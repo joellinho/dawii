@@ -1,0 +1,23 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">  
+ <h:body>
+	    <ui:composition> 
+			
+		<p:menu>	
+
+			<p:submenu label="Procesos">
+				<p:menuitem value="Ingreso de Guias" outcome="/cargarGuia.xhtml"/>
+			</p:submenu>
+	        <p:submenu label="Navegación">
+	            <p:menuitem value="Inicio" outcome="/main.xhtml"/>
+	            
+	            <p:menuitem value="Cibertec" url="http://www.primefaces.org" />  
+	        </p:submenu>  
+    	</p:menu>
+	    </ui:composition>
+    </h:body>
+</html>
