@@ -1,28 +1,13 @@
 package persistencia.servicefactory;
 
-import persistence.jpa.JPAClienteService;
-import persistence.jpa.JPADistritoService;
-import persistence.jpa.JPAEmpresaService;
-import persistence.jpa.JPAProductoTiendaService;
-import persistence.jpa.JPATiendaService;
-import persistence.jpa.JPATipoClienteService;
-import persistence.service.CategoriaProductoService;
-import persistence.service.ClienteService;
-import persistence.service.DetallePedidoService;
-import persistence.service.DistritoService;
-import persistence.service.EmpresaService;
-import persistence.service.ImageService;
-import persistence.service.ProductoTiendaService;
-import persistence.service.RepartidorService;
-import persistence.service.TiendaService;
-import persistence.service.TipoClienteService;
+import persistence.jpa.*;
+import persistence.service.*;
 
 public class JPAServiceFactory extends ServiceFactory{
 
 	@Override
 	public CategoriaProductoService obtenerCategoriaProductoService() {
-		// TODO Auto-generated method stub
-		return null;
+		return new JPACategoriaProductoService();
 	}
 
 	@Override
@@ -32,7 +17,7 @@ public class JPAServiceFactory extends ServiceFactory{
 
 	@Override
 	public DetallePedidoService obtenerDetallePedidoService() {
-		// TODO Auto-generated method stub
+		//return new JPAClienteService();
 		return null;
 	}
 
@@ -43,19 +28,17 @@ public class JPAServiceFactory extends ServiceFactory{
 
 	@Override
 	public EmpresaService obtenerEmpresaService() {
-		return new JPAEmpresaService();
+        return new JPAEmpresaService();
 	}
 
 	@Override
-	public persistence.service.EstadoRegistroPedidoService EstadoRegistroPedidoService() {
-		// TODO Auto-generated method stub
-		return null;
+	public EstadoRegistroPedidoService obtenerEstadoRegistroPedidoService() {
+		return new JPAEstadoRegistroPedidoService();
 	}
 
 	@Override
 	public ImageService obtenerImageService() {
-		// TODO Auto-generated method stub
-		return null;
+		return new JPAImageService();
 	}
 
 	@Override
@@ -65,8 +48,7 @@ public class JPAServiceFactory extends ServiceFactory{
 
 	@Override
 	public RepartidorService obtenerRepartidorService() {
-		// TODO Auto-generated method stub
-		return null;
+		return new JPARepartidorService();
 	}
 
 	@Override
@@ -77,6 +59,11 @@ public class JPAServiceFactory extends ServiceFactory{
 	@Override
 	public TipoClienteService obtenerTipoClienteService() {
 		return new JPATipoClienteService();
+	}
+
+	@Override
+	public PedidoService obtenerPedidoService() {
+		return new JPAPedidoService();
 	}
 	
 }

@@ -1,7 +1,9 @@
 package foo;
 
+import java.math.BigDecimal;
 import java.util.List;
 
+import persistence.entidades.CategoriaProducto;
 import persistence.entidades.Cliente;
 import persistence.entidades.Direccion;
 import persistence.entidades.Distrito;
@@ -9,9 +11,11 @@ import persistence.entidades.Empresa;
 import persistence.entidades.ProductoTienda;
 import persistence.entidades.Tienda;
 import persistence.entidades.TipoCliente;
+import persistence.service.CategoriaProductoService;
 import persistence.service.ClienteService;
 import persistence.service.DistritoService;
 import persistence.service.EmpresaService;
+import persistence.service.ProductoTiendaService;
 import persistence.service.TiendaService;
 import persistence.service.TipoClienteService;
 import persistencia.servicefactory.ServiceFactory;
@@ -119,7 +123,7 @@ public class Data
 		// Obtenemos la empresa a usar para la tienda
 		List<Empresa> listaEmpresa = empresaService.listarEmpresa();
 		Empresa empresa;
-		if(listaEmpresa.size()<=0){
+		if(listaEmpresa.size()>0){
 			empresa = listaEmpresa.get(0);
 		}
 		else{
@@ -149,11 +153,21 @@ public class Data
 	}
 	
 	public void AgregarCategoriaProducto(){
+		CategoriaProductoService categoriaProductoService = serviceFactory.obtenerCategoriaProductoService();
 		
+		CategoriaProducto categoriaProducto = new CategoriaProducto();
+		categoriaProducto.setDescripcion("Papas");
+		
+		if(categoriaProductoService.listarCategoriaProducto().size()<=0){
+			categoriaProductoService.insertar(categoriaProducto);
+			System.out.println("Categoria Producto Insertada.");
+		}
 	}
 	
 	public void AgregarProducto(){
 		TiendaService tiendaService = serviceFactory.obtenerTiendaService();
+		CategoriaProductoService categoriaProductoService = serviceFactory.obtenerCategoriaProductoService();
+		ProductoTiendaService productoTiendaService = serviceFactory.obtenerProductoTiendaService();
 		
 		List<Tienda> listaTienda = tiendaService.listarTienda();
 		Tienda tienda;
@@ -165,9 +179,22 @@ public class Data
 			return;
 		}	
 		
-		ProductoTienda producto = new ProductoTienda();
-		producto.set|
+		List<CategoriaProducto> listaCategoriaProd = categoriaProductoService.listarCategoriaProducto();
+		CategoriaProducto categoria;
+		if(listaCategoriaProd.size()>0){
+			categoria = listaCategoriaProd.get(0);
+		}
+		else{
+			System.out.println("No se encontro categorias disponibles para ser usadas en la incersión de producto");
+			return;
+		}
 		
+		ProductoTienda producto = new ProductoTienda();
+		producto.setDescripcion("Papas Medianas");
+		producto.setPrecio(new BigDecimal(10.10));
+		producto.setTienda(tienda);
+		producto.setCategoriaproducto(categoria);		
+		productoTiendaService.insertar(producto);		
 	}
 	
 }

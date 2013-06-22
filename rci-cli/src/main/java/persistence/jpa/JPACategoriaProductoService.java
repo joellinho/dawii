@@ -7,7 +7,7 @@ import javax.persistence.TypedQuery;
 import persistence.entidades.CategoriaProducto;
 import persistence.service.CategoriaProductoService;
 
-public class JPACategoriaProdiuctoService implements CategoriaProductoService {
+public class JPACategoriaProductoService implements CategoriaProductoService {
 
 	@Override
 	public void insertar(CategoriaProducto categoria) {
