@@ -9,7 +9,7 @@ public class Test {
 		Data data = new Data();
 		data.AgregarTipoCliente();
 		data.AgregarDistrito();
-		data.AgregarTipoCliente();
+		data.AgregarCliente();
 		
 		data.AgregarCategoriaProducto();
 		data.AgregarEmpresa();

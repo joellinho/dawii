@@ -5,17 +5,17 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import persistence.entidades.EstadoRegistroPedido;
-import persistence.service.EstadoRegistroPedidoService;
+import persistence.entidades.Image;
+import persistence.service.ImageService;
 
-public class JPAEstadoRegistroPedidoService implements EstadoRegistroPedidoService {
+public class JPAImageService implements ImageService {
 
 	@Override
-	public void insertar(EstadoRegistroPedido estadoRegistro) {
+	public void insertar(Image imagen) {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
 			em.getTransaction().begin();
-			em.persist(estadoRegistro);
+			em.persist(imagen);
 			em.getTransaction().commit();			
 		}
 		finally{
@@ -24,11 +24,11 @@ public class JPAEstadoRegistroPedidoService implements EstadoRegistroPedidoServi
 	}
 
 	@Override
-	public void actualizar(EstadoRegistroPedido estadoRegistro) {
-		EntityManager em = JPAUtil.getEntityManager();
+	public void actualizar(Image imagen) {
+	    EntityManager em = JPAUtil.getEntityManager();
 		try{
 			em.getTransaction().begin();
-			em.merge(estadoRegistro);
+			em.merge(imagen);
 			em.getTransaction().commit();
 		}
 		finally{
@@ -37,11 +37,11 @@ public class JPAEstadoRegistroPedidoService implements EstadoRegistroPedidoServi
 	}
 
 	@Override
-	public void eliminar(EstadoRegistroPedido estadoRegistro) {
+	public void eliminar(Image imagen) {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
 			em.getTransaction().begin();
-			em.remove(estadoRegistro);
+			em.remove(imagen);
 			/*
 			Esto deberia fallar, es necesario obtener el objeto de nuevo
 			ya que el em al que pertenece el objeto probablemente expiro
@@ -54,24 +54,24 @@ public class JPAEstadoRegistroPedidoService implements EstadoRegistroPedidoServi
 	}
 
 	@Override
-	public List<EstadoRegistroPedido> listarEstadoRegistro() {
+	public List<Image> listarImage() {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
-			String query = "SELECT er from EstadoRegistro er ORDER BY c.id";
-			TypedQuery<EstadoRegistroPedido> emquery = em.createQuery(query, EstadoRegistroPedido.class);
+			String query = "SELECT i from Image i ORDER BY i.id";
+			TypedQuery<Image> emquery = em.createQuery(query, Image.class);
 			return emquery.getResultList();			
 		}
 		finally{
 			em.close();			
-		}		
+		}	
 	}
 
 	@Override
-	public EstadoRegistroPedido obtenerPorId(int id) {
+	public Image obtenerPorId(int id) {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
-			String query = "SELECT er from EstadoRegistroPedido er WHERE er.id=:id ORDER BY er.id";
-			TypedQuery<EstadoRegistroPedido> emquery = em.createQuery(query, EstadoRegistroPedido.class);
+			String query = "SELECT i from Image i WHERE i.id=:id ORDER BY i.id";
+			TypedQuery<Image> emquery = em.createQuery(query, Image.class);
 			emquery.setParameter("id", id);
 			return emquery.getSingleResult();			
 		}
@@ -80,6 +80,6 @@ public class JPAEstadoRegistroPedidoService implements EstadoRegistroPedidoServi
 		}	
 	}
 
-
+	
 
 }

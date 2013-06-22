@@ -1,6 +1,5 @@
 package persistencia.servicefactory;
 
-import persistence.entidades.*;
 import persistence.jpa.*;
 import persistence.service.*;
 
@@ -8,8 +7,7 @@ public class JPAServiceFactory extends ServiceFactory{
 
 	@Override
 	public CategoriaProductoService obtenerCategoriaProductoService() {
-		// TODO Auto-generated method stub
-		return null;
+		return new JPACategoriaProductoService();
 	}
 
 	@Override
@@ -19,7 +17,7 @@ public class JPAServiceFactory extends ServiceFactory{
 
 	@Override
 	public DetallePedidoService obtenerDetallePedidoService() {
-		// TODO Auto-generated method stub
+		//return new JPAClienteService();
 		return null;
 	}
 
@@ -34,14 +32,13 @@ public class JPAServiceFactory extends ServiceFactory{
 	}
 
 	@Override
-	public EstadoRegistroPedido obtenerEstadoRegistroPedido() {
+	public EstadoRegistroPedidoService obtenerEstadoRegistroPedidoService() {
 		return new JPAEstadoRegistroPedidoService();
 	}
 
 	@Override
 	public ImageService obtenerImageService() {
-		// TODO Auto-generated method stub
-		return null;
+		return new JPAImageService();
 	}
 
 	@Override
@@ -65,9 +62,8 @@ public class JPAServiceFactory extends ServiceFactory{
 	}
 
 	@Override
-	public persistence.service.EstadoRegistroPedidoService EstadoRegistroPedidoService() {
-		// TODO Auto-generated method stub
-		return null;
+	public PedidoService obtenerPedidoService() {
+		return new JPAPedidoService();
 	}
 	
 }

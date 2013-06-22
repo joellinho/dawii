@@ -123,7 +123,7 @@ public class Data
 		// Obtenemos la empresa a usar para la tienda
 		List<Empresa> listaEmpresa = empresaService.listarEmpresa();
 		Empresa empresa;
-		if(listaEmpresa.size()<=0){
+		if(listaEmpresa.size()>0){
 			empresa = listaEmpresa.get(0);
 		}
 		else{
