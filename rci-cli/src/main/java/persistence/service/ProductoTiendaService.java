@@ -2,14 +2,14 @@ package persistence.service;
 
 import java.util.List;
 
-import persistence.entidades.Pedido;
+import persistence.entidades.ProductoTienda;
 
 public interface ProductoTiendaService {
 
-	void insertar(Pedido pedido);
-	void actualizar(Pedido pedido);
-	void eliminar(Pedido pedido);
-	List<Pedido> listarPedido();	
-	Pedido obtenerPorId(int id);
+	void insertar(ProductoTienda producto);
+	void actualizar(ProductoTienda producto);
+	void eliminar(ProductoTienda producto);
+	List<ProductoTienda> listarProducto();	
+	ProductoTienda obtenerPorId(int id);
 	
 }

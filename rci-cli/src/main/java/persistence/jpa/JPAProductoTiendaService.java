@@ -4,17 +4,17 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import persistence.entidades.Pedido;
+import persistence.entidades.ProductoTienda;
 import persistence.service.ProductoTiendaService;
 
 public class JPAProductoTiendaService implements ProductoTiendaService {
 
 	@Override
-	public void insertar(Pedido pedido) {
+	public void insertar(ProductoTienda producto) {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
 			em.getTransaction().begin();
-			em.persist(pedido);
+			em.persist(producto);
 			em.getTransaction().commit();
 		}
 		finally{
@@ -23,11 +23,11 @@ public class JPAProductoTiendaService implements ProductoTiendaService {
 	}
 
 	@Override
-	public void actualizar(Pedido pedido) {
+	public void actualizar(ProductoTienda producto) {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
 			em.getTransaction().begin();
-			em.merge(pedido);
+			em.merge(producto);
 			em.getTransaction().commit();
 		}
 		finally{
@@ -36,11 +36,11 @@ public class JPAProductoTiendaService implements ProductoTiendaService {
 	}
 
 	@Override
-	public void eliminar(Pedido pedido) {
+	public void eliminar(ProductoTienda producto) {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
 			em.getTransaction().begin();
-			em.remove(pedido);
+			em.remove(producto);
 			em.getTransaction().commit();
 		}
 		finally{
@@ -49,11 +49,11 @@ public class JPAProductoTiendaService implements ProductoTiendaService {
 	}
 
 	@Override
-	public List<Pedido> listarPedido() {
+	public List<ProductoTienda> listarProducto() {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
 			String query = "SELECT p from Pedido p ORDER BY p.id";
-			TypedQuery<Pedido> emquery = em.createQuery(query,Pedido.class);
+			TypedQuery<ProductoTienda> emquery = em.createQuery(query,ProductoTienda.class);
 			return emquery.getResultList();
 		}
 		finally{
@@ -62,11 +62,11 @@ public class JPAProductoTiendaService implements ProductoTiendaService {
 	}
 
 	@Override
-	public Pedido obtenerPorId(int id) {
+	public ProductoTienda obtenerPorId(int id) {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
-			String query = "SELECT p from Pedido d WHERE p.id=:id ORDER BY p.id";
-			TypedQuery<Pedido> emquery = em.createQuery(query,Pedido.class);
+			String query = "SELECT p from ProductoTienda p WHERE p.id=:id ORDER BY p.id";
+			TypedQuery<ProductoTienda> emquery = em.createQuery(query,ProductoTienda.class);
 			emquery.setParameter("id", id);
 			return emquery.getSingleResult();
 		}
