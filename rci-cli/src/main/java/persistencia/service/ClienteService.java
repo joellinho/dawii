@@ -1,4 +1,4 @@
-package persistencia.dao;
+package persistencia.service;
 
 
 import java.util.List;
@@ -7,7 +7,7 @@ import persistencia.entidades.Cliente;
 
 
 
-public interface ClienteDAO {
+public interface ClienteService {
 
 	void insertar(Cliente cliente);
 	void actualizar(Cliente cliente);
