@@ -2,14 +2,14 @@ package foo;
 
 import java.util.List;
 
-import persistencia.entidades.Cliente;
-import persistencia.entidades.Direccion;
-import persistencia.entidades.Distrito;
-import persistencia.entidades.TipoCliente;
-import persistencia.service.ClienteService;
-import persistencia.service.ServiceFactory;
-import persistencia.service.DistritoService;
-import persistencia.service.TipoClienteService;
+import persistence.entidades.Cliente;
+import persistence.entidades.Direccion;
+import persistence.entidades.Distrito;
+import persistence.entidades.TipoCliente;
+import persistence.service.ClienteService;
+import persistence.service.DistritoService;
+import persistence.service.TipoClienteService;
+import persistencia.servicefactory.ServiceFactory;
 
 /**
  * Hello world!
@@ -18,12 +18,17 @@ import persistencia.service.TipoClienteService;
 public class Data 
 {
     public static void AgregarTipoCliente(){
+    	System.out.println("Intentando insertar TipoCliente");
     	TipoClienteService tipoClienteDAO = ServiceFactory.obtenerDAOFactory().obtenerTipoClienteService();
     	
     	if(tipoClienteDAO.listarTipoCliente().size()<=0){
     		TipoCliente tipo = new TipoCliente();
     		tipo.setDescripcion("Regular");
     		tipoClienteDAO.insertar(tipo);
+    		System.out.println("Insertado 1 tipo ciente.");
+    	}
+    	else{
+    		System.out.println("Se encontraron TipoClientes, no se insertaran nuevos");
     	}
     }
     

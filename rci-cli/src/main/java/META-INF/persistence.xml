@@ -2,19 +2,19 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="dawii">
 	 	<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>persistencia.entidades.CategoriaProducto</class>
-		<class>persistencia.entidades.Cliente</class>
-		<class>persistencia.entidades.DetallePedido</class>
-		<class>persistencia.entidades.Distrito</class>
-		<class>persistencia.entidades.Empresa</class>
-		<class>persistencia.entidades.EstadoRegistroPedido</class>
-		<class>persistencia.entidades.Image</class>
-		<class>persistencia.entidades.Pedido</class>
-		<class>persistencia.entidades.ProductoTienda</class>
-		<class>persistencia.entidades.Repartidor</class>
-		<class>persistencia.entidades.Tienda</class>
-		<class>persistencia.entidades.TipoCliente</class>
-		<class>persistencia.entidades.Direccion</class>
+		<class>persistence.entidades.CategoriaProducto</class>
+		<class>persistence.entidades.Cliente</class>
+		<class>persistence.entidades.DetallePedido</class>
+		<class>persistence.entidades.Distrito</class>
+		<class>persistence.entidades.Empresa</class>
+		<class>persistence.entidades.EstadoRegistroPedido</class>
+		<class>persistence.entidades.Image</class>
+		<class>persistence.entidades.Pedido</class>
+		<class>persistence.entidades.ProductoTienda</class>
+		<class>persistence.entidades.Repartidor</class>
+		<class>persistence.entidades.Tienda</class>
+		<class>persistence.entidades.TipoCliente</class>
+		<class>persistence.entidades.Direccion</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver"  value="com.mysql.jdbc.Driver"/>
