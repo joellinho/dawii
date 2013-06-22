@@ -1,10 +1,10 @@
-package persistencia.dao;
+package persistencia.service;
 
 import java.util.List;
 
 import persistencia.entidades.TipoCliente;
 
-public interface TipoClienteDAO {
+public interface TipoClienteService {
 
 	void insertar(TipoCliente tipoCliente);
 	void actualizar(TipoCliente tipoCliente);

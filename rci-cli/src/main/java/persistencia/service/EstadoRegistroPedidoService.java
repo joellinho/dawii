@@ -1,10 +1,10 @@
-package persistencia.dao;
+package persistencia.service;
 
 import java.util.List;
 
 import persistencia.entidades.EstadoRegistroPedido;
 
-public interface EstadoRegistroPedidoDAO {
+public interface EstadoRegistroPedidoService {
 
 	void insertar(EstadoRegistroPedido estadoRegistro);
 	void actualizar(EstadoRegistroPedido estadoRegistro);

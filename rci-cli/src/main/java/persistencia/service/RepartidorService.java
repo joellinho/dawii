@@ -1,10 +1,10 @@
-package persistencia.dao;
+package persistencia.service;
 
 import java.util.List;
 
 import persistencia.entidades.Repartidor;
 
-public interface RepartidorDAO {
+public interface RepartidorService {
 
 	void insertar(Repartidor repartidor);
 	void actualizar(Repartidor repartidor);

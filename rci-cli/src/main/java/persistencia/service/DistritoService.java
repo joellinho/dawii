@@ -1,13 +1,13 @@
-package persistencia.dao;
+package persistencia.service;
 
 import java.util.List;
 import persistencia.entidades.Distrito;
 
-public interface DistritoDAO {
+public interface DistritoService {
 
 	void insertar(Distrito distrito);
-	void actualizar(Distrito direccion);
-	void eliminar(Distrito direccion);
+	void actualizar(Distrito distrito);
+	void eliminar(Distrito distrito);
 	List<Distrito> listarDistrito();	
 	Distrito obtenerPorId(int id);
 	

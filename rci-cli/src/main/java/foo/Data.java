@@ -2,14 +2,14 @@ package foo;
 
 import java.util.List;
 
-import persistencia.dao.ClienteDAO;
-import persistencia.dao.DAOFactory;
-import persistencia.dao.DistritoDAO;
-import persistencia.dao.TipoClienteDAO;
 import persistencia.entidades.Cliente;
 import persistencia.entidades.Direccion;
 import persistencia.entidades.Distrito;
 import persistencia.entidades.TipoCliente;
+import persistencia.service.ClienteService;
+import persistencia.service.ServiceFactory;
+import persistencia.service.DistritoService;
+import persistencia.service.TipoClienteService;
 
 /**
  * Hello world!
@@ -17,10 +17,8 @@ import persistencia.entidades.TipoCliente;
  */
 public class Data 
 {
-
-    
     public static void AgregarTipoCliente(){
-    	TipoClienteDAO tipoClienteDAO = DAOFactory.obtenerDAOFactory().obtenerTipoClienteDAO();
+    	TipoClienteService tipoClienteDAO = ServiceFactory.obtenerDAOFactory().obtenerTipoClienteService();
     	
     	if(tipoClienteDAO.listarTipoCliente().size()<=0){
     		TipoCliente tipo = new TipoCliente();
@@ -30,7 +28,7 @@ public class Data
     }
     
    public static void AgregarDistrito(){
-	   DistritoDAO distritoDAO = DAOFactory.obtenerDAOFactory().obtenerDistritoDAO();
+	   DistritoService distritoDAO = ServiceFactory.obtenerDAOFactory().obtenerDistritoService();
 	   if(distritoDAO.listarDistrito().size()<=0){
 		   Distrito distrito = new Distrito();
 		   distrito.setDescripcion("Rimac");
@@ -40,9 +38,9 @@ public class Data
     
     
    public static void AgregarCliente(){
-	   ClienteDAO clienteDAO = DAOFactory.obtenerDAOFactory().obtenerClienteDAO();
-	   DistritoDAO distritoDAO = DAOFactory.obtenerDAOFactory().obtenerDistritoDAO();
-	   TipoClienteDAO tipoClienteDAO = DAOFactory.obtenerDAOFactory().obtenerTipoClienteDAO();
+	   ClienteService clienteDAO = ServiceFactory.obtenerDAOFactory().obtenerClienteService();
+	   DistritoService distritoDAO = ServiceFactory.obtenerDAOFactory().obtenerDistritoService();
+	   TipoClienteService tipoClienteDAO = ServiceFactory.obtenerDAOFactory().obtenerTipoClienteService();
 	   
 	   //Obtenemos el distrito a usar
 	   List<Distrito> listaDistrito = distritoDAO.listarDistrito();

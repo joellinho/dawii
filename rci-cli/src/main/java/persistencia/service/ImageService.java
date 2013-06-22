@@ -1,10 +1,10 @@
-package persistencia.dao;
+package persistencia.service;
 
 import java.util.List;
 
 import persistencia.entidades.Image;
 
-public interface ImageDAO {
+public interface ImageService {
 
 	void insertar(Image imagen);
 	void actualizar(Image imagen);

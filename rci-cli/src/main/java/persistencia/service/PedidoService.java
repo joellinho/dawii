@@ -1,10 +1,10 @@
-package persistencia.dao;
+package persistencia.service;
 
 import java.util.List;
 
 import persistencia.entidades.Pedido;
 
-public interface PedidoDAO {
+public interface PedidoService {
 
 	void insertar(Pedido pedido);
 	void actualizar(Pedido pedido);

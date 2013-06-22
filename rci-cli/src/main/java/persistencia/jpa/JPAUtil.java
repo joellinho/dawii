@@ -1,11 +1,11 @@
-package persistencia.dao.jpa;
+package persistencia.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 
-public class HibernateUtil {
+public class JPAUtil {
 	 
 	private static EntityManagerFactory emf;
  

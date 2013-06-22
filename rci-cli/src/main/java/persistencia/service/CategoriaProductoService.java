@@ -1,10 +1,10 @@
-package persistencia.dao;
+package persistencia.service;
 
 import java.util.List;
 
 import persistencia.entidades.CategoriaProducto;
 
-public interface CategoriaProductoDAO {
+public interface CategoriaProductoService {
 
 	void insertar(CategoriaProducto categoria);
 	void actualizar(CategoriaProducto categoria);

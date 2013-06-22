@@ -1,24 +1,21 @@
-package persistencia.dao.jpa;
+package persistencia.jpa;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
-import persistencia.dao.ClienteDAO;
+import javax.persistence.TypedQuery;
 import persistencia.entidades.Cliente;
+import persistencia.service.ClienteService;
 
-public class JPAClienteDAO implements ClienteDAO {
+public class JPAClienteService implements ClienteService {
 
-	private EntityManager em = HibernateUtil.getEntityManager();
 	
 	@Override
-	public void insertar(Cliente cliente) {
-		
+	public void insertar(Cliente cliente) {		
+		EntityManager em = JPAUtil.getEntityManager();
 		try{
 			em.getTransaction().begin();
 			em.persist(cliente);
-			em.flush();
 			em.getTransaction().commit();			
 		}
 		finally{
@@ -28,13 +25,10 @@ public class JPAClienteDAO implements ClienteDAO {
 
 	@Override
 	public void actualizar(Cliente cliente) {
+		EntityManager em = JPAUtil.getEntityManager();
 		try{
 			em.getTransaction().begin();
-			/*
-			Esto deberia fallar
-			*/
 			em.merge(cliente);
-			em.flush(); 
 			em.getTransaction().commit();
 		}
 		finally{
@@ -44,13 +38,14 @@ public class JPAClienteDAO implements ClienteDAO {
 
 	@Override
 	public void eliminar(Cliente cliente) {
+		EntityManager em = JPAUtil.getEntityManager();
 		try{
 			em.getTransaction().begin();
 			em.remove(cliente);
 			/*
-			 * Deberia fallar
-			 */
-			em.flush(); 
+			Esto deberia fallar, es necesario obtener el objeto de nuevo
+			ya que el em al que pertenece el objeto probablemente expiro
+			*/
 			em.getTransaction().commit();
 		}
 		finally{
@@ -60,12 +55,11 @@ public class JPAClienteDAO implements ClienteDAO {
 
 	@Override
 	public List<Cliente> listarClientes() {
-		List<Cliente> listaEntidad;
+		EntityManager em = JPAUtil.getEntityManager();
 		try{
 			String query = "SELECT c from Cliente c ORDER BY c.id";
-			Query emquery = em.createQuery(query);
-			listaEntidad = emquery.getResultList();
-			return listaEntidad;
+			TypedQuery<Cliente> emquery = em.createQuery(query, Cliente.class);
+			return emquery.getResultList();			
 		}
 		finally{
 			em.close();			
@@ -74,18 +68,12 @@ public class JPAClienteDAO implements ClienteDAO {
 
 	@Override
 	public Cliente obtenerPorId(int id) {
-		List<Cliente> listaEntidad;
+		EntityManager em = JPAUtil.getEntityManager();
 		try{
-			String query = "SELECT c from Cliente c ORDER BY c.id";
-			Query emquery = em.createQuery(query);
+			String query = "SELECT c from Cliente c WHERE c.id=:id ORDER BY c.id";
+			TypedQuery<Cliente> emquery = em.createQuery(query, Cliente.class);
 			emquery.setParameter("id", id);
-			listaEntidad = emquery.getResultList();			
-			if(listaEntidad.size()>0){
-				return listaEntidad.get(0);
-			}
-			else{
-				return null;
-			}
+			return emquery.getSingleResult();			
 		}
 		finally{
 			em.close();			
