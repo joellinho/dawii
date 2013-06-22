@@ -1,21 +1,8 @@
 package persistencia.servicefactory;
 
-import persistence.jpa.JPAClienteService;
-import persistence.jpa.JPADistritoService;
-import persistence.jpa.JPAEmpresaService;
-import persistence.jpa.JPAProductoTiendaService;
-import persistence.jpa.JPATiendaService;
-import persistence.jpa.JPATipoClienteService;
-import persistence.service.CategoriaProductoService;
-import persistence.service.ClienteService;
-import persistence.service.DetallePedidoService;
-import persistence.service.DistritoService;
-import persistence.service.EmpresaService;
-import persistence.service.ImageService;
-import persistence.service.ProductoTiendaService;
-import persistence.service.RepartidorService;
-import persistence.service.TiendaService;
-import persistence.service.TipoClienteService;
+import persistence.entidades.*;
+import persistence.jpa.*;
+import persistence.service.*;
 
 public class JPAServiceFactory extends ServiceFactory{
 
@@ -43,13 +30,12 @@ public class JPAServiceFactory extends ServiceFactory{
 
 	@Override
 	public EmpresaService obtenerEmpresaService() {
-		return new JPAEmpresaService();
+        return new JPAEmpresaService();
 	}
 
 	@Override
-	public persistence.service.EstadoRegistroPedidoService EstadoRegistroPedidoService() {
-		// TODO Auto-generated method stub
-		return null;
+	public EstadoRegistroPedido obtenerEstadoRegistroPedido() {
+		return new JPAEstadoRegistroPedidoService();
 	}
 
 	@Override
@@ -65,8 +51,7 @@ public class JPAServiceFactory extends ServiceFactory{
 
 	@Override
 	public RepartidorService obtenerRepartidorService() {
-		// TODO Auto-generated method stub
-		return null;
+		return new JPARepartidorService();
 	}
 
 	@Override
@@ -77,6 +62,12 @@ public class JPAServiceFactory extends ServiceFactory{
 	@Override
 	public TipoClienteService obtenerTipoClienteService() {
 		return new JPATipoClienteService();
+	}
+
+	@Override
+	public persistence.service.EstadoRegistroPedidoService EstadoRegistroPedidoService() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
