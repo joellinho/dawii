@@ -7,8 +7,7 @@ public class JPAServiceFactory extends ServiceFactory{
 
 	@Override
 	public CategoriaProductoService obtenerCategoriaProductoService() {
-		// TODO Auto-generated method stub
-		return null;
+		return new JPACategoriaProductoService();
 	}
 
 	@Override
