@@ -25,15 +25,15 @@ public abstract class ServiceFactory {
 	private static final TipoService DEFAULT_SERVICE = TipoService.JPA;
 	
 	
-	public static ServiceFactory obtenerDAOFactory(TipoService tipo){
+	public static ServiceFactory obtenerServiceFactory(TipoService tipo){
 		switch(tipo){
 			case JPA: return new JPAServiceFactory();
 			default: return null;
 		}
 	}	
 	
-	public static ServiceFactory obtenerDAOFactory(){
-		return ServiceFactory.obtenerDAOFactory(ServiceFactory.DEFAULT_SERVICE);
+	public static ServiceFactory obtenerServiceFactory(){
+		return ServiceFactory.obtenerServiceFactory(ServiceFactory.DEFAULT_SERVICE);
 	}
 	
 	/**

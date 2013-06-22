@@ -3,6 +3,8 @@ package persistencia.servicefactory;
 import persistence.jpa.JPAClienteService;
 import persistence.jpa.JPADistritoService;
 import persistence.jpa.JPAEmpresaService;
+import persistence.jpa.JPAProductoTiendaService;
+import persistence.jpa.JPATiendaService;
 import persistence.jpa.JPATipoClienteService;
 import persistence.service.CategoriaProductoService;
 import persistence.service.ClienteService;
@@ -58,8 +60,7 @@ public class JPAServiceFactory extends ServiceFactory{
 
 	@Override
 	public ProductoTiendaService obtenerProductoTiendaService() {
-		// TODO Auto-generated method stub
-		return null;
+		return new JPAProductoTiendaService();
 	}
 
 	@Override
@@ -70,8 +71,7 @@ public class JPAServiceFactory extends ServiceFactory{
 
 	@Override
 	public TiendaService obtenerTiendaService() {
-		// TODO Auto-generated method stub
-		return null;
+		return new JPATiendaService();
 	}
 
 	@Override
