@@ -3,13 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>cib.dawii.rci.cli</groupId>
-  <artifactId>rci-cli</artifactId>
+  <artifactId>rci-cli</artifactId>S
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>rci-cli</name>
   <url>http://maven.apache.org</url>
-
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -31,7 +30,6 @@
 		<artifactId>jsf-facelets</artifactId>
 		<version>1.1.14</version>
 	</dependency>
-            
     
    <dependency>
       <groupId>com.sun.faces</groupId>
