@@ -2,19 +2,27 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="dawii">
 	 	<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>persistence.entidades.CategoriaProducto</class>
-		<class>persistence.entidades.Cliente</class>
-		<class>persistence.entidades.DetallePedido</class>
-		<class>persistence.entidades.Distrito</class>
-		<class>persistence.entidades.Empresa</class>
-		<class>persistence.entidades.EstadoRegistroPedido</class>
-		<class>persistence.entidades.Image</class>
-		<class>persistence.entidades.Pedido</class>
-		<class>persistence.entidades.ProductoTienda</class>
-		<class>persistence.entidades.Repartidor</class>
-		<class>persistence.entidades.Tienda</class>
-		<class>persistence.entidades.TipoCliente</class>
-		<class>persistence.entidades.Direccion</class>
+	 	<class>persistence.entity.Categoriaxproducto</class>
+	 	<class>persistence.entity.Ciudad</class>
+	 	<class>persistence.entity.Cliente</class>
+	 	<class>persistence.entity.Departament</class>
+	 	<class>persistence.entity.Departamento</class>
+	 	<class>persistence.entity.Detallepedido</class>
+	 	<class>persistence.entity.Empresa</class>
+	 	<class>persistence.entity.Estado</class>
+	 	<class>persistence.entity.Facturacion</class>
+	 	<class>persistence.entity.Imagen</class>
+	 	<class>persistence.entity.Productoxempresa</class>
+	 	<class>persistence.entity.Productoxtienda</class>
+	 	<class>persistence.entity.Provincia</class>
+	 	<class>persistence.entity.Registropedido</class>
+	 	<class>persistence.entity.Repartidore</class>
+	 	<class>persistence.entity.Tienda</class>
+	 	<class>persistence.entity.Tipocliente</class>
+	 	<class>persistence.entity.Tipocomprobante</class>
+	 	<class>persistence.entity.Tipodocumento</class>
+	 	<class>persistence.entity.Ubigeo</class>
+
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver"  value="com.mysql.jdbc.Driver"/>
