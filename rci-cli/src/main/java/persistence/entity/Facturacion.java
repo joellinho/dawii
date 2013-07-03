@@ -2,7 +2,8 @@ package persistence.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.math.BigDecimal;
+import java.util.Date;
+import java.util.Set;
 
 
 /**
@@ -15,91 +16,84 @@ public class Facturacion implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idfacturacion;
+	private int id;
 
-	private BigDecimal bruto;
+    @Temporal( TemporalType.TIMESTAMP)
+	private Date fechafacturacion;
 
-	private BigDecimal igv;
+	private String numerodoc;
 
-	private BigDecimal impuesto;
+	private String razonsocial;
 
-	private BigDecimal neto;
+	//bi-directional many-to-one association to Detallefacturacion
+	@OneToMany(mappedBy="facturacion")
+	private Set<Detallefacturacion> detallefacturacions;
 
-	private BigDecimal tipocambio;
-
-	//bi-directional many-to-one association to Detallepedido
+	//bi-directional many-to-one association to Documentocomercial
     @ManyToOne
-	private Detallepedido detallepedido;
+	private Documentocomercial documentocomercial;
 
-	//bi-directional many-to-one association to Registropedido
+	//bi-directional many-to-one association to Tipocomprobante
     @ManyToOne
-	private Registropedido registropedido;
+	private Tipocomprobante tipocomprobante;
 
     public Facturacion() {
     }
 
-	public int getIdfacturacion() {
-		return this.idfacturacion;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setIdfacturacion(int idfacturacion) {
-		this.idfacturacion = idfacturacion;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public BigDecimal getBruto() {
-		return this.bruto;
+	public Date getFechafacturacion() {
+		return this.fechafacturacion;
 	}
 
-	public void setBruto(BigDecimal bruto) {
-		this.bruto = bruto;
+	public void setFechafacturacion(Date fechafacturacion) {
+		this.fechafacturacion = fechafacturacion;
 	}
 
-	public BigDecimal getIgv() {
-		return this.igv;
+	public String getNumerodoc() {
+		return this.numerodoc;
 	}
 
-	public void setIgv(BigDecimal igv) {
-		this.igv = igv;
+	public void setNumerodoc(String numerodoc) {
+		this.numerodoc = numerodoc;
 	}
 
-	public BigDecimal getImpuesto() {
-		return this.impuesto;
+	public String getRazonsocial() {
+		return this.razonsocial;
 	}
 
-	public void setImpuesto(BigDecimal impuesto) {
-		this.impuesto = impuesto;
+	public void setRazonsocial(String razonsocial) {
+		this.razonsocial = razonsocial;
 	}
 
-	public BigDecimal getNeto() {
-		return this.neto;
+	public Set<Detallefacturacion> getDetallefacturacions() {
+		return this.detallefacturacions;
 	}
 
-	public void setNeto(BigDecimal neto) {
-		this.neto = neto;
-	}
-
-	public BigDecimal getTipocambio() {
-		return this.tipocambio;
-	}
-
-	public void setTipocambio(BigDecimal tipocambio) {
-		this.tipocambio = tipocambio;
-	}
-
-	public Detallepedido getDetallepedido() {
-		return this.detallepedido;
-	}
-
-	public void setDetallepedido(Detallepedido detallepedido) {
-		this.detallepedido = detallepedido;
+	public void setDetallefacturacions(Set<Detallefacturacion> detallefacturacions) {
+		this.detallefacturacions = detallefacturacions;
 	}
 	
-	public Registropedido getRegistropedido() {
-		return this.registropedido;
+	public Documentocomercial getDocumentocomercial() {
+		return this.documentocomercial;
 	}
 
-	public void setRegistropedido(Registropedido registropedido) {
-		this.registropedido = registropedido;
+	public void setDocumentocomercial(Documentocomercial documentocomercial) {
+		this.documentocomercial = documentocomercial;
+	}
+	
+	public Tipocomprobante getTipocomprobante() {
+		return this.tipocomprobante;
+	}
+
+	public void setTipocomprobante(Tipocomprobante tipocomprobante) {
+		this.tipocomprobante = tipocomprobante;
 	}
 	
 }

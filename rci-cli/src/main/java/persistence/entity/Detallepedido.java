@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
 
 
 /**
@@ -17,48 +16,41 @@ public class Detallepedido implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idDetallePedido;
+	private int id;
 
 	private int cantidad;
 
     @Temporal( TemporalType.TIMESTAMP)
-	private Date horaentrada;
-
-    @Temporal( TemporalType.TIMESTAMP)
 	private Date horasalida;
 
-	private BigDecimal preciocosto;
+	private BigDecimal preciounitario;
 
-	private BigDecimal precioventa;
+	//bi-directional one-to-one association to Detallefacturacion
+	@OneToOne(mappedBy="detallepedido")
+	private Detallefacturacion detallefacturacion;
 
-	private BigDecimal subtotal;
-
-	//bi-directional many-to-one association to Productoxtienda
+	//bi-directional many-to-one association to Documentocomercial
     @ManyToOne
-	private Productoxtienda productoxtienda;
+	@JoinColumn(name="doccom_id")
+	private Documentocomercial documentocomercial;
 
-	//bi-directional many-to-one association to Registropedido
+	//bi-directional many-to-one association to Productotienda
     @ManyToOne
-	private Registropedido registropedido;
+	private Productotienda productotienda;
 
-	//bi-directional many-to-one association to Repartidore
+	//bi-directional many-to-one association to Repartidor
     @ManyToOne
-	@JoinColumn(name="repartidores_idrepartidores")
-	private Repartidore repartidore;
-
-	//bi-directional many-to-one association to Facturacion
-	@OneToMany(mappedBy="detallepedido")
-	private Set<Facturacion> facturacions;
+	private Repartidor repartidor;
 
     public Detallepedido() {
     }
 
-	public int getIdDetallePedido() {
-		return this.idDetallePedido;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setIdDetallePedido(int idDetallePedido) {
-		this.idDetallePedido = idDetallePedido;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getCantidad() {
@@ -69,14 +61,6 @@ public class Detallepedido implements Serializable {
 		this.cantidad = cantidad;
 	}
 
-	public Date getHoraentrada() {
-		return this.horaentrada;
-	}
-
-	public void setHoraentrada(Date horaentrada) {
-		this.horaentrada = horaentrada;
-	}
-
 	public Date getHorasalida() {
 		return this.horasalida;
 	}
@@ -85,60 +69,44 @@ public class Detallepedido implements Serializable {
 		this.horasalida = horasalida;
 	}
 
-	public BigDecimal getPreciocosto() {
-		return this.preciocosto;
+	public BigDecimal getPreciounitario() {
+		return this.preciounitario;
 	}
 
-	public void setPreciocosto(BigDecimal preciocosto) {
-		this.preciocosto = preciocosto;
+	public void setPreciounitario(BigDecimal preciounitario) {
+		this.preciounitario = preciounitario;
 	}
 
-	public BigDecimal getPrecioventa() {
-		return this.precioventa;
+	public Detallefacturacion getDetallefacturacion() {
+		return this.detallefacturacion;
 	}
 
-	public void setPrecioventa(BigDecimal precioventa) {
-		this.precioventa = precioventa;
-	}
-
-	public BigDecimal getSubtotal() {
-		return this.subtotal;
-	}
-
-	public void setSubtotal(BigDecimal subtotal) {
-		this.subtotal = subtotal;
-	}
-
-	public Productoxtienda getProductoxtienda() {
-		return this.productoxtienda;
-	}
-
-	public void setProductoxtienda(Productoxtienda productoxtienda) {
-		this.productoxtienda = productoxtienda;
+	public void setDetallefacturacion(Detallefacturacion detallefacturacion) {
+		this.detallefacturacion = detallefacturacion;
 	}
 	
-	public Registropedido getRegistropedido() {
-		return this.registropedido;
+	public Documentocomercial getDocumentocomercial() {
+		return this.documentocomercial;
 	}
 
-	public void setRegistropedido(Registropedido registropedido) {
-		this.registropedido = registropedido;
+	public void setDocumentocomercial(Documentocomercial documentocomercial) {
+		this.documentocomercial = documentocomercial;
 	}
 	
-	public Repartidore getRepartidore() {
-		return this.repartidore;
+	public Productotienda getProductotienda() {
+		return this.productotienda;
 	}
 
-	public void setRepartidore(Repartidore repartidore) {
-		this.repartidore = repartidore;
+	public void setProductotienda(Productotienda productotienda) {
+		this.productotienda = productotienda;
 	}
 	
-	public Set<Facturacion> getFacturacions() {
-		return this.facturacions;
+	public Repartidor getRepartidor() {
+		return this.repartidor;
 	}
 
-	public void setFacturacions(Set<Facturacion> facturacions) {
-		this.facturacions = facturacions;
+	public void setRepartidor(Repartidor repartidor) {
+		this.repartidor = repartidor;
 	}
 	
 }

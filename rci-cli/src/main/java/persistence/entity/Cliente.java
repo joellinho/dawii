@@ -6,62 +6,65 @@ import java.util.Set;
 
 
 /**
- * The persistent class for the clientes database table.
+ * The persistent class for the cliente database table.
  * 
  */
 @Entity
-@Table(name="clientes")
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idclientes;
+	private int id;
 
-	private String cellcliente;
+	private String apellido;
 
 	private String direccion;
 
-	private String dnicliente;
+	private String email;
 
-	@Column(name="`nombre cliente`")
-	private String nombre_cliente;
+    @Lob()
+	private byte[] foto;
 
-	private String telfcliente;
+	private String nombre;
 
-	//bi-directional many-to-one association to Tipocliente
-    @ManyToOne
-	private Tipocliente tipocliente;
+	private String nrodocid;
 
-	//bi-directional many-to-one association to Tipodocumento
-    @ManyToOne
-	private Tipodocumento tipodocumento;
+	private String telefono;
 
 	//bi-directional many-to-one association to Ubigeo
     @ManyToOne
 	private Ubigeo ubigeo;
 
-	//bi-directional many-to-one association to Registropedido
+	//bi-directional many-to-one association to Tipodocumento
+    @ManyToOne
+	private Tipodocumento tipodocumento;
+
+	//bi-directional many-to-one association to Tipocliente
+    @ManyToOne
+	private Tipocliente tipocliente;
+
+	//bi-directional many-to-one association to Documentocomercial
 	@OneToMany(mappedBy="cliente")
-	private Set<Registropedido> registropedidos;
+	private Set<Documentocomercial> documentocomercials;
 
     public Cliente() {
     }
 
-	public int getIdclientes() {
-		return this.idclientes;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setIdclientes(int idclientes) {
-		this.idclientes = idclientes;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getCellcliente() {
-		return this.cellcliente;
+	public String getApellido() {
+		return this.apellido;
 	}
 
-	public void setCellcliente(String cellcliente) {
-		this.cellcliente = cellcliente;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	public String getDireccion() {
@@ -72,36 +75,52 @@ public class Cliente implements Serializable {
 		this.direccion = direccion;
 	}
 
-	public String getDnicliente() {
-		return this.dnicliente;
+	public String getEmail() {
+		return this.email;
 	}
 
-	public void setDnicliente(String dnicliente) {
-		this.dnicliente = dnicliente;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getNombre_cliente() {
-		return this.nombre_cliente;
+	public byte[] getFoto() {
+		return this.foto;
 	}
 
-	public void setNombre_cliente(String nombre_cliente) {
-		this.nombre_cliente = nombre_cliente;
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 
-	public String getTelfcliente() {
-		return this.telfcliente;
+	public String getNombre() {
+		return this.nombre;
 	}
 
-	public void setTelfcliente(String telfcliente) {
-		this.telfcliente = telfcliente;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public Tipocliente getTipocliente() {
-		return this.tipocliente;
+	public String getNrodocid() {
+		return this.nrodocid;
 	}
 
-	public void setTipocliente(Tipocliente tipocliente) {
-		this.tipocliente = tipocliente;
+	public void setNrodocid(String nrodocid) {
+		this.nrodocid = nrodocid;
+	}
+
+	public String getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public Ubigeo getUbigeo() {
+		return this.ubigeo;
+	}
+
+	public void setUbigeo(Ubigeo ubigeo) {
+		this.ubigeo = ubigeo;
 	}
 	
 	public Tipodocumento getTipodocumento() {
@@ -112,20 +131,20 @@ public class Cliente implements Serializable {
 		this.tipodocumento = tipodocumento;
 	}
 	
-	public Ubigeo getUbigeo() {
-		return this.ubigeo;
+	public Tipocliente getTipocliente() {
+		return this.tipocliente;
 	}
 
-	public void setUbigeo(Ubigeo ubigeo) {
-		this.ubigeo = ubigeo;
+	public void setTipocliente(Tipocliente tipocliente) {
+		this.tipocliente = tipocliente;
 	}
 	
-	public Set<Registropedido> getRegistropedidos() {
-		return this.registropedidos;
+	public Set<Documentocomercial> getDocumentocomercials() {
+		return this.documentocomercials;
 	}
 
-	public void setRegistropedidos(Set<Registropedido> registropedidos) {
-		this.registropedidos = registropedidos;
+	public void setDocumentocomercials(Set<Documentocomercial> documentocomercials) {
+		this.documentocomercials = documentocomercials;
 	}
 	
 }

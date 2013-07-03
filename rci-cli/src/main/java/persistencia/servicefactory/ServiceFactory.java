@@ -1,5 +1,7 @@
 package persistencia.servicefactory;
 
+import persistence.jpa.JPAServiceFactory;
+
 /**
  * La clase abstracta que representa un objeto DAO.
  * Usado para obtener el acceso a la base de datos.

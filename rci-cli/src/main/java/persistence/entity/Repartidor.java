@@ -6,20 +6,22 @@ import java.util.Set;
 
 
 /**
- * The persistent class for the empresa database table.
+ * The persistent class for the repartidor database table.
  * 
  */
 @Entity
-public class Empresa implements Serializable {
+public class Repartidor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	private String comentarios;
+	private String apellido;
 
 	private String direccion;
+
+	private String dni;
 
 	private String email;
 
@@ -28,27 +30,21 @@ public class Empresa implements Serializable {
 
 	private String nombre;
 
-	private String nombrecomercial;
-
-	private String ruc;
-
 	private String telefono;
 
-	private String weburl;
+	//bi-directional many-to-one association to Detallepedido
+	@OneToMany(mappedBy="repartidor")
+	private Set<Detallepedido> detallepedidos;
 
 	//bi-directional many-to-one association to Ubigeo
     @ManyToOne
 	private Ubigeo ubigeo;
 
-	//bi-directional many-to-one association to Productoempresa
-	@OneToMany(mappedBy="empresa")
-	private Set<Productoempresa> productoempresas;
-
 	//bi-directional many-to-one association to Tienda
-	@OneToMany(mappedBy="empresa")
-	private Set<Tienda> tiendas;
+    @ManyToOne
+	private Tienda tienda;
 
-    public Empresa() {
+    public Repartidor() {
     }
 
 	public int getId() {
@@ -59,12 +55,12 @@ public class Empresa implements Serializable {
 		this.id = id;
 	}
 
-	public String getComentarios() {
-		return this.comentarios;
+	public String getApellido() {
+		return this.apellido;
 	}
 
-	public void setComentarios(String comentarios) {
-		this.comentarios = comentarios;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	public String getDireccion() {
@@ -73,6 +69,14 @@ public class Empresa implements Serializable {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
+	}
+
+	public String getDni() {
+		return this.dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
 	public String getEmail() {
@@ -99,22 +103,6 @@ public class Empresa implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public String getNombrecomercial() {
-		return this.nombrecomercial;
-	}
-
-	public void setNombrecomercial(String nombrecomercial) {
-		this.nombrecomercial = nombrecomercial;
-	}
-
-	public String getRuc() {
-		return this.ruc;
-	}
-
-	public void setRuc(String ruc) {
-		this.ruc = ruc;
-	}
-
 	public String getTelefono() {
 		return this.telefono;
 	}
@@ -123,14 +111,14 @@ public class Empresa implements Serializable {
 		this.telefono = telefono;
 	}
 
-	public String getWeburl() {
-		return this.weburl;
+	public Set<Detallepedido> getDetallepedidos() {
+		return this.detallepedidos;
 	}
 
-	public void setWeburl(String weburl) {
-		this.weburl = weburl;
+	public void setDetallepedidos(Set<Detallepedido> detallepedidos) {
+		this.detallepedidos = detallepedidos;
 	}
-
+	
 	public Ubigeo getUbigeo() {
 		return this.ubigeo;
 	}
@@ -139,20 +127,12 @@ public class Empresa implements Serializable {
 		this.ubigeo = ubigeo;
 	}
 	
-	public Set<Productoempresa> getProductoempresas() {
-		return this.productoempresas;
+	public Tienda getTienda() {
+		return this.tienda;
 	}
 
-	public void setProductoempresas(Set<Productoempresa> productoempresas) {
-		this.productoempresas = productoempresas;
-	}
-	
-	public Set<Tienda> getTiendas() {
-		return this.tiendas;
-	}
-
-	public void setTiendas(Set<Tienda> tiendas) {
-		this.tiendas = tiendas;
+	public void setTienda(Tienda tienda) {
+		this.tienda = tienda;
 	}
 	
 }

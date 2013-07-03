@@ -15,39 +15,39 @@ public class Tipocomprobante implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idtipocomprobante;
+	private int id;
 
-	private String descripcioncomprobante;
+	private String descripcion;
 
-	//bi-directional many-to-one association to Registropedido
-	@OneToMany(mappedBy="tipocomprobanteBean")
-	private Set<Registropedido> registropedidos;
+	//bi-directional many-to-one association to Facturacion
+	@OneToMany(mappedBy="tipocomprobante")
+	private Set<Facturacion> facturacions;
 
     public Tipocomprobante() {
     }
 
-	public int getIdtipocomprobante() {
-		return this.idtipocomprobante;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setIdtipocomprobante(int idtipocomprobante) {
-		this.idtipocomprobante = idtipocomprobante;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getDescripcioncomprobante() {
-		return this.descripcioncomprobante;
+	public String getDescripcion() {
+		return this.descripcion;
 	}
 
-	public void setDescripcioncomprobante(String descripcioncomprobante) {
-		this.descripcioncomprobante = descripcioncomprobante;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
-	public Set<Registropedido> getRegistropedidos() {
-		return this.registropedidos;
+	public Set<Facturacion> getFacturacions() {
+		return this.facturacions;
 	}
 
-	public void setRegistropedidos(Set<Registropedido> registropedidos) {
-		this.registropedidos = registropedidos;
+	public void setFacturacions(Set<Facturacion> facturacions) {
+		this.facturacions = facturacions;
 	}
 	
 }

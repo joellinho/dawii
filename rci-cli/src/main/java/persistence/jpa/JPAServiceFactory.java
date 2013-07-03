@@ -1,7 +1,8 @@
-package persistencia.servicefactory;
+package persistence.jpa;
 
 import persistence.jpa.*;
-import persistence.service.*;
+import persistencia.servicefactory.ServiceFactory;
+
 
 public class JPAServiceFactory extends ServiceFactory{
 

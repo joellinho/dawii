@@ -6,11 +6,11 @@ import java.util.Set;
 
 
 /**
- * The persistent class for the tipodocumento database table.
+ * The persistent class for the estadoregistropedido database table.
  * 
  */
 @Entity
-public class Tipodocumento implements Serializable {
+public class Estadoregistropedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -19,11 +19,11 @@ public class Tipodocumento implements Serializable {
 
 	private String descripcion;
 
-	//bi-directional many-to-one association to Cliente
-	@OneToMany(mappedBy="tipodocumento")
-	private Set<Cliente> clientes;
+	//bi-directional many-to-one association to Documentocomercial
+	@OneToMany(mappedBy="estadoregistropedido")
+	private Set<Documentocomercial> documentocomercials;
 
-    public Tipodocumento() {
+    public Estadoregistropedido() {
     }
 
 	public int getId() {
@@ -42,12 +42,12 @@ public class Tipodocumento implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public Set<Cliente> getClientes() {
-		return this.clientes;
+	public Set<Documentocomercial> getDocumentocomercials() {
+		return this.documentocomercials;
 	}
 
-	public void setClientes(Set<Cliente> clientes) {
-		this.clientes = clientes;
+	public void setDocumentocomercials(Set<Documentocomercial> documentocomercials) {
+		this.documentocomercials = documentocomercials;
 	}
 	
 }

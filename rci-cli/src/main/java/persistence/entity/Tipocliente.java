@@ -15,9 +15,9 @@ public class Tipocliente implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idtipocliente;
+	private int id;
 
-	private String desctipocloente;
+	private String descripcion;
 
 	//bi-directional many-to-one association to Cliente
 	@OneToMany(mappedBy="tipocliente")
@@ -26,20 +26,20 @@ public class Tipocliente implements Serializable {
     public Tipocliente() {
     }
 
-	public int getIdtipocliente() {
-		return this.idtipocliente;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setIdtipocliente(int idtipocliente) {
-		this.idtipocliente = idtipocliente;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getDesctipocloente() {
-		return this.desctipocloente;
+	public String getDescripcion() {
+		return this.descripcion;
 	}
 
-	public void setDesctipocloente(String desctipocloente) {
-		this.desctipocloente = desctipocloente;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public Set<Cliente> getClientes() {
