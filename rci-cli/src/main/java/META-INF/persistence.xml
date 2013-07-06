@@ -18,13 +18,16 @@
 	 	<class>persistence.entity.Tipocliente</class>
 	 	<class>persistence.entity.Tipocomprobante</class>
 	 	<class>persistence.entity.Tipodocumento</class>
+
 	 	<class>persistence.entity.Ubigeo</class>
+	 	
+	 	<!-- 
 	 	<class>persistence.entity.UbigeoDepa</class>
 	 	<class>persistence.entity.UbigeoDist</class>
 	 	<class>persistence.entity.UbigeoDistPK</class>
 	 	<class>persistence.entity.UbigeoProv</class>
 	 	<class>persistence.entity.UbigeoProvPK</class>
-
+ -->
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver"  value="com.mysql.jdbc.Driver"/>
@@ -39,7 +42,7 @@
 			<property name="hibernate.hbm2ddl.auto" value="update"/>
 			
 			<!-- 
-				validate: validate the schema, makes no changes to the database.
+				validate: validate the schema, makes no changes to the database. (No corre?)
 				update: update the schema.
 				create: creates the schema, destroying previous data.
 				create-drop: drop the schema at the end of the session.

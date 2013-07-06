@@ -41,7 +41,7 @@ public class JPAClienteService implements ClienteService {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
 			em.getTransaction().begin();
-			em.remove(cliente);
+			em.remove(em.getReference(Cliente.class, cliente.getId()));
 			em.getTransaction().commit();
 		}
 		finally{
@@ -59,6 +59,28 @@ public class JPAClienteService implements ClienteService {
 		}
 		finally{
 			em.close();
+		}
+	}
+
+	@Override
+	public Cliente buscarPorUserPass(String user, String pass) {
+		EntityManager em = JPAUtil.getEntityManager();
+		try{
+			String query = "SELECT c FROM Cliente c WHERE c.nrodocid=:nrodocid";
+			TypedQuery<Cliente> emquery = em.createQuery(query,Cliente.class);
+			emquery.setParameter("nrodocid", user);
+			emquery.setMaxResults(1);
+			List<Cliente> listaCliente = emquery.getResultList();
+			
+			if(listaCliente!=null && listaCliente.size()>0){
+				return listaCliente.get(0);
+			}
+			else{
+				return null;
+			}
+		}
+		finally{
+			
 		}
 	}
 

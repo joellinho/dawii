@@ -12,21 +12,21 @@ import java.util.Set;
 @Entity
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String apellido;
 
+	private String nombre;
+	
 	private String direccion;
 
 	private String email;
 
     @Lob()
 	private byte[] foto;
-
-	private String nombre;
 
 	private String nrodocid;
 

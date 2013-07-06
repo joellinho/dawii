@@ -26,6 +26,14 @@ public abstract class ServiceFactory {
 		return ServiceFactory.obtenerServiceFactory(ServiceFactory.DEFAULT_SERVICE);
 	}
 	
+	
+	public abstract TipoclienteService obtenerTipoclienteService();
+	public abstract TipodocumentoService obtenerTipoDocumentoService();
+	public abstract ClienteService obtenerClienteService();
+	
+	
+	
+	
 	/**
 	 * Enumeración que lista las posibles implementaciones del DAOFactory
 	 * @author Alvaro

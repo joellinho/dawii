@@ -15,8 +15,8 @@ public class Detallefacturacion implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="detallepedido_id")
-	private int detallepedidoId;
+	@Column(name="idDetallePedido")
+	private int id;
 
 	private BigDecimal bruto;
 
@@ -43,12 +43,12 @@ public class Detallefacturacion implements Serializable {
     public Detallefacturacion() {
     }
 
-	public int getDetallepedidoId() {
-		return this.detallepedidoId;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setDetallepedidoId(int detallepedidoId) {
-		this.detallepedidoId = detallepedidoId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public BigDecimal getBruto() {

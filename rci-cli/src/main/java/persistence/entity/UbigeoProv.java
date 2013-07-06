@@ -9,7 +9,7 @@ import java.util.Set;
  * The persistent class for the ubigeo_prov database table.
  * 
  */
-@Entity
+//@Entity
 @Table(name="ubigeo_prov")
 public class UbigeoProv implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -26,7 +26,7 @@ public class UbigeoProv implements Serializable {
 
 	//bi-directional many-to-one association to UbigeoDepa
     @ManyToOne
-	@JoinColumn(name="ud_cod")
+	@JoinColumn(name="ud_cod", insertable=false, updatable=false)
 	private UbigeoDepa ubigeoDepa;
 
     public UbigeoProv() {

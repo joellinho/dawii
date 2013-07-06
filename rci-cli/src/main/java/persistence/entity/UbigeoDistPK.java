@@ -7,7 +7,7 @@ import javax.persistence.*;
  * The primary key class for the ubigeo_dist database table.
  * 
  */
-@Embeddable
+//@Embeddable
 public class UbigeoDistPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;

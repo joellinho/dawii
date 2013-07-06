@@ -9,7 +9,7 @@ import java.util.Set;
  * The persistent class for the ubigeo_depa database table.
  * 
  */
-@Entity
+//@Entity
 @Table(name="ubigeo_depa")
 public class UbigeoDepa implements Serializable {
 	private static final long serialVersionUID = 1L;

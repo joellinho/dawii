@@ -24,6 +24,7 @@ public class Categoriaproducto implements Serializable {
 	private Set<Productoempresa> productoempresas;
 
     public Categoriaproducto() {
+    	
     }
 
 	public int getId() {

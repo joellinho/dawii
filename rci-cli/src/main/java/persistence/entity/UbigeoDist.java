@@ -8,7 +8,7 @@ import javax.persistence.*;
  * The persistent class for the ubigeo_dist database table.
  * 
  */
-@Entity
+//@Entity
 @Table(name="ubigeo_dist")
 public class UbigeoDist implements Serializable {
 	private static final long serialVersionUID = 1L;

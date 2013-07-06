@@ -7,7 +7,7 @@ import javax.persistence.*;
  * The primary key class for the ubigeo_prov database table.
  * 
  */
-@Embeddable
+//@Embeddable
 public class UbigeoProvPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
