@@ -15,7 +15,9 @@ public class StartData {
 		StartData sd = new StartData();
 		
 		sd.InsertarTipoCliente();
-
+		sd.insertarTipoDocumento();
+		
+		//GeneroPersonaService gp = ServiceFactory.
 	}
 
 	
@@ -46,7 +48,7 @@ public class StartData {
 		if(cs.listarDocumento().size()<=0){
 			Tipodocumento td=new Tipodocumento();
 			td.setDescripcion("DNI");
-			td.setDescripcion("");
+			cs.insertar(td);
 		}
 	}
 	

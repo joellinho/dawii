@@ -74,6 +74,11 @@ public class RegistrarseManaged {
 		
 	}
 	
+	private String test(){
+		
+		return null;
+	}
+	
 	//=========Get/Set=========
 	public void setTipoDocServ(TipodocumentoService tipoDocServ) {
 		this.tipoDocServ = tipoDocServ;
@@ -113,6 +118,23 @@ public class RegistrarseManaged {
 
 	public RegistrarseManaged(){
 		this.listaTipoDoc = tipoDocServ.listarDocumento();
+		/*
+		if(this.tipoDocSeleccionado !=null){
+			boolean mod=false;
+			
+			for(Tipodocumento t : this.listaTipoDoc){				
+				if(t.getId()==this.tipoDocSeleccionado.getId()){
+					this.tipoDocSeleccionado = t;
+					mod = true;
+				}				
+			}
+			
+			if(!mod){
+				this.tipoDocSeleccionado = null;
+			}
+			
+			
+		}*/
 	}	
 
 	public List<Tipodocumento> getListaTipoDoc() {
