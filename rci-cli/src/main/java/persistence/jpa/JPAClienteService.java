@@ -5,23 +5,22 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import persistence.entidades.Cliente;
-import persistence.service.ClienteService;
+import persistence.entity.Cliente;
+import persistencia.servicefactory.ClienteService;
 
 public class JPAClienteService implements ClienteService {
 
-	
 	@Override
-	public void insertar(Cliente cliente) {		
+	public void insertar(Cliente cliente) {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
 			em.getTransaction().begin();
 			em.persist(cliente);
-			em.getTransaction().commit();			
+			em.getTransaction().commit();
 		}
 		finally{
 			em.close();
-		}		
+		}	
 	}
 
 	@Override
@@ -34,7 +33,7 @@ public class JPAClienteService implements ClienteService {
 		}
 		finally{
 			em.close();
-		}
+		}	
 	}
 
 	@Override
@@ -42,44 +41,47 @@ public class JPAClienteService implements ClienteService {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
 			em.getTransaction().begin();
-			em.remove(cliente);
-			/*
-			Esto deberia fallar, es necesario obtener el objeto de nuevo
-			ya que el em al que pertenece el objeto probablemente expiro
-			*/
+			em.remove(em.getReference(Cliente.class, cliente.getId()));
 			em.getTransaction().commit();
 		}
 		finally{
-			em.close();			
-		}		
+			em.close();
+		}	
 	}
 
 	@Override
 	public List<Cliente> listarClientes() {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
-			String query = "SELECT c from Cliente c ORDER BY c.id";
-			TypedQuery<Cliente> emquery = em.createQuery(query, Cliente.class);
-			return emquery.getResultList();			
+			String query = "SELECT c FROM Cliente c ORDER BY c.id";
+			TypedQuery<Cliente> emquery = em.createQuery(query,Cliente.class);
+			return emquery.getResultList();
 		}
 		finally{
-			em.close();			
-		}		
+			em.close();
+		}
 	}
 
 	@Override
-	public Cliente obtenerPorId(int id) {
+	public Cliente buscarPorUserPass(String user, String pass) {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
-			String query = "SELECT c from Cliente c WHERE c.id=:id ORDER BY c.id";
-			TypedQuery<Cliente> emquery = em.createQuery(query, Cliente.class);
-			emquery.setParameter("id", id);
-			return emquery.getSingleResult();			
+			String query = "SELECT c FROM Cliente c WHERE c.nrodocid=:nrodocid";
+			TypedQuery<Cliente> emquery = em.createQuery(query,Cliente.class);
+			emquery.setParameter("nrodocid", user);
+			emquery.setMaxResults(1);
+			List<Cliente> listaCliente = emquery.getResultList();
+			
+			if(listaCliente!=null && listaCliente.size()>0){
+				return listaCliente.get(0);
+			}
+			else{
+				return null;
+			}
 		}
 		finally{
-			em.close();			
-		}		
+			
+		}
 	}
-
 
 }

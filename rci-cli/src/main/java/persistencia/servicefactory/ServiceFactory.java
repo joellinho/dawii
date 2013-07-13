@@ -1,17 +1,6 @@
 package persistencia.servicefactory;
 
-import persistence.service.CategoriaProductoService;
-import persistence.service.ClienteService;
-import persistence.service.DetallePedidoService;
-import persistence.service.DistritoService;
-import persistence.service.EmpresaService;
-import persistence.service.EstadoRegistroPedidoService;
-import persistence.service.ImageService;
-import persistence.service.PedidoService;
-import persistence.service.ProductoTiendaService;
-import persistence.service.RepartidorService;
-import persistence.service.TiendaService;
-import persistence.service.TipoClienteService;
+import persistence.jpa.JPAServiceFactory;
 
 /**
  * La clase abstracta que representa un objeto DAO.
@@ -37,6 +26,17 @@ public abstract class ServiceFactory {
 		return ServiceFactory.obtenerServiceFactory(ServiceFactory.DEFAULT_SERVICE);
 	}
 	
+	
+	public abstract TipoclienteService obtenerTipoclienteService();
+	public abstract TipodocumentoService obtenerTipoDocumentoService();
+	public abstract ClienteService obtenerClienteService();
+	public abstract UbigeoDepaService obtenerUbigeoDepaService();
+	public abstract UbigeoDistService obtenerUbigeoDistService();
+	public abstract UbigeoProvService obtenerUbigeoProvService();
+	public abstract UbigeoService obtenerUbigeoService();
+	
+	
+	
 	/**
 	 * Enumeración que lista las posibles implementaciones del DAOFactory
 	 * @author Alvaro
@@ -46,18 +46,6 @@ public abstract class ServiceFactory {
 		JPA,
 		MOCK,
 	}
-	
-	public abstract CategoriaProductoService obtenerCategoriaProductoService();
-	public abstract ClienteService obtenerClienteService();
-	public abstract PedidoService obtenerPedidoService();
-	public abstract DetallePedidoService obtenerDetallePedidoService();
-	public abstract DistritoService obtenerDistritoService();
-	public abstract EmpresaService obtenerEmpresaService();
-	public abstract EstadoRegistroPedidoService obtenerEstadoRegistroPedidoService();
-	public abstract ImageService obtenerImageService();
-	public abstract ProductoTiendaService obtenerProductoTiendaService();
-	public abstract RepartidorService obtenerRepartidorService();
-	public abstract TiendaService obtenerTiendaService();
-	public abstract TipoClienteService obtenerTipoClienteService();	
+
 	
 }

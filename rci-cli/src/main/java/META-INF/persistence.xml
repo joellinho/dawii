@@ -2,19 +2,32 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="dawii">
 	 	<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>persistence.entidades.CategoriaProducto</class>
-		<class>persistence.entidades.Cliente</class>
-		<class>persistence.entidades.DetallePedido</class>
-		<class>persistence.entidades.Distrito</class>
-		<class>persistence.entidades.Empresa</class>
-		<class>persistence.entidades.EstadoRegistroPedido</class>
-		<class>persistence.entidades.Image</class>
-		<class>persistence.entidades.Pedido</class>
-		<class>persistence.entidades.ProductoTienda</class>
-		<class>persistence.entidades.Repartidor</class>
-		<class>persistence.entidades.Tienda</class>
-		<class>persistence.entidades.TipoCliente</class>
-		<class>persistence.entidades.Direccion</class>
+	 	<class>persistence.entity.Categoriaproducto</class>
+	 	<class>persistence.entity.Cliente</class>
+	 	<class>persistence.entity.Detallefacturacion</class>
+	 	<class>persistence.entity.Detallepedido</class>
+	 	<class>persistence.entity.Empresacliente</class>
+	 	<class>persistence.entity.Empresacomercial</class>
+	 	<class>persistence.entity.Estadopedido</class>
+	 	<class>persistence.entity.Facturacion</class>
+	 	<class>persistence.entity.Generopersona</class>
+	 	<class>persistence.entity.Image</class>
+	 	<class>persistence.entity.Pedido</class>
+	 	<class>persistence.entity.Productoempresa</class>
+	 	<class>persistence.entity.Productotienda</class>
+	 	<class>persistence.entity.Repartidor</class>
+	 	<class>persistence.entity.Tienda</class>
+	 	<class>persistence.entity.Tipocliente</class>
+	 	<class>persistence.entity.Tipocomprobante</class>
+	 	<class>persistence.entity.Tipodocumento</class>
+	 	<class>persistence.entity.Ubigeo</class>
+	 	<class>persistence.entity.UbigeoDepa</class>
+	 	<class>persistence.entity.UbigeoDist</class>
+	 	<class>persistence.entity.UbigeoDistPK</class>
+	 	<class>persistence.entity.UbigeoProv</class>
+	 	<class>persistence.entity.UbigeoProvPK</class>
+	 	<class>persistence.entity.Ubigeopai</class>
+
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver"  value="com.mysql.jdbc.Driver"/>
@@ -29,7 +42,7 @@
 			<property name="hibernate.hbm2ddl.auto" value="update"/>
 			
 			<!-- 
-				validate: validate the schema, makes no changes to the database.
+				validate: validate the schema, makes no changes to the database. (No corre?)
 				update: update the schema.
 				create: creates the schema, destroying previous data.
 				create-drop: drop the schema at the end of the session.

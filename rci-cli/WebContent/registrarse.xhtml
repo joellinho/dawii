@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:body> 
+    	<ui:composition template="/template/layout.xhtml">
+ 		<ui:define name="content">
+
+ 		
+ 			<p:panel header="Registrarse">  
+ 			 		<h:form id="formRegistrar">
+ 				<h:panelGrid columns="2" cellpadding="5">
+ 				
+ 				<h:outputLabel for="txtApellido" value="Apellido" />
+ 				<p:inputText id="txtApellido" value="#{registrarseManaged.apellido}" />  
+ 				
+				<h:outputLabel for="txtNombre" value="Nombre"/>
+ 				<p:inputText id="txtNombre" value="#{registrarseManaged.nombre}"/> 
+ 				
+ 				<h:outputLabel for="txtDireccion" value="Dirección" />
+ 				<p:inputText id="txtDireccion" value="#{registrarseManaged.direccion}"/>  
+ 		
+ 				<h:outputLabel for="txtEmail" value="email"/>
+ 				<p:inputText id="txtEmail"  value="#{registrarseManaged.email}"/> 
+ 				
+ 				<h:outputLabel for="txtNrodcid" value="Documento"/>
+ 				<p:inputText id="txtNrodcid" value="#{registrarseManaged.documento}"/> 
+ 				
+ 				<h:outputLabel for="txtTelefono" value="Teléfono"/>
+ 				<p:inputText id="txtTelefono" value="#{registrarseManaged.telefono}"/> 
+ 				
+ 				<h:outputLabel for="cboTipoDocumento" value="Tipo Documento"/>
+ 				<p:selectOneMenu id="cboTipoDocumento" value="#{registrarseManaged.tipoDocSeleccionado}">  
+                	<f:selectItem itemLabel="-- Tipo Doc --" itemValue="" />  
+                	
+                	<f:selectItems value="#{registrarseManaged.listaTipoDoc}" 
+                				   var="tipoDoc"
+                				   itemLabel="#{tipoDoc.descripcion}"
+                	/>  
+            	</p:selectOneMenu>  
+ 				
+ 				
+ 				</h:panelGrid>
+ 				 
+ 			
+ 		 		<p:commandButton id="btnTest" value="Test" 
+ 				 	    actionListener="#{registrarseManaged.insertarUsuario}" ajax="false" />
+ 				 	    
+ 				</h:form>
+ 			</p:panel>
+ 			
+
+ 		
+ 		</ui:define>
+    	</ui:composition> 
+    </h:body>
+ 
+</html>
+
+  

@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    >  
+ 
+    <h:head>  
+ 
+
+    </h:head>  
+      
+    <h:body>
+
+      <h:form>  
+   
+           <p:panel header="Login Test">
+             	<h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="login" value="Usuario:" style="font-weight:bold"/>          
+	        <p:inputText id="login" value="#{managedBean.user}" />
+
+	        <h:outputLabel for="password" value="Password:" style="font-weight:bold"/>          
+	        <p:password id="password" value="#{managedBean.pass}" />          
+
+
+	          <p:commandButton id="loginButton" value="Autenticar"  
+                    action="#{managedBean.autenticar}" ajax="false" />
+              </h:panelGrid>
+              
+              <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+              
+              
+                
+           </p:panel>  
+ 	
+
+      </h:form>
+
+    </h:body>  
+</html>
