@@ -34,9 +34,7 @@ public abstract class ServiceFactory {
 	public abstract UbigeoDistService obtenerUbigeoDistService();
 	public abstract UbigeoProvService obtenerUbigeoProvService();
 	public abstract UbigeoService obtenerUbigeoService();
-	public abstract GeneroPersonaService obtenerGeneroClienteService();
-	
-	public abstract GeneroPersonaService obtenerGeneroClienteService();
+	public abstract GeneroPersonaService obtenerGeneroClienteService();//duplicado-borrado
 	public abstract EmpresaClienteService obtenerEmpresaClienteService();
 	public abstract PedidosService obtenerPedidosService();
 	

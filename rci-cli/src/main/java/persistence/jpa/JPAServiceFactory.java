@@ -1,7 +1,9 @@
 package persistence.jpa;
 
 import persistencia.servicefactory.ClienteService;
+import persistencia.servicefactory.EmpresaClienteService;
 import persistencia.servicefactory.GeneroPersonaService;
+import persistencia.servicefactory.PedidosService;
 import persistencia.servicefactory.ServiceFactory;
 import persistencia.servicefactory.TipoclienteService;
 import persistencia.servicefactory.TipodocumentoService;
@@ -51,7 +53,6 @@ public class JPAServiceFactory extends ServiceFactory{
 	@Override
 	public GeneroPersonaService obtenerGeneroClienteService() {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
 		return new JPAGeneroPersonaService();
 	}
 
@@ -65,9 +66,6 @@ public class JPAServiceFactory extends ServiceFactory{
 	public PedidosService obtenerPedidosService() {
 		// TODO Auto-generated method stub
 		return new JPAPedidosService();
-=======
-		return null;
->>>>>>> branch 'developer' of https://github.com/Anteo4Ever/dawii.git
 	}
 
 	
