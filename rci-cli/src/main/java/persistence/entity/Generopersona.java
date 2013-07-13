@@ -15,7 +15,7 @@ public class Generopersona implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private String id;
+	private int id;
 
 	private String descripcion;
 
@@ -30,11 +30,11 @@ public class Generopersona implements Serializable {
     public Generopersona() {
     }
 
-	public String getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

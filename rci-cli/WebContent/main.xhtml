@@ -6,8 +6,34 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">
       
     <h:body> 
-    	<ui:composition template="/template/layout.xhtml">
- 			Test!!!!!!!!!!!
+   	<ui:composition template="/template/layout.xhtml">
+ 		<ui:define name="content">
+
+	<h:form id="formRegistrar">
+ 			<p:panel header="Registrarse">  
+ 			  				
+ 				<p:selectOneMenu id="cboTipoDocumento" value="#{registrarseManaged.tipoDocSeleccionado}">  
+                	
+                	
+                	<f:selectItems value="#{registrarseManaged.listaTipoDoc}" 
+                				   var="tipoDoc"
+                				   itemLabel="#{tipoDoc.descripcion}"
+                	/>  
+            	</p:selectOneMenu>  
+ 				
+ 				
+ 
+ 				 
+ 			
+ 		 		<p:commandButton id="btnTest" value="Test" 
+ 				 	    actionListener="#{registrarseManaged.test}" ajax="false" />
+ 				 	    
+ 				
+ 			</p:panel>
+ 			
+</h:form>
+
+</ui:define>
     	</ui:composition> 
     </h:body>
  

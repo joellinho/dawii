@@ -9,10 +9,9 @@
     	<ui:composition template="/template/layout.xhtml">
  		<ui:define name="content">
 
-		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
- 		
+ 		<h:form id="formRegistrar">
  			<p:panel header="Registrarse">  
- 			 		<h:form id="formRegistrar">
+ 			 		
  				<h:panelGrid columns="2" cellpadding="5">
  				
  				<h:outputLabel for="txtApellido" value="Apellido" />
@@ -29,9 +28,6 @@
  				
  				<h:outputLabel for="txtLoginPassword" value="LoginPassword"/>
  				<p:inputText id="txtPassword" value="#{registrarseManaged.loginPassword}"/>
- 				
- 			    <h:outputLabel for="txtLoginPassword2" value="LoginPassword2"/>
- 				<p:inputText id="txtPassword2" value="#{registrarseManaged.loginPassword2}"/>
  				
  				<h:outputLabel for="txtLoginUser" value="LoginUser"/>
  				<p:inputText id="txtLoginUser" value="#{registrarseManaged.loginUser}"/>
@@ -50,7 +46,7 @@
  				
  				
  				<p:selectOneMenu id="cboTipoDocumento" value="#{registrarseManaged.tipoDocSeleccionado}">  
-                	<f:selectItem itemLabel="-- Tipo Doc --" itemValue="" />  
+                	
                 	
                 	<f:selectItems value="#{registrarseManaged.listaTipoDoc}" 
                 				   var="tipoDoc"
@@ -65,10 +61,10 @@
  		 		<p:commandButton id="btnTest" value="Test" 
  				 	    actionListener="#{registrarseManaged.insertarUsuario}" ajax="false" />
  				 	    
- 				</h:form>
+ 				
  			</p:panel>
  			
-
+</h:form>
  		
  		</ui:define>
     	</ui:composition> 
