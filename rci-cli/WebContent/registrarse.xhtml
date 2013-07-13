@@ -29,22 +29,22 @@
  				<h:outputLabel for="txtEmail" value="Email"/>
  				<p:inputText id="txtEmail"  value="#{registrarseManaged.email}"/>
  				
- 				<h:outputLabel for="txtLoginPassword" value="LoginPassword"/>
- 				<p:password id="txtPassword" value="#{registrarseManaged.loginPassword}"/>
- 				
- 			    <h:outputLabel for="txtLoginPassword2" value="LoginPassword2"/>
- 				<p:password id="txtPassword2" value="#{registrarseManaged.loginPassword2}"/>
- 				
- 				<h:outputLabel for="txtLoginUser" value="LoginUser"/>
+ 				<h:outputLabel for="txtLoginUser" value="Usuario"/>
  				<p:inputText id="txtLoginUser" value="#{registrarseManaged.loginUser}"/>
  				
- 				<h:outputLabel for="txtNumeroDocumentoIdentidad" value="NumeroDocumentoIdentidad"/>
+ 				<h:outputLabel for="txtPassword" value="Crea una Contraseña"/>
+ 				<p:password id="txtPassword" value="#{registrarseManaged.loginPassword}"/>
+ 				
+ 			    <h:outputLabel for="txtLoginPassword2" value="Vuelve a Escribir la Contraseña"/>
+ 				<p:password id="txtPassword2" value="#{registrarseManaged.loginPassword2}"/>
+ 				
+ 				<h:outputLabel for="txtNumeroDocumentoIdentidad" value="Número Documento de Identidad"/>
  				<p:inputText id="txtNumeroDocumentoIdentidad" value="#{registrarseManaged.numeroDocumentoIdentidad}"/>
  				
- 				<h:outputLabel for="txtTelefonoCelular" value="TelefonoCelular"/>
+ 				<h:outputLabel for="txtTelefonoCelular" value="Celular"/>
  				<p:inputText id="txtTelefonoCelular" value="#{registrarseManaged.telefonoCelular}"/>
  				
- 				<h:outputLabel for="txtTelefonoPrincipal" value="TelefonoPrincipal"/>
+ 				<h:outputLabel for="txtTelefonoPrincipal" value="Telefono"/>
  				<p:inputText id="txtTelefonoPrincipal" value="#{registrarseManaged.telefonoPrincipal}"/>       
  				
  				<h:outputLabel for="cboTipoDocumento" value="Tipo Documento"/>
@@ -64,7 +64,7 @@
  				</h:panelGrid>
  				 
  			
- 		 		<p:commandButton id="btnTest" value="Test" 
+ 		 		<p:commandButton id="btnTest" value="Registrar" 
  				 	    actionListener="#{registrarseManaged.insertarUsuario}" ajax="false" />
  				 	    
 
