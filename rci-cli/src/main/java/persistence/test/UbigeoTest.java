@@ -33,7 +33,7 @@ public class UbigeoTest {
 		udep.setUdcod(primerUbigeo.getCodDep());
 		udep.setUdnombre(primerUbigeo.getNomDep());
 		
-		uDepServ
+		//uDepServ
 		
 		
 		

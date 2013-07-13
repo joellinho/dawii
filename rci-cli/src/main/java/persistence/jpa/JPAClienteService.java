@@ -66,9 +66,10 @@ public class JPAClienteService implements ClienteService {
 	public Cliente buscarPorUserPass(String user, String pass) {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
-			String query = "SELECT c FROM Cliente c WHERE c.nrodocid=:nrodocid";
+			String query = "SELECT c FROM Cliente c WHERE c.loginpassword=:loginpassword and c.loginuser=:loginuser";
 			TypedQuery<Cliente> emquery = em.createQuery(query,Cliente.class);
-			emquery.setParameter("nrodocid", user);
+			emquery.setParameter("loginuser", user);
+			emquery.setParameter("loginpassword", pass);
 			emquery.setMaxResults(1);
 			List<Cliente> listaCliente = emquery.getResultList();
 			
