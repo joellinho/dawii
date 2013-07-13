@@ -43,6 +43,16 @@ public class StartData {
 			cs.insertarGenero(gc);
 		}
 	}
+	public void insertarTipoDocumento(){
+		TipodocumentoService cs=sf.obtenerTipoDocumentoService();
+		
+		if(cs.listarDocumento().size()<=0){
+			Tipodocumento td=new Tipodocumento();
+			td.setDescripcion("DNI");
+			td.setDescripcion("");
+		}
+	}
+	
 	
 	public void insertarTipoDocumento(){
 		TipodocumentoService cs=sf.obtenerTipoDocumentoService();
@@ -50,7 +60,6 @@ public class StartData {
 		if(cs.listarDocumento().size()<=0){
 			Tipodocumento td=new Tipodocumento();
 			td.setDescripcion("DNI");
-			td.setDescripcion("RUC");
 			cs.insertar(td);
 		}
 	}
