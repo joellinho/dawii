@@ -30,7 +30,7 @@ public class JPAGeneroPersonaService implements GeneroPersonaService{
 		// TODO Auto-generated method stub
 		EntityManager em=JPAUtil.getEntityManager();
 		try{
-			String query ="SELECT gp FROM Generopersona gp ";
+			String query ="SELECT gp FROM GeneroPersona gp ORDER BY g.id";
 			TypedQuery<Generopersona> emquery=em.createQuery(query, Generopersona.class);
 			return emquery.getResultList();
 		}finally{

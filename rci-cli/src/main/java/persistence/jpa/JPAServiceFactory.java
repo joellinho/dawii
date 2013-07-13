@@ -1,16 +1,6 @@
 package persistence.jpa;
 
-import persistencia.servicefactory.ClienteService;
-import persistencia.servicefactory.EmpresaClienteService;
-import persistencia.servicefactory.GeneroPersonaService;
-import persistencia.servicefactory.PedidosService;
-import persistencia.servicefactory.ServiceFactory;
-import persistencia.servicefactory.TipoclienteService;
-import persistencia.servicefactory.TipodocumentoService;
-import persistencia.servicefactory.UbigeoDepaService;
-import persistencia.servicefactory.UbigeoDistService;
-import persistencia.servicefactory.UbigeoProvService;
-import persistencia.servicefactory.UbigeoService;
+import persistencia.servicefactory.*;
 
 
 public class JPAServiceFactory extends ServiceFactory{
