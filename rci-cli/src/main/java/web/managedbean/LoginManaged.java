@@ -41,7 +41,7 @@ public class LoginManaged {
 	public String autenticar(){
 		this.clienteLogeado = cliServ.buscarPorUserPass(user, pass);
 		if(clienteLogeado!=null){	
-			return null;
+			return "main";
 		}
 		else{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Mensaje", "Usuario y/o Contraseña incorrectos."));  

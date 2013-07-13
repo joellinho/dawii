@@ -66,6 +66,7 @@ public class JPAServiceFactory extends ServiceFactory{
 	public PedidosService obtenerPedidosService() {
 		// TODO Auto-generated method stub
 		return new JPAPedidosService();
+
 	}
 
 	

@@ -15,9 +15,9 @@ public class StartData {
 		StartData sd = new StartData();
 		
 		sd.InsertarTipoCliente();
-		sd.insertarEmpresaCliente();
-		sd.insertarGenero();
 		sd.insertarTipoDocumento();
+		
+		//GeneroPersonaService gp = ServiceFactory.
 	}
 
 	
@@ -37,8 +37,6 @@ public class StartData {
 		if(cs.listarGenero().size()<=0){
 			Generopersona gc=new Generopersona();
 			gc.setDescripcion("Masculino");
-			cs.insertarGenero(gc);
-			gc=new Generopersona();
 			gc.setDescripcion("Femenino");
 			cs.insertarGenero(gc);
 		}
@@ -55,7 +53,6 @@ public class StartData {
 	}
 	
 	
-	
 	public void insertarEmpresaCliente(){
 		EmpresaClienteService cs=sf.obtenerEmpresaClienteService();
 		
@@ -67,5 +64,5 @@ public class StartData {
 		}
 	}
 		
-	
+
 }
