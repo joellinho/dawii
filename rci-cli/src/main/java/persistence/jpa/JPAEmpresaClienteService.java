@@ -33,7 +33,7 @@ public class JPAEmpresaClienteService implements EmpresaClienteService{
 		// TODO Auto-generated method stub
 		EntityManager em=JPAUtil.getEntityManager();
 		try{
-			String query="SELECT ec FROM empresacliente ec ORDER BY ec.id";
+			String query="SELECT ec FROM Empresacliente ec ORDER BY ec.id";
 			TypedQuery<Empresacliente> emquery=em.createQuery(query, Empresacliente.class);
 			return emquery.getResultList();
 		}finally{

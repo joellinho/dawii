@@ -3,6 +3,8 @@ package persistence.entity;
 import javax.persistence.*;
 
 
+
+
 /**
  * The persistent class for the ubigeo_dist database table.
  * 
