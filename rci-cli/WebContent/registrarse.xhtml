@@ -10,6 +10,7 @@
  		<ui:define name="content">
 
 
+
 		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
  		
   		<h:form id="formRegistrar">
@@ -26,7 +27,7 @@
  				<p:inputText id="txtDireccion" value="#{registrarseManaged.direccion}"/>  
  		
  				<h:outputLabel for="txtEmail" value="Email"/>
- 				<p:inputText id="txtEmail"  value="#{registrarseManaged.email}"/> 
+ 				<p:inputText id="txtEmail"  value="#{registrarseManaged.email}"/>
  				
  				<h:outputLabel for="txtLoginPassword" value="LoginPassword"/>
  				<p:password id="txtPassword" value="#{registrarseManaged.loginPassword}"/>
@@ -69,8 +70,6 @@
 
  			</p:panel>
  		</h:form>
- 			
-</h:form>
  		
  		</ui:define>
     	</ui:composition> 
