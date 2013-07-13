@@ -14,9 +14,7 @@ public class SelectData {
 		sd.ListarUbigeo();
 		sd.ListarUbigeoDist();
 	}
-	
-	
-	
+
 	public void ListarUbigeo(){
 		UbigeoService us = sf.obtenerUbigeoService();
 		
