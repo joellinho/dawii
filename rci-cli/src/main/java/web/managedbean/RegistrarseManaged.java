@@ -33,7 +33,7 @@ public class RegistrarseManaged {
 	private String email;
 	private String loginPassword;
 	private String loginPassword2;
-	private String loginUser; 
+	//private String loginUser; 
 	private String numeroDocumentoIdentidad; 
 	private String telefonoCelular; 
 	private String telefonoPrincipal; 
@@ -57,7 +57,7 @@ public class RegistrarseManaged {
 		cli.setDireccion(this.direccion);
 		cli.setEmail(this.email);
 		cli.setLoginpassword(this.loginPassword);
-		cli.setLoginuser(this.loginUser);
+		//cli.setLoginuser(this.loginUser);
 		cli.setNumeroDocumentoIdentidad(this.numeroDocumentoIdentidad);
 		cli.setTelefonoCelular(this.telefonoCelular);
 		cli.setTelefonoPrincipal(this.telefonoPrincipal);
@@ -161,13 +161,13 @@ public class RegistrarseManaged {
 		this.loginPassword = loginPassword;
 	}
 
-	public String getLoginUser() {
+	/*public String getLoginUser() {
 		return loginUser;
 	}
 
 	public void setLoginUser(String loginUser) {
 		this.loginUser = loginUser;
-	}
+	} */
 
 	public String getNumeroDocumentoIdentidad() {
 		return numeroDocumentoIdentidad;
