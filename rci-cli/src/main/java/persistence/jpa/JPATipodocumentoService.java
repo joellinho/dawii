@@ -50,7 +50,7 @@ public class JPATipodocumentoService implements TipodocumentoService {
 	}
 
 	@Override
-	public List<Tipodocumento> listar() {
+	public List<Tipodocumento> listarDocumento() {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
 			String query = "SELECT t FROM Tipodocumento t ORDER BY t.id";
