@@ -9,6 +9,7 @@
     	<ui:composition template="/template/layout.xhtml">
  		<ui:define name="content">
 
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
  		
  			<p:panel header="Registrarse">  
  			 		<h:form id="formRegistrar">
@@ -28,6 +29,9 @@
  				
  				<h:outputLabel for="txtLoginPassword" value="LoginPassword"/>
  				<p:inputText id="txtPassword" value="#{registrarseManaged.loginPassword}"/>
+ 				
+ 			    <h:outputLabel for="txtLoginPassword2" value="LoginPassword2"/>
+ 				<p:inputText id="txtPassword2" value="#{registrarseManaged.loginPassword2}"/>
  				
  				<h:outputLabel for="txtLoginUser" value="LoginUser"/>
  				<p:inputText id="txtLoginUser" value="#{registrarseManaged.loginUser}"/>
