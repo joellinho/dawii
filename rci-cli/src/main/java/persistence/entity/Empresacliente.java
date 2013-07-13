@@ -6,24 +6,26 @@ import java.util.List;
 
 
 /**
- * The persistent class for the tipocliente database table.
+ * The persistent class for the empresacliente database table.
  * 
  */
 @Entity
-public class Tipocliente implements Serializable {
+public class Empresacliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	private String descripcion;
+	private String razonsocial;
+
+	private String ruc;
 
 	//bi-directional many-to-one association to Cliente
-	@OneToMany(mappedBy="tipocliente")
+	@OneToMany(mappedBy="empresacliente")
 	private List<Cliente> clientes;
 
-    public Tipocliente() {
+    public Empresacliente() {
     }
 
 	public int getId() {
@@ -34,12 +36,20 @@ public class Tipocliente implements Serializable {
 		this.id = id;
 	}
 
-	public String getDescripcion() {
-		return this.descripcion;
+	public String getRazonsocial() {
+		return this.razonsocial;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setRazonsocial(String razonsocial) {
+		this.razonsocial = razonsocial;
+	}
+
+	public String getRuc() {
+		return this.ruc;
+	}
+
+	public void setRuc(String ruc) {
+		this.ruc = ruc;
 	}
 
 	public List<Cliente> getClientes() {

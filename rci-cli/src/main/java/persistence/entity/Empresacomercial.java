@@ -2,22 +2,21 @@ package persistence.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
+import java.math.BigDecimal;
+import java.util.List;
 
 
 /**
- * The persistent class for the empresa database table.
+ * The persistent class for the empresacomercial database table.
  * 
  */
 @Entity
-public class Empresa implements Serializable {
+public class Empresacomercial implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-
-	private String comentarios;
 
 	private String direccion;
 
@@ -30,9 +29,13 @@ public class Empresa implements Serializable {
 
 	private String nombrecomercial;
 
-	private String ruc;
+	private String nrotelefonofijo;
 
-	private String telefono;
+	private String observaciones;
+
+	private BigDecimal porcimpconsumo;
+
+	private String ruc;
 
 	private String weburl;
 
@@ -41,14 +44,14 @@ public class Empresa implements Serializable {
 	private Ubigeo ubigeo;
 
 	//bi-directional many-to-one association to Productoempresa
-	@OneToMany(mappedBy="empresa")
-	private Set<Productoempresa> productoempresas;
+	@OneToMany(mappedBy="empresacomercial")
+	private List<Productoempresa> productoempresas;
 
 	//bi-directional many-to-one association to Tienda
-	@OneToMany(mappedBy="empresa")
-	private Set<Tienda> tiendas;
+	@OneToMany(mappedBy="empresacomercial")
+	private List<Tienda> tiendas;
 
-    public Empresa() {
+    public Empresacomercial() {
     }
 
 	public int getId() {
@@ -57,14 +60,6 @@ public class Empresa implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getComentarios() {
-		return this.comentarios;
-	}
-
-	public void setComentarios(String comentarios) {
-		this.comentarios = comentarios;
 	}
 
 	public String getDireccion() {
@@ -107,20 +102,36 @@ public class Empresa implements Serializable {
 		this.nombrecomercial = nombrecomercial;
 	}
 
+	public String getNrotelefonofijo() {
+		return this.nrotelefonofijo;
+	}
+
+	public void setNrotelefonofijo(String nrotelefonofijo) {
+		this.nrotelefonofijo = nrotelefonofijo;
+	}
+
+	public String getObservaciones() {
+		return this.observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+
+	public BigDecimal getPorcimpconsumo() {
+		return this.porcimpconsumo;
+	}
+
+	public void setPorcimpconsumo(BigDecimal porcimpconsumo) {
+		this.porcimpconsumo = porcimpconsumo;
+	}
+
 	public String getRuc() {
 		return this.ruc;
 	}
 
 	public void setRuc(String ruc) {
 		this.ruc = ruc;
-	}
-
-	public String getTelefono() {
-		return this.telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
 	}
 
 	public String getWeburl() {
@@ -139,19 +150,19 @@ public class Empresa implements Serializable {
 		this.ubigeo = ubigeo;
 	}
 	
-	public Set<Productoempresa> getProductoempresas() {
+	public List<Productoempresa> getProductoempresas() {
 		return this.productoempresas;
 	}
 
-	public void setProductoempresas(Set<Productoempresa> productoempresas) {
+	public void setProductoempresas(List<Productoempresa> productoempresas) {
 		this.productoempresas = productoempresas;
 	}
 	
-	public Set<Tienda> getTiendas() {
+	public List<Tienda> getTiendas() {
 		return this.tiendas;
 	}
 
-	public void setTiendas(Set<Tienda> tiendas) {
+	public void setTiendas(List<Tienda> tiendas) {
 		this.tiendas = tiendas;
 	}
 	

@@ -3,7 +3,6 @@ package web.managedbean;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import persistence.entity.Cliente;
@@ -51,8 +50,8 @@ public class RegistrarseManaged {
 		cli.setNombre(this.nombre);
 		cli.setDireccion(this.direccion);
 		cli.setEmail(this.email);
-		cli.setTelefono(this.telefono);
-		cli.setNrodocid(this.documento);
+		//cli.setTelefono(this.telefono);
+		//cli.setNrodocid(this.documento);
 		cli.setTipodocumento(this.tipoDocSeleccionado);
 		cli.setTipocliente(tipoCli);
 		

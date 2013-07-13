@@ -6,31 +6,35 @@ import java.util.List;
 
 
 /**
- * The persistent class for the tipocliente database table.
+ * The persistent class for the generopersona database table.
  * 
  */
 @Entity
-public class Tipocliente implements Serializable {
+public class Generopersona implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private String id;
 
 	private String descripcion;
 
 	//bi-directional many-to-one association to Cliente
-	@OneToMany(mappedBy="tipocliente")
+	@OneToMany(mappedBy="generopersona")
 	private List<Cliente> clientes;
 
-    public Tipocliente() {
+	//bi-directional many-to-one association to Repartidor
+	@OneToMany(mappedBy="generopersona")
+	private List<Repartidor> repartidors;
+
+    public Generopersona() {
     }
 
-	public int getId() {
+	public String getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -48,6 +52,14 @@ public class Tipocliente implements Serializable {
 
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
+	}
+	
+	public List<Repartidor> getRepartidors() {
+		return this.repartidors;
+	}
+
+	public void setRepartidors(List<Repartidor> repartidors) {
+		this.repartidors = repartidors;
 	}
 	
 }

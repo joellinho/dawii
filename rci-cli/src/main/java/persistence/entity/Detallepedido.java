@@ -3,7 +3,7 @@ package persistence.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -20,27 +20,27 @@ public class Detallepedido implements Serializable {
 
 	private int cantidad;
 
-    @Temporal( TemporalType.TIMESTAMP)
-	private Date horasalida;
+	private BigDecimal ganancia;
+
+	private BigDecimal preciocosto;
 
 	private BigDecimal preciounitario;
 
-	//bi-directional one-to-one association to Detallefacturacion
-	@OneToOne(mappedBy="detallepedido")
-	private Detallefacturacion detallefacturacion;
+	//bi-directional many-to-one association to Detallefacturacion
+	@OneToMany(mappedBy="detallepedido")
+	private List<Detallefacturacion> detallefacturacions;
 
-	//bi-directional many-to-one association to Documentocomercial
+	//bi-directional many-to-one association to Pedido
     @ManyToOne
-	@JoinColumn(name="doccom_id")
-	private Documentocomercial documentocomercial;
-
-	//bi-directional many-to-one association to Productotienda
-    @ManyToOne
-	private Productotienda productotienda;
+	private Pedido pedido;
 
 	//bi-directional many-to-one association to Repartidor
     @ManyToOne
 	private Repartidor repartidor;
+
+	//bi-directional many-to-one association to Productotienda
+    @ManyToOne
+	private Productotienda productotienda;
 
     public Detallepedido() {
     }
@@ -61,12 +61,20 @@ public class Detallepedido implements Serializable {
 		this.cantidad = cantidad;
 	}
 
-	public Date getHorasalida() {
-		return this.horasalida;
+	public BigDecimal getGanancia() {
+		return this.ganancia;
 	}
 
-	public void setHorasalida(Date horasalida) {
-		this.horasalida = horasalida;
+	public void setGanancia(BigDecimal ganancia) {
+		this.ganancia = ganancia;
+	}
+
+	public BigDecimal getPreciocosto() {
+		return this.preciocosto;
+	}
+
+	public void setPreciocosto(BigDecimal preciocosto) {
+		this.preciocosto = preciocosto;
 	}
 
 	public BigDecimal getPreciounitario() {
@@ -77,28 +85,20 @@ public class Detallepedido implements Serializable {
 		this.preciounitario = preciounitario;
 	}
 
-	public Detallefacturacion getDetallefacturacion() {
-		return this.detallefacturacion;
+	public List<Detallefacturacion> getDetallefacturacions() {
+		return this.detallefacturacions;
 	}
 
-	public void setDetallefacturacion(Detallefacturacion detallefacturacion) {
-		this.detallefacturacion = detallefacturacion;
+	public void setDetallefacturacions(List<Detallefacturacion> detallefacturacions) {
+		this.detallefacturacions = detallefacturacions;
 	}
 	
-	public Documentocomercial getDocumentocomercial() {
-		return this.documentocomercial;
+	public Pedido getPedido() {
+		return this.pedido;
 	}
 
-	public void setDocumentocomercial(Documentocomercial documentocomercial) {
-		this.documentocomercial = documentocomercial;
-	}
-	
-	public Productotienda getProductotienda() {
-		return this.productotienda;
-	}
-
-	public void setProductotienda(Productotienda productotienda) {
-		this.productotienda = productotienda;
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 	
 	public Repartidor getRepartidor() {
@@ -107,6 +107,14 @@ public class Detallepedido implements Serializable {
 
 	public void setRepartidor(Repartidor repartidor) {
 		this.repartidor = repartidor;
+	}
+	
+	public Productotienda getProductotienda() {
+		return this.productotienda;
+	}
+
+	public void setProductotienda(Productotienda productotienda) {
+		this.productotienda = productotienda;
 	}
 	
 }

@@ -6,11 +6,13 @@
 	 	<class>persistence.entity.Cliente</class>
 	 	<class>persistence.entity.Detallefacturacion</class>
 	 	<class>persistence.entity.Detallepedido</class>
-	 	<class>persistence.entity.Documentocomercial</class>
-	 	<class>persistence.entity.Empresa</class>
-	 	<class>persistence.entity.Estadoregistropedido</class>
+	 	<class>persistence.entity.Empresacliente</class>
+	 	<class>persistence.entity.Empresacomercial</class>
+	 	<class>persistence.entity.Estadopedido</class>
 	 	<class>persistence.entity.Facturacion</class>
+	 	<class>persistence.entity.Generopersona</class>
 	 	<class>persistence.entity.Image</class>
+	 	<class>persistence.entity.Pedido</class>
 	 	<class>persistence.entity.Productoempresa</class>
 	 	<class>persistence.entity.Productotienda</class>
 	 	<class>persistence.entity.Repartidor</class>
@@ -18,16 +20,14 @@
 	 	<class>persistence.entity.Tipocliente</class>
 	 	<class>persistence.entity.Tipocomprobante</class>
 	 	<class>persistence.entity.Tipodocumento</class>
-
 	 	<class>persistence.entity.Ubigeo</class>
-	 	
-	 	<!-- 
 	 	<class>persistence.entity.UbigeoDepa</class>
 	 	<class>persistence.entity.UbigeoDist</class>
 	 	<class>persistence.entity.UbigeoDistPK</class>
 	 	<class>persistence.entity.UbigeoProv</class>
 	 	<class>persistence.entity.UbigeoProvPK</class>
- -->
+	 	<class>persistence.entity.Ubigeopai</class>
+
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver"  value="com.mysql.jdbc.Driver"/>

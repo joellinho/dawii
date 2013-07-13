@@ -3,7 +3,7 @@ package persistence.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -16,22 +16,26 @@ public class Facturacion implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private String id;
+
+	private String deleted;
 
     @Temporal( TemporalType.TIMESTAMP)
 	private Date fechafacturacion;
 
 	private String numerodoc;
 
+	private String observaciones;
+
 	private String razonsocial;
 
 	//bi-directional many-to-one association to Detallefacturacion
 	@OneToMany(mappedBy="facturacion")
-	private Set<Detallefacturacion> detallefacturacions;
+	private List<Detallefacturacion> detallefacturacions;
 
-	//bi-directional many-to-one association to Documentocomercial
+	//bi-directional many-to-one association to Pedido
     @ManyToOne
-	private Documentocomercial documentocomercial;
+	private Pedido pedido;
 
 	//bi-directional many-to-one association to Tipocomprobante
     @ManyToOne
@@ -40,12 +44,20 @@ public class Facturacion implements Serializable {
     public Facturacion() {
     }
 
-	public int getId() {
+	public String getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getDeleted() {
+		return this.deleted;
+	}
+
+	public void setDeleted(String deleted) {
+		this.deleted = deleted;
 	}
 
 	public Date getFechafacturacion() {
@@ -64,6 +76,14 @@ public class Facturacion implements Serializable {
 		this.numerodoc = numerodoc;
 	}
 
+	public String getObservaciones() {
+		return this.observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+
 	public String getRazonsocial() {
 		return this.razonsocial;
 	}
@@ -72,20 +92,20 @@ public class Facturacion implements Serializable {
 		this.razonsocial = razonsocial;
 	}
 
-	public Set<Detallefacturacion> getDetallefacturacions() {
+	public List<Detallefacturacion> getDetallefacturacions() {
 		return this.detallefacturacions;
 	}
 
-	public void setDetallefacturacions(Set<Detallefacturacion> detallefacturacions) {
+	public void setDetallefacturacions(List<Detallefacturacion> detallefacturacions) {
 		this.detallefacturacions = detallefacturacions;
 	}
 	
-	public Documentocomercial getDocumentocomercial() {
-		return this.documentocomercial;
+	public Pedido getPedido() {
+		return this.pedido;
 	}
 
-	public void setDocumentocomercial(Documentocomercial documentocomercial) {
-		this.documentocomercial = documentocomercial;
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 	
 	public Tipocomprobante getTipocomprobante() {

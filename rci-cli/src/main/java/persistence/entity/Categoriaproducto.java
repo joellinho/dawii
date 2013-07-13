@@ -2,7 +2,8 @@ package persistence.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
+
+import java.util.List;
 
 
 /**
@@ -21,10 +22,9 @@ public class Categoriaproducto implements Serializable {
 
 	//bi-directional many-to-one association to Productoempresa
 	@OneToMany(mappedBy="categoriaproducto")
-	private Set<Productoempresa> productoempresas;
+	private List<Productoempresa> productoempresas;
 
     public Categoriaproducto() {
-    	
     }
 
 	public int getId() {
@@ -43,11 +43,11 @@ public class Categoriaproducto implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public Set<Productoempresa> getProductoempresas() {
+	public List<Productoempresa> getProductoempresas() {
 		return this.productoempresas;
 	}
 
-	public void setProductoempresas(Set<Productoempresa> productoempresas) {
+	public void setProductoempresas(List<Productoempresa> productoempresas) {
 		this.productoempresas = productoempresas;
 	}
 	

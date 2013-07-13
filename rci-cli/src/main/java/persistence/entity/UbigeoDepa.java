@@ -1,56 +1,53 @@
 package persistence.entity;
 
-import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
+
+import java.util.Collection;
 
 
 /**
  * The persistent class for the ubigeo_depa database table.
  * 
  */
-//@Entity
+@Entity
 @Table(name="ubigeo_depa")
-public class UbigeoDepa implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class UbigeoDepa {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ud_cod")
-	private String udCod;
+	@Column(name="ud_cod", unique=true, nullable=false, length=5)
+	private String udcod;
 
-	@Column(name="ud_nombre")
-	private String udNombre;
+	@Column(name="ud_nombre", length=200)
+	private String udnombre;
 
 	//bi-directional many-to-one association to UbigeoProv
-	@OneToMany(mappedBy="ubigeoDepa")
-	private Set<UbigeoProv> ubigeoProvs;
+	@OneToMany(mappedBy="ubigeodepa")
+	private Collection<UbigeoProv> ubigeoprov;
 
-    public UbigeoDepa() {
-    }
-
-	public String getUdCod() {
-		return this.udCod;
+	public String getUdcod() {
+		return udcod;
 	}
 
-	public void setUdCod(String udCod) {
-		this.udCod = udCod;
+	public void setUdcod(String udcod) {
+		this.udcod = udcod;
 	}
 
-	public String getUdNombre() {
-		return this.udNombre;
+	public String getUdnombre() {
+		return udnombre;
 	}
 
-	public void setUdNombre(String udNombre) {
-		this.udNombre = udNombre;
+	public void setUdnombre(String udnombre) {
+		this.udnombre = udnombre;
 	}
 
-	public Set<UbigeoProv> getUbigeoProvs() {
-		return this.ubigeoProvs;
+	public Collection<UbigeoProv> getUbigeoprov() {
+		return ubigeoprov;
 	}
 
-	public void setUbigeoProvs(Set<UbigeoProv> ubigeoProvs) {
-		this.ubigeoProvs = ubigeoProvs;
+	public void setUbigeoprov(Collection<UbigeoProv> ubigeoprov) {
+		this.ubigeoprov = ubigeoprov;
 	}
-	
+
+
+
 }

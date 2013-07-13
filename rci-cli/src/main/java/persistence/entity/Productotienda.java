@@ -2,7 +2,7 @@ package persistence.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -17,13 +17,15 @@ public class Productotienda implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	private String observaciones;
+
 	//bi-directional many-to-one association to Detallefacturacion
 	@OneToMany(mappedBy="productotienda")
-	private Set<Detallefacturacion> detallefacturacions;
+	private List<Detallefacturacion> detallefacturacions;
 
 	//bi-directional many-to-one association to Detallepedido
 	@OneToMany(mappedBy="productotienda")
-	private Set<Detallepedido> detallepedidos;
+	private List<Detallepedido> detallepedidos;
 
 	//bi-directional many-to-one association to Productoempresa
     @ManyToOne
@@ -44,19 +46,27 @@ public class Productotienda implements Serializable {
 		this.id = id;
 	}
 
-	public Set<Detallefacturacion> getDetallefacturacions() {
+	public String getObservaciones() {
+		return this.observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+
+	public List<Detallefacturacion> getDetallefacturacions() {
 		return this.detallefacturacions;
 	}
 
-	public void setDetallefacturacions(Set<Detallefacturacion> detallefacturacions) {
+	public void setDetallefacturacions(List<Detallefacturacion> detallefacturacions) {
 		this.detallefacturacions = detallefacturacions;
 	}
 	
-	public Set<Detallepedido> getDetallepedidos() {
+	public List<Detallepedido> getDetallepedidos() {
 		return this.detallepedidos;
 	}
 
-	public void setDetallepedidos(Set<Detallepedido> detallepedidos) {
+	public void setDetallepedidos(List<Detallepedido> detallepedidos) {
 		this.detallepedidos = detallepedidos;
 	}
 	

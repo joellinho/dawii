@@ -3,7 +3,7 @@ package persistence.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -16,14 +16,14 @@ public class Productoempresa implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private String id;
 
 	private String descripcion;
 
     @Lob()
 	private byte[] foto;
 
-	private String masFotos;
+	private String masfotos;
 
 	private String observaciones;
 
@@ -31,26 +31,28 @@ public class Productoempresa implements Serializable {
 
 	private BigDecimal precioventa;
 
+	//bi-directional many-to-one association to Empresacomercial
+    @ManyToOne
+	@JoinColumn(name="empresa_id")
+	private Empresacomercial empresacomercial;
+
 	//bi-directional many-to-one association to Categoriaproducto
     @ManyToOne
+	@JoinColumn(name="categoria_id")
 	private Categoriaproducto categoriaproducto;
-
-	//bi-directional many-to-one association to Empresa
-    @ManyToOne
-	private Empresa empresa;
 
 	//bi-directional many-to-one association to Productotienda
 	@OneToMany(mappedBy="productoempresa")
-	private Set<Productotienda> productotiendas;
+	private List<Productotienda> productotiendas;
 
     public Productoempresa() {
     }
 
-	public int getId() {
+	public String getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -70,12 +72,12 @@ public class Productoempresa implements Serializable {
 		this.foto = foto;
 	}
 
-	public String getMasFotos() {
-		return this.masFotos;
+	public String getMasfotos() {
+		return this.masfotos;
 	}
 
-	public void setMasFotos(String masFotos) {
-		this.masFotos = masFotos;
+	public void setMasfotos(String masfotos) {
+		this.masfotos = masfotos;
 	}
 
 	public String getObservaciones() {
@@ -102,6 +104,14 @@ public class Productoempresa implements Serializable {
 		this.precioventa = precioventa;
 	}
 
+	public Empresacomercial getEmpresacomercial() {
+		return this.empresacomercial;
+	}
+
+	public void setEmpresacomercial(Empresacomercial empresacomercial) {
+		this.empresacomercial = empresacomercial;
+	}
+	
 	public Categoriaproducto getCategoriaproducto() {
 		return this.categoriaproducto;
 	}
@@ -110,19 +120,11 @@ public class Productoempresa implements Serializable {
 		this.categoriaproducto = categoriaproducto;
 	}
 	
-	public Empresa getEmpresa() {
-		return this.empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
-	
-	public Set<Productotienda> getProductotiendas() {
+	public List<Productotienda> getProductotiendas() {
 		return this.productotiendas;
 	}
 
-	public void setProductotiendas(Set<Productotienda> productotiendas) {
+	public void setProductotiendas(List<Productotienda> productotiendas) {
 		this.productotiendas = productotiendas;
 	}
 	

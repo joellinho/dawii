@@ -2,7 +2,7 @@ package persistence.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -12,15 +12,13 @@ import java.util.Set;
 @Entity
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String apellido;
 
-	private String nombre;
-	
 	private String direccion;
 
 	private String email;
@@ -28,25 +26,42 @@ public class Cliente implements Serializable {
     @Lob()
 	private byte[] foto;
 
-	private String nrodocid;
+	private String loginpassword;
 
-	private String telefono;
+	private String loginuser;
 
-	//bi-directional many-to-one association to Ubigeo
+	private String nombre;
+
+	private String numeroDocumentoIdentidad;
+
+	private String telefonoCelular;
+
+	private String telefonoPrincipal;
+
+	//bi-directional many-to-one association to Generopersona
     @ManyToOne
-	private Ubigeo ubigeo;
+	@JoinColumn(name="genero_id")
+	private Generopersona generopersona;
+
+	//bi-directional many-to-one association to Empresacliente
+    @ManyToOne
+	private Empresacliente empresacliente;
 
 	//bi-directional many-to-one association to Tipodocumento
     @ManyToOne
 	private Tipodocumento tipodocumento;
 
+	//bi-directional many-to-one association to Ubigeo
+    @ManyToOne
+	private Ubigeo ubigeo;
+
 	//bi-directional many-to-one association to Tipocliente
     @ManyToOne
 	private Tipocliente tipocliente;
 
-	//bi-directional many-to-one association to Documentocomercial
+	//bi-directional many-to-one association to Pedido
 	@OneToMany(mappedBy="cliente")
-	private Set<Documentocomercial> documentocomercials;
+	private List<Pedido> pedidos;
 
     public Cliente() {
     }
@@ -91,6 +106,22 @@ public class Cliente implements Serializable {
 		this.foto = foto;
 	}
 
+	public String getLoginpassword() {
+		return this.loginpassword;
+	}
+
+	public void setLoginpassword(String loginpassword) {
+		this.loginpassword = loginpassword;
+	}
+
+	public String getLoginuser() {
+		return this.loginuser;
+	}
+
+	public void setLoginuser(String loginuser) {
+		this.loginuser = loginuser;
+	}
+
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -99,28 +130,44 @@ public class Cliente implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public String getNrodocid() {
-		return this.nrodocid;
+	public String getNumeroDocumentoIdentidad() {
+		return this.numeroDocumentoIdentidad;
 	}
 
-	public void setNrodocid(String nrodocid) {
-		this.nrodocid = nrodocid;
+	public void setNumeroDocumentoIdentidad(String numeroDocumentoIdentidad) {
+		this.numeroDocumentoIdentidad = numeroDocumentoIdentidad;
 	}
 
-	public String getTelefono() {
-		return this.telefono;
+	public String getTelefonoCelular() {
+		return this.telefonoCelular;
 	}
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setTelefonoCelular(String telefonoCelular) {
+		this.telefonoCelular = telefonoCelular;
 	}
 
-	public Ubigeo getUbigeo() {
-		return this.ubigeo;
+	public String getTelefonoPrincipal() {
+		return this.telefonoPrincipal;
 	}
 
-	public void setUbigeo(Ubigeo ubigeo) {
-		this.ubigeo = ubigeo;
+	public void setTelefonoPrincipal(String telefonoPrincipal) {
+		this.telefonoPrincipal = telefonoPrincipal;
+	}
+
+	public Generopersona getGeneropersona() {
+		return this.generopersona;
+	}
+
+	public void setGeneropersona(Generopersona generopersona) {
+		this.generopersona = generopersona;
+	}
+	
+	public Empresacliente getEmpresacliente() {
+		return this.empresacliente;
+	}
+
+	public void setEmpresacliente(Empresacliente empresacliente) {
+		this.empresacliente = empresacliente;
 	}
 	
 	public Tipodocumento getTipodocumento() {
@@ -131,6 +178,14 @@ public class Cliente implements Serializable {
 		this.tipodocumento = tipodocumento;
 	}
 	
+	public Ubigeo getUbigeo() {
+		return this.ubigeo;
+	}
+
+	public void setUbigeo(Ubigeo ubigeo) {
+		this.ubigeo = ubigeo;
+	}
+	
 	public Tipocliente getTipocliente() {
 		return this.tipocliente;
 	}
@@ -139,12 +194,12 @@ public class Cliente implements Serializable {
 		this.tipocliente = tipocliente;
 	}
 	
-	public Set<Documentocomercial> getDocumentocomercials() {
-		return this.documentocomercials;
+	public List<Pedido> getPedidos() {
+		return this.pedidos;
 	}
 
-	public void setDocumentocomercials(Set<Documentocomercial> documentocomercials) {
-		this.documentocomercials = documentocomercials;
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 	
 }

@@ -2,7 +2,7 @@ package persistence.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -21,7 +21,11 @@ public class Tipodocumento implements Serializable {
 
 	//bi-directional many-to-one association to Cliente
 	@OneToMany(mappedBy="tipodocumento")
-	private Set<Cliente> clientes;
+	private List<Cliente> clientes;
+
+	//bi-directional many-to-one association to Repartidor
+	@OneToMany(mappedBy="tipodocumento")
+	private List<Repartidor> repartidors;
 
     public Tipodocumento() {
     }
@@ -42,12 +46,20 @@ public class Tipodocumento implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public Set<Cliente> getClientes() {
+	public List<Cliente> getClientes() {
 		return this.clientes;
 	}
 
-	public void setClientes(Set<Cliente> clientes) {
+	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
+	}
+	
+	public List<Repartidor> getRepartidors() {
+		return this.repartidors;
+	}
+
+	public void setRepartidors(List<Repartidor> repartidors) {
+		this.repartidors = repartidors;
 	}
 	
 }

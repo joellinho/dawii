@@ -2,7 +2,7 @@ package persistence.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -23,6 +23,9 @@ public class Ubigeo implements Serializable {
 	@Column(name="cod_dis")
 	private String codDis;
 
+	@Column(name="cod_pais")
+	private String codPais;
+
 	@Column(name="cod_pro")
 	private String codPro;
 
@@ -32,28 +35,27 @@ public class Ubigeo implements Serializable {
 	@Column(name="nom_dist")
 	private String nomDist;
 
+	@Column(name="nom_pais")
+	private String nomPais;
+
 	@Column(name="nom_prov")
 	private String nomProv;
 
 	//bi-directional many-to-one association to Cliente
 	@OneToMany(mappedBy="ubigeo")
-	private Set<Cliente> clientes;
+	private List<Cliente> clientes;
 
-	//bi-directional many-to-one association to Documentocomercial
+	//bi-directional many-to-one association to Empresacomercial
 	@OneToMany(mappedBy="ubigeo")
-	private Set<Documentocomercial> documentocomercials;
-
-	//bi-directional many-to-one association to Empresa
-	@OneToMany(mappedBy="ubigeo")
-	private Set<Empresa> empresas;
+	private List<Empresacomercial> empresacomercials;
 
 	//bi-directional many-to-one association to Repartidor
 	@OneToMany(mappedBy="ubigeo")
-	private Set<Repartidor> repartidors;
+	private List<Repartidor> repartidors;
 
 	//bi-directional many-to-one association to Tienda
 	@OneToMany(mappedBy="ubigeo")
-	private Set<Tienda> tiendas;
+	private List<Tienda> tiendas;
 
     public Ubigeo() {
     }
@@ -82,6 +84,14 @@ public class Ubigeo implements Serializable {
 		this.codDis = codDis;
 	}
 
+	public String getCodPais() {
+		return this.codPais;
+	}
+
+	public void setCodPais(String codPais) {
+		this.codPais = codPais;
+	}
+
 	public String getCodPro() {
 		return this.codPro;
 	}
@@ -106,6 +116,14 @@ public class Ubigeo implements Serializable {
 		this.nomDist = nomDist;
 	}
 
+	public String getNomPais() {
+		return this.nomPais;
+	}
+
+	public void setNomPais(String nomPais) {
+		this.nomPais = nomPais;
+	}
+
 	public String getNomProv() {
 		return this.nomProv;
 	}
@@ -114,44 +132,43 @@ public class Ubigeo implements Serializable {
 		this.nomProv = nomProv;
 	}
 
-	public Set<Cliente> getClientes() {
+	public List<Cliente> getClientes() {
 		return this.clientes;
 	}
 
-	public void setClientes(Set<Cliente> clientes) {
+	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
 	}
 	
-	public Set<Documentocomercial> getDocumentocomercials() {
-		return this.documentocomercials;
+	public List<Empresacomercial> getEmpresacomercials() {
+		return this.empresacomercials;
 	}
 
-	public void setDocumentocomercials(Set<Documentocomercial> documentocomercials) {
-		this.documentocomercials = documentocomercials;
+	public void setEmpresacomercials(List<Empresacomercial> empresacomercials) {
+		this.empresacomercials = empresacomercials;
 	}
 	
-	public Set<Empresa> getEmpresas() {
-		return this.empresas;
-	}
-
-	public void setEmpresas(Set<Empresa> empresas) {
-		this.empresas = empresas;
-	}
-	
-	public Set<Repartidor> getRepartidors() {
+	public List<Repartidor> getRepartidors() {
 		return this.repartidors;
 	}
 
-	public void setRepartidors(Set<Repartidor> repartidors) {
+	public void setRepartidors(List<Repartidor> repartidors) {
 		this.repartidors = repartidors;
 	}
 	
-	public Set<Tienda> getTiendas() {
+	public List<Tienda> getTiendas() {
 		return this.tiendas;
 	}
 
-	public void setTiendas(Set<Tienda> tiendas) {
+	public void setTiendas(List<Tienda> tiendas) {
 		this.tiendas = tiendas;
+	}
+	
+	public String toString(){
+		return this.getCodPais() + 
+				this.getCodDep() +
+				this.getCodDis() +
+				this.getCodPro();
 	}
 	
 }

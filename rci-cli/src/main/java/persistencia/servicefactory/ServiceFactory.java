@@ -30,7 +30,10 @@ public abstract class ServiceFactory {
 	public abstract TipoclienteService obtenerTipoclienteService();
 	public abstract TipodocumentoService obtenerTipoDocumentoService();
 	public abstract ClienteService obtenerClienteService();
-	
+	public abstract UbigeoDepaService obtenerUbigeoDepaService();
+	public abstract UbigeoDistService obtenerUbigeoDistService();
+	public abstract UbigeoProvService obtenerUbigeoProvService();
+	public abstract UbigeoService obtenerUbigeoService();
 	
 	
 	

@@ -15,40 +15,46 @@ public class Detallefacturacion implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="idDetallePedido")
-	private int id;
+	@Column(name="detalleorden_id")
+	private int detalleordenId;
 
 	private BigDecimal bruto;
 
 	private int cantidad;
 
-	private BigDecimal igv;
+	private BigDecimal impuestoconsumo;
 
-	private BigDecimal impuesto;
+	private BigDecimal impuestoigv;
+
+	private BigDecimal neto;
+
+	private BigDecimal porcentajeigv;
+
+	private BigDecimal porcentajeimpuestoconsumo;
 
 	private BigDecimal tipocambio;
-
-	//bi-directional one-to-one association to Detallepedido
-	@OneToOne
-	private Detallepedido detallepedido;
-
-	//bi-directional many-to-one association to Facturacion
-    @ManyToOne
-	private Facturacion facturacion;
 
 	//bi-directional many-to-one association to Productotienda
     @ManyToOne
 	private Productotienda productotienda;
 
+	//bi-directional many-to-one association to Facturacion
+    @ManyToOne
+	private Facturacion facturacion;
+
+	//bi-directional many-to-one association to Detallepedido
+    @ManyToOne
+	private Detallepedido detallepedido;
+
     public Detallefacturacion() {
     }
 
-	public int getId() {
-		return this.id;
+	public int getDetalleordenId() {
+		return this.detalleordenId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setDetalleordenId(int detalleordenId) {
+		this.detalleordenId = detalleordenId;
 	}
 
 	public BigDecimal getBruto() {
@@ -67,20 +73,44 @@ public class Detallefacturacion implements Serializable {
 		this.cantidad = cantidad;
 	}
 
-	public BigDecimal getIgv() {
-		return this.igv;
+	public BigDecimal getImpuestoconsumo() {
+		return this.impuestoconsumo;
 	}
 
-	public void setIgv(BigDecimal igv) {
-		this.igv = igv;
+	public void setImpuestoconsumo(BigDecimal impuestoconsumo) {
+		this.impuestoconsumo = impuestoconsumo;
 	}
 
-	public BigDecimal getImpuesto() {
-		return this.impuesto;
+	public BigDecimal getImpuestoigv() {
+		return this.impuestoigv;
 	}
 
-	public void setImpuesto(BigDecimal impuesto) {
-		this.impuesto = impuesto;
+	public void setImpuestoigv(BigDecimal impuestoigv) {
+		this.impuestoigv = impuestoigv;
+	}
+
+	public BigDecimal getNeto() {
+		return this.neto;
+	}
+
+	public void setNeto(BigDecimal neto) {
+		this.neto = neto;
+	}
+
+	public BigDecimal getPorcentajeigv() {
+		return this.porcentajeigv;
+	}
+
+	public void setPorcentajeigv(BigDecimal porcentajeigv) {
+		this.porcentajeigv = porcentajeigv;
+	}
+
+	public BigDecimal getPorcentajeimpuestoconsumo() {
+		return this.porcentajeimpuestoconsumo;
+	}
+
+	public void setPorcentajeimpuestoconsumo(BigDecimal porcentajeimpuestoconsumo) {
+		this.porcentajeimpuestoconsumo = porcentajeimpuestoconsumo;
 	}
 
 	public BigDecimal getTipocambio() {
@@ -91,12 +121,12 @@ public class Detallefacturacion implements Serializable {
 		this.tipocambio = tipocambio;
 	}
 
-	public Detallepedido getDetallepedido() {
-		return this.detallepedido;
+	public Productotienda getProductotienda() {
+		return this.productotienda;
 	}
 
-	public void setDetallepedido(Detallepedido detallepedido) {
-		this.detallepedido = detallepedido;
+	public void setProductotienda(Productotienda productotienda) {
+		this.productotienda = productotienda;
 	}
 	
 	public Facturacion getFacturacion() {
@@ -107,12 +137,12 @@ public class Detallefacturacion implements Serializable {
 		this.facturacion = facturacion;
 	}
 	
-	public Productotienda getProductotienda() {
-		return this.productotienda;
+	public Detallepedido getDetallepedido() {
+		return this.detallepedido;
 	}
 
-	public void setProductotienda(Productotienda productotienda) {
-		this.productotienda = productotienda;
+	public void setDetallepedido(Detallepedido detallepedido) {
+		this.detallepedido = detallepedido;
 	}
 	
 }

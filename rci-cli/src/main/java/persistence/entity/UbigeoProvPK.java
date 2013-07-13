@@ -7,52 +7,72 @@ import javax.persistence.*;
  * The primary key class for the ubigeo_prov database table.
  * 
  */
-//@Embeddable
+@Embeddable
 public class UbigeoProvPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="ud_cod")
-	private String udCod;
+	@Column(name="up_cod", unique=true, nullable=false, length=5)
+	private String upcod;
 
-	@Column(name="up_cod")
-	private String upCod;
+	@Column(name="ud_cod", unique=true, nullable=false, length=5)
+	private String udcod;
 
-    public UbigeoProvPK() {
-    }
-	public String getUdCod() {
-		return this.udCod;
-	}
-	public void setUdCod(String udCod) {
-		this.udCod = udCod;
-	}
-	public String getUpCod() {
-		return this.upCod;
-	}
-	public void setUpCod(String upCod) {
-		this.upCod = upCod;
+	public UbigeoProvPK() {
 	}
 
-	public boolean equals(Object other) {
-		if (this == other) {
-			return true;
-		}
-		if (!(other instanceof UbigeoProvPK)) {
-			return false;
-		}
-		UbigeoProvPK castOther = (UbigeoProvPK)other;
-		return 
-			this.udCod.equals(castOther.udCod)
-			&& this.upCod.equals(castOther.upCod);
+	public String getUpcod() {
+		return upcod;
+	}
 
-    }
-    
+	public void setUpcod(String upcod) {
+		this.upcod = upcod;
+	}
+
+	public String getUdcod() {
+		return udcod;
+	}
+
+	public void setUdcod(String udcod) {
+		this.udcod = udcod;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int hash = 17;
-		hash = hash * prime + this.udCod.hashCode();
-		hash = hash * prime + this.upCod.hashCode();
-		
-		return hash;
-    }
+		int result = 1;
+		result = prime * result + ((udcod == null) ? 0 : udcod.hashCode());
+		result = prime * result + ((upcod == null) ? 0 : upcod.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof UbigeoProvPK)) {
+			return false;
+		}
+		UbigeoProvPK other = (UbigeoProvPK) obj;
+		if (udcod == null) {
+			if (other.udcod != null) {
+				return false;
+			}
+		} else if (!udcod.equals(other.udcod)) {
+			return false;
+		}
+		if (upcod == null) {
+			if (other.upcod != null) {
+				return false;
+			}
+		} else if (!upcod.equals(other.upcod)) {
+			return false;
+		}
+		return true;
+	}
+
 }

@@ -4,27 +4,30 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 
 /**
- * The persistent class for the documentocomercial database table.
+ * The persistent class for the pedido database table.
  * 
  */
 @Entity
-public class Documentocomercial implements Serializable {
+public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	private byte deleted;
+	private String deleted;
 
 	private String direcciondestino;
 
     @Temporal( TemporalType.TIMESTAMP)
 	private Date fechahoraentrada;
+
+    @Temporal( TemporalType.TIMESTAMP)
+	private Date fechahoraregistro;
 
     @Temporal( TemporalType.TIMESTAMP)
 	private Date fechahorasalida;
@@ -35,33 +38,31 @@ public class Documentocomercial implements Serializable {
 
 	private BigDecimal porcentajeigv;
 
+	private String referenciadirdestino;
+
 	private byte ultimopedido;
 
 	//bi-directional many-to-one association to Detallepedido
-	@OneToMany(mappedBy="documentocomercial")
-	private Set<Detallepedido> detallepedidos;
+	@OneToMany(mappedBy="pedido")
+	private List<Detallepedido> detallepedidos;
 
-	//bi-directional many-to-one association to Estadoregistropedido
-    @ManyToOne
-	private Estadoregistropedido estadoregistropedido;
+	//bi-directional many-to-one association to Facturacion
+	@OneToMany(mappedBy="pedido")
+	private List<Facturacion> facturacions;
 
 	//bi-directional many-to-one association to Tienda
     @ManyToOne
 	private Tienda tienda;
 
+	//bi-directional many-to-one association to Estadopedido
+    @ManyToOne
+	private Estadopedido estadopedido;
+
 	//bi-directional many-to-one association to Cliente
     @ManyToOne
 	private Cliente cliente;
 
-	//bi-directional many-to-one association to Ubigeo
-    @ManyToOne
-	private Ubigeo ubigeo;
-
-	//bi-directional many-to-one association to Facturacion
-	@OneToMany(mappedBy="documentocomercial")
-	private Set<Facturacion> facturacions;
-
-    public Documentocomercial() {
+    public Pedido() {
     }
 
 	public int getId() {
@@ -72,11 +73,11 @@ public class Documentocomercial implements Serializable {
 		this.id = id;
 	}
 
-	public byte getDeleted() {
+	public String getDeleted() {
 		return this.deleted;
 	}
 
-	public void setDeleted(byte deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
 
@@ -94,6 +95,14 @@ public class Documentocomercial implements Serializable {
 
 	public void setFechahoraentrada(Date fechahoraentrada) {
 		this.fechahoraentrada = fechahoraentrada;
+	}
+
+	public Date getFechahoraregistro() {
+		return this.fechahoraregistro;
+	}
+
+	public void setFechahoraregistro(Date fechahoraregistro) {
+		this.fechahoraregistro = fechahoraregistro;
 	}
 
 	public Date getFechahorasalida() {
@@ -128,6 +137,14 @@ public class Documentocomercial implements Serializable {
 		this.porcentajeigv = porcentajeigv;
 	}
 
+	public String getReferenciadirdestino() {
+		return this.referenciadirdestino;
+	}
+
+	public void setReferenciadirdestino(String referenciadirdestino) {
+		this.referenciadirdestino = referenciadirdestino;
+	}
+
 	public byte getUltimopedido() {
 		return this.ultimopedido;
 	}
@@ -136,20 +153,20 @@ public class Documentocomercial implements Serializable {
 		this.ultimopedido = ultimopedido;
 	}
 
-	public Set<Detallepedido> getDetallepedidos() {
+	public List<Detallepedido> getDetallepedidos() {
 		return this.detallepedidos;
 	}
 
-	public void setDetallepedidos(Set<Detallepedido> detallepedidos) {
+	public void setDetallepedidos(List<Detallepedido> detallepedidos) {
 		this.detallepedidos = detallepedidos;
 	}
 	
-	public Estadoregistropedido getEstadoregistropedido() {
-		return this.estadoregistropedido;
+	public List<Facturacion> getFacturacions() {
+		return this.facturacions;
 	}
 
-	public void setEstadoregistropedido(Estadoregistropedido estadoregistropedido) {
-		this.estadoregistropedido = estadoregistropedido;
+	public void setFacturacions(List<Facturacion> facturacions) {
+		this.facturacions = facturacions;
 	}
 	
 	public Tienda getTienda() {
@@ -160,28 +177,20 @@ public class Documentocomercial implements Serializable {
 		this.tienda = tienda;
 	}
 	
+	public Estadopedido getEstadopedido() {
+		return this.estadopedido;
+	}
+
+	public void setEstadopedido(Estadopedido estadopedido) {
+		this.estadopedido = estadopedido;
+	}
+	
 	public Cliente getCliente() {
 		return this.cliente;
 	}
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
-	}
-	
-	public Ubigeo getUbigeo() {
-		return this.ubigeo;
-	}
-
-	public void setUbigeo(Ubigeo ubigeo) {
-		this.ubigeo = ubigeo;
-	}
-	
-	public Set<Facturacion> getFacturacions() {
-		return this.facturacions;
-	}
-
-	public void setFacturacions(Set<Facturacion> facturacions) {
-		this.facturacions = facturacions;
 	}
 	
 }

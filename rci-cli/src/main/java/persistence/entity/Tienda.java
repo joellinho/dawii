@@ -2,7 +2,8 @@ package persistence.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
+import java.math.BigDecimal;
+import java.util.List;
 
 
 /**
@@ -21,27 +22,29 @@ public class Tienda implements Serializable {
 
 	private String direccion;
 
-	private String telefono;
+	private String nrotelefonofijo;
 
-	//bi-directional many-to-one association to Documentocomercial
+	private BigDecimal porcimpconsumo;
+
+	//bi-directional many-to-one association to Pedido
 	@OneToMany(mappedBy="tienda")
-	private Set<Documentocomercial> documentocomercials;
+	private List<Pedido> pedidos;
 
 	//bi-directional many-to-one association to Productotienda
 	@OneToMany(mappedBy="tienda")
-	private Set<Productotienda> productotiendas;
+	private List<Productotienda> productotiendas;
 
 	//bi-directional many-to-one association to Repartidor
 	@OneToMany(mappedBy="tienda")
-	private Set<Repartidor> repartidors;
-
-	//bi-directional many-to-one association to Empresa
-    @ManyToOne
-	private Empresa empresa;
+	private List<Repartidor> repartidors;
 
 	//bi-directional many-to-one association to Ubigeo
     @ManyToOne
 	private Ubigeo ubigeo;
+
+	//bi-directional many-to-one association to Empresacomercial
+    @ManyToOne
+	private Empresacomercial empresacomercial;
 
     public Tienda() {
     }
@@ -70,44 +73,44 @@ public class Tienda implements Serializable {
 		this.direccion = direccion;
 	}
 
-	public String getTelefono() {
-		return this.telefono;
+	public String getNrotelefonofijo() {
+		return this.nrotelefonofijo;
 	}
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setNrotelefonofijo(String nrotelefonofijo) {
+		this.nrotelefonofijo = nrotelefonofijo;
 	}
 
-	public Set<Documentocomercial> getDocumentocomercials() {
-		return this.documentocomercials;
+	public BigDecimal getPorcimpconsumo() {
+		return this.porcimpconsumo;
 	}
 
-	public void setDocumentocomercials(Set<Documentocomercial> documentocomercials) {
-		this.documentocomercials = documentocomercials;
+	public void setPorcimpconsumo(BigDecimal porcimpconsumo) {
+		this.porcimpconsumo = porcimpconsumo;
+	}
+
+	public List<Pedido> getPedidos() {
+		return this.pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 	
-	public Set<Productotienda> getProductotiendas() {
+	public List<Productotienda> getProductotiendas() {
 		return this.productotiendas;
 	}
 
-	public void setProductotiendas(Set<Productotienda> productotiendas) {
+	public void setProductotiendas(List<Productotienda> productotiendas) {
 		this.productotiendas = productotiendas;
 	}
 	
-	public Set<Repartidor> getRepartidors() {
+	public List<Repartidor> getRepartidors() {
 		return this.repartidors;
 	}
 
-	public void setRepartidors(Set<Repartidor> repartidors) {
+	public void setRepartidors(List<Repartidor> repartidors) {
 		this.repartidors = repartidors;
-	}
-	
-	public Empresa getEmpresa() {
-		return this.empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
 	}
 	
 	public Ubigeo getUbigeo() {
@@ -116,6 +119,14 @@ public class Tienda implements Serializable {
 
 	public void setUbigeo(Ubigeo ubigeo) {
 		this.ubigeo = ubigeo;
+	}
+	
+	public Empresacomercial getEmpresacomercial() {
+		return this.empresacomercial;
+	}
+
+	public void setEmpresacomercial(Empresacomercial empresacomercial) {
+		this.empresacomercial = empresacomercial;
 	}
 	
 }

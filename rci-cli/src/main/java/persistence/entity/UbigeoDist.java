@@ -1,6 +1,5 @@
 package persistence.entity;
 
-import java.io.Serializable;
 import javax.persistence.*;
 
 
@@ -8,50 +7,54 @@ import javax.persistence.*;
  * The persistent class for the ubigeo_dist database table.
  * 
  */
-//@Entity
+@Entity
 @Table(name="ubigeo_dist")
-public class UbigeoDist implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class UbigeoDist {
+
 
 	@EmbeddedId
 	private UbigeoDistPK id;
 
-	@Column(name="udi_nombre")
-	private String udiNombre;
+	@Column(name="udi_nombre", length=200)
+	private String udinombre;
 
 	//bi-directional many-to-one association to UbigeoProv
-    @ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumns({
-		@JoinColumn(name="ud_cod", referencedColumnName="ud_cod"),
-		@JoinColumn(name="up_cod", referencedColumnName="up_cod")
+		@JoinColumn(name="up_cod", referencedColumnName="up_cod", nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="ud_cod", referencedColumnName="ud_cod", nullable=false, insertable=false, updatable=false)
 		})
-	private UbigeoProv ubigeoProv;
+	private UbigeoProv ubigeoprov;
 
-    public UbigeoDist() {
-    }
+	public UbigeoDist() {
+	}
 
 	public UbigeoDistPK getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(UbigeoDistPK id) {
 		this.id = id;
 	}
-	
-	public String getUdiNombre() {
-		return this.udiNombre;
+
+	public String getUdinombre() {
+		return udinombre;
 	}
 
-	public void setUdiNombre(String udiNombre) {
-		this.udiNombre = udiNombre;
+	public void setUdinombre(String udinombre) {
+		this.udinombre = udinombre;
 	}
 
-	public UbigeoProv getUbigeoProv() {
-		return this.ubigeoProv;
+	public UbigeoProv getUbigeoprov() {
+		return ubigeoprov;
 	}
 
-	public void setUbigeoProv(UbigeoProv ubigeoProv) {
-		this.ubigeoProv = ubigeoProv;
+	public void setUbigeoprov(UbigeoProv ubigeoprov) {
+		this.ubigeoprov = ubigeoprov;
 	}
-	
+
+	public String toString(){
+		return this.id.getUdcod()+ this.id.getUdicod() + this.id.getUpcod();
+	}
+
 }

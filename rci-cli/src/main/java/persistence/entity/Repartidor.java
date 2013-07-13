@@ -2,7 +2,7 @@ package persistence.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -21,28 +21,43 @@ public class Repartidor implements Serializable {
 
 	private String direccion;
 
-	private String dni;
-
 	private String email;
 
     @Lob()
 	private byte[] foto;
 
+	private String loginpassword;
+
+	private String loginuser;
+
 	private String nombre;
 
-	private String telefono;
+	private String numeroDocumentoIdentidad;
+
+	private String telefonoCelular;
+
+	private String telefonoPrincipal;
 
 	//bi-directional many-to-one association to Detallepedido
 	@OneToMany(mappedBy="repartidor")
-	private Set<Detallepedido> detallepedidos;
+	private List<Detallepedido> detallepedidos;
 
-	//bi-directional many-to-one association to Ubigeo
+	//bi-directional many-to-one association to Generopersona
     @ManyToOne
-	private Ubigeo ubigeo;
+	@JoinColumn(name="genero_id")
+	private Generopersona generopersona;
 
 	//bi-directional many-to-one association to Tienda
     @ManyToOne
 	private Tienda tienda;
+
+	//bi-directional many-to-one association to Tipodocumento
+    @ManyToOne
+	private Tipodocumento tipodocumento;
+
+	//bi-directional many-to-one association to Ubigeo
+    @ManyToOne
+	private Ubigeo ubigeo;
 
     public Repartidor() {
     }
@@ -71,14 +86,6 @@ public class Repartidor implements Serializable {
 		this.direccion = direccion;
 	}
 
-	public String getDni() {
-		return this.dni;
-	}
-
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
-
 	public String getEmail() {
 		return this.email;
 	}
@@ -95,6 +102,22 @@ public class Repartidor implements Serializable {
 		this.foto = foto;
 	}
 
+	public String getLoginpassword() {
+		return this.loginpassword;
+	}
+
+	public void setLoginpassword(String loginpassword) {
+		this.loginpassword = loginpassword;
+	}
+
+	public String getLoginuser() {
+		return this.loginuser;
+	}
+
+	public void setLoginuser(String loginuser) {
+		this.loginuser = loginuser;
+	}
+
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -103,28 +126,44 @@ public class Repartidor implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public String getTelefono() {
-		return this.telefono;
+	public String getNumeroDocumentoIdentidad() {
+		return this.numeroDocumentoIdentidad;
 	}
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setNumeroDocumentoIdentidad(String numeroDocumentoIdentidad) {
+		this.numeroDocumentoIdentidad = numeroDocumentoIdentidad;
 	}
 
-	public Set<Detallepedido> getDetallepedidos() {
+	public String getTelefonoCelular() {
+		return this.telefonoCelular;
+	}
+
+	public void setTelefonoCelular(String telefonoCelular) {
+		this.telefonoCelular = telefonoCelular;
+	}
+
+	public String getTelefonoPrincipal() {
+		return this.telefonoPrincipal;
+	}
+
+	public void setTelefonoPrincipal(String telefonoPrincipal) {
+		this.telefonoPrincipal = telefonoPrincipal;
+	}
+
+	public List<Detallepedido> getDetallepedidos() {
 		return this.detallepedidos;
 	}
 
-	public void setDetallepedidos(Set<Detallepedido> detallepedidos) {
+	public void setDetallepedidos(List<Detallepedido> detallepedidos) {
 		this.detallepedidos = detallepedidos;
 	}
 	
-	public Ubigeo getUbigeo() {
-		return this.ubigeo;
+	public Generopersona getGeneropersona() {
+		return this.generopersona;
 	}
 
-	public void setUbigeo(Ubigeo ubigeo) {
-		this.ubigeo = ubigeo;
+	public void setGeneropersona(Generopersona generopersona) {
+		this.generopersona = generopersona;
 	}
 	
 	public Tienda getTienda() {
@@ -133,6 +172,22 @@ public class Repartidor implements Serializable {
 
 	public void setTienda(Tienda tienda) {
 		this.tienda = tienda;
+	}
+	
+	public Tipodocumento getTipodocumento() {
+		return this.tipodocumento;
+	}
+
+	public void setTipodocumento(Tipodocumento tipodocumento) {
+		this.tipodocumento = tipodocumento;
+	}
+	
+	public Ubigeo getUbigeo() {
+		return this.ubigeo;
+	}
+
+	public void setUbigeo(Ubigeo ubigeo) {
+		this.ubigeo = ubigeo;
 	}
 	
 }

@@ -6,11 +6,11 @@ import java.util.List;
 
 
 /**
- * The persistent class for the tipocomprobante database table.
+ * The persistent class for the estadopedido database table.
  * 
  */
 @Entity
-public class Tipocomprobante implements Serializable {
+public class Estadopedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -19,11 +19,11 @@ public class Tipocomprobante implements Serializable {
 
 	private String descripcion;
 
-	//bi-directional many-to-one association to Facturacion
-	@OneToMany(mappedBy="tipocomprobante")
-	private List<Facturacion> facturacions;
+	//bi-directional many-to-one association to Pedido
+	@OneToMany(mappedBy="estadopedido")
+	private List<Pedido> pedidos;
 
-    public Tipocomprobante() {
+    public Estadopedido() {
     }
 
 	public int getId() {
@@ -42,12 +42,12 @@ public class Tipocomprobante implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public List<Facturacion> getFacturacions() {
-		return this.facturacions;
+	public List<Pedido> getPedidos() {
+		return this.pedidos;
 	}
 
-	public void setFacturacions(List<Facturacion> facturacions) {
-		this.facturacions = facturacions;
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 	
 }
