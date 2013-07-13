@@ -23,9 +23,6 @@ public class Cliente implements Serializable {
 
 	private String email;
 
-    @Lob()
-	private byte[] foto;
-
 	private String loginpassword;
 
 	private String loginuser;
@@ -96,14 +93,6 @@ public class Cliente implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public byte[] getFoto() {
-		return this.foto;
-	}
-
-	public void setFoto(byte[] foto) {
-		this.foto = foto;
 	}
 
 	public String getLoginpassword() {

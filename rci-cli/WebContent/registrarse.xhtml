@@ -9,6 +9,7 @@
     	<ui:composition template="/template/layout.xhtml">
  		<ui:define name="content">
 
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
  		
  			<p:panel header="Registrarse">  
  			 		<h:form id="formRegistrar">
@@ -23,19 +24,28 @@
  				<h:outputLabel for="txtDireccion" value="Dirección" />
  				<p:inputText id="txtDireccion" value="#{registrarseManaged.direccion}"/>  
  		
- 				<h:outputLabel for="txtEmail" value="email"/>
+ 				<h:outputLabel for="txtEmail" value="Email"/>
  				<p:inputText id="txtEmail"  value="#{registrarseManaged.email}"/> 
  				
- 				<h:outputLabel for="txtNrodcid" value="Documento"/>
- 				<p:inputText id="txtNrodcid" value="#{registrarseManaged.documento}"/> 
+ 				<h:outputLabel for="txtLoginPassword" value="LoginPassword"/>
+ 				<p:inputText id="txtPassword" value="#{registrarseManaged.loginPassword}"/>
  				
- 				<h:outputLabel for="txtTelefono" value="Teléfono"/>
- 				<p:inputText id="txtTelefono" value="#{registrarseManaged.telefono}"/> 
+ 			    <h:outputLabel for="txtLoginPassword2" value="LoginPassword2"/>
+ 				<p:inputText id="txtPassword2" value="#{registrarseManaged.loginPassword2}"/>
+ 				
+ 				<h:outputLabel for="txtLoginUser" value="LoginUser"/>
+ 				<p:inputText id="txtLoginUser" value="#{registrarseManaged.loginUser}"/>
+ 				
+ 				<h:outputLabel for="txtNumeroDocumentoIdentidad" value="NumeroDocumentoIdentidad"/>
+ 				<p:inputText id="txtNumeroDocumentoIdentidad" value="#{registrarseManaged.numeroDocumentoIdentidad}"/>
+ 				
+ 				<h:outputLabel for="txtTelefonoCelular" value="TelefonoCelular"/>
+ 				<p:inputText id="txtTelefonoCelular" value="#{registrarseManaged.telefonoCelular}"/>
+ 				
+ 				<h:outputLabel for="txtTelefonoPrincipal" value="TelefonoPrincipal"/>
+ 				<p:inputText id="txtTelefonoPrincipal" value="#{registrarseManaged.telefonoPrincipal}"/>       
  				
  				<h:outputLabel for="cboTipoDocumento" value="Tipo Documento"/>
- 				
- 				
- 				
  				<p:selectOneMenu id="cboTipoDocumento" value="#{registrarseManaged.tipoDocSeleccionado}">  
                 	<f:selectItem itemLabel="-- Tipo Doc --" itemValue="" />  
                 	

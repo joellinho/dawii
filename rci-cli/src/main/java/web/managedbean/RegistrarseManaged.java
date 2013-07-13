@@ -2,7 +2,9 @@ package web.managedbean;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import persistence.entity.Cliente;
@@ -29,8 +31,12 @@ public class RegistrarseManaged {
 	private String nombre;
 	private String direccion;
 	private String email;
-	private String documento;
-	private String telefono;
+	private String loginPassword;
+	private String loginPassword2;
+	private String loginUser; 
+	private String numeroDocumentoIdentidad; 
+	private String telefonoCelular; 
+	private String telefonoPrincipal; 
 	private Tipodocumento tipoDocSeleccionado;
 	
 	// Constructor
@@ -42,7 +48,7 @@ public class RegistrarseManaged {
 	public String insertarUsuario(ActionEvent action){
 		// Obtengo el tipoCLiente
 		// ALerta posible excepcion
-		Tipocliente tipoCli =  tipoCliServ.listarTipoCliente().get(0);
+		//Tipocliente tipoCli =  tipoCliServ.listarTipoCliente().get(0);
 		
 		// Cliente		
 		Cliente cli = new Cliente();
@@ -50,13 +56,22 @@ public class RegistrarseManaged {
 		cli.setNombre(this.nombre);
 		cli.setDireccion(this.direccion);
 		cli.setEmail(this.email);
-		//cli.setTelefono(this.telefono);
-		//cli.setNrodocid(this.documento);
+		cli.setLoginpassword(this.loginPassword);
+		cli.setLoginuser(this.loginUser);
+		cli.setNumeroDocumentoIdentidad(this.numeroDocumentoIdentidad);
+		cli.setTelefonoCelular(this.telefonoCelular);
+		cli.setTelefonoPrincipal(this.telefonoPrincipal);
 		cli.setTipodocumento(this.tipoDocSeleccionado);
-		cli.setTipocliente(tipoCli);
+		//cli.setTipocliente(tipoCli);
 		
-		cliServ.insertar(cli);
+		if (loginPassword.equals(loginPassword2)) {
+			cliServ.insertar(cli);
+		}
+	    else{
+	    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Mensaje", "Las Contraseñas no son Iguales."));		
+		}
 		return null;
+		
 	}
 	
 	//=========Get/Set=========
@@ -96,24 +111,8 @@ public class RegistrarseManaged {
 		this.email = email;
 	}
 
-	public String getDocumento() {
-		return documento;
-	}
-
-	public void setDocumento(String documento) {
-		this.documento = documento;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
 	public RegistrarseManaged(){
-		this.listaTipoDoc = tipoDocServ.listar();
+		this.listaTipoDoc = tipoDocServ.listarDocumento();
 	}	
 
 	public List<Tipodocumento> getListaTipoDoc() {
@@ -131,5 +130,54 @@ public class RegistrarseManaged {
 	public void setTipoDocSeleccionado(Tipodocumento tipoDocSeleccionado) {
 		this.tipoDocSeleccionado = tipoDocSeleccionado;
 	}
+	
+	public String getLoginPassword() {
+		return loginPassword;
+	}
+
+	public void setLoginPassword(String loginPassword) {
+		this.loginPassword = loginPassword;
+	}
+
+	public String getLoginUser() {
+		return loginUser;
+	}
+
+	public void setLoginUser(String loginUser) {
+		this.loginUser = loginUser;
+	}
+
+	public String getNumeroDocumentoIdentidad() {
+		return numeroDocumentoIdentidad;
+	}
+
+	public void setNumeroDocumentoIdentidad(String numeroDocumentoIdentidad) {
+		this.numeroDocumentoIdentidad = numeroDocumentoIdentidad;
+	}
+
+	public String getTelefonoCelular() {
+		return telefonoCelular;
+	}
+
+	public void setTelefonoCelular(String telefonoCelular) {
+		this.telefonoCelular = telefonoCelular;
+	}
+
+	public String getTelefonoPrincipal() {
+		return telefonoPrincipal;
+	}
+
+	public void setTelefonoPrincipal(String telefonoPrincipal) {
+		this.telefonoPrincipal = telefonoPrincipal;
+	}
+	
+	public String getLoginPassword2() {
+		return loginPassword2;
+	}
+
+	public void setLoginPassword2(String loginPassword2) {
+		this.loginPassword2 = loginPassword2;
+	}
+
 	
 }
