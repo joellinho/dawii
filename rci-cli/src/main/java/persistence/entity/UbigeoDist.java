@@ -15,7 +15,7 @@ public class UbigeoDist {
 	@EmbeddedId
 	private UbigeoDistPK id;
 
-	@Column(name="udi_nombre", length=200)
+ 	@Column(name="udi_nombre", length=200)
 	private String udinombre;
 
 	//bi-directional many-to-one association to UbigeoProv
