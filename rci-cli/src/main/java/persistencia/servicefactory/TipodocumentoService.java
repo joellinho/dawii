@@ -12,5 +12,5 @@ public interface  TipodocumentoService {
 	
 	public void eliminar(Tipodocumento tipo);
 	
-	public List<Tipodocumento> listar();
+	public List<Tipodocumento> listarDocumento();
 }

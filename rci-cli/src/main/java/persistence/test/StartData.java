@@ -29,7 +29,26 @@ public class StartData {
 		}
 	}
 	
+	public void insertarGenero(){
+		GeneroPersonaService cs=sf.obtenerGeneroClienteService();
+		
+		if(cs.listarGenero().size()<=0){
+			Generopersona gc=new Generopersona();
+			gc.setDescripcion("Masculino");
+			gc.setDescripcion("Femenino");
+			cs.insertarGenero(gc);
+		}
+	}
 	
+	public void insertarTipoDocumento(){
+		TipodocumentoService cs=sf.obtenerTipoDocumentoService();
+		
+		if(cs.listarDocumento().size()<=0){
+			Tipodocumento td=new Tipodocumento();
+			td.setDescripcion("DNI");
+			td.setDescripcion("");
+		}
+	}
 	
 	
 	
