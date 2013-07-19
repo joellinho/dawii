@@ -15,20 +15,8 @@
 		  <ui:include src="/template/header.xhtml" />
 	</ui:insert>
  
- 	<table style="width:100%">
- 		<tr >
- 			<td width="20%" >
- 					<ui:insert name="sideMenu" >
-		  				<ui:include src="/template/sideMenu.xhtml" />
-					</ui:insert>
- 	 		</td>
-	 		<td width="80%" >
-	 		 		<ui:insert name="content" >
-				 	 	<ui:include src="/template/content.xhtml" />
-				   	</ui:insert>
- 			</td>
-	 	</tr>
- 	</table>
+ 	<ui:include src="/template/content.xhtml" />
+
  	
  	<ui:insert name="footer" >
 		<ui:include src="/template/footer.xhtml" />
