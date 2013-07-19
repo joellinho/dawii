@@ -12,23 +12,7 @@
 	<h:form id="formRegistrar">
  			<p:panel header="Registrarse">  
  			  				
- 				<p:selectOneMenu id="cboTipoDocumento" value="#{registrarseManaged.tipoDocSeleccionado}">  
-                	
-                	
-                	<f:selectItems value="#{registrarseManaged.listaTipoDoc}" 
-                				   var="tipoDoc"
-                				   itemLabel="#{tipoDoc.descripcion}"                				   
-                	/>  
-                	<f:converter converterId="tipoDocumentoConverter" />
-            	</p:selectOneMenu>  
  				
- 				
- 
- 				 
- 			
- 		 		<p:commandButton id="btnTest" value="Test" 
- 				 	    actionListener="#{registrarseManaged.test}" ajax="false" />
- 				 	    
  				
  			</p:panel>
  			
