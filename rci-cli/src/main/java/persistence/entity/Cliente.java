@@ -2,6 +2,7 @@ package persistence.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -41,7 +42,7 @@ public class Cliente implements Serializable {
 	private Generopersona generopersona;
 
 	//bi-directional many-to-one association to Empresacliente
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.PERSIST)
 	private Empresacliente empresacliente;
 
 	//bi-directional many-to-one association to Tipodocumento

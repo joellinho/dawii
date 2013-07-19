@@ -8,9 +8,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import persistence.entity.Cliente;
+import persistence.entity.Empresacliente;
 import persistence.entity.Tipocliente;
 import persistence.entity.Tipodocumento;
 import persistencia.servicefactory.ClienteService;
+import persistencia.servicefactory.EmpresaClienteService;
 import persistencia.servicefactory.ServiceFactory;
 import persistencia.servicefactory.TipoclienteService;
 import persistencia.servicefactory.TipodocumentoService;
@@ -22,6 +24,7 @@ public class RegistrarseManaged {
 	private TipodocumentoService tipoDocServ = ServiceFactory.obtenerServiceFactory().obtenerTipoDocumentoService();
 	private TipoclienteService tipoCliServ = ServiceFactory.obtenerServiceFactory().obtenerTipoclienteService();
 	private ClienteService cliServ = ServiceFactory.obtenerServiceFactory().obtenerClienteService();
+	private EmpresaClienteService empServ = ServiceFactory.obtenerServiceFactory().obtenerEmpresaClienteService();
 	
 	// Listado de Tipo Documento
 	private List<Tipodocumento> listaTipoDoc;
@@ -39,6 +42,10 @@ public class RegistrarseManaged {
 	private String telefonoPrincipal; 
 	private Tipodocumento tipoDocSeleccionado;
 	
+	// Atributos de la empresa
+	private String razonSocial;
+	private String rucEmpresa;
+	
 	// Constructor
 	public TipodocumentoService getTipoDocServ() {
 		return tipoDocServ;
@@ -46,11 +53,10 @@ public class RegistrarseManaged {
 	
 	// Insertar Usuario
 	public String insertarUsuario(ActionEvent action){
-		// Obtengo el tipoCLiente
-		// ALerta posible excepcion
-		//Tipocliente tipoCli =  tipoCliServ.listarTipoCliente().get(0);
+		//TODO: Validaciones del usuario.
+			
 		
-		// Cliente		
+		// Creamos el cliente 		
 		Cliente cli = new Cliente();
 		cli.setApellido(this.apellido);
 		cli.setNombre(this.nombre);
@@ -62,15 +68,34 @@ public class RegistrarseManaged {
 		cli.setTelefonoCelular(this.telefonoCelular);
 		cli.setTelefonoPrincipal(this.telefonoPrincipal);
 		cli.setTipodocumento(this.tipoDocSeleccionado);
-		//cli.setTipocliente(tipoCli);
+		
+		// Buscamos la empresa, si no la encontramos creamos una nueva
+		//TODO: Deberiamos comprobar si la razon social es la misma?
+		
+		Empresacliente ec = null;
+		
+		// Comrpobamos que se aya escrito datos, si no simplemente ignoramos
+		if(!(rucEmpresa==null) && !(rucEmpresa.equals(""))){
+			ec = empServ.buscarEmpresaClientePorRuc(rucEmpresa);
+			if(ec==null){
+				ec = new Empresacliente();
+				ec.setRazonsocial(razonSocial);
+				ec.setRuc(rucEmpresa);			
+			}
+		}
+		
+		// Asignamos la empresa
+		cli.setEmpresacliente(ec);
 		
 		if (loginPassword.equals(loginPassword2)) {
 			cliServ.insertar(cli);
+			return "main";
 		}
 	    else{
-	    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Mensaje", "Las Contraseñas no son Iguales."));		
+	    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Mensaje", "Las Contraseñas no son Iguales."));
+	    	return null;
 		}
-		return null;
+		
 		
 	}
 	
@@ -118,23 +143,6 @@ public class RegistrarseManaged {
 
 	public RegistrarseManaged(){
 		this.listaTipoDoc = tipoDocServ.listarDocumento();
-		/*
-		if(this.tipoDocSeleccionado !=null){
-			boolean mod=false;
-			
-			for(Tipodocumento t : this.listaTipoDoc){				
-				if(t.getId()==this.tipoDocSeleccionado.getId()){
-					this.tipoDocSeleccionado = t;
-					mod = true;
-				}				
-			}
-			
-			if(!mod){
-				this.tipoDocSeleccionado = null;
-			}
-			
-			
-		}*/
 	}	
 
 	public List<Tipodocumento> getListaTipoDoc() {
@@ -201,5 +209,19 @@ public class RegistrarseManaged {
 		this.loginPassword2 = loginPassword2;
 	}
 
-	
+	public String getRazonSocial() {
+		return razonSocial;
+	}
+
+	public void setRazonSocial(String razonSocial) {
+		this.razonSocial = razonSocial;
+	}
+
+	public String getrucEmpresa() {
+		return rucEmpresa;
+	}
+
+	public void setrucEmpresa(String ruc) {
+		this.rucEmpresa = ruc;
+	}
 }

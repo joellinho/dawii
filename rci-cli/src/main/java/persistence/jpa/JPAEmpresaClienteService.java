@@ -43,4 +43,24 @@ public class JPAEmpresaClienteService implements EmpresaClienteService{
 		
 	}
 
+	@Override
+	public Empresacliente buscarEmpresaClientePorRuc(String ruc) {
+		EntityManager em=JPAUtil.getEntityManager();
+		try{
+			String query="SELECT ec FROM Empresacliente ec WHERE ec.ruc like :ruc";
+			TypedQuery<Empresacliente> emquery=em.createQuery(query, Empresacliente.class);
+			emquery.setParameter("ruc", ruc);
+			List<Empresacliente> listaResultado = emquery.getResultList();
+			if(listaResultado.size()<=0){
+				return null;
+			}
+			else{
+				return listaResultado.get(0);
+			}
+			
+		}finally{
+			em.close();
+		}
+	}
+
 }
