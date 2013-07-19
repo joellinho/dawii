@@ -17,8 +17,9 @@
                 	
                 	<f:selectItems value="#{registrarseManaged.listaTipoDoc}" 
                 				   var="tipoDoc"
-                				   itemLabel="#{tipoDoc.descripcion}"
+                				   itemLabel="#{tipoDoc.descripcion}"                				   
                 	/>  
+                	<f:converter converterId="tipoDocumentoConverter" />
             	</p:selectOneMenu>  
  				
  				

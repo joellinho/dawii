@@ -39,4 +39,10 @@ public class JPAGeneroPersonaService implements GeneroPersonaService{
 				
 	}
 
+	@Override
+	public Generopersona findById(int id) {
+		EntityManager em=JPAUtil.getEntityManager();
+		return em.getReference(Generopersona.class, id);
+	}
+
 }

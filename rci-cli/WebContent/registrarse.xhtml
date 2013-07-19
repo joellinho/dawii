@@ -12,64 +12,163 @@
 
 
 		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
- 		
-  		<h:form id="formRegistrar">
-  			<p:panel header="Registrarse">  
- 				<h:panelGrid columns="2" cellpadding="5">
+ 		<h:form id="formRegistrar">
+
+  			<p:panelGrid style="margin-top:20px">   
+ 				<f:facet name="header">
+ 					<p:row>  
+            			<p:column colspan="2">Registrarse</p:column>  
+       				</p:row>       				
+ 				</f:facet>
  				
- 				<h:outputLabel for="txtApellido" value="Apellido" />
- 				<p:inputText id="txtApellido" value="#{registrarseManaged.apellido}" />  
+ 				<!-- Datos de Personales -->
  				
-				<h:outputLabel for="txtNombre" value="Nombre"/>
- 				<p:inputText id="txtNombre" value="#{registrarseManaged.nombre}"/> 
+ 				<p:row>  
+        			<p:column colspan="2" styleClass="ui-widget-header">	  
+            			Datos Personales
+        			</p:column>  
+    			</p:row>  
  				
- 				<h:outputLabel for="txtDireccion" value="Dirección" />
- 				<p:inputText id="txtDireccion" value="#{registrarseManaged.direccion}"/>  
- 				
- 				<h:outputLabel for="txtEmail" value="Correo Electronico"/>
- 				<p:inputText id="txtEmail" value="#{registrarseManaged.email}" required="true">
- 				<f:validateLength minimum="5" /> 
- 				</p:inputText>
- 				
- 				<h:outputLabel for="txtPassword" value="Crea una Contraseña"/>
- 				<p:password id="txtPassword" value="#{registrarseManaged.loginPassword}"/>
- 				
- 			    <h:outputLabel for="txtLoginPassword2" value="Vuelve a Escribir la Contraseña"/>
- 				<p:password id="txtPassword2" value="#{registrarseManaged.loginPassword2}"/>
- 				
- 				<h:outputLabel for="txtNumeroDocumentoIdentidad" value="Número Documento de Identidad"/>
- 				<p:inputText id="txtNumeroDocumentoIdentidad" value="#{registrarseManaged.numeroDocumentoIdentidad}"/>
- 				
- 				<h:outputLabel for="txtTelefonoCelular" value="Celular"/>
- 				<p:keyboard id="txtTelefonoCelular" value="#{registrarseManaged.telefonoCelular}" keypadOnly="true"/>
- 				
- 				<h:outputLabel for="txtTelefonoPrincipal" value="Telefono"/>
- 				<p:inputText id="txtTelefonoPrincipal" value="#{registrarseManaged.telefonoPrincipal}"/>       
- 				
- 				<h:outputLabel for="cboTipoDocumento" value="Tipo Documento"/>
- 				
- 				
- 				
- 				<p:selectOneMenu id="cboTipoDocumento" value="#{registrarseManaged.tipoDocSeleccionado}">  
-                	
-                	
+ 				<p:row>
+	 				<p:column>  
+	 					Apellido
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtApellido" value="#{registrarseManaged.apellido}" />
+	 				</p:column>   
+ 				</p:row>
+ 			
+ 				<p:row>
+	 				<p:column>  
+	 					Nombre
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtNombre" value="#{registrarseManaged.nombre}"/> 
+	 				</p:column>   
+ 				</p:row>				
+				
+				<p:row>
+	 				<p:column>  
+	 					Dirección
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtDireccion" value="#{registrarseManaged.direccion}"/>  
+	 				</p:column>   
+ 				</p:row>		
+ 				 				
+				<p:row>
+	 				<p:column>  
+	 					Correo Electronico
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtEmail" value="#{registrarseManaged.email}" required="true">
+ 							<f:validateLength minimum="5" /> 
+ 						</p:inputText>
+	 				</p:column>   
+ 				</p:row>		
+ 			
+ 				<p:row>
+	 				<p:column>  
+	 					Crea una Contraseña
+	 				</p:column>
+	 				<p:column> 
+	 					<p:password id="txtPassword" value="#{registrarseManaged.loginPassword}"/>
+	 				</p:column>   
+ 				</p:row>		
+ 			
+ 				<p:row>
+	 				<p:column>  
+	 					Vuelve a Escribir la Contraseña
+	 				</p:column>
+	 				<p:column> 
+	 					<p:password id="txtPassword2" value="#{registrarseManaged.loginPassword2}"/>
+	 				</p:column>   
+ 				</p:row>		
+ 			    	
+ 			    <p:row>
+	 				<p:column>  
+	 					Tipo de Documento de Identidad
+	 				</p:column>
+	 				<p:column> 
+	 					<p:selectOneMenu id="cboTipoDocumento" value="#{registrarseManaged.tipoDocSeleccionado}">
                 	<f:selectItems value="#{registrarseManaged.listaTipoDoc}" 
                 				   var="tipoDoc"
-                				   itemLabel="#{tipoDoc.descripcion}"
+                				   itemLabel="#{tipoDoc.descripcion}"                				   
                 	/>  
-            	</p:selectOneMenu>  
+                	<f:converter converterId="tipoDocumentoConverter" />
+            	</p:selectOneMenu>
+	 				</p:column>   
+ 				</p:row>		
+ 			    	
+ 			    <p:row>
+	 				<p:column>  
+	 					Número Documento de Identidad
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtNumeroDocumentoIdentidad" value="#{registrarseManaged.numeroDocumentoIdentidad}"/>
+	 				</p:column>   
+ 				</p:row>	
+ 								
+ 				 <p:row>
+	 				<p:column>  
+	 					Celular
+	 				</p:column>
+	 				<p:column> 
+	 					<p:keyboard id="txtTelefonoCelular" value="#{registrarseManaged.telefonoCelular}" keypadOnly="true"/>
+	 				</p:column>   
+ 				</p:row>	
+ 				
+ 				<p:row>
+	 				<p:column>  
+	 					Celular
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtTelefonoPrincipal" value="#{registrarseManaged.telefonoPrincipal}"/>
+	 				</p:column>   
+ 				</p:row> 				
+ 				
+ 				<!-- Datos de  -->
+ 				
+			 	<p:row>  
+        			<p:column colspan="2" styleClass="ui-widget-header">	  
+            			Datos de Empresa
+        			</p:column>  
+    			</p:row>  
+ 				
+ 				<p:row>
+	 				<p:column>  
+	 					RUC
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtRuc" value=""/>
+	 				</p:column>   
+ 				</p:row> 	
+ 				
+ 				<p:row>
+	 				<p:column>  
+	 					Razón Social
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtRazonSocial" value=""/>
+	 				</p:column>   
+ 				</p:row> 	
  				
  				
- 				</h:panelGrid>
- 				 
- 			
- 		 		<p:commandButton id="btnTest" value="Registrar" 
+ 				<p:row>
+	 				<p:column colspan="2">  
+	 					<p:commandButton id="btnTest" value="Registrar" 
  				 	    actionListener="#{registrarseManaged.insertarUsuario}" ajax="false" />
+	 				</p:column>
+
+ 				</p:row>
+
+ 		 		
  				 	    
 
- 			</p:panel>
+ 			</p:panelGrid>
  		</h:form>
- 		
+  	
+ 	
  		</ui:define>
     	</ui:composition> 
     </h:body>

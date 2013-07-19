@@ -10,4 +10,5 @@ public interface GeneroPersonaService {
 	public void insertarGenero(Generopersona genero);
 	public List<Generopersona> listarGenero();
 	
+	public Generopersona findById(int id);
 }

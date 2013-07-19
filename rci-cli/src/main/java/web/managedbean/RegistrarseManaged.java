@@ -74,7 +74,7 @@ public class RegistrarseManaged {
 		
 	}
 	
-	private String test(){
+	public String test(){
 		
 		return null;
 	}

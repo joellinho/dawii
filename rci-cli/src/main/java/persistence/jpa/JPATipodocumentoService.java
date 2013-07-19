@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import persistence.entity.Generopersona;
 import persistence.entity.Tipodocumento;
 import persistencia.servicefactory.TipodocumentoService;
 
@@ -60,6 +61,12 @@ public class JPATipodocumentoService implements TipodocumentoService {
 		finally{
 			em.close();
 		}
+	}
+
+	@Override
+	public Tipodocumento findById(int id) {
+		EntityManager em=JPAUtil.getEntityManager();
+		return em.getReference(Tipodocumento.class, id);
 	}
 
 }

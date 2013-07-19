@@ -61,5 +61,18 @@ public class Generopersona implements Serializable {
 	public void setRepartidors(List<Repartidor> repartidors) {
 		this.repartidors = repartidors;
 	}
+
+	
+	// Helpers ------------------------------------------------------------------------------------
+
+    // This must return true for another Foo object with same key/id.
+    public boolean equals(Object other) {
+        return other instanceof Generopersona && (id >= 0) ? id == (((Generopersona) other).id) : (other == this);
+    }
+
+    // This must return the same hashcode for every Foo object with the same key.
+    public int hashCode() {
+        return id >=0 ? this.getClass().hashCode() + id : super.hashCode();
+    }
 	
 }
