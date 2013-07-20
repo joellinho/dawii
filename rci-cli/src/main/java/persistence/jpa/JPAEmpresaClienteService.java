@@ -5,8 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import org.hibernate.cfg.CreateKeySecondPass;
-
 import persistence.entity.Empresacliente;
 import persistencia.servicefactory.EmpresaClienteService;
 
