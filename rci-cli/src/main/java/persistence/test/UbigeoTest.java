@@ -68,12 +68,29 @@ public class UbigeoTest {
 				}
 			}
 			
-		}
-		//Ubigeo primerUbigeo = lista.get(0);
-		
+			// En este punto tenemos las provincias, vamos por el departamento
+			
+			// Creamos la key
+			UbigeoDistPK udpk = new UbigeoDistPK();
+			udpk.setUdcod(udepa.getUdcod());
+			udpk.setUpcod(uprov.getId().getUpcod());
+			udpk.setUdicod(ubi.getCodDis());
+			
+			if(udist==null || !udist.getId().equals(udpk)){
+				udist = uDistServ.obtenerPorId(udpk);
 				
-		//
-		
+				if(udist == null){
+					udist = new UbigeoDist();
+					
+					udist.setId(udpk);
+					udist.setUbigeoprov(uprov);
+					udist.setUdinombre(ubi.getNomDist());
+					
+					uDistServ.insertar(udist);
+				}
+			}
+			
+		}
 		
 		
 	}

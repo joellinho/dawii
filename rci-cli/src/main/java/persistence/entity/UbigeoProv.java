@@ -23,7 +23,7 @@ import java.util.Collection;
  	private String upnombre;
 
  	//bi-directional many-to-one association to UbigeoDist
- 	@OneToMany(mappedBy="ubigeoprov", cascade=CascadeType.PERSIST)
+ 	@OneToMany(mappedBy="ubigeoprov")
  	private Collection<UbigeoDist> ubigeodists = new ArrayList<UbigeoDist>();
 
  	//bi-directional many-to-one association to UbigeoDepa

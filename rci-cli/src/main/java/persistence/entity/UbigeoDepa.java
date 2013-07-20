@@ -21,7 +21,7 @@ public class UbigeoDepa {
 	private String udnombre;
 
 	//bi-directional many-to-one association to UbigeoProv
-	@OneToMany(mappedBy="ubigeodepa", cascade=CascadeType.PERSIST)
+	@OneToMany(mappedBy="ubigeodepa")
 	private Collection<UbigeoProv> ubigeoprov;
 
 	public String getUdcod() {
