@@ -5,9 +5,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import persistence.entity.Generopersona;
 import persistence.entity.Tipodocumento;
-import persistencia.servicefactory.GeneroPersonaService;
 import persistencia.servicefactory.ServiceFactory;
 import persistencia.servicefactory.TipodocumentoService;
 

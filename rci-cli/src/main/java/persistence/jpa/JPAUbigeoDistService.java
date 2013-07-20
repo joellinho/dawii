@@ -23,4 +23,23 @@ public class JPAUbigeoDistService implements
 		}
 	}
 
+	@Override
+	public void insertar(UbigeoDist ubigeoDist) {
+		EntityManager em = JPAUtil.getEntityManager();
+		try{
+			em.getTransaction().begin();
+			em.persist(ubigeoDist);
+			em.getTransaction().commit();
+		}
+		finally{
+			em.close();
+		}	
+	}
+
+	@Override
+	public UbigeoDist obtenerPorId(String id) {
+		EntityManager em=JPAUtil.getEntityManager();
+		return em.getReference(UbigeoDist.class, id);
+	}
+
 }

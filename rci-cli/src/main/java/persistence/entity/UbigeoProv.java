@@ -23,7 +23,7 @@ import java.util.Collection;
  	private String upnombre;
 
  	//bi-directional many-to-one association to UbigeoDist
- 	@OneToMany(mappedBy="ubigeoprov")
+ 	@OneToMany(mappedBy="ubigeoprov", cascade=CascadeType.PERSIST)
  	private Collection<UbigeoDist> ubigeodists = new ArrayList<UbigeoDist>();
 
  	//bi-directional many-to-one association to UbigeoDepa
@@ -64,6 +64,14 @@ import java.util.Collection;
  		this.ubigeodepa = ubigeodepa;
  	}
 
+ 	// This must return true for another Foo object with same key/id.
+    public boolean equals(Object other) {
+        return other instanceof UbigeoProv && id!=null ? id.equals( ((UbigeoProv) other).getId() ) : (other == this);
+    }
 
+    // This must return the same hashcode for every Foo object with the same key.
+    public int hashCode() {
+        return id!=null ? this.getClass().hashCode() + id.hashCode() : super.hashCode();
+    }
 
  }

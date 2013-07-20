@@ -8,9 +8,29 @@
     <h:body> 
     	<ui:composition template="/template/layout.xhtml">
  		<ui:define name="content">
+			<p:panelGrid style="margin-top:20px">
+				<!-- Titulo de la tabla -->   
+				<f:facet name="header">
+ 					<p:row>  
+            			<p:column colspan="2">Pedido</p:column>  
+       				</p:row>       				
+ 				</f:facet>
+ 				
+ 				<!-- Cabecera --> 				
+				<p:row>  
+        			<p:column colspan="2" >	  
+            			Datos Generales del Pedido
+        			</p:column>
+    			</p:row>
+				
+				<p:row>  
+        			<p:column>	  
+            			
+        			</p:column>
+    			</p:row>
 			
 			
-			 		
+			</p:panelGrid>
  		</ui:define>
     	</ui:composition> 
     </h:body>
