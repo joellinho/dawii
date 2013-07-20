@@ -7,5 +7,5 @@ import persistence.entity.Ubigeo;
 public interface UbigeoService {
 	
 	public List<Ubigeo> listarUbigeo();
-	
+	public Ubigeo obtenerUbigeo(String ubiProvincia);
 }

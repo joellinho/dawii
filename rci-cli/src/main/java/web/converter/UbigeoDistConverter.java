@@ -1,5 +1,54 @@
 package web.converter;
 
-public class UbigeoDistConverter {
+import java.util.StringTokenizer;
 
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
+import javax.faces.convert.FacesConverter;
+
+import persistence.entity.UbigeoDist;
+import persistence.entity.UbigeoDistPK;
+import persistencia.servicefactory.ServiceFactory;
+import persistencia.servicefactory.UbigeoDistService;
+
+@FacesConverter(value="ubigeoDistConverter")
+public class UbigeoDistConverter implements Converter {
+
+	@Override
+	public Object getAsObject(FacesContext context, UIComponent component, String value) {
+		
+		if(value==null|| value.equals("")){
+            return null;
+        }		
+
+		UbigeoDistPK updk = new UbigeoDistPK();
+		StringTokenizer st = new StringTokenizer(value, ";");
+		UbigeoDist uprov = null;
+		
+		if(st.countTokens()==3)
+		{			
+			updk.setUdicod(st.nextToken());
+			updk.setUpcod(st.nextToken());
+			updk.setUdcod(st.nextToken());
+			
+			UbigeoDistService ups = ServiceFactory.obtenerServiceFactory().obtenerUbigeoDistService();
+			uprov = ups.obtenerPorId(updk);
+		}
+		
+		return uprov;
+	}
+
+	@Override
+	public String getAsString(FacesContext context, UIComponent component, Object value) {
+		
+		if(value==null|| !(value instanceof UbigeoDist)){
+            return null;
+        }
+		
+		UbigeoDist udActual = (UbigeoDist) value;
+		return String.valueOf(udActual.getId().getUdicod() + ";" + udActual.getId().getUpcod() + ";" + udActual.getId().getUdcod());			
+	}
+	
+	
 }
