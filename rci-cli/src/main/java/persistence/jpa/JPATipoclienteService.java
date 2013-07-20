@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import persistence.entity.Cliente;
+import persistence.entity.Generopersona;
 import persistence.entity.Tipocliente;
 import persistencia.servicefactory.TipoclienteService;
 
@@ -61,5 +63,6 @@ public class JPATipoclienteService implements TipoclienteService {
 			em.close();
 		}
 	}
+
 
 }

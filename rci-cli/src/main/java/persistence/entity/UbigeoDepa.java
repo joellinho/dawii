@@ -48,6 +48,16 @@ public class UbigeoDepa {
 		this.ubigeoprov = ubigeoprov;
 	}
 
+	// Helpers ------------------------------------------------------------------------------------
 
+    // This must return true for another Foo object with same key/id.
+    public boolean equals(Object other) {
+        return other instanceof UbigeoDepa && !(udcod.equals("")) ? udcod.equals( ((UbigeoDepa) other).getUdcod() ) : (other == this);
+    }
+
+    // This must return the same hashcode for every Foo object with the same key.
+    public int hashCode() {
+        return !(udcod.equals("")) ? this.getClass().hashCode() + udcod.hashCode() : super.hashCode();
+    }
 
 }

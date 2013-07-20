@@ -10,16 +10,26 @@
  		<ui:define name="content">
 
 
-
-		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
- 		<h:form id="formRegistrar">
-
+ 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			<table style="width:100%">
+			
+ 			<tr>
+ 		
+ 			<td width="70%" >
+			<h:form id="formRegistrar">
   			<p:panelGrid style="margin-top:20px">   
  				<f:facet name="header">
  					<p:row>  
             			<p:column colspan="2">Registrarse</p:column>  
        				</p:row>       				
  				</f:facet>
+ 				
+ 				<p:row>  
+        			<p:column colspan="2" >	  
+            			Registrate si no posees una cuenta.
+        			</p:column>  
+    			</p:row>
+ 				
  				
  				<!-- Datos de Personales -->
  				
@@ -120,14 +130,14 @@
  				
  				<p:row>
 	 				<p:column>  
-	 					Celular
+	 					Telefono
 	 				</p:column>
 	 				<p:column> 
 	 					<p:inputText id="txtTelefonoPrincipal" value="#{registrarseManaged.telefonoPrincipal}"/>
 	 				</p:column>   
  				</p:row> 				
  				
- 				<!-- Datos de  -->
+ 				<!-- Datos de la Empresa -->
  				
 			 	<p:row>  
         			<p:column colspan="2" styleClass="ui-widget-header">	  
@@ -140,7 +150,7 @@
 	 					RUC
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtRuc" value=""/>
+	 					<p:inputText id="txtRuc" value="#{registrarseManaged.rucEmpresa}"/>
 	 				</p:column>   
  				</p:row> 	
  				
@@ -149,7 +159,7 @@
 	 					Razón Social
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtRazonSocial" value=""/>
+	 					<p:inputText id="txtRazonSocial" value="#{registrarseManaged.razonSocial}"/>
 	 				</p:column>   
  				</p:row> 	
  				
@@ -160,15 +170,59 @@
  				 	    actionListener="#{registrarseManaged.insertarUsuario}" ajax="false" />
 	 				</p:column>
 
- 				</p:row>
-
- 		 		
- 				 	    
-
+ 				</p:row>				 	    
  			</p:panelGrid>
- 		</h:form>
-  	
- 	
+ 			</h:form>
+ 		
+ 		
+			</td>
+			
+			
+			<td width="30%" align="center" valign="top">
+				<h:form id="frmLogin">  
+   
+				<p:panelGrid style="margin-top:20px">
+					<f:facet name="header">
+	 					<p:row>  
+	            			<p:column colspan="2">Ingresar</p:column>  
+	       				</p:row>       				
+	 				</f:facet>
+				   
+			       <p:row>
+		 				<p:column>  
+		 					Usuario:
+		 				</p:column>
+		 				<p:column> 
+		 					<p:inputText id="login" value="#{managedBean.user}" />
+		 				</p:column>   
+	 				</p:row> 	
+		 				
+	 				<p:row>
+		 				<p:column>  
+		 					Password:
+		 				</p:column>
+		 				<p:column> 
+		 					<p:password id="password" value="#{managedBean.pass}" /> 
+		 				</p:column>   
+	 				</p:row> 	
+	 				
+	                <p:row>
+		 				<p:column colspan="2">  
+		 					<p:commandButton id="loginButton" value="Autenticar"  
+	                    					 action="#{managedBean.autenticar}" ajax="false" />
+		 				</p:column>		 				
+	 				</p:row> 	    
+	
+	            
+           		</p:panelGrid>
+	          	</h:form>
+             
+			</td>
+			
+			</tr>
+			
+			</table>
+			 		
  		</ui:define>
     	</ui:composition> 
     </h:body>

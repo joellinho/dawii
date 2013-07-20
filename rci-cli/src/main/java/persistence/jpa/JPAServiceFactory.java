@@ -1,6 +1,9 @@
 package persistence.jpa;
 
 import persistencia.servicefactory.ClienteService;
+import persistencia.servicefactory.EmpresaClienteService;
+import persistencia.servicefactory.GeneroPersonaService;
+import persistencia.servicefactory.PedidosService;
 import persistencia.servicefactory.ServiceFactory;
 import persistencia.servicefactory.TipoclienteService;
 import persistencia.servicefactory.TipodocumentoService;
@@ -45,6 +48,25 @@ public class JPAServiceFactory extends ServiceFactory{
 	@Override
 	public UbigeoService obtenerUbigeoService() {
 		return new JPAUbigeoService();
+	}
+
+	@Override
+	public GeneroPersonaService obtenerGeneroClienteService() {
+		// TODO Auto-generated method stub
+		return new JPAGeneroPersonaService();
+	}
+
+	@Override
+	public EmpresaClienteService obtenerEmpresaClienteService() {
+		// TODO Auto-generated method stub
+		return new JPAEmpresaClienteService();
+	}
+
+	@Override
+	public PedidosService obtenerPedidosService() {
+		// TODO Auto-generated method stub
+		return new JPAPedidosService();
+
 	}
 
 	

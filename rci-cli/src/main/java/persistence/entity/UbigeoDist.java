@@ -56,5 +56,15 @@ public class UbigeoDist {
 	public String toString(){
 		return this.id.getUdcod()+ this.id.getUdicod() + this.id.getUpcod();
 	}
+	
+	// This must return true for another Foo object with same key/id.
+    public boolean equals(Object other) {
+        return other instanceof UbigeoDist && id!=null ? id.equals( ((UbigeoDist) other).getId() ) : (other == this);
+    }
+
+    // This must return the same hashcode for every Foo object with the same key.
+    public int hashCode() {
+        return id!=null ? this.getClass().hashCode() + id.hashCode() : super.hashCode();
+    }
 
 }

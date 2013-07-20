@@ -15,7 +15,7 @@ public class Generopersona implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private String id;
+	private int id;
 
 	private String descripcion;
 
@@ -30,11 +30,11 @@ public class Generopersona implements Serializable {
     public Generopersona() {
     }
 
-	public String getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -61,5 +61,18 @@ public class Generopersona implements Serializable {
 	public void setRepartidors(List<Repartidor> repartidors) {
 		this.repartidors = repartidors;
 	}
+
+	
+	// Helpers ------------------------------------------------------------------------------------
+
+    // This must return true for another Foo object with same key/id.
+    public boolean equals(Object other) {
+        return other instanceof Generopersona && (id >= 0) ? id == (((Generopersona) other).id) : (other == this);
+    }
+
+    // This must return the same hashcode for every Foo object with the same key.
+    public int hashCode() {
+        return id >=0 ? this.getClass().hashCode() + id : super.hashCode();
+    }
 	
 }

@@ -22,18 +22,23 @@ public class LoginManaged {
 	public String getUser() {
 		return user;
 	}
+	
 	public void setUser(String user) {
 		this.user = user;
 	}
+	
 	public String getPass() {
 		return pass;
 	}
+	
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
+	
 	public Cliente getClienteLogeado() {
 		return clienteLogeado;
 	}
+	
 	public void setClienteLogeado(Cliente clienteLogeado) {
 		this.clienteLogeado = clienteLogeado;
 	}
@@ -41,7 +46,7 @@ public class LoginManaged {
 	public String autenticar(){
 		this.clienteLogeado = cliServ.buscarPorUserPass(user, pass);
 		if(clienteLogeado!=null){	
-			return null;
+			return "main";
 		}
 		else{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Mensaje", "Usuario y/o Contraseña incorrectos."));  
@@ -49,5 +54,7 @@ public class LoginManaged {
 		}
 	}
 	
-	
+	public boolean isLoggedIn(){
+		return this.clienteLogeado!=null;
+	}
 }

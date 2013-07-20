@@ -13,11 +13,11 @@ public abstract class ServiceFactory {
 	
 	
 	private static final TipoService DEFAULT_SERVICE = TipoService.JPA;
-	
+	private static JPAServiceFactory jpaFactory = new JPAServiceFactory();
 	
 	public static ServiceFactory obtenerServiceFactory(TipoService tipo){
 		switch(tipo){
-			case JPA: return new JPAServiceFactory();
+			case JPA: return jpaFactory;
 			default: return null;
 		}
 	}	
@@ -26,7 +26,6 @@ public abstract class ServiceFactory {
 		return ServiceFactory.obtenerServiceFactory(ServiceFactory.DEFAULT_SERVICE);
 	}
 	
-	
 	public abstract TipoclienteService obtenerTipoclienteService();
 	public abstract TipodocumentoService obtenerTipoDocumentoService();
 	public abstract ClienteService obtenerClienteService();
@@ -34,8 +33,10 @@ public abstract class ServiceFactory {
 	public abstract UbigeoDistService obtenerUbigeoDistService();
 	public abstract UbigeoProvService obtenerUbigeoProvService();
 	public abstract UbigeoService obtenerUbigeoService();
-	
-	
+	public abstract GeneroPersonaService obtenerGeneroClienteService();//duplicado-borrado
+	public abstract EmpresaClienteService obtenerEmpresaClienteService();
+	public abstract PedidosService obtenerPedidosService();
+
 	
 	/**
 	 * Enumeración que lista las posibles implementaciones del DAOFactory
