@@ -43,7 +43,7 @@ public class Tienda implements Serializable {
 	private Ubigeo ubigeo;
 
 	//bi-directional many-to-one association to Empresacomercial
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
 	private Empresacomercial empresacomercial;
 
     public Tienda() {

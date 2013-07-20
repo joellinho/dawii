@@ -75,6 +75,7 @@
 	                				   itemLabel="#{ubiDist.udinombre}"                				   
 	                		/>
 	                		<p:ajax 
+	                			update=":frmPedido:tblDetalle:btnAgregarProducto :frmBuscarProducto:tblProductos"
                         		listener="#{pedidoManaged.handleDistChange}" />  
 	                		<f:converter converterId="ubigeoDistConverter" />
             			</p:selectOneMenu>
@@ -100,70 +101,84 @@
         				  <p:inputText id="txtReferencia" value="#{pedidoManaged.referenciaDirDestino}" />
         			</p:column>
        			</p:row>
-    			
-    			
-				<p:row>  
-        			<p:column>	
-        				  <p:commandButton id="btnTest" value="test" 
- 				 	    actionListener="#{pedidoManaged.test}" ajax="false" />
-        			</p:column>
-       			</p:row>
-			
+    						
 				<p:row>  
         			<p:column colspan="2" styleClass="ui-widget-header">	  
             			Detalle del Pedido
         			</p:column>
     			</p:row>
     			
-    			<!-- Tabla Productos -->
-    			<p:row>
-    				<p:column>
-    					<p:dataTable id="tblDetalle" var="detalle" value="#{pedidoManaged.listaDetallePedido}" 
+    			<p:row>  
+        			<p:column colspan="2" >	  
+            			<p:dataTable id="tblDetalle" var="detalle" value="#{pedidoManaged.listaDetallePedido}" 
     					 rowKey="#{detalle.id}" wigdetvar="tableDetalle" >  
-		  	
+						  	<f:facet name="header">  
+		            			Detalle del pedido  
+		        			</f:facet>  
+		  						
+			  				 <p:column headerText="Producto">  
+			            		#{detalle.productoTienda.productoEmpresa.descripcion}  
+			        		 </p:column>  
+			  				
+			  				 <p:column headerText="Cantidad">	  
+			            		<p:spinner id="detCantidad"   
+	                    			value="#{detalle.cantidad}" min="0" max="100"/> 
+			        		 </p:column>
+			        		 
+		        			<p:column style="width:4%">  
+                				<p:commandButton  icon="ui-icon-search" >  
+                			  
+            					</p:commandButton>  
+        					</p:column>
+        			
+        					<p:column style="width:4%">  
+                				<p:commandButton id="deleteButton" update="tblDetalle" icon="i-icon-circle-close" title="Delete">  
+            					</p:commandButton>  
+        					</p:column>    
+		  				
+		  					<f:facet name="footer">  
+					           <p:commandButton id="btnAgregarProducto" value="Agregar Producto"  
+					            	  onclick="buscarProducto.show()"
+					            	  disabled="#{empty pedidoManaged.listaTiendas}"
+			             	   />
+		  					</f:facet>
 		  				</p:dataTable>
 		  				
-		  				 <p:column headerText="Producto">  
-		            		#{detalle.productoTienda.productoEmpresa.descripcion}  
-		        		 </p:column>  
-		  				
-		  				 <p:column headerText="Producto">	  
-		            		
-		            		<p:spinner id="detCantidad"   
-                    			value="#{detalle.cantidad}" min="0" max="100"/> 
-		        		 </p:column>	
-    				</p:column>
-    				
-    				<p:column style="width:4%">  
-                		<p:commandButton  icon="ui-icon-search" >  
-                			  
-            			</p:commandButton>  
+			
+		
         			</p:column>
-        			
-        			<p:column style="width:4%">  
-                		<p:commandButton id="deleteButton" update="tblDetalle" icon="i-icon-circle-close" title="Delete">  
-                			  
-            			</p:commandButton>  
-        			</p:column>    
-    				
- 
     			</p:row>
-			</p:panelGrid>
+    			
+    		</p:panelGrid>
+			
+								  
+             	
+			
 		</h:form>
 		
-		<!-- Form de busqueda de producto -->
-		<h:form id="frmBuscarProducto">
-			<p:dialog id="dlgBuscarProducto" header="Productos" wigdetVar="buscarProductos" resizable="true">
-				<h:panelGrid columns="2" cellpadding="5">  
-					
-				</h:panelGrid>
-			</p:dialog>
-				
-	
-		</h:form>
-		
-		<!-- Form de eliminación de producto-->
-		
+		<!-- Form de busqueda de producto -->		
+		  
+  	 	<h:form id="frmBuscarProducto">      
+  	 	 	<p:confirmDialog global="true" showEffect="fade" hideEffect="explode" id="insertDialog" header="Insertar" widgetVar="buscarProducto" resizable="false">  
+        	<h:panelGrid columns="2" cellpadding="5">  
+           		
+           		 	<p:dataTable id="tblProductos" var="prodTie" value="#{pedidoManaged.listaProductoTienda}" widgetVar="tablaProductos"   
+           						 emptyMessage="No se encontró productos." filteredValue="#{pedidoManaged.listaProdTiendaFliltrados}">  
+  						<p:column headerText="Producto" filterBy="productoempresa.descripcion"   
+                				  filterMatchMode="contains">  
+  							<h:outputText value="#{prodTie.productoempresa.descripcion}" />
+  						</p:column>
+  						
+  						<p:column headerText="Precio Unitario">
+  							<h:outputText value="#{prodTie.productoempresa.precioventa}" />  
+  						</p:column>
+  					
+  					</p:dataTable>		   		
+            
+            </h:panelGrid>
+	    	</p:confirmDialog>
+		</h:form>  
+
 		
  		</ui:define>
     	</ui:composition> 

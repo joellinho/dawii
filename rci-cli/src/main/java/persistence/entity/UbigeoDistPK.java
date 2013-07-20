@@ -12,10 +12,10 @@ public class UbigeoDistPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="udi_cod", unique=true, nullable=false, length=5)
+	@Column(name="udi_cod", unique=true, nullable=false, length=9)
 	private String udicod;
 
-	@Column(name="up_cod", unique=true, nullable=false, length=5)
+	@Column(name="up_cod", unique=true, nullable=false, length=7)
 	private String upcod;
 
 	@Column(name="ud_cod", unique=true, nullable=false, length=5)

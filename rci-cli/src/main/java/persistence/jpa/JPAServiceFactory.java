@@ -4,6 +4,7 @@ import persistencia.servicefactory.ClienteService;
 import persistencia.servicefactory.EmpresaClienteService;
 import persistencia.servicefactory.GeneroPersonaService;
 import persistencia.servicefactory.PedidosService;
+import persistencia.servicefactory.ProductoTiendaService;
 import persistencia.servicefactory.ServiceFactory;
 import persistencia.servicefactory.TiendaService;
 import persistencia.servicefactory.TipoclienteService;
@@ -73,6 +74,11 @@ public class JPAServiceFactory extends ServiceFactory{
 	@Override
 	public TiendaService obtenerTiendaService() {
 		return new JPATiendaService();
+	}
+
+	@Override
+	public ProductoTiendaService obtenerProductoTiendaService() {
+		return new JPAProductoTiendaService();
 	}
 
 	

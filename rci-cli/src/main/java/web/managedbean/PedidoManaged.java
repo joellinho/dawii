@@ -19,6 +19,8 @@ public class PedidoManaged {
 	private UbigeoDepaService uDepaServ = ServiceFactory.obtenerServiceFactory().obtenerUbigeoDepaService();
 	private UbigeoService ubiService = ServiceFactory.obtenerServiceFactory().obtenerUbigeoService();
 	private TiendaService tieService = ServiceFactory.obtenerServiceFactory().obtenerTiendaService();
+	private ProductoTiendaService proTieService = ServiceFactory.obtenerServiceFactory().obtenerProductoTiendaService();
+	
 	
 	// Datos de la cabecera del pedido que son llenados desde la página web
 	private String direccionDestino;	
@@ -41,6 +43,13 @@ public class PedidoManaged {
 	private List<Tienda> listaTiendas;
 	private Tienda tiendaSelect;
 	
+	// Lista de ProductoTienda
+	private List<Productotienda> listaProductoTienda;
+	private List<Productotienda> listaProdTiendaFliltrados;
+	private Productotienda productoTiendaSelect;
+	
+	
+	// Producto 
 	public PedidoManaged(){
 		this.inicializarData();
 	}
@@ -91,11 +100,22 @@ public class PedidoManaged {
 		// Ahora obtenemos el ubigeo
 		if(this.ubiDistSelect!=null){
 			this.ubiSelect = ubiService.obtenerUbigeo(this.ubiDistSelect.getId().getUdicod());
-			if(this.ubiSelect!=null){ // Si logramos obtener el ubigeo entonces podemos buscar la lista de tiendas
+			
+			// Si logramos obtener el ubigeo entonces podemos buscar la lista de tiendas
+			if(this.ubiSelect!=null){ 
 				this.listaTiendas = tieService.obtenerTiendasUbigeo(ubiSelect);
+				
+				// Si encontramos data, buscamos toda la lista de productos de todas las tienda encontradas.
+				if(listaTiendas!=null && listaTiendas.size()>0){
+					this.listaProductoTienda = this.proTieService.listarProductoTiendaEnTiendas(listaTiendas);
+				}
+				else{
+					this.listaProductoTienda = null;
+				}
 			}
 			else{ // En caso contrario limpiamos
 				this.listaTiendas=null;
+				this.listaProductoTienda = null;
 			}
 			
 		}
@@ -103,6 +123,7 @@ public class PedidoManaged {
 			this.ubiSelect = null;
 			this.listaTiendas = null;
 			this.tiendaSelect = null;	
+			this.listaProductoTienda = null;
 		}
 	}
 		
@@ -223,6 +244,31 @@ public class PedidoManaged {
 
 	public void setTiendaSelect(Tienda tiendaSelect) {
 		this.tiendaSelect = tiendaSelect;
+	}
+
+	public List<Productotienda> getListaProductoTienda() {
+		return listaProductoTienda;
+	}
+
+	public void setListaProductoTienda(List<Productotienda> listaProductoTienda) {
+		this.listaProductoTienda = listaProductoTienda;
+	}
+
+	public Productotienda getProductoTiendaSelect() {
+		return productoTiendaSelect;
+	}
+
+	public void setProductoTiendaSelect(Productotienda productoTiendaSelect) {
+		this.productoTiendaSelect = productoTiendaSelect;
+	}
+
+	public List<Productotienda> getListaProdTiendaFliltrados() {
+		return listaProdTiendaFliltrados;
+	}
+
+	public void setListaProdTiendaFliltrados(
+			List<Productotienda> listaProdTiendaFliltrados) {
+		this.listaProdTiendaFliltrados = listaProdTiendaFliltrados;
 	}
 	
 	
