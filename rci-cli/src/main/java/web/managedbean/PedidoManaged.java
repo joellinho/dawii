@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.model.SelectItem;
 
 import persistence.entity.*;
 import persistencia.servicefactory.*;
@@ -47,6 +48,7 @@ public class PedidoManaged {
 	private List<Productotienda> listaProductoTienda;
 	private List<Productotienda> listaProdTiendaFliltrados;
 	private Productotienda productoTiendaSelect;
+	private SelectItem[] listaFranquicia;
 	
 	
 	// Producto 
@@ -57,6 +59,7 @@ public class PedidoManaged {
 	private void inicializarData(){
 		this.obtenerListaDepartamentos();
 		this.listaDetallePedido = new ArrayList<Detallepedido>();
+		this.listaFranquicia = this.createFilterOptions(this.listaTiendas);
 	}
 	
 	private void obtenerListaDepartamentos(){
@@ -74,6 +77,28 @@ public class PedidoManaged {
 	public void handleDistChange(){
 		this.obtenerUbigeoYtiendas();
 	}
+	
+	private SelectItem[] createFilterOptions(List<Tienda> tiendas)  {
+		if(tiendas==null){
+			SelectItem[] options = new SelectItem[1];  
+			  
+	        options[0] = new SelectItem("", "Seleccionar");  
+	        return options;
+		}
+		else{
+	        SelectItem[] options = new SelectItem[tiendas.size() + 1];  
+	  
+	        options[0] = new SelectItem("", "Seleccionar");  
+	        
+	        for(int i = 0; i < tiendas.size(); i++) {  
+	            options[i + 1] = new SelectItem(tiendas.get(i) , 
+	            		tiendas.get(i).getEmpresacomercial().getNombrecomercial());  
+	        }  
+  
+        	return options;
+		}
+    }  
+  
 	
 	private void obtenerListaProvincias(){
 		if(this.ubiDepaSelect!=null){
@@ -108,6 +133,9 @@ public class PedidoManaged {
 				// Si encontramos data, buscamos toda la lista de productos de todas las tienda encontradas.
 				if(listaTiendas!=null && listaTiendas.size()>0){
 					this.listaProductoTienda = this.proTieService.listarProductoTiendaEnTiendas(listaTiendas);
+					// Por ultimo llenamos las opciones de filtrado 
+					this.listaFranquicia = this.createFilterOptions(this.listaTiendas);
+					
 				}
 				else{
 					this.listaProductoTienda = null;
@@ -270,7 +298,10 @@ public class PedidoManaged {
 			List<Productotienda> listaProdTiendaFliltrados) {
 		this.listaProdTiendaFliltrados = listaProdTiendaFliltrados;
 	}
-	
+
+	public SelectItem[] getListaFranquicia() {
+		return listaFranquicia;
+	}
 	
 	
 }

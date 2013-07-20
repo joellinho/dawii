@@ -164,7 +164,17 @@
            		
            		 	<p:dataTable id="tblProductos" var="prodTie" value="#{pedidoManaged.listaProductoTienda}" widgetVar="tablaProductos"   
            						 emptyMessage="No se encontró productos." filteredValue="#{pedidoManaged.listaProdTiendaFliltrados}">  
-  						<p:column headerText="Producto" filterBy="productoempresa.descripcion"   
+  						
+			        	<p:column filterBy="#{prodTie.tienda}"   
+			                headerText="Franquicia" 
+			                filterOptions="#{pedidoManaged.listaFranquicia}"
+			                filterMatchMode="exact">
+            				<h:outputText value="#{prodTie.id}" />
+				        </p:column>  
+
+  						
+  						
+  						<p:column headerText="Producto" filterBy="#{prodTie.productoempresa.descripcion}"   
                 				  filterMatchMode="contains">  
   							<h:outputText value="#{prodTie.productoempresa.descripcion}" />
   						</p:column>
@@ -172,6 +182,8 @@
   						<p:column headerText="Precio Unitario">
   							<h:outputText value="#{prodTie.productoempresa.precioventa}" />  
   						</p:column>
+  						
+  						
   					
   					</p:dataTable>		   		
             
