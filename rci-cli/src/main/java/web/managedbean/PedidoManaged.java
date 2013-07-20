@@ -78,6 +78,35 @@ public class PedidoManaged {
 		this.obtenerUbigeoYtiendas();
 	}
 	
+	public String agregarProducto(){
+		if(this.productoTiendaSelect != null){
+			// ITeramos en los elementos para buscar si es que ya lo agregamos
+			for(Detallepedido detalle : listaDetallePedido){
+				// Si lo encontramos
+				if(detalle.getProductotienda().getId()== this.productoTiendaSelect.getId()){
+					return null; // Rompemos
+				}
+			}
+			
+			Detallepedido dp = new Detallepedido();
+			dp.setProductotienda(this.productoTiendaSelect);
+			dp.setCantidad(1);
+			this.listaDetallePedido.add(dp);
+			
+			return null;
+		}
+		else{
+			return null;
+		}
+	}
+	
+	public String removerDetalle(){
+		if(this.selectedDetalle!=null && this.listaDetallePedido != null){
+			this.listaDetallePedido.remove(this.selectedDetalle);
+		}
+		return null;
+	}
+	
 	private SelectItem[] createFilterOptions(List<Tienda> tiendas)  {
 		if(tiendas==null){
 			SelectItem[] options = new SelectItem[1];  

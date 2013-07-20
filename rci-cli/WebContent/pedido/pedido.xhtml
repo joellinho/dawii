@@ -117,22 +117,21 @@
 		        			</f:facet>  
 		  						
 			  				 <p:column headerText="Producto">  
-			            		#{detalle.productoTienda.productoEmpresa.descripcion}  
+			            		#{detalle.productotienda.productoempresa.descripcion}  
 			        		 </p:column>  
 			  				
-			  				 <p:column headerText="Cantidad">	  
+			  				 <p:column headerText="Cantidad">
+			  				 	  
 			            		<p:spinner id="detCantidad"   
 	                    			value="#{detalle.cantidad}" min="0" max="100"/> 
 			        		 </p:column>
-			        		 
-		        			<p:column style="width:4%">  
-                				<p:commandButton  icon="ui-icon-search" >  
-                			  
-            					</p:commandButton>  
-        					</p:column>
         			
         					<p:column style="width:4%">  
-                				<p:commandButton id="deleteButton" update="tblDetalle" icon="i-icon-circle-close" title="Delete">  
+                				<p:commandButton id="deleteButton" update="tblDetalle" icon="i-icon-circle-close" title="Delete"
+                						action="#{pedidoManaged.removerDetalle}">		                 
+			                 
+			                 	<f:setPropertyActionListener value="#{detalle}" target="#{pedidoManaged.selectedDetalle}" />
+			                   
             					</p:commandButton>  
         					</p:column>    
 		  				
@@ -169,10 +168,8 @@
 			                headerText="Franquicia" 
 			                filterOptions="#{pedidoManaged.listaFranquicia}"
 			                filterMatchMode="exact">
-            				<h:outputText value="#{prodTie.id}" />
-				        </p:column>  
-
-  						
+            				<h:outputText value="#{prodTie.productoempresa.empresacomercial.nombrecomercial}" />
+				        </p:column>
   						
   						<p:column headerText="Producto" filterBy="#{prodTie.productoempresa.descripcion}"   
                 				  filterMatchMode="contains">  
@@ -183,7 +180,14 @@
   							<h:outputText value="#{prodTie.productoempresa.precioventa}" />  
   						</p:column>
   						
-  						
+  						<p:column style="width:4%">  
+			                <p:commandButton id="selectButton" update=":frmPedido:tblDetalle" icon="ui-icon-search" title="View"
+			                 action="#{pedidoManaged.agregarProducto}">		                 
+			                 
+			                 <f:setPropertyActionListener value="#{prodTie}" target="#{pedidoManaged.productoTiendaSelect}" />
+			                 
+			                </p:commandButton>    
+        				</p:column> 
   					
   					</p:dataTable>		   		
             
