@@ -13,11 +13,11 @@ public abstract class ServiceFactory {
 	
 	
 	private static final TipoService DEFAULT_SERVICE = TipoService.JPA;
-	
+	private static JPAServiceFactory jpaFactory = new JPAServiceFactory();
 	
 	public static ServiceFactory obtenerServiceFactory(TipoService tipo){
 		switch(tipo){
-			case JPA: return new JPAServiceFactory();
+			case JPA: return jpaFactory;
 			default: return null;
 		}
 	}	

@@ -60,4 +60,18 @@ public class JPAUbigeoProvService implements UbigeoProvService {
 		}
 	}
 
+	@Override
+	public List<UbigeoProv> listarUbigeoProvPorDepa(String codDepa) {
+		EntityManager em = JPAUtil.getEntityManager();
+		try{
+			String query = "SELECT up FROM UbigeoProv up WHERE up.id.udcod=:codDepa";
+			TypedQuery<UbigeoProv> emquery = em.createQuery(query,UbigeoProv.class);
+			emquery.setParameter("codDepa", codDepa);
+			return emquery.getResultList();
+		}
+		finally{
+			em.close();
+		}
+	}
+
 }

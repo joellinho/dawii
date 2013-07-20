@@ -24,7 +24,7 @@ public class UbigeoDistConverter implements Converter {
 
 		UbigeoDistPK updk = new UbigeoDistPK();
 		StringTokenizer st = new StringTokenizer(value, ";");
-		UbigeoDist uprov = null;
+		UbigeoDist udis = null;
 		
 		if(st.countTokens()==3)
 		{			
@@ -32,11 +32,11 @@ public class UbigeoDistConverter implements Converter {
 			updk.setUpcod(st.nextToken());
 			updk.setUdcod(st.nextToken());
 			
-			UbigeoDistService ups = ServiceFactory.obtenerServiceFactory().obtenerUbigeoDistService();
-			uprov = ups.obtenerPorId(updk);
+			UbigeoDistService uds = ServiceFactory.obtenerServiceFactory().obtenerUbigeoDistService();
+			udis = uds.obtenerPorId(updk);
 		}
 		
-		return uprov;
+		return udis;
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class UbigeoDistConverter implements Converter {
         }
 		
 		UbigeoDist udActual = (UbigeoDist) value;
-		return String.valueOf(udActual.getId().getUdicod() + ";" + udActual.getId().getUpcod() + ";" + udActual.getId().getUdcod());			
+		return udActual.getId().getUdicod() + ";" + udActual.getId().getUpcod() + ";" + udActual.getId().getUdcod();			
 	}
 	
 	

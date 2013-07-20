@@ -59,4 +59,18 @@ public class JPAUbigeoDistService implements
 		}
 	}
 
+	@Override
+	public List<UbigeoDist> listarUbigeoDistPorProv(String codProv) {
+		EntityManager em = JPAUtil.getEntityManager();
+		try{
+			String query = "SELECT ud FROM UbigeoDist ud WHERE ud.id.upcod=:codProv";
+			TypedQuery<UbigeoDist> emquery = em.createQuery(query,UbigeoDist.class);
+			emquery.setParameter("codProv", codProv);
+			return emquery.getResultList();
+		}
+		finally{
+			em.close();
+		}	
+	}
+
 }

@@ -45,7 +45,7 @@ public class UbigeoProvConverter implements Converter {
         }
 		
 		UbigeoProv upActual = (UbigeoProv) value;
-		return String.valueOf(upActual.getId().getUdcod() + ";" + upActual.getId().getUpcod() );			
+		return upActual.getId().getUdcod() + ";" + upActual.getId().getUpcod();			
 	}
 
 }

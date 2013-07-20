@@ -37,11 +37,11 @@ public class PedidoFilter implements Filter {
 	        
     	LoginManaged lm = (LoginManaged) httpRequest.getSession().getAttribute("loginManaged");
     	 
-    	if (lm != null && lm.isLoggedIn()) {
+    	//if (lm != null && lm.isLoggedIn()) {
     		chain.doFilter(request, response);
-	    } else {            
-	        httpResponse.sendRedirect(httpRequest.getContextPath() + "/auth/loginOrRegister.xhtml"); 
-	    } 
+	    //} else {            
+	        //httpResponse.sendRedirect(httpRequest.getContextPath() + "/auth/loginOrRegister.xhtml"); 
+	    //} 
 	}
 
 	@Override
