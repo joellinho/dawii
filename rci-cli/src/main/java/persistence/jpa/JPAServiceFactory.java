@@ -5,6 +5,7 @@ import persistencia.servicefactory.EmpresaClienteService;
 import persistencia.servicefactory.GeneroPersonaService;
 import persistencia.servicefactory.PedidosService;
 import persistencia.servicefactory.ServiceFactory;
+import persistencia.servicefactory.TiendaService;
 import persistencia.servicefactory.TipoclienteService;
 import persistencia.servicefactory.TipodocumentoService;
 import persistencia.servicefactory.UbigeoDepaService;
@@ -67,6 +68,11 @@ public class JPAServiceFactory extends ServiceFactory{
 		// TODO Auto-generated method stub
 		return new JPAPedidosService();
 
+	}
+
+	@Override
+	public TiendaService obtenerTiendaService() {
+		return new JPATiendaService();
 	}
 
 	

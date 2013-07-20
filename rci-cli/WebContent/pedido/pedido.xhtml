@@ -8,7 +8,7 @@
     <h:body> 
     	<ui:composition template="/template/layout.xhtml">
  		<ui:define name="content">
- 		<h:form id="test">
+ 		<h:form id="frmPedido">
  		
 			<p:panelGrid style="margin-top:20px">
 				<!-- Titulo de la tabla -->   
@@ -18,13 +18,14 @@
        				</p:row>       				
  				</f:facet>
  				
- 				<!-- Cabecera --> 				
+ 				<!-- Separador Datos Generales--> 				
 				<p:row>  
-        			<p:column colspan="2" >	  
+        			<p:column colspan="2" styleClass="ui-widget-header">	  
             			Datos Generales del Pedido
         			</p:column>
     			</p:row>
 				
+				<!-- Ubigeo -->
 				<p:row>
 					<p:column>
 						Departamento	  
@@ -73,11 +74,32 @@
 	                				   var="ubiDist"
 	                				   itemLabel="#{ubiDist.udinombre}"                				   
 	                		/>
-	                		
+	                		<p:ajax 
+                        		listener="#{pedidoManaged.handleDistChange}" />  
 	                		<f:converter converterId="ubigeoDistConverter" />
             			</p:selectOneMenu>
         			</p:column>
     			</p:row>
+    			
+    			<!-- Dirección -->
+    			
+    			<p:row>  
+        			<p:column>	
+        				Dirección Destino:		  
+        			</p:column>
+        			<p:column>	
+        				  <p:inputText id="txtDireccion" value="#{pedidoManaged.direccionDestino}" />
+        			</p:column>
+       			</p:row>
+       			
+       			<p:row>  
+        			<p:column>	
+        				Referencia		  
+        			</p:column>
+        			<p:column>	
+        				  <p:inputText id="txtReferencia" value="#{pedidoManaged.referenciaDirDestino}" />
+        			</p:column>
+       			</p:row>
     			
     			
 				<p:row>  
@@ -87,8 +109,62 @@
         			</p:column>
        			</p:row>
 			
+				<p:row>  
+        			<p:column colspan="2" styleClass="ui-widget-header">	  
+            			Detalle del Pedido
+        			</p:column>
+    			</p:row>
+    			
+    			<!-- Tabla Productos -->
+    			<p:row>
+    				<p:column>
+    					<p:dataTable id="tblDetalle" var="detalle" value="#{pedidoManaged.listaDetallePedido}" 
+    					 rowKey="#{detalle.id}" wigdetvar="tableDetalle" >  
+		  	
+		  				</p:dataTable>
+		  				
+		  				 <p:column headerText="Producto">  
+		            		#{detalle.productoTienda.productoEmpresa.descripcion}  
+		        		 </p:column>  
+		  				
+		  				 <p:column headerText="Producto">	  
+		            		
+		            		<p:spinner id="detCantidad"   
+                    			value="#{detalle.cantidad}" min="0" max="100"/> 
+		        		 </p:column>	
+    				</p:column>
+    				
+    				<p:column style="width:4%">  
+                		<p:commandButton  icon="ui-icon-search" >  
+                			  
+            			</p:commandButton>  
+        			</p:column>
+        			
+        			<p:column style="width:4%">  
+                		<p:commandButton id="deleteButton" update="tblDetalle" icon="i-icon-circle-close" title="Delete">  
+                			  
+            			</p:commandButton>  
+        			</p:column>    
+    				
+ 
+    			</p:row>
 			</p:panelGrid>
 		</h:form>
+		
+		<!-- Form de busqueda de producto -->
+		<h:form id="frmBuscarProducto">
+			<p:dialog id="dlgBuscarProducto" header="Productos" wigdetVar="buscarProductos" resizable="true">
+				<h:panelGrid columns="2" cellpadding="5">  
+					
+				</h:panelGrid>
+			</p:dialog>
+				
+	
+		</h:form>
+		
+		<!-- Form de eliminación de producto-->
+		
+		
  		</ui:define>
     	</ui:composition> 
     </h:body>

@@ -36,7 +36,7 @@ public abstract class ServiceFactory {
 	public abstract GeneroPersonaService obtenerGeneroClienteService();//duplicado-borrado
 	public abstract EmpresaClienteService obtenerEmpresaClienteService();
 	public abstract PedidosService obtenerPedidosService();
-
+	public abstract TiendaService obtenerTiendaService();
 	
 	/**
 	 * Enumeración que lista las posibles implementaciones del DAOFactory

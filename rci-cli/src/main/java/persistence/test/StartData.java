@@ -32,8 +32,8 @@ public class StartData {
 	}
 	
 	public void insertarGenero(){
-		GeneroPersonaService cs=sf.obtenerGeneroClienteService();
 		
+		GeneroPersonaService cs=sf.obtenerGeneroClienteService();
 		if(cs.listarGenero().size()<=0){
 			Generopersona gc=new Generopersona();
 			gc.setDescripcion("Masculino");
@@ -52,17 +52,6 @@ public class StartData {
 		}
 	}
 	
-	
-	public void insertarEmpresaCliente(){
-		EmpresaClienteService cs=sf.obtenerEmpresaClienteService();
-		
-		if(cs.listarEmpresaCliente().size()<=0){
-			Empresacliente ec=new Empresacliente();
-			ec.setRazonsocial("empresa 01");
-			ec.setRazonsocial("empresa 02");
-			cs.insertarEmpresaCliente(ec);
-		}
-	}
 		
 
 }

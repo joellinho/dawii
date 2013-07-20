@@ -39,7 +39,7 @@ public class Detallepedido implements Serializable {
 	private Repartidor repartidor;
 
 	//bi-directional many-to-one association to Productotienda
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
 	private Productotienda productotienda;
 
     public Detallepedido() {
