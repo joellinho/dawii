@@ -33,8 +33,8 @@
         <filter-class>web.filter.PedidoFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>pedidoFilter</filter-name>
-        <url-pattern>/pedido/*</url-pattern>
+        <filter-name>userFilter</filter-name>
+        <url-pattern>/user/*</url-pattern>
     </filter-mapping>
     
 </web-app>

@@ -20,8 +20,8 @@ import web.managedbean.LoginManaged;
  * 
  */
 
-@WebFilter("/pedido/*")
-public class PedidoFilter implements Filter {
+@WebFilter("/user/*")
+public class UserFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
