@@ -3,7 +3,7 @@ package persistence.test;
 import java.util.List;
 
 import persistence.entity.*;
-import persistencia.servicefactory.*;
+import persistence.servicefactory.*;
 
 
 public class UbigeoTest {

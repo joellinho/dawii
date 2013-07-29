@@ -1,4 +1,4 @@
-package persistencia.servicefactory;
+package persistence.servicefactory;
 
 import persistence.jpa.JPAServiceFactory;
 

@@ -5,9 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import persistence.entity.Cliente;
 import persistence.entity.Generopersona;
-import persistencia.servicefactory.GeneroPersonaService;
+import persistence.servicefactory.GeneroPersonaService;
 
 public class JPAGeneroPersonaService implements GeneroPersonaService{
 

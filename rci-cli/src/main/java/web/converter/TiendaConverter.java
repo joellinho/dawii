@@ -6,8 +6,8 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import persistence.entity.Tienda;
-import persistencia.servicefactory.ServiceFactory;
-import persistencia.servicefactory.TiendaService;
+import persistence.servicefactory.ServiceFactory;
+import persistence.servicefactory.TiendaService;
 
 @FacesConverter(value="tiendaConverter")
 public class TiendaConverter implements Converter {

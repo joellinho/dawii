@@ -1,7 +1,7 @@
 package persistence.test;
 
 import persistence.entity.*;
-import persistencia.servicefactory.*;
+import persistence.servicefactory.*;
 
 
 public class StartData {

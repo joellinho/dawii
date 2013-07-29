@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import persistence.entity.Empresacliente;
-import persistencia.servicefactory.EmpresaClienteService;
+import persistence.servicefactory.EmpresaClienteService;
 
 public class JPAEmpresaClienteService implements EmpresaClienteService{
 

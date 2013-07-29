@@ -9,8 +9,8 @@ import javax.faces.convert.FacesConverter;
 
 import persistence.entity.UbigeoDist;
 import persistence.entity.UbigeoDistPK;
-import persistencia.servicefactory.ServiceFactory;
-import persistencia.servicefactory.UbigeoDistService;
+import persistence.servicefactory.ServiceFactory;
+import persistence.servicefactory.UbigeoDistService;
 
 @FacesConverter(value="ubigeoDistConverter")
 public class UbigeoDistConverter implements Converter {

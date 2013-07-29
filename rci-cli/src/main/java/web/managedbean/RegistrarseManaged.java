@@ -11,11 +11,11 @@ import persistence.entity.Cliente;
 import persistence.entity.Empresacliente;
 import persistence.entity.Tipocliente;
 import persistence.entity.Tipodocumento;
-import persistencia.servicefactory.ClienteService;
-import persistencia.servicefactory.EmpresaClienteService;
-import persistencia.servicefactory.ServiceFactory;
-import persistencia.servicefactory.TipoclienteService;
-import persistencia.servicefactory.TipodocumentoService;
+import persistence.servicefactory.ClienteService;
+import persistence.servicefactory.EmpresaClienteService;
+import persistence.servicefactory.ServiceFactory;
+import persistence.servicefactory.TipoclienteService;
+import persistence.servicefactory.TipodocumentoService;
 
 
 @ManagedBean(name="registrarseManaged")

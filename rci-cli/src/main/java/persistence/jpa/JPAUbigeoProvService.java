@@ -5,11 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import persistence.entity.UbigeoDepa;
-import persistence.entity.UbigeoDist;
 import persistence.entity.UbigeoProv;
 import persistence.entity.UbigeoProvPK;
-import persistencia.servicefactory.UbigeoProvService;
+import persistence.servicefactory.UbigeoProvService;
 
 public class JPAUbigeoProvService implements UbigeoProvService {
 

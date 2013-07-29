@@ -7,8 +7,8 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import persistence.entity.UbigeoDepa;
-import persistencia.servicefactory.ServiceFactory;
-import persistencia.servicefactory.UbigeoDepaService;
+import persistence.servicefactory.ServiceFactory;
+import persistence.servicefactory.UbigeoDepaService;
 
 @FacesConverter(value="ubigeoDepaConverter")
 public class UbigeoDepaConverter implements Converter {

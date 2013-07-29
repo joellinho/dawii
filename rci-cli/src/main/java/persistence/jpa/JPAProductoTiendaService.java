@@ -7,8 +7,7 @@ import javax.persistence.TypedQuery;
 
 import persistence.entity.Productotienda;
 import persistence.entity.Tienda;
-import persistence.entity.Ubigeo;
-import persistencia.servicefactory.ProductoTiendaService;
+import persistence.servicefactory.ProductoTiendaService;
 
 public class JPAProductoTiendaService implements ProductoTiendaService {
 

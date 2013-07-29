@@ -6,8 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import persistence.entity.Ubigeo;
-import persistence.entity.UbigeoProv;
-import persistencia.servicefactory.UbigeoService;
+import persistence.servicefactory.UbigeoService;
 
 public class JPAUbigeoService implements UbigeoService {
 

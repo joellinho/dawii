@@ -5,10 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import persistence.entity.Pedido;
 import persistence.entity.Tienda;
 import persistence.entity.Ubigeo;
-import persistencia.servicefactory.TiendaService;
+import persistence.servicefactory.TiendaService;
 
 public class JPATiendaService implements TiendaService{
 

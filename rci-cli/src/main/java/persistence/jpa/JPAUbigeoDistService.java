@@ -7,10 +7,9 @@ import javax.persistence.TypedQuery;
 
 import persistence.entity.UbigeoDist;
 import persistence.entity.UbigeoDistPK;
-import persistence.entity.UbigeoProv;
 
 public class JPAUbigeoDistService implements
-		persistencia.servicefactory.UbigeoDistService {
+		persistence.servicefactory.UbigeoDistService {
 
 	@Override
 	public List<UbigeoDist> listarUbigeoDist() {

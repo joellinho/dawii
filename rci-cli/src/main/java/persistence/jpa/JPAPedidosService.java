@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import persistence.entity.Pedido;
-import persistencia.servicefactory.PedidosService;
+import persistence.servicefactory.PedidosService;
 
 public class JPAPedidosService  implements PedidosService{
 

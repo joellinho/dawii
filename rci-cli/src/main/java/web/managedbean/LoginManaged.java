@@ -6,8 +6,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import persistence.entity.Cliente;
-import persistencia.servicefactory.ClienteService;
-import persistencia.servicefactory.ServiceFactory;
+import persistence.servicefactory.ClienteService;
+import persistence.servicefactory.ServiceFactory;
 
 @ManagedBean(name="managedBean")
 @SessionScoped

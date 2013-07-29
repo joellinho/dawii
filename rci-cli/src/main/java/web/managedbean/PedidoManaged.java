@@ -9,7 +9,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
 
 import persistence.entity.*;
-import persistencia.servicefactory.*;
+import persistence.servicefactory.*;
 
 @ManagedBean(name="pedidoManaged")
 @ViewScoped

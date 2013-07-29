@@ -9,8 +9,8 @@ import javax.faces.convert.FacesConverter;
 
 import persistence.entity.UbigeoProv;
 import persistence.entity.UbigeoProvPK;
-import persistencia.servicefactory.ServiceFactory;
-import persistencia.servicefactory.UbigeoProvService;
+import persistence.servicefactory.ServiceFactory;
+import persistence.servicefactory.UbigeoProvService;
 
 @FacesConverter(value="ubigeoProvConverter")
 public class UbigeoProvConverter implements Converter {
