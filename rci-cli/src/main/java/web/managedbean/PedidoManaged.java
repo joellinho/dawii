@@ -1,44 +1,54 @@
 package web.managedbean;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.EventObject;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.UUID;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
 
+import org.hibernate.id.GUIDGenerator;
+
+import jxl.write.DateTime;
+
 import persistence.entity.*;
 import persistence.servicefactory.*;
+import web.managedbean.event.UbigeoSelectedEvent;
+import web.managedbean.event.UbigeoSelectedListener;
 
 @ManagedBean(name="pedidoManaged")
 @ViewScoped
-public class PedidoManaged {
+public class PedidoManaged implements UbigeoSelectedListener{
 	// Service
-	private UbigeoProvService uProvServ = ServiceFactory.obtenerServiceFactory().obtenerUbigeoProvService();
-	private UbigeoDistService uDistServ = ServiceFactory.obtenerServiceFactory().obtenerUbigeoDistService();
-	private UbigeoDepaService uDepaServ = ServiceFactory.obtenerServiceFactory().obtenerUbigeoDepaService();
-	private UbigeoService ubiService = ServiceFactory.obtenerServiceFactory().obtenerUbigeoService();
 	private TiendaService tieService = ServiceFactory.obtenerServiceFactory().obtenerTiendaService();
 	private ProductoTiendaService proTieService = ServiceFactory.obtenerServiceFactory().obtenerProductoTiendaService();
+	private PedidoService pedService = ServiceFactory.obtenerServiceFactory().obtenerPedidoService();
 	
+	// Managed Bean Login
+	@ManagedProperty(value="#{loginManaged}")
+	private LoginManaged loginManaged;
 	
+	// Managed Bean Ubigeo
+	@ManagedProperty(value="#{ubigeoManaged}")
+	private UbigeoManaged ubigeoManaged;
+
 	// Datos de la cabecera del pedido que son llenados desde la página web
 	private String direccionDestino;	
 	private String referenciaDirDestino;
-	private Ubigeo ubiSelect;
+	private Ubigeo ubigeoActual;
 	
 	// Datos del detalle del pedido
 	private List<Detallepedido> listaDetallePedido;
-	private Detallepedido selectedDetalle;
-	
-	// Datos de Ubigeo para obtener las tiendas 
-	private UbigeoProv ubiProvSelect;	
-	private UbigeoDist ubiDistSelect;	
-	private UbigeoDepa ubiDepaSelect;	
-	private List<UbigeoProv> listaUbiProv;
-	private List<UbigeoDist> listaUbiDist;
-	private List<UbigeoDepa> listaUbiDepa;	
+	private Detallepedido selectedDetalle;	
 	
 	// Lista de tiendas
 	private List<Tienda> listaTiendas;
@@ -56,26 +66,21 @@ public class PedidoManaged {
 		this.inicializarData();
 	}
 	
-	private void inicializarData(){
-		this.obtenerListaDepartamentos();
+	private void inicializarData(){		
 		this.listaDetallePedido = new ArrayList<Detallepedido>();
 		this.listaFranquicia = this.createFilterOptions(this.listaTiendas);
-	}
+	}		
 	
-	private void obtenerListaDepartamentos(){
-		this.listaUbiDepa = uDepaServ.listarUbigeoDepa();
-	}
-	
-	public void handleDepaChange(){
-		this.obtenerListaProvincias();
-	}
-	
-	public void handleProvChange(){
-		this.obtenerListaDistritos();
-	}
-	
-	public void handleDistChange(){
-		this.obtenerUbigeoYtiendas();
+	public void obtenerUbigeoDefault(){
+		if(this.loginManaged.getClienteLogeado()!=null &&
+		   this.loginManaged.getClienteLogeado().getUbigeo() != null){
+			
+			this.ubigeoManaged.forzarUbigeo(this.loginManaged.getClienteLogeado().getUbigeo());
+			
+		}
+		
+		// Por ultimo obtenemos la direccion
+		this.direccionDestino = this.loginManaged.getClienteLogeado().getDireccion();
 	}
 	
 	public String agregarProducto(){
@@ -128,56 +133,112 @@ public class PedidoManaged {
 		}
     }  
   
-	
-	private void obtenerListaProvincias(){
-		if(this.ubiDepaSelect!=null){
-			this.listaUbiProv = uProvServ.listarUbigeoProvPorDepa(this.ubiDepaSelect.getUdcod());
-		}
-		else{
-			this.listaUbiProv = null;
-		}
-	}
-	
-	private void obtenerListaDistritos(){
-		if(this.ubiProvSelect!=null){
-			this.listaUbiDist = uDistServ.listarUbigeoDistPorProv(this.ubiProvSelect.getId().getUpcod());
-		}
-		else{
-			this.listaUbiDist = null;
-		}
-	}
-	
-	private void obtenerUbigeoYtiendas(){
-		// Cada ves que se cambia el ubigeo se crea un nuevo detalle y se descarta el anterior
-		this.listaDetallePedido = new ArrayList<Detallepedido>();
+	public void registrarPedido(){
+		// Creamos el pedido 		
+		Pedido pedidoActual = new Pedido();
+		pedidoActual.setDirecciondestino(this.direccionDestino);
+		pedidoActual.setFechahoraregistro(new Date());
+		pedidoActual.setMonto(new BigDecimal(0));
+		pedidoActual.setObservaciones("");//****
+		pedidoActual.setPorcentajeigv(new BigDecimal(0.18));//****
+		pedidoActual.setReferenciadirdestino("");//****
+		pedidoActual.setDetallepedidos(this.listaDetallePedido);
+		//pedidoActual.setFacturacions(null);
+		pedidoActual.setTienda(this.tiendaSelect);
+		pedidoActual.setDeleted("F");
+		//didoActual.setEstadopedido(null);
+		pedidoActual.setCliente(this.loginManaged.getClienteLogeado());
 		
-		// Ahora obtenemos el ubigeo
-		if(this.ubiDistSelect!=null){
-			this.ubiSelect = ubiService.obtenerUbigeo(this.ubiDistSelect.getId().getUdicod());
-			
-			// Si logramos obtener el ubigeo entonces podemos buscar la lista de tiendas
-			if(this.ubiSelect!=null){ 
-				this.listaTiendas = tieService.obtenerTiendasUbigeo(ubiSelect);
+		// Actualizamos los detalles para que referencie el pedido
+		for(Detallepedido dp : pedidoActual.getDetallepedidos()){
+			dp.setPedido(pedidoActual);
+		}
+		
+		
+		//Creamos las facturas
+		pedidoActual.setFacturacions(this.generarFacturaDesdePedido(pedidoActual));
+		
+		// Ahora que tenemos las facturas y lso detalles
+		pedService.insertarPedido(pedidoActual);
+
+		
+		// Redirect yadayada
+		
+	}	
+	
+	
+	
+	private List<Facturacion> generarFacturaDesdePedido(Pedido pedidoActual) {
+		List<Facturacion> listaFacturacion = new ArrayList<Facturacion>();
+		for(Detallepedido detallePedido : pedidoActual.getDetallepedidos()){
+			Facturacion factura = null;
+			// Buscamos si la tienda ya tiene una factura creada
+			for(Facturacion fBus : listaFacturacion){
 				
-				// Si encontramos data, buscamos toda la lista de productos de todas las tienda encontradas.
-				if(listaTiendas!=null && listaTiendas.size()>0){
-					this.listaProductoTienda = this.proTieService.listarProductoTiendaEnTiendas(listaTiendas);
-					// Por ultimo llenamos las opciones de filtrado 
-					this.listaFranquicia = this.createFilterOptions(this.listaTiendas);
-					
-				}
-				else{
-					this.listaProductoTienda = null;
+				if(fBus.getidTiendaTrasient()==detallePedido.getProductotienda().getTienda().getId()){
+					// Si vemos que ya existe una factura, obtenemos la referencia
+					factura = fBus;
 				}
 			}
-			else{ // En caso contrario limpiamos
-				this.listaTiendas=null;
+			
+			// Si no encontramos factura alguna la creamos
+			if(factura==null){
+				factura = new Facturacion();
+				factura.setFechafacturacion(new Date());
+				factura.setId( UUID.randomUUID().toString() );
+				//factura.setObservaciones(observaciones)
+				factura.setPedido(pedidoActual);
+				//factura.setRazonsocial(razonsocial);
+				//factura.setTipocomprobante(tipocomprobante)				
+				factura.setDetallefacturacions(new ArrayList<Detallefacturacion>());
+				factura.setidTiendaTrasient(detallePedido.getProductotienda().getTienda().getId());
+				listaFacturacion.add(factura);
+			}
+			
+			// Ahora que tenemos la factura creamos el detalle actual
+			Detallefacturacion detalleFact = new Detallefacturacion();
+			//detalleFact.setBruto(bruto)
+			detalleFact.setCantidad(detallePedido.getCantidad());
+			detalleFact.setDetallepedido(detallePedido);
+			detalleFact.setFacturacion(factura);
+			//detalleFact.setImpuestoconsumo(impuestoconsumo)
+			//detalleFact.setImpuestoigv(impuestoigv)
+			//detalleFact.setNeto(neto)
+			//detalleFact.setPorcentajeigv(porcentajeigv)
+			//detalleFact.setPorcentajeimpuestoconsumo(porcentajeimpuestoconsumo)
+			detalleFact.setProductotienda(detallePedido.getProductotienda());
+			//detalleFact.setTipocambio(tipocambio)
+			
+			// Ahora agregamos el detalle
+			factura.getDetallefacturacions().add(detalleFact);
+		}
+		return listaFacturacion;
+	}	
+	
+	private void obteneTiendas(Ubigeo ubigeoSeleccionado){
+		// Cada ves que se cambia el ubigeo se crea un nuevo detalle y se descarta el anterior
+		this.listaDetallePedido = new ArrayList<Detallepedido>();		
+		
+		if(ubigeoSeleccionado!=null){
+			// Guardo la variable que llego del evento 
+			this.ubigeoActual = ubigeoSeleccionado;
+			
+			// Listo las tiendas
+			this.listaTiendas = tieService.obtenerTiendasUbigeo(ubigeoSeleccionado);
+			
+			// Si encontramos data, buscamos toda la lista de productos de todas las tienda encontradas.
+			if(listaTiendas!=null && listaTiendas.size()>0){
+				this.listaProductoTienda = this.proTieService.listarProductoTiendaEnTiendas(listaTiendas);
+				// Por ultimo llenamos las opciones de filtrado 
+				this.listaFranquicia = this.createFilterOptions(this.listaTiendas);
+				
+			}
+			else{
 				this.listaProductoTienda = null;
 			}
-			
 		}
 		else{
-			this.ubiSelect = null;
+			this.ubigeoActual = null;
 			this.listaTiendas = null;
 			this.tiendaSelect = null;	
 			this.listaProductoTienda = null;
@@ -217,66 +278,6 @@ public class PedidoManaged {
 
 	public void setListaDetallePedido(List<Detallepedido> listaDetallePedido) {
 		this.listaDetallePedido = listaDetallePedido;
-	}
-
-
-	public UbigeoProv getUbiProvSelect() {
-		return ubiProvSelect;
-	}
-
-
-	public void setUbiProvSelect(UbigeoProv ubiProvSelect) {
-		this.ubiProvSelect = ubiProvSelect;
-	}
-
-
-	public UbigeoDist getUbiDistSelect() {
-		return ubiDistSelect;
-	}
-
-
-	public void setUbiDistSelect(UbigeoDist ubiDistSelect) {
-		this.ubiDistSelect = ubiDistSelect;
-	}
-
-
-	public UbigeoDepa getUbiDepaSelect() {
-		return ubiDepaSelect;
-	}
-
-
-	public void setUbiDepaSelect(UbigeoDepa ubiDepaSelect) {
-		this.ubiDepaSelect = ubiDepaSelect;
-	}
-
-
-	public List<UbigeoProv> getListaUbiProv() {
-		return listaUbiProv;
-	}
-
-
-	public void setListaUbiProv(List<UbigeoProv> listaUbiProv) {
-		this.listaUbiProv = listaUbiProv;
-	}
-
-
-	public List<UbigeoDist> getListaUbiDist() {
-		return listaUbiDist;
-	}
-
-
-	public void setListaUbiDist(List<UbigeoDist> listaUbiDist) {
-		this.listaUbiDist = listaUbiDist;
-	}
-
-
-	public List<UbigeoDepa> getListaUbiDepa() {
-		return listaUbiDepa;
-	}
-
-
-	public void setListaUbiDepa(List<UbigeoDepa> listaUbiDepa) {
-		this.listaUbiDepa = listaUbiDepa;
 	}
 
 	public Detallepedido getSelectedDetalle() {
@@ -330,6 +331,34 @@ public class PedidoManaged {
 
 	public SelectItem[] getListaFranquicia() {
 		return listaFranquicia;
+	}
+
+	public LoginManaged getLoginManaged() {
+		return loginManaged;
+	}
+
+	public void setLoginManaged(LoginManaged loginManaged) {
+		this.loginManaged = loginManaged;
+	}
+
+	public UbigeoManaged getUbigeoManaged() {
+		return ubigeoManaged;
+	}
+
+	public void setUbigeoManaged(UbigeoManaged ubigeoManaged) {
+		
+		if(this.ubigeoManaged!=null){
+			this.ubigeoManaged.removeUbigeoSelectedEventListener(this);
+		}
+		
+		this.ubigeoManaged = ubigeoManaged;
+		this.ubigeoManaged.addUbigeoSelectedEventListener(this);
+	}
+	
+	@Override
+	public void handleUbigeoSelectedEvent(UbigeoSelectedEvent e) {
+		
+		this.obteneTiendas(e.getUbigeoSeleccionado());
 	}
 	
 	

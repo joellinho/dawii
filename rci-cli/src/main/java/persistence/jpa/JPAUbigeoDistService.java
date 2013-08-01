@@ -57,6 +57,15 @@ public class JPAUbigeoDistService implements
 			em.close();
 		}
 	}
+	
+	@Override
+	public UbigeoDist obtenerPorId(String udicod, String upcod, String udcod) {
+		UbigeoDistPK id = new UbigeoDistPK();
+		id.setUdcod(udcod);
+		id.setUdicod(udicod);
+		id.setUpcod(upcod);
+		return this.obtenerPorId(id);
+	}
 
 	@Override
 	public List<UbigeoDist> listarUbigeoDistPorProv(String codProv) {
@@ -71,5 +80,7 @@ public class JPAUbigeoDistService implements
 			em.close();
 		}	
 	}
+
+
 
 }

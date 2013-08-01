@@ -31,15 +31,15 @@
 						Departamento	  
 					</p:column>  
         			<p:column>	  
-            			<p:selectOneMenu id="cboUbiDepa" value="#{pedidoManaged.ubiDepaSelect}">
+            			<p:selectOneMenu id="cboUbiDepa" value="#{pedidoManaged.ubigeoManaged.ubiDepaSelect}">
             			<f:selectItem itemLabel="Seleccionar" itemValue="" />  
-	                		<f:selectItems value="#{pedidoManaged.listaUbiDepa}" 
+	                		<f:selectItems value="#{pedidoManaged.ubigeoManaged.listaUbiDepa}" 
 	                				   var="ubiDepa"
 	                				   itemLabel="#{ubiDepa.udnombre}"                				   
 	                		/>  
 	                		
 	                		<p:ajax update="cboUbiProv"  
-                        		listener="#{pedidoManaged.handleDepaChange}" />  
+                        		listener="#{pedidoManaged.ubigeoManaged.handleDepaChange}" />  
 	                		<f:converter converterId="ubigeoDepaConverter" />
             			</p:selectOneMenu>
         			</p:column>
@@ -50,14 +50,14 @@
 						Provincia	  
 					</p:column>  
         			<p:column>	  
-            			<p:selectOneMenu id="cboUbiProv" value="#{pedidoManaged.ubiProvSelect}">
+            			<p:selectOneMenu id="cboUbiProv" value="#{pedidoManaged.ubigeoManaged.ubiProvSelect}">
             				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
-	                		<f:selectItems value="#{pedidoManaged.listaUbiProv}" 
+	                		<f:selectItems value="#{pedidoManaged.ubigeoManaged.listaUbiProv}" 
 	                				   var="ubiProv"
 	                				   itemLabel="#{ubiProv.upnombre}"                				   
 	                		/>  
 	                		<p:ajax update="cboUbiDist"  
-                        		listener="#{pedidoManaged.handleProvChange}" />  
+                        		listener="#{pedidoManaged.ubigeoManaged.handleProvChange}" />  
 	                		<f:converter converterId="ubigeoProvConverter" />
             			</p:selectOneMenu>
         			</p:column>
@@ -68,15 +68,15 @@
 						Distrito	  
 					</p:column>  
         			<p:column>	  
-            			<p:selectOneMenu id="cboUbiDist" value="#{pedidoManaged.ubiDistSelect}">
+            			<p:selectOneMenu id="cboUbiDist" value="#{pedidoManaged.ubigeoManaged.ubiDistSelect}">
             				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
-	                		<f:selectItems value="#{pedidoManaged.listaUbiDist}" 
+	                		<f:selectItems value="#{pedidoManaged.ubigeoManaged.listaUbiDist}" 
 	                				   var="ubiDist"
 	                				   itemLabel="#{ubiDist.udinombre}"                				   
 	                		/>
 	                		<p:ajax 
 	                			update=":frmPedido:tblDetalle:btnAgregarProducto :frmBuscarProducto:tblProductos"
-                        		listener="#{pedidoManaged.handleDistChange}" />  
+                        		listener="#{pedidoManaged.ubigeoManaged.handleDistChange}" />  
 	                		<f:converter converterId="ubigeoDistConverter" />
             			</p:selectOneMenu>
         			</p:column>
@@ -102,6 +102,21 @@
         			</p:column>
        			</p:row>
     						
+     			<p:row>  
+        			<p:column>	
+        				   <p:commandButton id="btnDefaultUbi" value="Ubigeo Default"  
+	                    					action="#{pedidoManaged.obtenerUbigeoDefault}" 
+	                    					update="cboUbiDepa cboUbiProv cboUbiDist txtDireccion" />
+        			</p:column>
+       			</p:row>
+       			
+       			<p:row>  
+        			<p:column>	
+        				   <p:commandButton id="btnGenerarPedido" value="Enviar Pedido"  
+	                    					action="#{pedidoManaged.registrarPedido}"/>
+        			</p:column>
+       			</p:row>
+       			
 				<p:row>  
         			<p:column colspan="2" styleClass="ui-widget-header">	  
             			Detalle del Pedido
@@ -188,6 +203,7 @@
 			                 
 			                </p:commandButton>    
         				</p:column> 
+  					
   					
   					</p:dataTable>		   		
             

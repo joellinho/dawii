@@ -32,7 +32,7 @@ public class Productotienda implements Serializable {
 	private Productoempresa productoempresa;
 
 	//bi-directional many-to-one association to Tienda
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
 	private Tienda tienda;
 
     public Productotienda() {

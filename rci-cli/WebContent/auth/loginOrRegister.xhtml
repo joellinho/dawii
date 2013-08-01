@@ -55,17 +55,8 @@
 	 				<p:column> 
 	 					<p:inputText id="txtNombre" value="#{registrarseManaged.nombre}"/> 
 	 				</p:column>   
- 				</p:row>				
-				
-				<p:row>
-	 				<p:column>  
-	 					Dirección
-	 				</p:column>
-	 				<p:column> 
-	 					<p:inputText id="txtDireccion" value="#{registrarseManaged.direccion}"/>  
-	 				</p:column>   
- 				</p:row>		
- 				 				
+ 				</p:row>								
+				 				 				
 				<p:row>
 	 				<p:column>  
 	 					Correo Electronico
@@ -163,14 +154,88 @@
 	 				</p:column>   
  				</p:row> 	
  				
+ 				<!-- Direccion Usual-->
  				
- 				<p:row>
+			 	<p:row>  
+        			<p:column colspan="2" styleClass="ui-widget-header">	  
+            			Dirección Frecuente
+        			</p:column>  
+    			</p:row>  
+ 				
+ 				<!-- Ubigeo -->		
+    			<p:row>
+					<p:column>
+						Departamento	  
+					</p:column>  
+        			<p:column>	  
+            			<p:selectOneMenu id="cboUbiDepa" value="#{registrarseManaged.ubigeoManaged.ubiDepaSelect}">
+            			<f:selectItem itemLabel="Seleccionar" itemValue="" />  
+	                		<f:selectItems value="#{registrarseManaged.ubigeoManaged.listaUbiDepa}" 
+	                				   var="ubiDepa"
+	                				   itemLabel="#{ubiDepa.udnombre}"                				   
+	                		/>  
+	                		
+	                		<p:ajax update="cboUbiProv"  
+                        		listener="#{registrarseManaged.ubigeoManaged.handleDepaChange}" />  
+	                		<f:converter converterId="ubigeoDepaConverter" />
+            			</p:selectOneMenu>
+        			</p:column>
+    			</p:row>
+    			
+    			<p:row>
+					<p:column>
+						Provincia	  
+					</p:column>  
+        			<p:column>	  
+            			<p:selectOneMenu id="cboUbiProv" value="#{registrarseManaged.ubigeoManaged.ubiProvSelect}">
+            				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
+	                		<f:selectItems value="#{registrarseManaged.ubigeoManaged.listaUbiProv}" 
+	                				   var="ubiProv"
+	                				   itemLabel="#{ubiProv.upnombre}"                				   
+	                		/>  
+	                		<p:ajax update="cboUbiDist"  
+                        		listener="#{registrarseManaged.ubigeoManaged.handleProvChange}" />  
+	                		<f:converter converterId="ubigeoProvConverter" />
+            			</p:selectOneMenu>
+        			</p:column>
+    			</p:row>
+    			
+    			<p:row>
+					<p:column>
+						Distrito	  
+					</p:column>  
+        			<p:column>	  
+            			<p:selectOneMenu id="cboUbiDist" value="#{registrarseManaged.ubigeoManaged.ubiDistSelect}">
+            				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
+	                		<f:selectItems value="#{registrarseManaged.ubigeoManaged.listaUbiDist}" 
+	                				   var="ubiDist"
+	                				   itemLabel="#{ubiDist.udinombre}"                				   
+	                		/>
+	                		<p:ajax 	                			
+                        		listener="#{registrarseManaged.ubigeoManaged.handleDistChange}" />  
+	                		<f:converter converterId="ubigeoDistConverter" />
+            			</p:selectOneMenu>
+        			</p:column>
+    			</p:row>
+    			
+    			<!-- Dirección -->
+    			
+    			<p:row>  
+        			<p:column>	
+        				Dirección Destino:		  
+        			</p:column>
+        			<p:column>	
+        				  <p:inputText id="txtDireccion" value="#{pedidoManaged.direccionDestino}" />
+        			</p:column>
+       			</p:row>	
+       			
+    			<p:row>
 	 				<p:column colspan="2">  
 	 					<p:commandButton id="btnTest" value="Registrar" 
  				 	    actionListener="#{registrarseManaged.insertarUsuario}" ajax="false" />
 	 				</p:column>
 
- 				</p:row>				 	    
+ 				</p:row>			 	    
  			</p:panelGrid>
  			</h:form>
  		
@@ -193,7 +258,7 @@
 		 					Usuario:
 		 				</p:column>
 		 				<p:column> 
-		 					<p:inputText id="login" value="#{managedBean.user}" />
+		 					<p:inputText id="login" value="#{loginManaged.user}" />
 		 				</p:column>   
 	 				</p:row> 	
 		 				
@@ -202,14 +267,14 @@
 		 					Password:
 		 				</p:column>
 		 				<p:column> 
-		 					<p:password id="password" value="#{managedBean.pass}" /> 
+		 					<p:password id="password" value="#{loginManaged.pass}" /> 
 		 				</p:column>   
 	 				</p:row> 	
 	 				
 	                <p:row>
 		 				<p:column colspan="2">  
 		 					<p:commandButton id="loginButton" value="Autenticar"  
-	                    					 action="#{managedBean.autenticar}" ajax="false" />
+	                    					 action="#{loginManaged.autenticar}" ajax="false" />
 		 				</p:column>		 				
 	 				</p:row> 	    
 	

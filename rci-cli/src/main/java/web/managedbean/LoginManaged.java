@@ -9,7 +9,7 @@ import persistence.entity.Cliente;
 import persistence.servicefactory.ClienteService;
 import persistence.servicefactory.ServiceFactory;
 
-@ManagedBean(name="managedBean")
+@ManagedBean(name="loginManaged")
 @SessionScoped
 public class LoginManaged {
 	private ClienteService cliServ = ServiceFactory.obtenerServiceFactory().obtenerClienteService();

@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import persistence.entity.Cliente;
 import persistence.entity.Empresacliente;
-import persistence.entity.Tipocliente;
 import persistence.entity.Tipodocumento;
 import persistence.servicefactory.ClienteService;
 import persistence.servicefactory.EmpresaClienteService;
@@ -46,6 +46,10 @@ public class RegistrarseManaged {
 	private String razonSocial;
 	private String rucEmpresa;
 	
+	// Managed Bean Ubigeo
+	@ManagedProperty(value="#{ubigeoManaged}")
+	private UbigeoManaged ubigeoManaged;
+	
 	// Constructor
 	public TipodocumentoService getTipoDocServ() {
 		return tipoDocServ;
@@ -68,6 +72,7 @@ public class RegistrarseManaged {
 		cli.setTelefonoCelular(this.telefonoCelular);
 		cli.setTelefonoPrincipal(this.telefonoPrincipal);
 		cli.setTipodocumento(this.tipoDocSeleccionado);
+		cli.setUbigeo(this.ubigeoManaged.getUbiSelect());
 		
 		// Buscamos la empresa, si no la encontramos creamos una nueva
 		//TODO: Deberiamos comprobar si la razon social es la misma?
@@ -223,5 +228,13 @@ public class RegistrarseManaged {
 
 	public void setrucEmpresa(String ruc) {
 		this.rucEmpresa = ruc;
+	}
+
+	public UbigeoManaged getUbigeoManaged() {
+		return ubigeoManaged;
+	}
+
+	public void setUbigeoManaged(UbigeoManaged ubigeoManaged) {
+		this.ubigeoManaged = ubigeoManaged;
 	}
 }

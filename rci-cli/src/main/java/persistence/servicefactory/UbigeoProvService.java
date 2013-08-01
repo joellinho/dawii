@@ -11,6 +11,8 @@ public interface UbigeoProvService {
 	public List<UbigeoProv> listarUbigeoProvPorDepa(String codDepa);
 	public void insertar(UbigeoProv ubigeoProv);
 	public UbigeoProv obtenerPorId(UbigeoProvPK id);
+	public UbigeoProv obtenerPorId(String upcod, String udcod);
+	
 	
 }
 

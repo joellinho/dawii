@@ -12,4 +12,5 @@ public interface UbigeoDistService {
 	public List<UbigeoDist> listarUbigeoDistPorProv(String codProv);
 	public void insertar(UbigeoDist ubigeoDist);
 	public UbigeoDist obtenerPorId(UbigeoDistPK id);
+	public UbigeoDist obtenerPorId(String udicod, String upcod, String udcod);
 }

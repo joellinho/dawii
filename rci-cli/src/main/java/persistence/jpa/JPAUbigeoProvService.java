@@ -57,6 +57,14 @@ public class JPAUbigeoProvService implements UbigeoProvService {
 			em.close();
 		}
 	}
+	
+	@Override
+	public UbigeoProv obtenerPorId(String upcod, String udcod) {
+		UbigeoProvPK id = new UbigeoProvPK();
+		id.setUdcod(udcod);
+		id.setUpcod(upcod);
+		return this.obtenerPorId(id);
+	}
 
 	@Override
 	public List<UbigeoProv> listarUbigeoProvPorDepa(String codDepa) {
@@ -71,5 +79,7 @@ public class JPAUbigeoProvService implements UbigeoProvService {
 			em.close();
 		}
 	}
+
+	
 
 }

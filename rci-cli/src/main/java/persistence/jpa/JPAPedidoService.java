@@ -6,10 +6,27 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import persistence.entity.Pedido;
-import persistence.servicefactory.PedidosService;
+import persistence.servicefactory.PedidoService;
 
-public class JPAPedidosService  implements PedidosService{
+public class JPAPedidoService implements PedidoService {
 
+	@Override
+	public void insertarPedido(Pedido pedido) {
+		EntityManager em = JPAUtil.getEntityManager();
+		try{
+			em.getTransaction().begin();
+			em.persist(pedido);
+			em.getTransaction().commit();
+		}
+		catch(Exception e) {
+			em.getTransaction().rollback();
+			throw e;
+		}
+		finally{
+			em.close();
+		}
+	}
+	
 	@Override
 	public List<Pedido> listarPedidos() {
 		// TODO Auto-generated method stub
@@ -25,5 +42,6 @@ public class JPAPedidosService  implements PedidosService{
 		
 		
 	}
+
 
 }

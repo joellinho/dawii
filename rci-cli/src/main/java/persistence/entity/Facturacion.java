@@ -2,6 +2,7 @@ package persistence.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,6 @@ public class Facturacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String id;
 
 	private String deleted;
@@ -29,8 +29,11 @@ public class Facturacion implements Serializable {
 
 	private String razonsocial;
 
+	@Transient
+	private int idTiendaTrasient;
+	
 	//bi-directional many-to-one association to Detallefacturacion
-	@OneToMany(mappedBy="facturacion")
+	@OneToMany(mappedBy="facturacion", cascade=CascadeType.PERSIST)
 	private List<Detallefacturacion> detallefacturacions;
 
 	//bi-directional many-to-one association to Pedido
@@ -114,6 +117,14 @@ public class Facturacion implements Serializable {
 
 	public void setTipocomprobante(Tipocomprobante tipocomprobante) {
 		this.tipocomprobante = tipocomprobante;
+	}
+
+	public int getidTiendaTrasient() {
+		return idTiendaTrasient;
+	}
+
+	public void setidTiendaTrasient(int idTiendaTrasient) {
+		this.idTiendaTrasient = idTiendaTrasient;
 	}
 	
 }

@@ -3,7 +3,7 @@ package persistence.jpa;
 import persistence.servicefactory.ClienteService;
 import persistence.servicefactory.EmpresaClienteService;
 import persistence.servicefactory.GeneroPersonaService;
-import persistence.servicefactory.PedidosService;
+import persistence.servicefactory.PedidoService;
 import persistence.servicefactory.ProductoTiendaService;
 import persistence.servicefactory.ServiceFactory;
 import persistence.servicefactory.TiendaService;
@@ -65,13 +65,6 @@ public class JPAServiceFactory extends ServiceFactory{
 	}
 
 	@Override
-	public PedidosService obtenerPedidosService() {
-		// TODO Auto-generated method stub
-		return new JPAPedidosService();
-
-	}
-
-	@Override
 	public TiendaService obtenerTiendaService() {
 		return new JPATiendaService();
 	}
@@ -79,6 +72,11 @@ public class JPAServiceFactory extends ServiceFactory{
 	@Override
 	public ProductoTiendaService obtenerProductoTiendaService() {
 		return new JPAProductoTiendaService();
+	}
+
+	@Override
+	public PedidoService obtenerPedidoService() {
+		return new JPAPedidoService();
 	}
 
 	

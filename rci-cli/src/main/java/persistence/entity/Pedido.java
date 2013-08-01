@@ -43,11 +43,11 @@ public class Pedido implements Serializable {
 	private byte ultimopedido;
 
 	//bi-directional many-to-one association to Detallepedido
-	@OneToMany(mappedBy="pedido")
+	@OneToMany(mappedBy="pedido", cascade=CascadeType.PERSIST)
 	private List<Detallepedido> detallepedidos;
 
 	//bi-directional many-to-one association to Facturacion
-	@OneToMany(mappedBy="pedido")
+	@OneToMany(mappedBy="pedido", cascade=CascadeType.PERSIST)
 	private List<Facturacion> facturacions;
 
 	//bi-directional many-to-one association to Tienda
