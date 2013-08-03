@@ -94,7 +94,7 @@ public class RegistrarseManaged {
 		
 		if (loginPassword.equals(loginPassword2)) {
 			cliServ.insertar(cli);
-			return "main";
+			return "successReg";
 		}
 	    else{
 	    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Mensaje", "Las Contraseñas no son Iguales."));

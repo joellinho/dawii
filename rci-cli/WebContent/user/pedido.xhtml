@@ -8,25 +8,66 @@
     <h:body> 
     	<ui:composition template="/template/layout.xhtml">
  		<ui:define name="content">
- 		<h:form id="frmPedido">
- 		
-			<p:panelGrid style="margin-top:20px">
-				<!-- Titulo de la tabla -->   
-				<f:facet name="header">
- 					<p:row>  
-            			<p:column colspan="2">Pedido</p:column>  
-       				</p:row>       				
- 				</f:facet>
+ 	
+ 		 		
+ 		<!-- Datos del Pedido -->
+		<h:form id="frmPedido">
+ 		<p:panelGrid style="margin-top:20px">
+		<f:facet name="header">
+		    <p:row>
+			<p:column colspan="2" >	  
+          			Pedido
+      		</p:column>
+    		</p:row>   				
+		</f:facet>
  				
- 				<!-- Separador Datos Generales--> 				
+		<p:row>
+ 			<p:column  >
+ 				<p:panelGrid style="margin-top:20px">
+			
+ 						
+	   			<!-- Tipo Comprobante -->
+	   			<p:row>
+	   				<p:column colspan="2" styleClass="ui-widget-header">  
+	   					Comprobante de Pago
+	   				</p:column>	   			
+	   			</p:row>
 				<p:row>  
-        			<p:column colspan="2" styleClass="ui-widget-header">	  
-            			Datos Generales del Pedido
+        			<p:column>
+        				TipoComprobante
+        			</p:column>
+        			<p:column>
+        				<p:selectOneMenu id="cboTipoComp" value="#{pedidoManaged.tipocomprobanteSelect}">
+            				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
+	                		<f:selectItems value="#{pedidoManaged.listaTipoComp}" 
+	                				   var="tipoComp"
+	                				   itemLabel="#{tipoComp.descripcion}"                				   
+	                		/>
+	                		<p:ajax update="lblRazonSocial"  
+                        		listener="#{pedidoManaged.updateNombreLabelRS}" />  
+	                		<f:converter converterId="tipocomprobanteConverter" />
+            			</p:selectOneMenu>
         			</p:column>
     			</p:row>
-				
+    		
+    			<p:row>  
+        			<p:column>
+        				<h:outputLabel id="lblRazonSocial" value="#{pedidoManaged.nombreLabelRS}" />  
+        			</p:column>
+        			<p:column>
+        				  <p:inputText id="txtRazonSocial" value="#{pedidoManaged.razonSocial}" />
+        			</p:column>
+    			</p:row>
+			
 				<!-- Ubigeo -->
 				<p:row>
+	   				<p:column colspan="2" styleClass="ui-widget-header">  
+	   					Dirección de Entrega
+	   				</p:column>	   			
+	   			</p:row>
+			
+				<p:row>
+					<!-- Ubigeo Departamento -->
 					<p:column>
 						Departamento	  
 					</p:column>  
@@ -43,6 +84,9 @@
 	                		<f:converter converterId="ubigeoDepaConverter" />
             			</p:selectOneMenu>
         			</p:column>
+        			
+        			
+        			
     			</p:row>
     			
     			<p:row>
@@ -116,55 +160,68 @@
 	                    					action="#{pedidoManaged.registrarPedido}"/>
         			</p:column>
        			</p:row>
-       			
-				<p:row>  
-        			<p:column colspan="2" styleClass="ui-widget-header">	  
-            			Detalle del Pedido
-        			</p:column>
-    			</p:row>
-    			
-    			<p:row>  
-        			<p:column colspan="2" >	  
-            			<p:dataTable id="tblDetalle" var="detalle" value="#{pedidoManaged.listaDetallePedido}" 
-    					 rowKey="#{detalle.id}" wigdetvar="tableDetalle" >  
-						  	<f:facet name="header">  
-		            			Detalle del pedido  
-		        			</f:facet>  
-		  						
-			  				 <p:column headerText="Producto">  
-			            		#{detalle.productotienda.productoempresa.descripcion}  
-			        		 </p:column>  
-			  				
-			  				 <p:column headerText="Cantidad">
-			  				 	  
-			            		<p:spinner id="detCantidad"   
-	                    			value="#{detalle.cantidad}" min="0" max="100"/> 
-			        		 </p:column>
-        			
-        					<p:column style="width:4%">  
-                				<p:commandButton id="deleteButton" update="tblDetalle" icon="i-icon-circle-close" title="Delete"
-                						action="#{pedidoManaged.removerDetalle}">		                 
-			                 
-			                 	<f:setPropertyActionListener value="#{detalle}" target="#{pedidoManaged.selectedDetalle}" />
-			                   
-            					</p:commandButton>  
-        					</p:column>    
-		  				
-		  					<f:facet name="footer">  
-					           <p:commandButton id="btnAgregarProducto" value="Agregar Producto"  
-					            	  onclick="buscarProducto.show()"
-					            	  disabled="#{empty pedidoManaged.listaTiendas}"
-			             	   />
-		  					</f:facet>
-		  				</p:dataTable>
-		  				
-			
-		
-        			</p:column>
-    			</p:row>
+    
     			
     		</p:panelGrid>
 			
+ 			</p:column>
+  			
+  			<!-- Detalle Seleccionado -->
+ 			<p:column  > 						
+    			
+    		
+           			<p:dataTable id="tblDetalle" var="detalle" value="#{pedidoManaged.listaDetallePedido}" 
+   					 rowKey="#{detalle.id}" wigdetvar="tableDetalle" >  
+					  	<f:facet name="header">  
+	            			Detalle del pedido  
+	        			</f:facet>  
+	  						
+	  					 <p:column headerText="CC">  
+		            		#{detalle.productotienda.tienda.empresacomercial.nombrecomercial}  
+		        		 </p:column>  	
+	  						
+		  				 <p:column headerText="Producto">  
+		            		#{detalle.productotienda.productoempresa.descripcion}  
+		        		 </p:column>  
+		  				
+		  				 <p:column headerText="Cantidad">		  				 	  
+		            		<p:spinner id="detCantidad"   
+                    			value="#{detalle.cantidad}" min="1" max="99">
+                    			
+                    		<p:ajax 
+	                			update=""
+                        		listener="#{pedidoManaged.actualizarCostos}" /> 	
+                    			
+                    			
+                   			</p:spinner> 
+		        		 </p:column>
+       			
+       					<p:column headerText="Eliminar" style="width:4%">  
+               				<p:commandButton id="deleteButton" update="tblDetalle" icon="ui-icon-close" title="Delete"
+               						action="#{pedidoManaged.removerDetalle}">		                 
+		                 
+		                 	<f:setPropertyActionListener value="#{detalle}" target="#{pedidoManaged.selectedDetalle}" />
+		                   
+           					</p:commandButton>  
+       					</p:column>    
+	  				
+	  					<f:facet name="footer">  
+				           <p:commandButton id="btnAgregarProducto" value="Agregar Producto"  
+				            	  onclick="buscarProducto.show()"
+				            	  disabled="#{empty pedidoManaged.listaTiendas}"
+		             	   />
+	  					</f:facet>
+	  				</p:dataTable>
+	  				
+			
+		
+        		
+    			
+ 			</p:column>
+	  	</p:row>
+ 		</p:panelGrid>
+
+		
 								  
              	
 			
@@ -173,7 +230,9 @@
 		<!-- Form de busqueda de producto -->		
 		  
   	 	<h:form id="frmBuscarProducto">      
-  	 	 	<p:confirmDialog global="true" showEffect="fade" hideEffect="explode" id="insertDialog" header="Insertar" widgetVar="buscarProducto" resizable="false">  
+  	 	 	<p:confirmDialog global="true" showEffect="fade" hideEffect="explode" id="insertDialog" header="Buscar Producto"
+  	 	 					 message="Seleccione los productos." widgetVar="buscarProducto" resizable="false">
+  	 		   
         	<h:panelGrid columns="2" cellpadding="5">  
            		
            		 	<p:dataTable id="tblProductos" var="prodTie" value="#{pedidoManaged.listaProductoTienda}" widgetVar="tablaProductos"   
@@ -196,7 +255,7 @@
   						</p:column>
   						
   						<p:column style="width:4%">  
-			                <p:commandButton id="selectButton" update=":frmPedido:tblDetalle" icon="ui-icon-search" title="View"
+			                <p:commandButton id="selectButton" update=":frmPedido:tblDetalle" icon="ui-icon-arrowreturn-1-n" title="View"
 			                 action="#{pedidoManaged.agregarProducto}">		                 
 			                 
 			                 <f:setPropertyActionListener value="#{prodTie}" target="#{pedidoManaged.productoTiendaSelect}" />

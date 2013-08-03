@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 import persistence.entity.Detallepedido;
@@ -20,7 +21,7 @@ import web.managedbean.event.UbigeoSelectedEvent;
 import web.managedbean.event.UbigeoSelectedListener;
 
 @ManagedBean(name="ubigeoManaged")
-@ViewScoped
+@SessionScoped
 public class UbigeoManaged {
 	// Service
 	private UbigeoProvService uProvServ = ServiceFactory.obtenerServiceFactory().obtenerUbigeoProvService();

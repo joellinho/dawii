@@ -16,7 +16,7 @@ public class StartData {
 		
 		sd.InsertarTipoCliente();
 		sd.insertarTipoDocumento();
-		
+		sd.insertarTipocomprobante();
 		//GeneroPersonaService gp = ServiceFactory.
 	}
 
@@ -49,6 +49,20 @@ public class StartData {
 			Tipodocumento td=new Tipodocumento();
 			td.setDescripcion("DNI");
 			cs.insertar(td);
+		}
+	}
+	
+	public void insertarTipocomprobante(){
+		TipocomprobanteService tcs = sf.obtenerTipocomprobanteService();
+		
+		if(tcs.listarComprobantes().size()<=0){
+			Tipocomprobante tc = new Tipocomprobante();
+			tc.setDescripcion("Boleta");
+			tcs.insertar(tc);
+			
+			tc = new Tipocomprobante();
+			tc.setDescripcion("Factura");
+			tcs.insertar(tc);
 		}
 	}
 	

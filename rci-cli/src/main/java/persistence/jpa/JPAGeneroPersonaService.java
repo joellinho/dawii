@@ -34,8 +34,7 @@ public class JPAGeneroPersonaService implements GeneroPersonaService{
 			return emquery.getResultList();
 		}finally{
 			em.close();
-		}
-				
+		}				
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import persistence.servicefactory.ProductoTiendaService;
 import persistence.servicefactory.ServiceFactory;
 import persistence.servicefactory.TiendaService;
 import persistence.servicefactory.TipoclienteService;
+import persistence.servicefactory.TipocomprobanteService;
 import persistence.servicefactory.TipodocumentoService;
 import persistence.servicefactory.UbigeoDepaService;
 import persistence.servicefactory.UbigeoDistService;
@@ -77,6 +78,11 @@ public class JPAServiceFactory extends ServiceFactory{
 	@Override
 	public PedidoService obtenerPedidoService() {
 		return new JPAPedidoService();
+	}
+
+	@Override
+	public TipocomprobanteService obtenerTipocomprobanteService() {
+		return new JPATipocomprobanteService();
 	}
 
 	

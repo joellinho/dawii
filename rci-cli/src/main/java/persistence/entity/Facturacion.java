@@ -16,6 +16,7 @@ public class Facturacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(length=100)
 	private String id;
 
 	private String deleted;
