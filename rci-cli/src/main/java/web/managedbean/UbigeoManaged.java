@@ -228,7 +228,5 @@ public class UbigeoManaged {
 
 	public void setUbiSelect(Ubigeo ubiSelect) {
 		this.ubiSelect = ubiSelect;
-	}
-	
-	
+	}	
 }

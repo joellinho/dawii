@@ -148,11 +148,16 @@
     						
      			<p:row>  
         			<p:column>	
-        				   <p:commandButton id="btnDefaultUbi" value="Ubigeo Default"  
-	                    					action="#{pedidoManaged.obtenerUbigeoDefault}" 
-	                    					update="cboUbiDepa cboUbiProv cboUbiDist txtDireccion" />
+        				   Obtener dirección por defecto
+        			</p:column>
+        			
+        			<p:column>
+        				 <p:commandLink id="ajax" update="cboUbiDepa cboUbiProv cboUbiDist txtDireccion" actionListener="#{pedidoManaged.obtenerUbigeoDefault}" style="margin-right:20px;">  
+        					<h:outputText value="Dirección" />  
+  					  	 </p:commandLink>  
         			</p:column>
        			</p:row>
+       			
        			
        			<p:row>  
         			<p:column>	

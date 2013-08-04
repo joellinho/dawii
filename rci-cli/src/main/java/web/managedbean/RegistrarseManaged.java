@@ -56,7 +56,7 @@ public class RegistrarseManaged {
 	}
 	
 	// Insertar Usuario
-	public String insertarUsuario(ActionEvent action){
+	public String insertarUsuario(){
 		//TODO: Validaciones del usuario.
 			
 		
@@ -94,7 +94,7 @@ public class RegistrarseManaged {
 		
 		if (loginPassword.equals(loginPassword2)) {
 			cliServ.insertar(cli);
-			return "successReg";
+			return "/auth/successReg";
 		}
 	    else{
 	    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Mensaje", "Las Contraseñas no son Iguales."));

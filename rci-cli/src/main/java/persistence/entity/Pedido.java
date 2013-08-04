@@ -40,7 +40,7 @@ public class Pedido implements Serializable {
 
 	private String referenciadirdestino;
 
-	private byte ultimopedido;
+	private int ultimopedido;
 
 	//bi-directional many-to-one association to Detallepedido
 	@OneToMany(mappedBy="pedido", cascade=CascadeType.PERSIST)
@@ -145,12 +145,12 @@ public class Pedido implements Serializable {
 		this.referenciadirdestino = referenciadirdestino;
 	}
 
-	public byte getUltimopedido() {
+	public int getUltimopedido() {
 		return this.ultimopedido;
 	}
 
-	public void setUltimopedido(byte ultimopedido) {
-		this.ultimopedido = ultimopedido;
+	public void setUltimopedido(int i) {
+		this.ultimopedido = i;
 	}
 
 	public List<Detallepedido> getDetallepedidos() {

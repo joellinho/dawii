@@ -16,6 +16,9 @@ public class SelectData {
 	}
 
 	public void ListarUbigeo(){
+		PedidoService ps = sf.obtenerPedidoService();
+		ps.listarPedidos();
+		
 		UbigeoService us = sf.obtenerUbigeoService();
 		
 		List<Ubigeo> listaUbigeo = us.listarUbigeo();

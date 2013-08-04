@@ -12,9 +12,10 @@
                 <h:outputLabel>Export Report</h:outputLabel>
                  <h:selectOneRadio value="#{reportsBean.exportOption}">
                     <f:selectItem itemValue="PDF" itemLabel="PDF"/>
+                    <!-- 
                     <f:selectItem itemValue="HTML" itemLabel="HTML"/>
                     <f:selectItem itemValue="EXCEL" itemLabel="EXCEL"/>
-                    <f:selectItem itemValue="RTF" itemLabel="RTF"/>
+                    <f:selectItem itemValue="RTF" itemLabel="RTF"/> -->
                 </h:selectOneRadio>
                 <h:commandButton  action="#{reportsBean.execute}" value="Get Report" />
  
