@@ -25,8 +25,13 @@
 		 					Usuario:
 		 				</p:column>
 		 				<p:column> 
-		 					<p:inputText id="login" value="#{loginManaged.user}" />
+		 					<p:inputText id="login" value="#{loginManaged.user}" required="true">
+		 					<p:ajax update="msgLogin" event="keyup" />
+		 					</p:inputText>
 		 				</p:column>   
+		 				<p:column>
+		 				<p:message for="login" id="msgLogin" display="icon"/>
+		 				</p:column>
 	 				</p:row> 	
 		 				
 	 				<p:row>
@@ -34,8 +39,13 @@
 		 					Password:
 		 				</p:column>
 		 				<p:column> 
-		 					<p:password id="password" value="#{loginManaged.pass}" /> 
+		 					<p:password id="password" value="#{loginManaged.pass}" required="true">
+		 					<p:ajax update="msgPassword" event="keyup" />
+		 					</p:password> 
 		 				</p:column>   
+		 				<p:column>
+		 				<p:message for="password" id="msgPassword" display="icon"/>
+		 				</p:column>
 	 				</p:row> 	
 	 				
 	                <p:row>

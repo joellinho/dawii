@@ -4,14 +4,13 @@
     xmlns:f="http://java.sun.com/jsf/core" 
     xmlns:p="http://primefaces.org/ui"
     xmlns:ui="http://java.sun.com/jsf/facelets">
-      
-      
+            
     <h:body> 
    	<ui:composition template="/template/layout.xhtml">
  		<ui:define name="content">
 
 
-		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+		<p:messages id="messages" autoUpdate="true" closable="true" />
 			<table style="width:100%">
 			
  			<tr>
@@ -42,57 +41,86 @@
  				
  				<p:row>
 	 				<p:column>  
-	 					Apellido
+	 					Apellido *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtApellido" value="#{registrarseManaged.apellido}" />
-	 				</p:column>   
+	 					<p:inputText id="Apellido" value="#{registrarseManaged.apellido}" required="true">
+	 					  <!-- <f:validateLength minimum="3" /> -->
+	 					  <p:ajax update="msgApellido" event="keyup" />
+	 					</p:inputText>
+	 				</p:column>
+	 				<p:column>
+	 				<p:message for="Apellido" id="msgApellido" display="icon"/>
+	 				</p:column>
+	 				    
  				</p:row>
  			
  				<p:row>
 	 				<p:column>  
-	 					Nombre
+	 					Nombre *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtNombre" value="#{registrarseManaged.nombre}"/> 
+	 					<p:inputText id="Nombre" value="#{registrarseManaged.nombre}" required="true">
+	 					<f:validateLength minimum="3" />
+	 					<p:ajax update="msgNombre" event="keyup" />
+	 					</p:inputText> 
+	 				</p:column>
+	 				<p:column>
+	 				<p:message for="Nombre" id="msgNombre" display="icon"/>
 	 				</p:column>   
  				</p:row>								
 				 				 				
 				<p:row>
 	 				<p:column>  
-	 					Correo Electronico
+	 					Correo Electronico *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtEmail" value="#{registrarseManaged.email}" required="true">
+	 					<p:inputText id="Email" value="#{registrarseManaged.email}" required="true">
  							<f:validateLength minimum="5" /> 
+ 							<p:ajax update="msgEmail" event="keyup" />
  						</p:inputText>
-	 				</p:column>   
+	 				</p:column> 
+	 				<p:column>
+	 				<p:message for="Email" id="msgEmail" display="icon"/>
+	 				</p:column>  
  				</p:row>		
  			
  				<p:row>
 	 				<p:column>  
-	 					Crea una Contraseña
+	 					Crea una Contraseña * (max. 5)
 	 				</p:column>
 	 				<p:column> 
-	 					<p:password id="txtPassword" value="#{registrarseManaged.loginPassword}"/>
+	 					<p:password id="Password" value="#{registrarseManaged.loginPassword}" required="true">
+	 						 <f:validateLength minimum="3" maximum="5"/>
+	 						 <p:ajax update="msgPassword" event="keyup" />
+	 					</p:password>
 	 				</p:column>   
+	 				<p:column>
+	 				<p:message for="Password" id="msgPassword" display="icon"/>
+	 				</p:column>
  				</p:row>		
  			
  				<p:row>
 	 				<p:column>  
-	 					Vuelve a Escribir la Contraseña
+	 					Vuelve a Escribir la Contraseña *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:password id="txtPassword2" value="#{registrarseManaged.loginPassword2}"/>
+	 					<p:password id="Password2" value="#{registrarseManaged.loginPassword2}" required="true">
+	 						<f:validateLength minimum="3" maximum="5"/>
+	 						<p:ajax update="msgPassword2" event="keyup" />
+	 					</p:password>
 	 				</p:column>   
+	 				<p:column>
+	 				<p:message for="Password2" id="msgPassword2" display="icon"/>
+	 				</p:column>
  				</p:row>		
  			    	
  			    <p:row>
 	 				<p:column>  
-	 					Tipo de Documento de Identidad
+	 					Tipo de Documento de Identidad *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:selectOneMenu id="cboTipoDocumento" value="#{registrarseManaged.tipoDocSeleccionado}">
+	 					<p:selectOneMenu id="cboTipoDocumento" value="#{registrarseManaged.tipoDocSeleccionado}" >
                 	<f:selectItems value="#{registrarseManaged.listaTipoDoc}" 
                 				   var="tipoDoc"
                 				   itemLabel="#{tipoDoc.descripcion}"                				   
@@ -104,29 +132,47 @@
  			    	
  			    <p:row>
 	 				<p:column>  
-	 					Número Documento de Identidad
+	 					Número Documento de Identidad *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtNumeroDocumentoIdentidad" value="#{registrarseManaged.numeroDocumentoIdentidad}"/>
+	 					<p:inputText id="NumeroDocumentoIdentidad" value="#{registrarseManaged.numeroDocumentoIdentidad}" required="true">
+	 						<f:validateLength maximum="8" />
+	 						<p:ajax update="msgNumeroDocumentoIdentidad" event="keyup" />
+	 					</p:inputText>
 	 				</p:column>   
+	 				<p:column>
+	 				<p:message for="NumeroDocumentoIdentidad" id="msgNumeroDocumentoIdentidad" display="icon"/>
+	 				</p:column>
  				</p:row>	
  								
  				 <p:row>
 	 				<p:column>  
-	 					Celular
+	 					Celular *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:keyboard id="txtTelefonoCelular" value="#{registrarseManaged.telefonoCelular}" keypadOnly="true"/>
-	 				</p:column>   
+	 					<p:keyboard id="TelefonoCelular" value="#{registrarseManaged.telefonoCelular}" keypadOnly="true" required="true">
+	 						<f:validateLength maximum="9" />
+	 						<p:ajax update="msgTelefonoCelular" event="keyup" />
+	 					</p:keyboard>
+	 				</p:column>  
+	 				<p:column>
+	 				<p:message for="TelefonoCelular" id="msgTelefonoCelular" display="icon"/>
+	 				</p:column> 
  				</p:row>	
  				
  				<p:row>
 	 				<p:column>  
-	 					Telefono
+	 					Telefono *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtTelefonoPrincipal" value="#{registrarseManaged.telefonoPrincipal}"/>
+	 					<p:inputText id="TelefonoPrincipal" value="#{registrarseManaged.telefonoPrincipal}" required="true">
+	 						<f:validateLength maximum="7" />
+	 						<p:ajax update="msgTelefonoPrincipal" event="keyup" />
+	 					</p:inputText>
 	 				</p:column>   
+	 				<p:column>
+	 				<p:message for="TelefonoPrincipal" id="msgTelefonoPrincipal" display="icon"/>
+	 				</p:column>
  				</p:row> 				
  				
  				<!-- Datos de la Empresa -->
@@ -142,7 +188,7 @@
 	 					RUC
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtRuc" value="#{registrarseManaged.rucEmpresa}"/>
+	 					<p:inputText id="Ruc" value="#{registrarseManaged.rucEmpresa}"/>
 	 				</p:column>   
  				</p:row> 	
  				
@@ -151,7 +197,7 @@
 	 					Razón Social
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtRazonSocial" value="#{registrarseManaged.razonSocial}"/>
+	 					<p:inputText id="RazonSocial" value="#{registrarseManaged.razonSocial}"/>
 	 				</p:column>   
  				</p:row> 	
  				
@@ -223,17 +269,23 @@
     			
     			<p:row>  
         			<p:column>	
-        				Dirección Destino:		  
+        				Dirección Destino *		  
         			</p:column>
         			<p:column>	
-        				  <p:inputText id="txtDireccion" value="#{pedidoManaged.direccionDestino}" />
+        				  <p:inputText id="Direccion" value="#{pedidoManaged.direccionDestino}" required="true">
+        				  	<f:validateLength minimum="7" />
+	 						<p:ajax update="msgDireccion" event="keyup" />
+        				  </p:inputText>
+        			</p:column>
+        			<p:column>
+        			<p:message for="Direccion" id="msgDireccion" display="icon"/>
         			</p:column>
        			</p:row>	
        			
     			<p:row>
 	 				<p:column colspan="2">  
 	 					<p:commandButton id="btnTest" value="Registrar" 
- 				 	    action="#{registrarseManaged.insertarUsuario}"/>
+ 				 	    action="#{registrarseManaged.insertarUsuario}" />
 	 				</p:column>
 
  				</p:row>			 	    
