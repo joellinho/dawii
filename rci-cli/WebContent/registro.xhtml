@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+      
+    <h:body> 
+   	<ui:composition template="/template/layout.xhtml">
+ 		<ui:define name="content">
+
+
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			<table style="width:100%">
+			
+ 			<tr>
+ 		
+ 			<td width="70%" >
+			<h:form id="formRegistrar">
+  			<p:panelGrid style="margin-top:20px">   
+ 				<f:facet name="header">
+ 					<p:row>  
+            			<p:column colspan="2">Registrarse</p:column>  
+       				</p:row>       				
+ 				</f:facet>
+ 				
+ 				<p:row>  
+        			<p:column colspan="2" >	  
+            			Registrate si no posees una cuenta.
+        			</p:column>  
+    			</p:row>
+ 				
+ 				
+ 				<!-- Datos de Personales -->
+ 				
+ 				<p:row>  
+        			<p:column colspan="2" styleClass="ui-widget-header">	  
+            			Datos Personales
+        			</p:column>  
+    			</p:row>  
+ 				
+ 				<p:row>
+	 				<p:column>  
+	 					Apellido
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtApellido" value="#{registrarseManaged.apellido}" />
+	 				</p:column>   
+ 				</p:row>
+ 			
+ 				<p:row>
+	 				<p:column>  
+	 					Nombre
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtNombre" value="#{registrarseManaged.nombre}"/> 
+	 				</p:column>   
+ 				</p:row>								
+				 				 				
+				<p:row>
+	 				<p:column>  
+	 					Correo Electronico
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtEmail" value="#{registrarseManaged.email}" required="true">
+ 							<f:validateLength minimum="5" /> 
+ 						</p:inputText>
+	 				</p:column>   
+ 				</p:row>		
+ 			
+ 				<p:row>
+	 				<p:column>  
+	 					Crea una Contraseña
+	 				</p:column>
+	 				<p:column> 
+	 					<p:password id="txtPassword" value="#{registrarseManaged.loginPassword}"/>
+	 				</p:column>   
+ 				</p:row>		
+ 			
+ 				<p:row>
+	 				<p:column>  
+	 					Vuelve a Escribir la Contraseña
+	 				</p:column>
+	 				<p:column> 
+	 					<p:password id="txtPassword2" value="#{registrarseManaged.loginPassword2}"/>
+	 				</p:column>   
+ 				</p:row>		
+ 			    	
+ 			    <p:row>
+	 				<p:column>  
+	 					Tipo de Documento de Identidad
+	 				</p:column>
+	 				<p:column> 
+	 					<p:selectOneMenu id="cboTipoDocumento" value="#{registrarseManaged.tipoDocSeleccionado}">
+                	<f:selectItems value="#{registrarseManaged.listaTipoDoc}" 
+                				   var="tipoDoc"
+                				   itemLabel="#{tipoDoc.descripcion}"                				   
+                	/>  
+                	<f:converter converterId="tipoDocumentoConverter" />
+            	</p:selectOneMenu>
+	 				</p:column>   
+ 				</p:row>		
+ 			    	
+ 			    <p:row>
+	 				<p:column>  
+	 					Número Documento de Identidad
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtNumeroDocumentoIdentidad" value="#{registrarseManaged.numeroDocumentoIdentidad}"/>
+	 				</p:column>   
+ 				</p:row>	
+ 								
+ 				 <p:row>
+	 				<p:column>  
+	 					Celular
+	 				</p:column>
+	 				<p:column> 
+	 					<p:keyboard id="txtTelefonoCelular" value="#{registrarseManaged.telefonoCelular}" keypadOnly="true"/>
+	 				</p:column>   
+ 				</p:row>	
+ 				
+ 				<p:row>
+	 				<p:column>  
+	 					Telefono
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtTelefonoPrincipal" value="#{registrarseManaged.telefonoPrincipal}"/>
+	 				</p:column>   
+ 				</p:row> 				
+ 				
+ 				<!-- Datos de la Empresa -->
+ 				
+			 	<p:row>  
+        			<p:column colspan="2" styleClass="ui-widget-header">	  
+            			Datos de Empresa
+        			</p:column>  
+    			</p:row>  
+ 				
+ 				<p:row>
+	 				<p:column>  
+	 					RUC
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtRuc" value="#{registrarseManaged.rucEmpresa}"/>
+	 				</p:column>   
+ 				</p:row> 	
+ 				
+ 				<p:row>
+	 				<p:column>  
+	 					Razón Social
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtRazonSocial" value="#{registrarseManaged.razonSocial}"/>
+	 				</p:column>   
+ 				</p:row> 	
+ 				
+ 				<!-- Direccion Usual-->
+ 				
+			 	<p:row>  
+        			<p:column colspan="2" styleClass="ui-widget-header">	  
+            			Dirección Frecuente
+        			</p:column>  
+    			</p:row>  
+ 				
+ 				<!-- Ubigeo -->		
+    			<p:row>
+					<p:column>
+						Departamento	  
+					</p:column>  
+        			<p:column>	  
+            			<p:selectOneMenu id="cboUbiDepa" value="#{registrarseManaged.ubigeoManaged.ubiDepaSelect}">
+            			<f:selectItem itemLabel="Seleccionar" itemValue="" />  
+	                		<f:selectItems value="#{registrarseManaged.ubigeoManaged.listaUbiDepa}" 
+	                				   var="ubiDepa"
+	                				   itemLabel="#{ubiDepa.udnombre}"                				   
+	                		/>  
+	                		
+	                		<p:ajax update="cboUbiProv"  
+                        		listener="#{registrarseManaged.ubigeoManaged.handleDepaChange}" />  
+	                		<f:converter converterId="ubigeoDepaConverter" />
+            			</p:selectOneMenu>
+        			</p:column>
+    			</p:row>
+    			
+    			<p:row>
+					<p:column>
+						Provincia	  
+					</p:column>  
+        			<p:column>	  
+            			<p:selectOneMenu id="cboUbiProv" value="#{registrarseManaged.ubigeoManaged.ubiProvSelect}">
+            				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
+	                		<f:selectItems value="#{registrarseManaged.ubigeoManaged.listaUbiProv}" 
+	                				   var="ubiProv"
+	                				   itemLabel="#{ubiProv.upnombre}"                				   
+	                		/>  
+	                		<p:ajax update="cboUbiDist"  
+                        		listener="#{registrarseManaged.ubigeoManaged.handleProvChange}" />  
+	                		<f:converter converterId="ubigeoProvConverter" />
+            			</p:selectOneMenu>
+        			</p:column>
+    			</p:row>
+    			
+    			<p:row>
+					<p:column>
+						Distrito	  
+					</p:column>  
+        			<p:column>	  
+            			<p:selectOneMenu id="cboUbiDist" value="#{registrarseManaged.ubigeoManaged.ubiDistSelect}">
+            				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
+	                		<f:selectItems value="#{registrarseManaged.ubigeoManaged.listaUbiDist}" 
+	                				   var="ubiDist"
+	                				   itemLabel="#{ubiDist.udinombre}"                				   
+	                		/>
+	                		<p:ajax 	                			
+                        		listener="#{registrarseManaged.ubigeoManaged.handleDistChange}" />  
+	                		<f:converter converterId="ubigeoDistConverter" />
+            			</p:selectOneMenu>
+        			</p:column>
+    			</p:row>
+    			
+    			<!-- Dirección -->
+    			
+    			<p:row>  
+        			<p:column>	
+        				Dirección Destino:		  
+        			</p:column>
+        			<p:column>	
+        				  <p:inputText id="txtDireccion" value="#{pedidoManaged.direccionDestino}" />
+        			</p:column>
+       			</p:row>	
+       			
+    			<p:row>
+	 				<p:column colspan="2">  
+	 					<p:commandButton id="btnTest" value="Registrar" 
+ 				 	    action="#{registrarseManaged.insertarUsuario}"/>
+	 				</p:column>
+
+ 				</p:row>			 	    
+ 			</p:panelGrid>
+ 			</h:form>
+ 		
+ 		
+			</td>
+			</tr>
+			</table>
+			
+
+		</ui:define>
+    	</ui:composition> 
+    </h:body>
+ 
+</html>

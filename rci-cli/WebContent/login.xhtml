@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:body> 
+    	<ui:composition template="/template/layout.xhtml">
+ 		<ui:define name="content">
+
+
+		<td width="30%" align="center" valign="top">
+				<h:form id="frmLogin">  
+   
+				<p:panelGrid style="margin-top:20px">
+					<f:facet name="header">
+	 					<p:row>  
+	            			<p:column colspan="2">Ingresar</p:column>  
+	       				</p:row>       				
+	 				</f:facet>
+				   
+			       <p:row>
+		 				<p:column>  
+		 					Usuario:
+		 				</p:column>
+		 				<p:column> 
+		 					<p:inputText id="login" value="#{loginManaged.user}" />
+		 				</p:column>   
+	 				</p:row> 	
+		 				
+	 				<p:row>
+		 				<p:column>  
+		 					Password:
+		 				</p:column>
+		 				<p:column> 
+		 					<p:password id="password" value="#{loginManaged.pass}" /> 
+		 				</p:column>   
+	 				</p:row> 	
+	 				
+	                <p:row>
+		 				<p:column colspan="2">  
+		 					<p:commandButton id="loginButton" value="Autenticar"  
+	                    					 action="#{loginManaged.autenticar}" ajax="false" />
+		 				</p:column>		 				
+	 				</p:row> 	    
+	
+	            
+           		</p:panelGrid>
+	          	</h:form>
+             
+			</td>
+		  	
+ 	
+ 		</ui:define>
+    	</ui:composition> 
+    </h:body>
+ 
+</html>
+
+  

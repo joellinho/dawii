@@ -4,16 +4,21 @@
     xmlns:f="http://java.sun.com/jsf/core" 
     xmlns:p="http://primefaces.org/ui"
     xmlns:ui="http://java.sun.com/jsf/facelets">
-
+	
     <h:body> 
-    	<ui:composition template="/template/layout.xhtml">
- 		<ui:define name="content">
-
+    	
+				<SCRIPT type="text/javascript">
+				
+				function redireccionar() 
+				{
+				location.href="login.xhtml"
+				} 
+				setTimeout ("redireccionar()", 2000);
+				
+				</SCRIPT>
 			
-			Registrado con exito
-			
- 		</ui:define>
-    	</ui:composition> 
+			<h2>Registrado con exito</h2>
+			 
     </h:body>
  
 </html>

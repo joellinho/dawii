@@ -94,6 +94,7 @@ public class RegistrarseManaged {
 		
 		if (loginPassword.equals(loginPassword2)) {
 			cliServ.insertar(cli);
+			//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro exitoso.",""));
 			return "/auth/successReg";
 		}
 	    else{
