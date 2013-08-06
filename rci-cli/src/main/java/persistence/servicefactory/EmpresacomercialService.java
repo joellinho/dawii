@@ -6,5 +6,5 @@ import persistence.entity.Empresacomercial;
 
 public interface EmpresacomercialService {
 
-	public List<Empresacomercial> listar();	
+	public List<Empresacomercial> listarConProductos();	
 }

@@ -7,16 +7,45 @@
       
     <h:body> 
    	<ui:composition template="/template/layout.xhtml">
- 		<ui:define name="content">
+ 		<ui:define name="content">	
 
+		<h:form id="frmListarProductosGlobal">  
+		    <p:dataTable id="tblProductosEmpresa" var="empresa" value="#{productosEmpresaManaged.listaEmpresa}">  
+		  
+		        <f:facet name="header">  
+		            Nuestros Productos
+		        </f:facet>  
+		  
+		        <p:columnGroup type="header">  
+		            <p:row>  
+		                <p:column rowspan="2" headerText="Franquicia" />  
 
-		<h1>BIENVENIDO, USTED PUEDE :</h1>
-		
-		<h:link value="REGISTRARSE" outcome="registro"></h:link>
-		
-		<h3>O</h3>
-		
-		<h:link value="LOGEARSE" outcome="login"></h:link>   
+		                <p:column headerText="Producto" />  
+		                <p:column headerText="Precio" />  
+		            </p:row>  
+		        </p:columnGroup>  
+		  
+		        <p:subTable var="producto" value="#{empresa.productoempresas}">  
+		            <f:facet name="header">  
+		             	#{empresa.nombrecomercial}   
+		            </f:facet>  
+		  
+		            <p:column>  
+		                  
+		            </p:column>  
+		  
+		            <p:column>  
+		                #{producto.descripcion}  
+		            </p:column>  
+		  
+		            <p:column>  
+		                #{producto.precioventa}  
+		            </p:column>  
+		  
+		        </p:subTable>  
+		    </p:dataTable>  
+		</h:form>  
+                  
 
 		</ui:define>
     	</ui:composition> 

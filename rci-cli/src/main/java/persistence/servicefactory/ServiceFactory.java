@@ -39,6 +39,7 @@ public abstract class ServiceFactory {
 	public abstract ProductoTiendaService obtenerProductoTiendaService();
 	public abstract PedidoService obtenerPedidoService();
 	public abstract TipocomprobanteService obtenerTipocomprobanteService();
+	public abstract EmpresacomercialService obtenerEmpresacomercialService();
 	
 	/**
 	 * Enumeración que lista las posibles implementaciones del DAOFactory

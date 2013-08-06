@@ -2,6 +2,7 @@ package persistence.jpa;
 
 import persistence.servicefactory.ClienteService;
 import persistence.servicefactory.EmpresaClienteService;
+import persistence.servicefactory.EmpresacomercialService;
 import persistence.servicefactory.GeneroPersonaService;
 import persistence.servicefactory.PedidoService;
 import persistence.servicefactory.ProductoTiendaService;
@@ -83,6 +84,11 @@ public class JPAServiceFactory extends ServiceFactory{
 	@Override
 	public TipocomprobanteService obtenerTipocomprobanteService() {
 		return new JPATipocomprobanteService();
+	}
+
+	@Override
+	public EmpresacomercialService obtenerEmpresacomercialService() {
+		return new JPAEmpresaComercialService();
 	}
 
 	

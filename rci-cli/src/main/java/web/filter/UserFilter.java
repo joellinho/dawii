@@ -1,6 +1,7 @@
 package web.filter;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -34,13 +35,17 @@ public class UserFilter implements Filter {
 		FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 	    HttpServletResponse httpResponse = (HttpServletResponse) response;
-	        
+	    
+	    // Guardamos la URL 
+	    String requestURI = httpRequest.getRequestURI();
+	    
     	LoginManaged lm = (LoginManaged) httpRequest.getSession().getAttribute("loginManaged");
     	 
     	if (lm != null && lm.isLoggedIn()) {
     		chain.doFilter(request, response);
 	    } else {            
-	        httpResponse.sendRedirect(httpRequest.getContextPath() + "/auth/loginOrRegister.xhtml"); 
+	    	
+	        httpResponse.sendRedirect(httpRequest.getContextPath() + "/auth/login.xhtml?from=" + URLEncoder.encode(requestURI, "UTF-8"));
 	    } 
 	}
 

@@ -1,5 +1,7 @@
 package web.managedbean;
 
+import java.io.IOException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -20,6 +22,7 @@ public class LoginManaged implements UbigeoSelectedListener {
 	private String user;
 	private String pass;
 	private Cliente clienteLogeado;
+	private String from;
 	
 	// Managed Bean Ubigeo
 	@ManagedProperty(value="#{ubigeoManaged}")
@@ -51,13 +54,31 @@ public class LoginManaged implements UbigeoSelectedListener {
 	
 	public String autenticar(){
 		this.clienteLogeado = cliServ.buscarPorUserPass(user, pass);
-		if(clienteLogeado!=null){	
-			return "/mainUsuario";
+		if(clienteLogeado!=null){
+			
+			try {
+				if(this.from!=null){
+					FacesContext.getCurrentInstance().getExternalContext().redirect(from);
+					return null;
+				}
+				else{
+					return "/main";
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
 		}
 		else{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Mensaje", "Usuario y/o Contraseña incorrectos."));  
-			return null;			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Mensaje", "Usuario y/o Contraseña incorrectos."));
+			return null;
 		}
+	}
+	
+	public String salir(){
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "/main";
 	}
 	
 	public void modificar(){
@@ -75,7 +96,7 @@ public class LoginManaged implements UbigeoSelectedListener {
 	}
 
 	public void setUbigeoManaged(UbigeoManaged ubigeoManaged) {
-
+		
 		if(this.ubigeoManaged!=null){
 			this.ubigeoManaged.removeUbigeoSelectedEventListener(this);
 		}
@@ -90,5 +111,13 @@ public class LoginManaged implements UbigeoSelectedListener {
 			this.clienteLogeado.setUbigeo(e.getUbigeoSeleccionado());
 		}
 		
+	}
+
+	public String getFrom() {
+		return from;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
 	}
 }

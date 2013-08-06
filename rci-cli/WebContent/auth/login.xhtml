@@ -28,10 +28,8 @@
 		 					<p:inputText id="login" value="#{loginManaged.user}" required="true">
 		 					<p:ajax update="msgLogin" event="keyup" />
 		 					</p:inputText>
+		 					<p:message for="login" id="msgLogin" display="icon"/>
 		 				</p:column>   
-		 				<p:column>
-		 				<p:message for="login" id="msgLogin" display="icon"/>
-		 				</p:column>
 	 				</p:row> 	
 		 				
 	 				<p:row>
@@ -41,22 +39,24 @@
 		 				<p:column> 
 		 					<p:password id="password" value="#{loginManaged.pass}" required="true">
 		 					<p:ajax update="msgPassword" event="keyup" />
-		 					</p:password> 
+		 					</p:password>
+		 					<p:message for="password" id="msgPassword" display="icon"/> 
 		 				</p:column>   
-		 				<p:column>
-		 				<p:message for="password" id="msgPassword" display="icon"/>
-		 				</p:column>
 	 				</p:row> 	
 	 				
 	                <p:row>
-		 				<p:column colspan="2">  
+	                	<p:column>
+	                		<a href="/rci-cli/auth/registro.xhtml">¿No tienes una cuenta?</a>
+	                	</p:column>
+		 				<p:column>  
 		 					<p:commandButton id="loginButton" value="Autenticar"  
 	                    					 action="#{loginManaged.autenticar}" ajax="false" />
 		 				</p:column>		 				
 	 				</p:row> 	    
-	
+					
 	            
            		</p:panelGrid>
+           			<p:messages id="messages" autoUpdate="true" closable="true" />
 	          	</h:form>
              
 			</td>
