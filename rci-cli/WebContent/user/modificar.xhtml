@@ -46,7 +46,7 @@
 	 					Apellido
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtApellido" value="#{loginManaged.clienteLogeado.apellido}" />
+	 					<p:inputText id="txtApellido" value="#{modificarClienteManaged.clienteLogeadoCopy.apellido}" />
 	 				</p:column>   
  				</p:row>
  			
@@ -55,7 +55,7 @@
 	 					Nombre
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtNombre" value="#{loginManaged.clienteLogeado.nombre}"/> 
+	 					<p:inputText id="txtNombre" value="#{modificarClienteManaged.clienteLogeadoCopy.nombre}"/> 
 	 				</p:column>   
  				</p:row>								
 				 				 				
@@ -65,7 +65,7 @@
 	 				</p:column>
 	 					 				
 	 				<p:column>
-	 					<h:outputLabel for="txtEmail" value="#{loginManaged.clienteLogeado.email}"/> 
+	 					<h:outputLabel for="txtEmail" value="#{modificarClienteManaged.clienteLogeadoCopy.email}"/> 
 	 				</p:column>   
  				</p:row>		
  			
@@ -77,8 +77,8 @@
 	 					Tipo de Documento de Identidad
 	 				</p:column>
 	 				<p:column> 
-	 					<p:selectOneMenu id="cboTipoDocumento" value="#{loginManaged.clienteLogeado.tipodocumento}">
-	                	<f:selectItems value="#{registrarseManaged.listaTipoDoc}" 
+	 					<p:selectOneMenu id="cboTipoDocumento" value="#{modificarClienteManaged.clienteLogeadoCopy.tipodocumento}">
+	                	<f:selectItems value="#{modificarClienteManaged.listaTipoDoc}" 
 	                				   var="tipoDoc"
 	                				   itemLabel="#{tipoDoc.descripcion}"                				   
 	                	/>  
@@ -92,7 +92,7 @@
 	 					Número Documento de Identidad
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtNumeroDocumentoIdentidad" value="#{loginManaged.clienteLogeado.numeroDocumentoIdentidad}"/>
+	 					<p:inputText id="txtNumeroDocumentoIdentidad" value="#{modificarClienteManaged.clienteLogeadoCopy.numeroDocumentoIdentidad}"/>
 	 				</p:column>   
  				</p:row>	
  								
@@ -101,7 +101,7 @@
 	 					Celular
 	 				</p:column>
 	 				<p:column> 
-	 					<p:keyboard id="txtTelefonoCelular" value="#{loginManaged.clienteLogeado.telefonoCelular}" keypadOnly="true"/>
+	 					<p:keyboard id="txtTelefonoCelular" value="#{modificarClienteManaged.clienteLogeadoCopy.telefonoCelular}" keypadOnly="true"/>
 	 				</p:column>   
  				</p:row>	
  				
@@ -110,7 +110,7 @@
 	 					Telefono
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtTelefonoPrincipal" value="#{loginManaged.clienteLogeado.telefonoPrincipal}"/>
+	 					<p:inputText id="txtTelefonoPrincipal" value="#{modificarClienteManaged.clienteLogeadoCopy.telefonoPrincipal}"/>
 	 				</p:column>   
  				</p:row> 				
  				
@@ -128,15 +128,15 @@
 						Departamento	  
 					</p:column>  
         			<p:column>	  
-            			<p:selectOneMenu id="cboUbiDepa" value="#{loginManaged.ubigeoManaged.ubiDepaSelect}">
+            			<p:selectOneMenu id="cboUbiDepa" value="#{modificarClienteManaged.ubigeoManaged.ubiDepaSelect}">
             			<f:selectItem itemLabel="Seleccionar" itemValue="" />  
-	                		<f:selectItems value="#{loginManaged.ubigeoManaged.listaUbiDepa}" 
+	                		<f:selectItems value="#{modificarClienteManaged.ubigeoManaged.listaUbiDepa}" 
 	                				   var="ubiDepa"
 	                				   itemLabel="#{ubiDepa.udnombre}"                				   
 	                		/>  
 	                		
 	                		<p:ajax update="cboUbiProv"  
-                        		listener="#{loginManaged.ubigeoManaged.handleDepaChange}" />  
+                        		listener="#{modificarClienteManaged.ubigeoManaged.handleDepaChange}" />  
 	                		<f:converter converterId="ubigeoDepaConverter" />
             			</p:selectOneMenu>
         			</p:column>
@@ -147,14 +147,14 @@
 						Provincia	  
 					</p:column>  
         			<p:column>	  
-            			<p:selectOneMenu id="cboUbiProv" value="#{loginManaged.ubigeoManaged.ubiProvSelect}">
+            			<p:selectOneMenu id="cboUbiProv" value="#{modificarClienteManaged.ubigeoManaged.ubiProvSelect}">
             				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
-	                		<f:selectItems value="#{loginManaged.ubigeoManaged.listaUbiProv}" 
+	                		<f:selectItems value="#{modificarClienteManaged.ubigeoManaged.listaUbiProv}" 
 	                				   var="ubiProv"
 	                				   itemLabel="#{ubiProv.upnombre}"                				   
 	                		/>  
 	                		<p:ajax update="cboUbiDist"  
-                        		listener="#{loginManaged.ubigeoManaged.handleProvChange}" />  
+                        		listener="#{modificarClienteManaged.ubigeoManaged.handleProvChange}" />  
 	                		<f:converter converterId="ubigeoProvConverter" />
             			</p:selectOneMenu>
         			</p:column>
@@ -165,14 +165,14 @@
 						Distrito	  
 					</p:column>  
         			<p:column>	  
-            			<p:selectOneMenu id="cboUbiDist" value="#{loginManaged.ubigeoManaged.ubiDistSelect}">
+            			<p:selectOneMenu id="cboUbiDist" value="#{modificarClienteManaged.ubigeoManaged.ubiDistSelect}">
             				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
-	                		<f:selectItems value="#{loginManaged.ubigeoManaged.listaUbiDist}" 
+	                		<f:selectItems value="#{modificarClienteManaged.ubigeoManaged.listaUbiDist}" 
 	                				   var="ubiDist"
 	                				   itemLabel="#{ubiDist.udinombre}"                				   
 	                		/>
 	                		<p:ajax 	                			
-                        		listener="#{loginManaged.ubigeoManaged.handleDistChange}" />  
+                        		listener="#{modificarClienteManaged.ubigeoManaged.handleDistChange}" />  
 	                		<f:converter converterId="ubigeoDistConverter" />
             			</p:selectOneMenu>
         			</p:column>
@@ -185,16 +185,43 @@
         				Dirección Destino:		  
         			</p:column>
         			<p:column>	
-        				  <p:inputText id="txtDireccion" value="#{loginManaged.clienteLogeado.direccion}" />
+        				  <p:inputText id="txtDireccion" value="#{modificarClienteManaged.clienteLogeadoCopy.direccion}" />
         			</p:column>
        			</p:row>	
        			
-    			<p:row>
+ 				
+				<!-- Datos de la Empresa --> 				
+			 	<p:row>  
+        			<p:column colspan="2" styleClass="ui-widget-header">	  
+            			Datos de Empresa
+        			</p:column>  
+    			</p:row>  
+ 				
+ 				<p:row>
+	 				<p:column>  
+	 					RUC
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="Ruc" value="#{modificarClienteManaged.rucEmpresa}"/>
+	 				</p:column>   
+ 				</p:row> 	
+ 				
+ 				<p:row>
+	 				<p:column>  
+	 					Razón Social
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="RazonSocial" value="#{modificarClienteManaged.razonSocial}"/>
+	 				</p:column>   
+ 				</p:row>
+ 				
+ 				<p:row>
 	 				<p:column colspan="2">  
-	 					<p:commandButton id="btnModificar" value="Modificar" ajax="false" action="#{loginManaged.modificar}"/>
+	 					<p:commandButton id="btnModificar" value="Modificar" ajax="false" action="#{modificarClienteManaged.modificar}"/>
 	 				</p:column>
 
- 				</p:row>			 	    
+ 				</p:row>	 	
+ 						 	    
  			</p:panelGrid>
  		</h:form>
   	

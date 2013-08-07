@@ -24,10 +24,16 @@ public class LoginManaged implements UbigeoSelectedListener {
 	private Cliente clienteLogeado;
 	private String from;
 	
+	// Atributos de la empresa
+	private String razonSocial;
+	private String rucEmpresa;
+	
 	// Managed Bean Ubigeo
 	@ManagedProperty(value="#{ubigeoManaged}")
 	private UbigeoManaged ubigeoManaged;
 		
+	
+	
 	public String getUser() {
 		return user;
 	}
@@ -83,6 +89,8 @@ public class LoginManaged implements UbigeoSelectedListener {
 	
 	public void modificar(){
 		if(this.clienteLogeado!=null){
+			// Pr
+			
 			this.cliServ.actualizar(clienteLogeado);
 		}
 	}
@@ -120,4 +128,21 @@ public class LoginManaged implements UbigeoSelectedListener {
 	public void setFrom(String from) {
 		this.from = from;
 	}
+
+	public String getRazonSocial() {
+		return razonSocial;
+	}
+
+	public void setRazonSocial(String razonSocial) {
+		this.razonSocial = razonSocial;
+	}
+
+	public String getRucEmpresa() {
+		return rucEmpresa;
+	}
+
+	public void setRucEmpresa(String rucEmpresa) {
+		this.rucEmpresa = rucEmpresa;
+	}
+
 }
