@@ -46,7 +46,7 @@
 	 					Apellido
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtApellido" value="#{modificarClienteManaged.clienteLogeadoCopy.apellido}" />
+	 					<h:outputLabel for="txtApellido" value="#{modificarClienteManaged.clienteLogeadoCopy.apellido}" />
 	 				</p:column>   
  				</p:row>
  			
@@ -55,7 +55,7 @@
 	 					Nombre
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtNombre" value="#{modificarClienteManaged.clienteLogeadoCopy.nombre}"/> 
+	 					<h:outputLabel for="txtNombre" value="#{modificarClienteManaged.clienteLogeadoCopy.nombre}"/> 
 	 				</p:column>   
  				</p:row>								
 				 				 				
@@ -80,7 +80,7 @@
 	 					<p:selectOneMenu id="cboTipoDocumento" value="#{modificarClienteManaged.clienteLogeadoCopy.tipodocumento}">
 	                	<f:selectItems value="#{modificarClienteManaged.listaTipoDoc}" 
 	                				   var="tipoDoc"
-	                				   itemLabel="#{tipoDoc.descripcion}"                				   
+	                				   itemLabel="#{tipoDoc.descripcion}"              				   
 	                	/>  
                 	<f:converter converterId="tipoDocumentoConverter" />
             	</p:selectOneMenu>
@@ -92,8 +92,14 @@
 	 					Número Documento de Identidad
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtNumeroDocumentoIdentidad" value="#{modificarClienteManaged.clienteLogeadoCopy.numeroDocumentoIdentidad}"/>
-	 				</p:column>   
+	 					<p:inputText id="txtNumeroDocumentoIdentidad" value="#{modificarClienteManaged.clienteLogeadoCopy.numeroDocumentoIdentidad}"
+	 					required="true">
+	 					<p:ajax update="msgNumeroDocumentoIdentidad" event="keyup" />
+	 					</p:inputText>
+	 				</p:column>  
+	 				<p:column>
+	 				<p:message for="txtNumeroDocumentoIdentidad" id="msgNumeroDocumentoIdentidad" display="icon"/>
+	 				</p:column> 
  				</p:row>	
  								
  				 <p:row>
@@ -101,8 +107,14 @@
 	 					Celular
 	 				</p:column>
 	 				<p:column> 
-	 					<p:keyboard id="txtTelefonoCelular" value="#{modificarClienteManaged.clienteLogeadoCopy.telefonoCelular}" keypadOnly="true"/>
-	 				</p:column>   
+	 					<p:keyboard id="txtTelefonoCelular" value="#{modificarClienteManaged.clienteLogeadoCopy.telefonoCelular}" keypadOnly="true"
+	 					required="true">
+	 					<p:ajax update="msgTelefonoCelular" event="keyup" />
+	 					</p:keyboard>
+	 				</p:column>  
+	 				<p:column>
+	 				<p:message for="txtTelefonoCelular" id="msgTelefonoCelular" display="icon"/>
+	 				</p:column>  
  				</p:row>	
  				
  				<p:row>
@@ -110,8 +122,13 @@
 	 					Telefono
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="txtTelefonoPrincipal" value="#{modificarClienteManaged.clienteLogeadoCopy.telefonoPrincipal}"/>
+	 					<p:inputText id="txtTelefonoPrincipal" value="#{modificarClienteManaged.clienteLogeadoCopy.telefonoPrincipal}" required="true">
+	 					<p:ajax update="msgTelefonoPrincipal" event="keyup" />
+	 					</p:inputText>
 	 				</p:column>   
+	 				<p:column>
+	 				<p:message for="txtTelefonoPrincipal" id="msgTelefonoPrincipal" display="icon"/>
+	 				</p:column>  
  				</p:row> 				
  				
  				<!-- Direccion Usual-->
@@ -128,7 +145,7 @@
 						Departamento	  
 					</p:column>  
         			<p:column>	  
-            			<p:selectOneMenu id="cboUbiDepa" value="#{modificarClienteManaged.ubigeoManaged.ubiDepaSelect}">
+            			<p:selectOneMenu id="cboUbiDepa" value="#{modificarClienteManaged.ubigeoManaged.ubiDepaSelect}" required="true">
             			<f:selectItem itemLabel="Seleccionar" itemValue="" />  
 	                		<f:selectItems value="#{modificarClienteManaged.ubigeoManaged.listaUbiDepa}" 
 	                				   var="ubiDepa"
@@ -147,7 +164,7 @@
 						Provincia	  
 					</p:column>  
         			<p:column>	  
-            			<p:selectOneMenu id="cboUbiProv" value="#{modificarClienteManaged.ubigeoManaged.ubiProvSelect}">
+            			<p:selectOneMenu id="cboUbiProv" value="#{modificarClienteManaged.ubigeoManaged.ubiProvSelect}" required="true">
             				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
 	                		<f:selectItems value="#{modificarClienteManaged.ubigeoManaged.listaUbiProv}" 
 	                				   var="ubiProv"
@@ -165,7 +182,7 @@
 						Distrito	  
 					</p:column>  
         			<p:column>	  
-            			<p:selectOneMenu id="cboUbiDist" value="#{modificarClienteManaged.ubigeoManaged.ubiDistSelect}">
+            			<p:selectOneMenu id="cboUbiDist" value="#{modificarClienteManaged.ubigeoManaged.ubiDistSelect}" required="true">
             				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
 	                		<f:selectItems value="#{modificarClienteManaged.ubigeoManaged.listaUbiDist}" 
 	                				   var="ubiDist"
@@ -185,8 +202,13 @@
         				Dirección Destino:		  
         			</p:column>
         			<p:column>	
-        				  <p:inputText id="txtDireccion" value="#{modificarClienteManaged.clienteLogeadoCopy.direccion}" />
+        				  <p:inputText id="txtDireccion" value="#{modificarClienteManaged.clienteLogeadoCopy.direccion}" required="true">
+        				  <p:ajax update="msgDireccion" event="keyup" />
+        				  </p:inputText>
         			</p:column>
+        			<p:column>
+	 				<p:message for="txtDireccion" id="msgDireccion" display="icon"/>
+	 				</p:column>  
        			</p:row>	
        			
  				

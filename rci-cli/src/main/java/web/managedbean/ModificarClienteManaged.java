@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import persistence.entity.Cliente;
 import persistence.entity.Empresacliente;
@@ -84,15 +85,20 @@ public class ModificarClienteManaged {
 		// Si no se cambio nada--
 		else{
 			ec = this.clienteLogeadoCopy.getEmpresacliente();
+			
 		}
+		
 		
 		// Ahora que ya tenemos la razon social, debemos actualizar la data
 		this.clienteLogeadoCopy.setEmpresacliente(ec);
 		this.clienteLogeadoCopy.setUbigeo(this.ubigeoManaged.getUbiSelect());
 		cliServ.actualizar(this.clienteLogeadoCopy);
 		this.loginManaged.setClienteLogeado(this.clienteLogeadoCopy);		
-		return "modificarExito";
+		return "/user/successModUser";
+		
+		
 	}
+	
 	
 	// Getters and Setters
 	public List<Tipodocumento> getListaTipoDoc() {
