@@ -10,7 +10,6 @@ import javax.faces.bean.ViewScoped;
 import persistence.entity.Cliente;
 import persistence.entity.Empresacliente;
 import persistence.entity.Tipodocumento;
-import persistence.entity.Ubigeo;
 import persistence.servicefactory.ClienteService;
 import persistence.servicefactory.EmpresaClienteService;
 import persistence.servicefactory.ServiceFactory;

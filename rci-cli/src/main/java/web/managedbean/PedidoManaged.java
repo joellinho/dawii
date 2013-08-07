@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -17,6 +18,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
 
 import org.hibernate.id.GUIDGenerator;
+import org.primefaces.event.DragDropEvent;
 
 import jxl.write.DateTime;
 
@@ -76,14 +78,23 @@ public class PedidoManaged implements UbigeoSelectedListener{
 	
 	// Producto 
 	public PedidoManaged(){
-		this.inicializarData();
 	}
 	
-	private void inicializarData(){		
+	@PostConstruct
+	public void init(){
+		// Cargamos las listas iniciales
 		this.listaDetallePedido = new ArrayList<Detallepedido>();
 		this.listaFranquicia = this.createFilterOptions(this.listaTiendas);
 		this.listaTipoComp = this.tcomService.listarComprobantes();
-	}		
+		
+		// Forzamos al ubigeo a tomar el ubigeo default y dirección del cliente (si es que lo ubiera)
+		if(this.loginManaged.getClienteLogeado().getUbigeo()!=null){
+			this.ubigeoManaged.forzarUbigeo(this.loginManaged.getClienteLogeado().getUbigeo());
+			this.direccionDestino = this.loginManaged.getClienteLogeado().getDireccion();
+		}
+		
+	}
+
 	
 	public void obtenerUbigeoDefault(){
 		if(this.loginManaged.getClienteLogeado()!=null &&
@@ -97,31 +108,60 @@ public class PedidoManaged implements UbigeoSelectedListener{
 		this.direccionDestino = this.loginManaged.getClienteLogeado().getDireccion();
 	}
 	
-	public String agregarProducto(){
+	public void agregarProducto(){
 		if(this.productoTiendaSelect != null){
 			// ITeramos en los elementos para buscar si es que ya lo agregamos
 			for(Detallepedido detalle : listaDetallePedido){
 				// Si lo encontramos
 				if(detalle.getProductotienda().getId()== this.productoTiendaSelect.getId()){
-					return null; // Rompemos
+					return;// Rompemos
 				}
 			}
 			
+			// Marcamos como seleccionado para que se coloree la tabla
+			this.productoTiendaSelect.setSelected(true);
+			
+			// Creamos el detallePedido
 			Detallepedido dp = new Detallepedido();
 			dp.setProductotienda(this.productoTiendaSelect);
 			dp.setCantidad(1);
 			this.listaDetallePedido.add(dp);
-			
-			return null;
+
 		}
-		else{
-			return null;
+	}
+	
+	public void agregarProductoDrop(DragDropEvent ddEvent){
+		Productotienda prod = ((Productotienda) ddEvent.getData());
+		// ITeramos en los elementos para buscar si es que ya lo agregamos
+		for(Detallepedido detalle : listaDetallePedido){
+			// Si lo encontramos
+			if(detalle.getProductotienda().getId()== prod.getId()){
+				return; // Rompemos
+			}
 		}
+		
+		// Marcamos como seleccionado para que se coloree la tabla
+		prod.setSelected(true);
+		
+		// Creamos el detallePedido
+		Detallepedido dp = new Detallepedido();
+		dp.setProductotienda(prod);
+		dp.setCantidad(1);
+		this.listaDetallePedido.add(dp);
+					
+		
 	}
 	
 	public String removerDetalle(){
 		if(this.selectedDetalle!=null && this.listaDetallePedido != null){
+			// Tenemos que desmarcar el productoTienda
+			this.selectedDetalle.getProductotienda().setSelected(false);
+			
+			// Lo removemos
 			this.listaDetallePedido.remove(this.selectedDetalle);
+			
+			// Nuleamos ??
+			// this.selectedDetalle = null;
 		}
 		return null;
 	}
@@ -322,6 +362,7 @@ public class PedidoManaged implements UbigeoSelectedListener{
 			// Si encontramos data, buscamos toda la lista de productos de todas las tienda encontradas.
 			if(listaTiendas!=null && listaTiendas.size()>0){
 				this.listaProductoTienda = this.proTieService.listarProductoTiendaEnTiendas(listaTiendas);
+				
 				// Por ultimo llenamos las opciones de filtrado 
 				this.listaFranquicia = this.createFilterOptions(this.listaTiendas);
 				

@@ -35,6 +35,9 @@ public class Productotienda implements Serializable {
     @ManyToOne(fetch=FetchType.EAGER)
 	private Tienda tienda;
 
+    @Transient
+    private boolean selected = false;
+    
     public Productotienda() {
     }
 
@@ -84,6 +87,14 @@ public class Productotienda implements Serializable {
 
 	public void setTienda(Tienda tienda) {
 		this.tienda = tienda;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 	
 }
