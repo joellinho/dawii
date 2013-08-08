@@ -64,7 +64,12 @@
         				Dirección Destino:		  
         			</p:column>
         			<p:column>	
-        				  <p:inputText id="txtDireccion" value="#{pedidoManaged.direccionDestino}" />
+        				  <p:inputText id="txtDireccion" value="#{pedidoManaged.direccionDestino}" required="true">
+        				  <p:ajax update="msgDireccion" event="keyup" />
+        				  </p:inputText>
+        			</p:column>
+        			<p:column>
+        			<p:message for="txtDireccion" id="msgDireccion" display="icon"/>
         			</p:column>
         			
     			</p:row>
@@ -89,7 +94,12 @@
         				Referencia		  
         			</p:column>
         			<p:column>	
-        				  <p:inputText id="txtReferencia" value="#{pedidoManaged.referenciaDirDestino}" />
+        				  <p:inputText id="txtReferencia" value="#{pedidoManaged.referenciaDirDestino}" required="true">
+        				  <p:ajax update="msgReferencia" event="keyup" />
+        				  </p:inputText>
+        				  <p:column>
+        				  <p:message for="txtReferencia" id="msgReferencia" display="icon"/>
+        				  </p:column>
         			</p:column>
     			</p:row>
     			

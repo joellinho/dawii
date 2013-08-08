@@ -44,8 +44,10 @@
 	 					Apellido *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="Apellido" value="#{registrarseManaged.apellido}" required="true">
+	 					<p:inputText id="Apellido" value="#{registrarseManaged.apellido}" required="true" maxlength="20" 
+	 					validatorMessage="Ingrese solo caracteres [a-Z]">
 	 					  <!-- <f:validateLength minimum="3" /> -->
+	 					  <f:validateRegex pattern="[a-zA-Z ]*"/>
 	 					  <p:ajax update="msgApellido" event="keyup" />
 	 					</p:inputText>
 	 					<p:message for="Apellido" id="msgApellido" display="icon"/>
@@ -57,8 +59,10 @@
 	 					Nombre *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="Nombre" value="#{registrarseManaged.nombre}" required="true">
+	 					<p:inputText id="Nombre" value="#{registrarseManaged.nombre}" required="true" maxlength="10"
+	 					validatorMessage="Ingrese solo caracteres [a-Z]">
 	 					<f:validateLength minimum="3" />
+	 					<f:validateRegex pattern="[a-zA-Z ]*"/>
 	 					<p:ajax update="msgNombre" event="keyup" />
 	 					</p:inputText>
 	 					<p:message for="Nombre" id="msgNombre" display="icon"/> 
@@ -70,8 +74,8 @@
 	 					Correo Electronico *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="Email" value="#{registrarseManaged.email}" required="true">
- 							<f:validateLength minimum="5" /> 
+	 					<p:inputText id="Email" value="#{registrarseManaged.email}" required="true" maxlength="20">
+ 							<f:validateLength minimum="5" maximum="25"/> 
  							<p:ajax update="msgEmail" event="keyup" />
  						</p:inputText>
  						<p:message for="Email" id="msgEmail" display="icon"/>
@@ -83,7 +87,7 @@
 	 					Crea una Contraseña * (max. 5)
 	 				</p:column>
 	 				<p:column> 
-	 					<p:password id="Password" value="#{registrarseManaged.loginPassword}" required="true">
+	 					<p:password id="Password" value="#{registrarseManaged.loginPassword}" required="true" maxlength="5">
 	 						 <f:validateLength minimum="3" maximum="5"/>
 	 						 <p:ajax update="msgPassword" event="keyup" />
 	 					</p:password>
@@ -96,7 +100,7 @@
 	 					Vuelve a Escribir la Contraseña *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:password id="Password2" value="#{registrarseManaged.loginPassword2}" required="true">
+	 					<p:password id="Password2" value="#{registrarseManaged.loginPassword2}" required="true" maxlength="5">
 	 						<f:validateLength minimum="3" maximum="5"/>
 	 						<p:ajax update="msgPassword2" event="keyup" />
 	 					</p:password>
@@ -124,8 +128,10 @@
 	 					Número Documento de Identidad *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="NumeroDocumentoIdentidad" value="#{registrarseManaged.numeroDocumentoIdentidad}" required="true">
+	 					<p:inputText id="NumeroDocumentoIdentidad" value="#{registrarseManaged.numeroDocumentoIdentidad}" required="true"
+	 					maxlength="8" validatorMessage="Ingrese solo digitos">
 	 						<f:validateLength maximum="8" />
+	 						<f:validateRegex pattern="(^[1-9]{8}$)"/>
 	 						<p:ajax update="msgNumeroDocumentoIdentidad" event="keyup" />
 	 					</p:inputText>
 	 					<p:message for="NumeroDocumentoIdentidad" id="msgNumeroDocumentoIdentidad" display="icon"/>
@@ -137,7 +143,8 @@
 	 					Celular *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:keyboard id="TelefonoCelular" value="#{registrarseManaged.telefonoCelular}" keypadOnly="true" required="true">
+	 					<p:keyboard id="TelefonoCelular" value="#{registrarseManaged.telefonoCelular}" keypadOnly="true" required="true"
+	 					maxlength="9">
 	 						<f:validateLength maximum="9" />
 	 						<p:ajax update="msgTelefonoCelular" event="keyup" />
 	 					</p:keyboard>
@@ -150,7 +157,9 @@
 	 					Telefono *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="TelefonoPrincipal" value="#{registrarseManaged.telefonoPrincipal}" required="true">
+	 					<p:inputText id="TelefonoPrincipal" value="#{registrarseManaged.telefonoPrincipal}" required="true" 
+	 					validatorMessage="Ingrese solo digitos" maxlength="7">
+	 					<f:validateRegex pattern="(^[1-9]{7}$)"/>
 	 						<f:validateLength maximum="7" />
 	 						<p:ajax update="msgTelefonoPrincipal" event="keyup" />
 	 					</p:inputText>
@@ -171,7 +180,9 @@
 	 					RUC
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="Ruc" value="#{registrarseManaged.rucEmpresa}"/>
+	 					<p:inputText id="Ruc" value="#{registrarseManaged.rucEmpresa}" maxlength="11">
+	 					<f:validateRegex pattern="(^[1-9]{11}$)"/>
+	 					</p:inputText>
 	 				</p:column>   
  				</p:row> 	
  				
@@ -255,7 +266,7 @@
         				Dirección Destino *		  
         			</p:column>
         			<p:column>	
-        				  <p:inputText id="Direccion" value="#{registrarseManaged.direccion}" required="true">
+        				  <p:inputText id="Direccion" value="#{registrarseManaged.direccion}" required="true" maxlength="35">
         				  	<f:validateLength minimum="7" />
 	 						<p:ajax update="msgDireccion" event="keyup" />
         				  </p:inputText>
