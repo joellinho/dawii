@@ -38,13 +38,13 @@ public class Tienda implements Serializable {
 	@OneToMany(mappedBy="tienda")
 	private List<Repartidor> repartidors;
 
+	//bi-directional many-to-one association to Empresacomercial
+    @ManyToOne
+	private Empresacomercial empresacomercial;
+
 	//bi-directional many-to-one association to Ubigeo
     @ManyToOne
 	private Ubigeo ubigeo;
-
-	//bi-directional many-to-one association to Empresacomercial
-    @ManyToOne(fetch=FetchType.EAGER)
-	private Empresacomercial empresacomercial;
 
     public Tienda() {
     }
@@ -113,14 +113,6 @@ public class Tienda implements Serializable {
 		this.repartidors = repartidors;
 	}
 	
-	public Ubigeo getUbigeo() {
-		return this.ubigeo;
-	}
-
-	public void setUbigeo(Ubigeo ubigeo) {
-		this.ubigeo = ubigeo;
-	}
-	
 	public Empresacomercial getEmpresacomercial() {
 		return this.empresacomercial;
 	}
@@ -129,16 +121,25 @@ public class Tienda implements Serializable {
 		this.empresacomercial = empresacomercial;
 	}
 	
+	public Ubigeo getUbigeo() {
+		return this.ubigeo;
+	}
+
+	public void setUbigeo(Ubigeo ubigeo) {
+		this.ubigeo = ubigeo;
+	}
+	
 	// Helpers ------------------------------------------------------------------------------------
 
     // This must return true for another Foo object with same key/id.
     public boolean equals(Object other) {
-        return other instanceof Tienda && id>=0 ? id == ((Tienda) other).getId() : (other == this);
+        return other instanceof Tienda && (id >= 0) ? id == (((Tienda) other).id) : (other == this);
     }
 
     // This must return the same hashcode for every Foo object with the same key.
     public int hashCode() {
-        return id>=0 ? this.getClass().hashCode() + id : super.hashCode();
+        return id >=0 ? this.getClass().hashCode() + id : super.hashCode();
     }
+
 	
 }

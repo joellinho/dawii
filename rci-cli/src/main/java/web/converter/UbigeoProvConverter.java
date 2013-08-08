@@ -27,8 +27,8 @@ public class UbigeoProvConverter implements Converter {
 		
 		if(st.countTokens()==2)
 		{			
-			uppk.setUdcod(st.nextToken());
-			uppk.setUpcod(st.nextToken());
+			uppk.setUdCod(st.nextToken());
+			uppk.setUpCod(st.nextToken());
 			UbigeoProvService ups = ServiceFactory.obtenerServiceFactory().obtenerUbigeoProvService();
 			uprov = ups.obtenerPorId(uppk);
 		}
@@ -45,7 +45,7 @@ public class UbigeoProvConverter implements Converter {
         }
 		
 		UbigeoProv upActual = (UbigeoProv) value;
-		return upActual.getId().getUdcod() + ";" + upActual.getId().getUpcod();			
+		return upActual.getId().getUdCod() + ";" + upActual.getId().getUpCod();			
 	}
 
 }

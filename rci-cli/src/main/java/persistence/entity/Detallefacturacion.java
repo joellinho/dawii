@@ -34,17 +34,17 @@ public class Detallefacturacion implements Serializable {
 
 	private BigDecimal tipocambio;
 
-	//bi-directional many-to-one association to Productotienda
+	//bi-directional many-to-one association to Detallepedido
     @ManyToOne
-	private Productotienda productotienda;
+	private Detallepedido detallepedido;
 
 	//bi-directional many-to-one association to Facturacion
     @ManyToOne
 	private Facturacion facturacion;
 
-	//bi-directional many-to-one association to Detallepedido
+	//bi-directional many-to-one association to Productotienda
     @ManyToOne
-	private Detallepedido detallepedido;
+	private Productotienda productotienda;
 
     public Detallefacturacion() {
     }
@@ -121,12 +121,12 @@ public class Detallefacturacion implements Serializable {
 		this.tipocambio = tipocambio;
 	}
 
-	public Productotienda getProductotienda() {
-		return this.productotienda;
+	public Detallepedido getDetallepedido() {
+		return this.detallepedido;
 	}
 
-	public void setProductotienda(Productotienda productotienda) {
-		this.productotienda = productotienda;
+	public void setDetallepedido(Detallepedido detallepedido) {
+		this.detallepedido = detallepedido;
 	}
 	
 	public Facturacion getFacturacion() {
@@ -137,12 +137,12 @@ public class Detallefacturacion implements Serializable {
 		this.facturacion = facturacion;
 	}
 	
-	public Detallepedido getDetallepedido() {
-		return this.detallepedido;
+	public Productotienda getProductotienda() {
+		return this.productotienda;
 	}
 
-	public void setDetallepedido(Detallepedido detallepedido) {
-		this.detallepedido = detallepedido;
+	public void setProductotienda(Productotienda productotienda) {
+		this.productotienda = productotienda;
 	}
 	
 }

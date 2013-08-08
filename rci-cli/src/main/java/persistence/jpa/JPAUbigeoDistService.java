@@ -61,9 +61,9 @@ public class JPAUbigeoDistService implements
 	@Override
 	public UbigeoDist obtenerPorId(String udicod, String upcod, String udcod) {
 		UbigeoDistPK id = new UbigeoDistPK();
-		id.setUdcod(udcod);
-		id.setUdicod(udicod);
-		id.setUpcod(upcod);
+		id.setUdCod(udcod);
+		id.setUdiCod(udicod);
+		id.setUpCod(upcod);
 		return this.obtenerPorId(id);
 	}
 
@@ -71,7 +71,7 @@ public class JPAUbigeoDistService implements
 	public List<UbigeoDist> listarUbigeoDistPorProv(String codProv) {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
-			String query = "SELECT ud FROM UbigeoDist ud WHERE ud.id.upcod=:codProv";
+			String query = "SELECT ud FROM UbigeoDist ud WHERE ud.id.upCod=:codProv";
 			TypedQuery<UbigeoDist> emquery = em.createQuery(query,UbigeoDist.class);
 			emquery.setParameter("codProv", codProv);
 			return emquery.getResultList();

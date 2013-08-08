@@ -35,7 +35,7 @@ public class UbigeoDepaConverter implements Converter {
         }
 		
 		UbigeoDepa udActual = (UbigeoDepa) value;
-		return String.valueOf(udActual.getUdcod());			
+		return String.valueOf(udActual.getUdCod());			
 	}
 	
 }

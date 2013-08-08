@@ -51,7 +51,7 @@
             			<f:selectItem itemLabel="Seleccionar" itemValue="" />  
 	                		<f:selectItems value="#{pedidoManaged.ubigeoManaged.listaUbiDepa}" 
 	                				   var="ubiDepa"
-	                				   itemLabel="#{ubiDepa.udnombre}"                				   
+	                				   itemLabel="#{ubiDepa.udNombre}"                				   
 	                		/>  
 	                		
 	                		<p:ajax update="cboUbiProv"  
@@ -78,7 +78,7 @@
             				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
 	                		<f:selectItems value="#{pedidoManaged.ubigeoManaged.listaUbiProv}" 
 	                				   var="ubiProv"
-	                				   itemLabel="#{ubiProv.upnombre}"                				   
+	                				   itemLabel="#{ubiProv.upNombre}"                				   
 	                		/>  
 	                		<p:ajax update="cboUbiDist"  
                         		listener="#{pedidoManaged.ubigeoManaged.handleProvChange}" />  
@@ -102,7 +102,7 @@
             				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
 	                		<f:selectItems value="#{pedidoManaged.ubigeoManaged.listaUbiDist}" 
 	                				   var="ubiDist"
-	                				   itemLabel="#{ubiDist.udinombre}"                				   
+	                				   itemLabel="#{ubiDist.udiNombre}"                				   
 	                		/>
 	                		<p:ajax 
 	                			update=":frmBuscarProducto:tblProductos"

@@ -61,7 +61,6 @@ public class Generopersona implements Serializable {
 	public void setRepartidors(List<Repartidor> repartidors) {
 		this.repartidors = repartidors;
 	}
-
 	
 	// Helpers ------------------------------------------------------------------------------------
 
@@ -74,5 +73,6 @@ public class Generopersona implements Serializable {
     public int hashCode() {
         return id >=0 ? this.getClass().hashCode() + id : super.hashCode();
     }
+
 	
 }

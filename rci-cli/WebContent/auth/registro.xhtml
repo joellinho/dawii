@@ -202,7 +202,7 @@
             			<f:selectItem itemLabel="Seleccionar" itemValue="" />  
 	                		<f:selectItems value="#{registrarseManaged.ubigeoManaged.listaUbiDepa}" 
 	                				   var="ubiDepa"
-	                				   itemLabel="#{ubiDepa.udnombre}"                				   
+	                				   itemLabel="#{ubiDepa.udNombre}"                				   
 	                		/>  
 	                		
 	                		<p:ajax update="cboUbiProv"  
@@ -221,7 +221,7 @@
             				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
 	                		<f:selectItems value="#{registrarseManaged.ubigeoManaged.listaUbiProv}" 
 	                				   var="ubiProv"
-	                				   itemLabel="#{ubiProv.upnombre}"                				   
+	                				   itemLabel="#{ubiProv.upNombre}"                				   
 	                		/>  
 	                		<p:ajax update="cboUbiDist"  
                         		listener="#{registrarseManaged.ubigeoManaged.handleProvChange}" />  
@@ -239,7 +239,7 @@
             				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
 	                		<f:selectItems value="#{registrarseManaged.ubigeoManaged.listaUbiDist}" 
 	                				   var="ubiDist"
-	                				   itemLabel="#{ubiDist.udinombre}"                				   
+	                				   itemLabel="#{ubiDist.udiNombre}"                				   
 	                		/>
 	                		<p:ajax 	                			
                         		listener="#{registrarseManaged.ubigeoManaged.handleDistChange}" />  
@@ -255,7 +255,7 @@
         				Dirección Destino *		  
         			</p:column>
         			<p:column>	
-        				  <p:inputText id="Direccion" value="#{pedidoManaged.direccionDestino}" required="true">
+        				  <p:inputText id="Direccion" value="#{registrarseManaged.direccion}" required="true">
         				  	<f:validateLength minimum="7" />
 	 						<p:ajax update="msgDireccion" event="keyup" />
         				  </p:inputText>

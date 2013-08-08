@@ -2,7 +2,6 @@ package persistence.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
 import java.util.List;
 
 
@@ -36,14 +35,18 @@ public class Cliente implements Serializable {
 
 	private String telefonoPrincipal;
 
+	//bi-directional many-to-one association to Empresacliente
+    @ManyToOne(cascade=CascadeType.PERSIST)
+	private Empresacliente empresacliente;
+
 	//bi-directional many-to-one association to Generopersona
     @ManyToOne
 	@JoinColumn(name="genero_id")
 	private Generopersona generopersona;
 
-	//bi-directional many-to-one association to Empresacliente
-    @ManyToOne(cascade=CascadeType.PERSIST)
-	private Empresacliente empresacliente;
+	//bi-directional many-to-one association to Tipocliente
+    @ManyToOne
+	private Tipocliente tipocliente;
 
 	//bi-directional many-to-one association to Tipodocumento
     @ManyToOne
@@ -52,10 +55,6 @@ public class Cliente implements Serializable {
 	//bi-directional many-to-one association to Ubigeo
     @ManyToOne
 	private Ubigeo ubigeo;
-
-	//bi-directional many-to-one association to Tipocliente
-    @ManyToOne
-	private Tipocliente tipocliente;
 
 	//bi-directional many-to-one association to Pedido
 	@OneToMany(mappedBy="cliente")
@@ -144,6 +143,14 @@ public class Cliente implements Serializable {
 		this.telefonoPrincipal = telefonoPrincipal;
 	}
 
+	public Empresacliente getEmpresacliente() {
+		return this.empresacliente;
+	}
+
+	public void setEmpresacliente(Empresacliente empresacliente) {
+		this.empresacliente = empresacliente;
+	}
+	
 	public Generopersona getGeneropersona() {
 		return this.generopersona;
 	}
@@ -152,12 +159,12 @@ public class Cliente implements Serializable {
 		this.generopersona = generopersona;
 	}
 	
-	public Empresacliente getEmpresacliente() {
-		return this.empresacliente;
+	public Tipocliente getTipocliente() {
+		return this.tipocliente;
 	}
 
-	public void setEmpresacliente(Empresacliente empresacliente) {
-		this.empresacliente = empresacliente;
+	public void setTipocliente(Tipocliente tipocliente) {
+		this.tipocliente = tipocliente;
 	}
 	
 	public Tipodocumento getTipodocumento() {
@@ -174,14 +181,6 @@ public class Cliente implements Serializable {
 
 	public void setUbigeo(Ubigeo ubigeo) {
 		this.ubigeo = ubigeo;
-	}
-	
-	public Tipocliente getTipocliente() {
-		return this.tipocliente;
-	}
-
-	public void setTipocliente(Tipocliente tipocliente) {
-		this.tipocliente = tipocliente;
 	}
 	
 	public List<Pedido> getPedidos() {

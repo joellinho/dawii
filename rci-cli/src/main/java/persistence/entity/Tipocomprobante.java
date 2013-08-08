@@ -61,5 +61,4 @@ public class Tipocomprobante implements Serializable {
     public int hashCode() {
         return id >=0 ? this.getClass().hashCode() + id : super.hashCode();
     }
-	
 }

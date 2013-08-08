@@ -89,7 +89,7 @@ public class UbigeoManaged {
 		
 		// Ahora obtenemos el ubigeo
 		if(this.ubiDistSelect!=null){
-			this.ubiSelect = ubiService.obtenerUbigeo(this.ubiDistSelect.getId().getUdicod());
+			this.ubiSelect = ubiService.obtenerUbigeo(this.ubiDistSelect.getId().getUdiCod());
 			
 			// Lanzamos el evento
 			this.fireUbigeoSelectedEvent(ubiSelect);
@@ -103,7 +103,7 @@ public class UbigeoManaged {
 
 	private void obtenerListaProvincias(){
 		if(this.ubiDepaSelect!=null){
-			this.listaUbiProv = uProvServ.listarUbigeoProvPorDepa(this.ubiDepaSelect.getUdcod());
+			this.listaUbiProv = uProvServ.listarUbigeoProvPorDepa(this.ubiDepaSelect.getUdCod());
 		}
 		else{
 			this.listaUbiProv = null;
@@ -112,7 +112,7 @@ public class UbigeoManaged {
 	
 	private void obtenerListaDistritos(){
 		if(this.ubiProvSelect!=null){
-			this.listaUbiDist = uDistServ.listarUbigeoDistPorProv(this.ubiProvSelect.getId().getUpcod());
+			this.listaUbiDist = uDistServ.listarUbigeoDistPorProv(this.ubiProvSelect.getId().getUpCod());
 		}
 		else{
 			this.listaUbiDist = null;

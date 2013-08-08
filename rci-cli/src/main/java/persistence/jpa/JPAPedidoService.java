@@ -22,12 +22,12 @@ public class JPAPedidoService implements PedidoService {
 			List<Pedido> lista = emquery.getResultList();
 			if(lista.size()>0){
 				Pedido pedidoAnterior = lista.get(0);
-				pedidoAnterior.setUltimopedido(0);
+				pedidoAnterior.setUltimopedido((byte)0x00);
 				em.merge(pedidoAnterior);
 			}
 			
 			// Insertamos el nuevo
-			pedido.setUltimopedido(1);
+			pedido.setUltimopedido((byte)0x01);
 			
 			em.persist(pedido);
 			em.getTransaction().commit();

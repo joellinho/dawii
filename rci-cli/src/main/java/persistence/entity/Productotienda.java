@@ -2,6 +2,7 @@ package persistence.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -28,16 +29,17 @@ public class Productotienda implements Serializable {
 	private List<Detallepedido> detallepedidos;
 
 	//bi-directional many-to-one association to Productoempresa
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
+	@JoinColumn(name="productoempresa_id")
 	private Productoempresa productoempresa;
 
 	//bi-directional many-to-one association to Tienda
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
 	private Tienda tienda;
-
-    @Transient
-    private boolean selected = false;
     
+    @Transient
+    private boolean selected;
+
     public Productotienda() {
     }
 

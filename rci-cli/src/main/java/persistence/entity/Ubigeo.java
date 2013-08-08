@@ -14,6 +14,7 @@ public class Ubigeo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	@Column(name="cod_dep")
@@ -161,13 +162,6 @@ public class Ubigeo implements Serializable {
 
 	public void setTiendas(List<Tienda> tiendas) {
 		this.tiendas = tiendas;
-	}
-	
-	public String toString(){
-		return this.getCodPais() + 
-				this.getCodDep() +
-				this.getCodDis() +
-				this.getCodPro();
 	}
 	
 }

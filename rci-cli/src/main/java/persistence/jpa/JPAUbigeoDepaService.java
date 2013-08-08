@@ -40,7 +40,7 @@ public class JPAUbigeoDepaService implements UbigeoDepaService {
 	public UbigeoDepa obtenerPorId(String id) {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
-			String query = "SELECT ud FROM UbigeoDepa ud where ud.udcod=:id ";
+			String query = "SELECT ud FROM UbigeoDepa ud where ud.udCod=:id ";
 			TypedQuery<UbigeoDepa> emquery = em.createQuery(query,UbigeoDepa.class);
 			emquery.setMaxResults(1);
 			emquery.setParameter("id", id);

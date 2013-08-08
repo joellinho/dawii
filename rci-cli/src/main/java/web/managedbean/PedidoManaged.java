@@ -250,58 +250,7 @@ public class PedidoManaged implements UbigeoSelectedListener{
 		
 	}	
 	
-	
-	// Remover
-	private List<Facturacion> generarFacturaDesdePedidoOld(Pedido pedidoActual) {
-		List<Facturacion> listaFacturacion = new ArrayList<Facturacion>();
-		for(Detallepedido detallePedido : pedidoActual.getDetallepedidos()){
-			Facturacion factura = null;
-			// Buscamos si la tienda ya tiene una factura creada
-			for(Facturacion fBus : listaFacturacion){
-				
-				if(fBus.getidTiendaTrasient()==detallePedido.getProductotienda().getTienda().getId()){
-					// Si vemos que ya existe una factura, obtenemos la referencia
-					factura = fBus;
-				}
-			}
-			
-			// Si no encontramos factura alguna la creamos
-			
-			if(factura==null){
-				factura = new Facturacion();
-				factura.setFechafacturacion(new Date());
-				factura.setId( UUID.randomUUID().toString() ); // Debe generar el numero correcto, esta generando una UUID!
-				//factura.setObservaciones(observaciones)
-				factura.setPedido(pedidoActual);
-				factura.setRazonsocial(this.razonSocial);
-				factura.setTipocomprobante(this.tipocomprobanteSelect); 				
-				factura.setDetallefacturacions(new ArrayList<Detallefacturacion>());
-				factura.setidTiendaTrasient(detallePedido.getProductotienda().getTienda().getId());
-				listaFacturacion.add(factura);
-			}
-			
-			// Ahora que tenemos la factura creamos el detalle actual
-			Detallefacturacion detalleFact = new Detallefacturacion();
-			//detalleFact.setBruto(bruto)
-			detalleFact.setCantidad(detallePedido.getCantidad());
-			detalleFact.setDetallepedido(detallePedido);
-			detalleFact.setFacturacion(factura);
-			// Seteamos el cost neto
-			detalleFact.setNeto(detallePedido.getProductotienda().getProductoempresa().getPrecioventa());
-			detalleFact.setPorcentajeigv(new BigDecimal(0.18)); // De donde?
-			detalleFact.setPorcentajeimpuestoconsumo( detallePedido.getProductotienda().getTienda().getEmpresacomercial().getPorcimpconsumo() );
-			detalleFact.setProductotienda(detallePedido.getProductotienda());
-			
-			//detalleFact.setImpuestoconsumo(impuestoconsumo)
-			//detalleFact.setImpuestoigv(impuestoigv)
-			//detalleFact.setTipocambio(tipocambio)
-			
-			// Ahora agregamos el detalle
-			factura.getDetallefacturacions().add(detalleFact);
-		}
-		return listaFacturacion;
-	}	
-	
+		
 	private List<Facturacion> generarFacturaDesdePedido(Pedido pedidoActual) {
 		List<Facturacion> listaFacturacion = new ArrayList<Facturacion>();
 		

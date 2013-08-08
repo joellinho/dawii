@@ -34,13 +34,13 @@ public class Detallepedido implements Serializable {
     @ManyToOne
 	private Pedido pedido;
 
+	//bi-directional many-to-one association to Productotienda
+    @ManyToOne
+	private Productotienda productotienda;
+
 	//bi-directional many-to-one association to Repartidor
     @ManyToOne
 	private Repartidor repartidor;
-
-	//bi-directional many-to-one association to Productotienda
-    @ManyToOne(fetch=FetchType.EAGER)
-	private Productotienda productotienda;
 
     public Detallepedido() {
     }
@@ -101,20 +101,20 @@ public class Detallepedido implements Serializable {
 		this.pedido = pedido;
 	}
 	
-	public Repartidor getRepartidor() {
-		return this.repartidor;
-	}
-
-	public void setRepartidor(Repartidor repartidor) {
-		this.repartidor = repartidor;
-	}
-	
 	public Productotienda getProductotienda() {
 		return this.productotienda;
 	}
 
 	public void setProductotienda(Productotienda productotienda) {
 		this.productotienda = productotienda;
+	}
+	
+	public Repartidor getRepartidor() {
+		return this.repartidor;
+	}
+
+	public void setRepartidor(Repartidor repartidor) {
+		this.repartidor = repartidor;
 	}
 	
 }
