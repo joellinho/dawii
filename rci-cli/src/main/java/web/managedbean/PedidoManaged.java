@@ -25,6 +25,7 @@ import jxl.write.DateTime;
 
 import persistence.entity.*;
 import persistence.servicefactory.*;
+import report.common.AbstractReportBean.ExportOption;
 import web.managedbean.event.UbigeoSelectedEvent;
 import web.managedbean.event.UbigeoSelectedListener;
 
@@ -46,6 +47,10 @@ public class PedidoManaged implements UbigeoSelectedListener{
 	@ManagedProperty(value="#{ubigeoManaged}")
 	private UbigeoManaged ubigeoManaged;
 
+	@ManagedProperty(value="#{facturaReportBean}")
+	private FacturaReportBean facturaReportBean;
+	
+	
 	// Datos de la cabecera del pedido que son llenados desde la página web
 	private String direccionDestino;	
 	private String referenciaDirDestino;
@@ -64,6 +69,7 @@ public class PedidoManaged implements UbigeoSelectedListener{
 	private Tipocomprobante tipocomprobanteSelect;
 	private String nombreLabelRS = "Razón Social";
 	private String razonSocial;
+	private String numeroDoc;
 	
 	// Lista de ProductoTienda
 	private List<Productotienda> listaProductoTienda;
@@ -251,7 +257,7 @@ public class PedidoManaged implements UbigeoSelectedListener{
 		
 	}
 	
-	public void registrarPedido(){
+	public String registrarPedido(){
 		// Creamos el pedido 		
 		Pedido pedidoActual = new Pedido();
 		pedidoActual.setDirecciondestino(this.direccionDestino);
@@ -278,10 +284,11 @@ public class PedidoManaged implements UbigeoSelectedListener{
 		
 		// Ahora que tenemos las facturas y lso detalles
 		pedService.insertarPedido(pedidoActual);
-
 		
-		// Redirect yadayada
-		
+		this.facturaReportBean.setFact_id(pedidoActual.getFacturacions().get(0).getId());
+		this.facturaReportBean.setExportOption(ExportOption.PDF);
+		this.facturaReportBean.execute();
+		return "/main.xhtml";
 	}	
 	
 		
@@ -299,7 +306,16 @@ public class PedidoManaged implements UbigeoSelectedListener{
 		factura.setTipocomprobante(this.tipocomprobanteSelect); 				
 		factura.setDetallefacturacions(new ArrayList<Detallefacturacion>());
 		//factura.setidTiendaTrasient();
-		listaFacturacion.add(factura);		
+		factura.setSubTotal(this.subTotal);
+		factura.setImpuestoConsumo(this.impuestoConsumo);
+		factura.setBruto(this.bruto);
+		factura.setImpuestoIgv(this.impuestoIgv);
+		factura.setTotal(this.total);
+		factura.setNumerodoc(this.numeroDoc);
+		
+		
+		listaFacturacion.add(factura);	
+		
 		
 		for(Detallepedido detallePedido : pedidoActual.getDetallepedidos()){		
 			
@@ -550,6 +566,22 @@ public class PedidoManaged implements UbigeoSelectedListener{
 
 	public void setBruto(BigDecimal bruto) {
 		this.bruto = bruto;
+	}
+
+	public String getNumeroDoc() {
+		return numeroDoc;
+	}
+
+	public void setNumeroDoc(String numeroDoc) {
+		this.numeroDoc = numeroDoc;
+	}
+
+	public FacturaReportBean getFacturaReportBean() {
+		return facturaReportBean;
+	}
+
+	public void setFacturaReportBean(FacturaReportBean facturaReportBean) {
+		this.facturaReportBean = facturaReportBean;
 	}
 	
 	

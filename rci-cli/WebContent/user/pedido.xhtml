@@ -155,13 +155,21 @@
         			</p:column>
     			</p:row>
        			
-       		
+       			<p:row>  
+        			<p:column>
+        				Documento
+        			</p:column>
+        			<p:column>
+        				  <p:inputText id="txtNumeroDoc" value="#{pedidoManaged.numeroDoc}" />
+        			</p:column>
+    			</p:row>
+       			
        			
        			
        			<p:row>  
         			<p:column>	
         				   <p:commandButton id="btnGenerarPedido" value="Enviar Pedido"  
-	                    					action="#{pedidoManaged.registrarPedido}"/>
+	                    					action="#{pedidoManaged.registrarPedido}" ajax="false"/>
         			</p:column>
        			</p:row>
     
