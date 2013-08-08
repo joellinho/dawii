@@ -1,6 +1,7 @@
 package web.managedbean;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -35,6 +36,7 @@ public class PedidoManaged implements UbigeoSelectedListener{
 	private ProductoTiendaService proTieService = ServiceFactory.obtenerServiceFactory().obtenerProductoTiendaService();
 	private PedidoService pedService = ServiceFactory.obtenerServiceFactory().obtenerPedidoService();
 	private TipocomprobanteService tcomService = ServiceFactory.obtenerServiceFactory().obtenerTipocomprobanteService();
+	private SerieComprobanteService serieService = ServiceFactory.obtenerServiceFactory().obtenerSerieComprobanteService();
 	
 	// Managed Bean Login
 	@ManagedProperty(value="#{loginManaged}")
@@ -70,10 +72,11 @@ public class PedidoManaged implements UbigeoSelectedListener{
 	private SelectItem[] listaFranquicia;
 	
 	// Sub totales y Totales
-	private BigDecimal subTotal;
-	private BigDecimal impuestoConsumo;
-	private BigDecimal impuestoIgv;
-	private BigDecimal total;
+	private BigDecimal subTotal = BigDecimal.ZERO;
+	private BigDecimal impuestoConsumo= BigDecimal.ZERO;
+	private BigDecimal bruto= BigDecimal.ZERO;
+	private BigDecimal impuestoIgv= BigDecimal.ZERO;
+	private BigDecimal total= BigDecimal.ZERO;
 	
 	
 	// Producto 
@@ -125,8 +128,10 @@ public class PedidoManaged implements UbigeoSelectedListener{
 			Detallepedido dp = new Detallepedido();
 			dp.setProductotienda(this.productoTiendaSelect);
 			dp.setCantidad(1);
+			dp.setPreciounitario(this.productoTiendaSelect.getProductoempresa().getPrecioventa());
+			
 			this.listaDetallePedido.add(dp);
-
+			this.actualizarCostosTotales();
 		}
 	}
 	
@@ -147,8 +152,9 @@ public class PedidoManaged implements UbigeoSelectedListener{
 		Detallepedido dp = new Detallepedido();
 		dp.setProductotienda(prod);
 		dp.setCantidad(1);
+		dp.setPreciounitario(prod.getProductoempresa().getPrecioventa());
 		this.listaDetallePedido.add(dp);
-					
+		this.actualizarCostosTotales();
 		
 	}
 	
@@ -162,6 +168,7 @@ public class PedidoManaged implements UbigeoSelectedListener{
 			
 			// Nuleamos ??
 			// this.selectedDetalle = null;
+			this.actualizarCostosTotales();
 		}
 		return null;
 	}
@@ -198,23 +205,50 @@ public class PedidoManaged implements UbigeoSelectedListener{
 		}
     }  
   
-	public void actualizarCostos(){
+	public void actualizarCostosTotales(){
 		
-		this.subTotal = new BigDecimal(0);
-		this.impuestoConsumo = new BigDecimal(0);
-		this.impuestoIgv = new BigDecimal(0);
-		//BigDecimal total;
+		this.bruto = BigDecimal.ZERO;
 		
+		this.impuestoConsumo = BigDecimal.ZERO;
+		this.subTotal = BigDecimal.ZERO;
+		this.impuestoIgv = BigDecimal.ZERO;
+		
+		
+		// Recorremos cada detalle y sumamos el subtotal
 		for (Detallepedido detalle : this.listaDetallePedido){
-			this.subTotal = this.subTotal.add( detalle.getPreciocosto() );
-			BigDecimal porcentajeImpCons = detalle.getProductotienda().getTienda().getEmpresacomercial().getPorcimpconsumo();
-			BigDecimal impuestoConsumoActual = detalle.getPreciocosto().multiply(porcentajeImpCons);
-			this.impuestoConsumo = this.impuestoConsumo.add(impuestoConsumoActual);
+			// Sumamos los precios sin recargos ni impuestos
+			this.bruto = this.bruto.add(detalle.getPrecioXcantidad());
+			
+			// Sumamos el impuesto al consumo
+			this.impuestoConsumo = this.impuestoConsumo.add(detalle.getValorImpuestoConsumo());
+
 		}
+		
+		this.bruto = this.bruto.setScale(2,RoundingMode.HALF_DOWN);
+		this.impuestoConsumo = this.impuestoConsumo.setScale(2,RoundingMode.HALF_DOWN);
 	
-		// Ahora calculo el total
-		this.impuestoIgv =this.subTotal.add(this.impuestoConsumo).multiply(new BigDecimal(0.18)); 
-		this.total = this.subTotal.add(this.impuestoConsumo).add(this.impuestoIgv); 
+		
+		// Subtotal = bruto  + consumo
+		this.subTotal = this.bruto.add(this.impuestoConsumo)
+				.setScale(2,RoundingMode.HALF_DOWN);;
+		
+	
+		// Ahora calculo el IGV en base al subtotal
+		this.impuestoIgv =this.subTotal.add(this.impuestoConsumo).multiply(new BigDecimal(0.18))
+				.setScale(2,RoundingMode.HALF_DOWN);;
+		
+		// Ahora el total sumando sub e impuesto
+		this.total = this.subTotal.add(this.impuestoIgv)
+				.setScale(2,RoundingMode.HALF_DOWN);
+		
+		this.bruto.setScale(2,RoundingMode.HALF_DOWN);
+		this.impuestoConsumo.setScale(2,RoundingMode.HALF_DOWN);
+		this.subTotal.setScale(2,RoundingMode.HALF_DOWN);
+		this.impuestoIgv.setScale(2,RoundingMode.HALF_DOWN);
+		this.total.setScale(2,RoundingMode.HALF_DOWN);
+		
+		System.out.println("Updated");
+		
 	}
 	
 	public void registrarPedido(){
@@ -254,9 +288,11 @@ public class PedidoManaged implements UbigeoSelectedListener{
 	private List<Facturacion> generarFacturaDesdePedido(Pedido pedidoActual) {
 		List<Facturacion> listaFacturacion = new ArrayList<Facturacion>();
 		
+		// Obtenemos la serie para la factura;
+		
 		Facturacion factura = new Facturacion();
 		factura.setFechafacturacion(new Date());
-		factura.setId( UUID.randomUUID().toString() ); // Debe generar el numero correcto, esta generando una UUID!
+		//factura.setId( UUID.randomUUID().toString() ); // El metodo de insertar se encarga de esto
 		//factura.setObservaciones(observaciones)
 		factura.setPedido(pedidoActual);
 		factura.setRazonsocial(this.razonSocial);
@@ -506,6 +542,14 @@ public class PedidoManaged implements UbigeoSelectedListener{
 
 	public void setTotal(BigDecimal total) {
 		this.total = total;
+	}
+
+	public BigDecimal getBruto() {
+		return bruto;
+	}
+
+	public void setBruto(BigDecimal bruto) {
+		this.bruto = bruto;
 	}
 	
 	

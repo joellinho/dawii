@@ -96,10 +96,9 @@
 	 					required="true">
 	 					<p:ajax update="msgNumeroDocumentoIdentidad" event="keyup" />
 	 					</p:inputText>
+	 					<p:message for="txtNumeroDocumentoIdentidad" id="msgNumeroDocumentoIdentidad" display="icon"/>
 	 				</p:column>  
-	 				<p:column>
-	 				<p:message for="txtNumeroDocumentoIdentidad" id="msgNumeroDocumentoIdentidad" display="icon"/>
-	 				</p:column> 
+
  				</p:row>	
  								
  				 <p:row>
@@ -111,10 +110,9 @@
 	 					required="true">
 	 					<p:ajax update="msgTelefonoCelular" event="keyup" />
 	 					</p:keyboard>
+	 					<p:message for="txtTelefonoCelular" id="msgTelefonoCelular" display="icon"/>
 	 				</p:column>  
-	 				<p:column>
-	 				<p:message for="txtTelefonoCelular" id="msgTelefonoCelular" display="icon"/>
-	 				</p:column>  
+	 				  
  				</p:row>	
  				
  				<p:row>
@@ -125,10 +123,9 @@
 	 					<p:inputText id="txtTelefonoPrincipal" value="#{modificarClienteManaged.clienteLogeadoCopy.telefonoPrincipal}" required="true">
 	 					<p:ajax update="msgTelefonoPrincipal" event="keyup" />
 	 					</p:inputText>
+	 					<p:message for="txtTelefonoPrincipal" id="msgTelefonoPrincipal" display="icon"/>
 	 				</p:column>   
-	 				<p:column>
-	 				<p:message for="txtTelefonoPrincipal" id="msgTelefonoPrincipal" display="icon"/>
-	 				</p:column>  
+ 
  				</p:row> 				
  				
  				<!-- Direccion Usual-->
@@ -149,7 +146,7 @@
             			<f:selectItem itemLabel="Seleccionar" itemValue="" />  
 	                		<f:selectItems value="#{modificarClienteManaged.ubigeoManaged.listaUbiDepa}" 
 	                				   var="ubiDepa"
-	                				   itemLabel="#{ubiDepa.udnombre}"                				   
+	                				   itemLabel="#{ubiDepa.udNombre}"                				   
 	                		/>  
 	                		
 	                		<p:ajax update="cboUbiProv"  
@@ -168,7 +165,7 @@
             				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
 	                		<f:selectItems value="#{modificarClienteManaged.ubigeoManaged.listaUbiProv}" 
 	                				   var="ubiProv"
-	                				   itemLabel="#{ubiProv.upnombre}"                				   
+	                				   itemLabel="#{ubiProv.upNombre}"                				   
 	                		/>  
 	                		<p:ajax update="cboUbiDist"  
                         		listener="#{modificarClienteManaged.ubigeoManaged.handleProvChange}" />  
@@ -186,7 +183,7 @@
             				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
 	                		<f:selectItems value="#{modificarClienteManaged.ubigeoManaged.listaUbiDist}" 
 	                				   var="ubiDist"
-	                				   itemLabel="#{ubiDist.udinombre}"                				   
+	                				   itemLabel="#{ubiDist.udiNombre}"                				   
 	                		/>
 	                		<p:ajax 	                			
                         		listener="#{modificarClienteManaged.ubigeoManaged.handleDistChange}" />  
@@ -205,10 +202,8 @@
         				  <p:inputText id="txtDireccion" value="#{modificarClienteManaged.clienteLogeadoCopy.direccion}" required="true">
         				  <p:ajax update="msgDireccion" event="keyup" />
         				  </p:inputText>
+        				  <p:message for="txtDireccion" id="msgDireccion" display="icon"/>
         			</p:column>
-        			<p:column>
-	 				<p:message for="txtDireccion" id="msgDireccion" display="icon"/>
-	 				</p:column>  
        			</p:row>	
        			
  				

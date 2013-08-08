@@ -23,6 +23,9 @@ public class Tipocomprobante implements Serializable {
 	@OneToMany(mappedBy="tipocomprobante")
 	private List<Facturacion> facturacions;
 
+	@OneToMany(mappedBy="tipocomprobante")
+	private List<SerieComprobante> serieComprobantes;
+	
     public Tipocomprobante() {
     }
 
@@ -61,4 +64,12 @@ public class Tipocomprobante implements Serializable {
     public int hashCode() {
         return id >=0 ? this.getClass().hashCode() + id : super.hashCode();
     }
+
+	public List<SerieComprobante> getSerieComprobantes() {
+		return serieComprobantes;
+	}
+
+	public void setSerieComprobantes(List<SerieComprobante> serieComprobantes) {
+		this.serieComprobantes = serieComprobantes;
+	}
 }

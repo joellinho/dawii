@@ -196,12 +196,12 @@
 		        		 </p:column>  
 		  				
 		  				 <p:column headerText="Cantidad">		  				 	  
-		            		<p:spinner id="detCantidad"   
+		            		<p:spinner 
                     			value="#{detalle.cantidad}" min="1" max="99">
                     			
                     		<p:ajax 
-	                			update=""
-                        		listener="#{pedidoManaged.actualizarCostos}" /> 	
+	                			update="tblDetalle"
+                        		listener="#{pedidoManaged.actualizarCostosTotales}" /> 	
                     			
                     			
                    			</p:spinner> 
@@ -215,6 +215,46 @@
 		                   
            					</p:commandButton>  
        					</p:column>    
+	  					
+	  					<p:columnGroup type="footer">  
+				            <p:row>  
+				                <p:column colspan="3" footerText="Bruto:"  
+				                                style="text-align:right"  />  
+				  
+				                <p:column footerText="#{pedidoManaged.bruto}" />
+				            </p:row>
+				            
+				            <p:row>  
+				                <p:column colspan="3" footerText="Impuesto Consumo:"  
+				                                style="text-align:right"  />  
+				  
+				                <p:column footerText="#{pedidoManaged.impuestoConsumo}" />
+				            </p:row>  
+				            
+		                    <p:row>  
+				                <p:column colspan="3" footerText="Sub Total:"  
+				                                style="text-align:right"  />  
+				  
+				                <p:column footerText="#{pedidoManaged.subTotal}" />
+				            </p:row>  
+				            
+				            <p:row>  
+				                <p:column colspan="3" footerText="IGV:"  
+				                                style="text-align:right"  />  
+				  
+				                <p:column footerText="#{pedidoManaged.impuestoIgv}" />
+				            </p:row>
+				            
+				            <p:row>  
+				                <p:column colspan="3" footerText="Total:"  
+				                                style="text-align:right"  />  
+				  
+				                <p:column footerText="#{pedidoManaged.total}" />
+				            </p:row>        
+				        </p:columnGroup>  
+  
+	  				
+	  				
 	  				
 	  					</p:dataTable>
 	  					</p:outputPanel>  

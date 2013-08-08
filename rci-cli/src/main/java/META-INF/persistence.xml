@@ -25,6 +25,8 @@
 	 	<class>persistence.entity.UbigeoDistPK</class>
 	 	<class>persistence.entity.UbigeoProv</class>
 	 	<class>persistence.entity.UbigeoProvPK</class>
+	 	<class>persistence.entity.SerieComprobante</class>
+	 	
 
 		
 		<properties>

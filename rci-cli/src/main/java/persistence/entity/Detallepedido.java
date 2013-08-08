@@ -24,8 +24,8 @@ public class Detallepedido implements Serializable {
 
 	private BigDecimal preciocosto;
 
-	private BigDecimal preciounitario;
-
+	private BigDecimal preciounitario = BigDecimal.ZERO;
+	
 	//bi-directional many-to-one association to Detallefacturacion
 	@OneToMany(mappedBy="detallepedido")
 	private List<Detallefacturacion> detallefacturacions;
@@ -115,6 +115,26 @@ public class Detallepedido implements Serializable {
 
 	public void setRepartidor(Repartidor repartidor) {
 		this.repartidor = repartidor;
+	}
+	
+	// Campos calculados	
+	public BigDecimal getPrecioXcantidad(){
+		if(preciounitario!=null){
+			return this.preciounitario.multiply(new BigDecimal(this.cantidad));
+		}
+		else{
+			return BigDecimal.ZERO;
+		}
+	}
+	
+	public BigDecimal getValorImpuestoConsumo(){		
+		if(this.getProductotienda()!=null){
+			return this.getPrecioXcantidad().multiply( 
+					this.getProductotienda().getTienda().getPorcimpconsumo() );
+		}
+		else{
+			return BigDecimal.ZERO;
+		}
 	}
 	
 }

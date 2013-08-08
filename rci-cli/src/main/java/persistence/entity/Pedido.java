@@ -193,4 +193,26 @@ public class Pedido implements Serializable {
 		this.tienda = tienda;
 	}
 	
+	
+	public BigDecimal getSubTotalDetalle(){
+		BigDecimal res = BigDecimal.ZERO;
+		if(this.detallepedidos!=null){
+			for(Detallepedido dp : this.detallepedidos){
+				res.add(dp.getPrecioXcantidad());
+			}
+		}
+		return res;
+	}
+	
+	public BigDecimal getSubTotalImpuestoConsumo(){
+		BigDecimal res = BigDecimal.ZERO;
+		if(this.detallepedidos!=null){
+			for(Detallepedido dp : this.detallepedidos){
+				res.add(dp.getValorImpuestoConsumo());
+			}
+		}
+		return res;
+	}	
+
+	
 }
