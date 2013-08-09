@@ -9,8 +9,8 @@ import javax.faces.convert.FacesConverter;
 
 import persistence.entity.UbigeoDist;
 import persistence.entity.UbigeoDistPK;
-import persistencia.servicefactory.ServiceFactory;
-import persistencia.servicefactory.UbigeoDistService;
+import persistence.servicefactory.ServiceFactory;
+import persistence.servicefactory.UbigeoDistService;
 
 @FacesConverter(value="ubigeoDistConverter")
 public class UbigeoDistConverter implements Converter {
@@ -28,9 +28,9 @@ public class UbigeoDistConverter implements Converter {
 		
 		if(st.countTokens()==3)
 		{			
-			updk.setUdicod(st.nextToken());
-			updk.setUpcod(st.nextToken());
-			updk.setUdcod(st.nextToken());
+			updk.setUdiCod(st.nextToken());
+			updk.setUpCod(st.nextToken());
+			updk.setUdCod(st.nextToken());
 			
 			UbigeoDistService uds = ServiceFactory.obtenerServiceFactory().obtenerUbigeoDistService();
 			udis = uds.obtenerPorId(updk);
@@ -47,7 +47,7 @@ public class UbigeoDistConverter implements Converter {
         }
 		
 		UbigeoDist udActual = (UbigeoDist) value;
-		return udActual.getId().getUdicod() + ";" + udActual.getId().getUpcod() + ";" + udActual.getId().getUdcod();			
+		return udActual.getId().getUdiCod() + ";" + udActual.getId().getUpCod() + ";" + udActual.getId().getUdCod();			
 	}
 	
 	

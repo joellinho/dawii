@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import persistence.entity.Cliente;
-import persistencia.servicefactory.ClienteService;
+import persistence.servicefactory.ClienteService;
 
 public class JPAClienteService implements ClienteService {
 
@@ -66,9 +66,9 @@ public class JPAClienteService implements ClienteService {
 	public Cliente buscarPorUserPass(String user, String pass) {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
-			String query = "SELECT c FROM Cliente c WHERE c.loginpassword=:loginpassword and c.loginuser=:loginuser";
+			String query = "SELECT c FROM Cliente c WHERE c.loginpassword=:loginpassword and c.email=:email";
 			TypedQuery<Cliente> emquery = em.createQuery(query,Cliente.class);
-			emquery.setParameter("loginuser", user);
+			emquery.setParameter("email", user);
 			emquery.setParameter("loginpassword", pass);
 			emquery.setMaxResults(1);
 			List<Cliente> listaCliente = emquery.getResultList();

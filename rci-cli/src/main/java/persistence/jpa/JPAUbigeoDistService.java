@@ -7,10 +7,9 @@ import javax.persistence.TypedQuery;
 
 import persistence.entity.UbigeoDist;
 import persistence.entity.UbigeoDistPK;
-import persistence.entity.UbigeoProv;
 
 public class JPAUbigeoDistService implements
-		persistencia.servicefactory.UbigeoDistService {
+		persistence.servicefactory.UbigeoDistService {
 
 	@Override
 	public List<UbigeoDist> listarUbigeoDist() {
@@ -58,12 +57,21 @@ public class JPAUbigeoDistService implements
 			em.close();
 		}
 	}
+	
+	@Override
+	public UbigeoDist obtenerPorId(String udicod, String upcod, String udcod) {
+		UbigeoDistPK id = new UbigeoDistPK();
+		id.setUdCod(udcod);
+		id.setUdiCod(udicod);
+		id.setUpCod(upcod);
+		return this.obtenerPorId(id);
+	}
 
 	@Override
 	public List<UbigeoDist> listarUbigeoDistPorProv(String codProv) {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
-			String query = "SELECT ud FROM UbigeoDist ud WHERE ud.id.upcod=:codProv";
+			String query = "SELECT ud FROM UbigeoDist ud WHERE ud.id.upCod=:codProv";
 			TypedQuery<UbigeoDist> emquery = em.createQuery(query,UbigeoDist.class);
 			emquery.setParameter("codProv", codProv);
 			return emquery.getResultList();
@@ -72,5 +80,7 @@ public class JPAUbigeoDistService implements
 			em.close();
 		}	
 	}
+
+
 
 }

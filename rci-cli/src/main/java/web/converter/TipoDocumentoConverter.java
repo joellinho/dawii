@@ -6,8 +6,8 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import persistence.entity.Tipodocumento;
-import persistencia.servicefactory.ServiceFactory;
-import persistencia.servicefactory.TipodocumentoService;
+import persistence.servicefactory.ServiceFactory;
+import persistence.servicefactory.TipodocumentoService;
 
 @FacesConverter(value="tipoDocumentoConverter")
 public class TipoDocumentoConverter implements Converter {

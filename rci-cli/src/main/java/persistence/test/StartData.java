@@ -1,7 +1,7 @@
 package persistence.test;
 
 import persistence.entity.*;
-import persistencia.servicefactory.*;
+import persistence.servicefactory.*;
 
 
 public class StartData {
@@ -16,7 +16,7 @@ public class StartData {
 		
 		sd.InsertarTipoCliente();
 		sd.insertarTipoDocumento();
-		
+		sd.insertarTipocomprobante();
 		//GeneroPersonaService gp = ServiceFactory.
 	}
 
@@ -32,8 +32,8 @@ public class StartData {
 	}
 	
 	public void insertarGenero(){
-		GeneroPersonaService cs=sf.obtenerGeneroClienteService();
 		
+		GeneroPersonaService cs=sf.obtenerGeneroClienteService();
 		if(cs.listarGenero().size()<=0){
 			Generopersona gc=new Generopersona();
 			gc.setDescripcion("Masculino");
@@ -52,17 +52,20 @@ public class StartData {
 		}
 	}
 	
-	
-	public void insertarEmpresaCliente(){
-		EmpresaClienteService cs=sf.obtenerEmpresaClienteService();
+	public void insertarTipocomprobante(){
+		TipocomprobanteService tcs = sf.obtenerTipocomprobanteService();
 		
-		if(cs.listarEmpresaCliente().size()<=0){
-			Empresacliente ec=new Empresacliente();
-			ec.setRazonsocial("empresa 01");
-			ec.setRazonsocial("empresa 02");
-			cs.insertarEmpresaCliente(ec);
+		if(tcs.listarComprobantes().size()<=0){
+			Tipocomprobante tc = new Tipocomprobante();
+			tc.setDescripcion("Boleta");
+			tcs.insertar(tc);
+			
+			tc = new Tipocomprobante();
+			tc.setDescripcion("Factura");
+			tcs.insertar(tc);
 		}
 	}
+	
 		
 
 }

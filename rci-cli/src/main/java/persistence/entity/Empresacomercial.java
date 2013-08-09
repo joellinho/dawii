@@ -44,7 +44,7 @@ public class Empresacomercial implements Serializable {
 	private Ubigeo ubigeo;
 
 	//bi-directional many-to-one association to Productoempresa
-	@OneToMany(mappedBy="empresacomercial")
+	@OneToMany(mappedBy="empresacomercial", fetch=FetchType.EAGER)
 	private List<Productoempresa> productoempresas;
 
 	//bi-directional many-to-one association to Tienda

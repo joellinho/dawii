@@ -24,8 +24,8 @@ public class Detallepedido implements Serializable {
 
 	private BigDecimal preciocosto;
 
-	private BigDecimal preciounitario;
-
+	private BigDecimal preciounitario = BigDecimal.ZERO;
+	
 	//bi-directional many-to-one association to Detallefacturacion
 	@OneToMany(mappedBy="detallepedido")
 	private List<Detallefacturacion> detallefacturacions;
@@ -34,13 +34,13 @@ public class Detallepedido implements Serializable {
     @ManyToOne
 	private Pedido pedido;
 
-	//bi-directional many-to-one association to Repartidor
-    @ManyToOne
-	private Repartidor repartidor;
-
 	//bi-directional many-to-one association to Productotienda
     @ManyToOne
 	private Productotienda productotienda;
+
+	//bi-directional many-to-one association to Repartidor
+    @ManyToOne
+	private Repartidor repartidor;
 
     public Detallepedido() {
     }
@@ -101,6 +101,14 @@ public class Detallepedido implements Serializable {
 		this.pedido = pedido;
 	}
 	
+	public Productotienda getProductotienda() {
+		return this.productotienda;
+	}
+
+	public void setProductotienda(Productotienda productotienda) {
+		this.productotienda = productotienda;
+	}
+	
 	public Repartidor getRepartidor() {
 		return this.repartidor;
 	}
@@ -109,12 +117,24 @@ public class Detallepedido implements Serializable {
 		this.repartidor = repartidor;
 	}
 	
-	public Productotienda getProductotienda() {
-		return this.productotienda;
+	// Campos calculados	
+	public BigDecimal getPrecioXcantidad(){
+		if(preciounitario!=null){
+			return this.preciounitario.multiply(new BigDecimal(this.cantidad));
+		}
+		else{
+			return BigDecimal.ZERO;
+		}
 	}
-
-	public void setProductotienda(Productotienda productotienda) {
-		this.productotienda = productotienda;
+	
+	public BigDecimal getValorImpuestoConsumo(){		
+		if(this.getProductotienda()!=null){
+			return this.getPrecioXcantidad().multiply( 
+					this.getProductotienda().getTienda().getPorcimpconsumo() );
+		}
+		else{
+			return BigDecimal.ZERO;
+		}
 	}
 	
 }

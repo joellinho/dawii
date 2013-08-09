@@ -23,6 +23,9 @@ public class Tipocomprobante implements Serializable {
 	@OneToMany(mappedBy="tipocomprobante")
 	private List<Facturacion> facturacions;
 
+	@OneToMany(mappedBy="tipocomprobante")
+	private List<SerieComprobante> serieComprobantes;
+	
     public Tipocomprobante() {
     }
 
@@ -50,4 +53,23 @@ public class Tipocomprobante implements Serializable {
 		this.facturacions = facturacions;
 	}
 	
+	// Helpers ------------------------------------------------------------------------------------
+
+    // This must return true for another Foo object with same key/id.
+    public boolean equals(Object other) {
+        return other instanceof Tipocomprobante && (id >= 0) ? id == (((Tipocomprobante) other).id) : (other == this);
+    }
+
+    // This must return the same hashcode for every Foo object with the same key.
+    public int hashCode() {
+        return id >=0 ? this.getClass().hashCode() + id : super.hashCode();
+    }
+
+	public List<SerieComprobante> getSerieComprobantes() {
+		return serieComprobantes;
+	}
+
+	public void setSerieComprobantes(List<SerieComprobante> serieComprobantes) {
+		this.serieComprobantes = serieComprobantes;
+	}
 }

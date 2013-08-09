@@ -43,24 +43,24 @@ public class Pedido implements Serializable {
 	private byte ultimopedido;
 
 	//bi-directional many-to-one association to Detallepedido
-	@OneToMany(mappedBy="pedido")
+	@OneToMany(mappedBy="pedido", cascade=CascadeType.PERSIST)
 	private List<Detallepedido> detallepedidos;
 
 	//bi-directional many-to-one association to Facturacion
-	@OneToMany(mappedBy="pedido")
+	@OneToMany(mappedBy="pedido", cascade=CascadeType.PERSIST)
 	private List<Facturacion> facturacions;
 
-	//bi-directional many-to-one association to Tienda
+	//bi-directional many-to-one association to Cliente
     @ManyToOne
-	private Tienda tienda;
+	private Cliente cliente;
 
 	//bi-directional many-to-one association to Estadopedido
     @ManyToOne
 	private Estadopedido estadopedido;
 
-	//bi-directional many-to-one association to Cliente
+	//bi-directional many-to-one association to Tienda
     @ManyToOne
-	private Cliente cliente;
+	private Tienda tienda;
 
     public Pedido() {
     }
@@ -169,12 +169,12 @@ public class Pedido implements Serializable {
 		this.facturacions = facturacions;
 	}
 	
-	public Tienda getTienda() {
-		return this.tienda;
+	public Cliente getCliente() {
+		return this.cliente;
 	}
 
-	public void setTienda(Tienda tienda) {
-		this.tienda = tienda;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 	public Estadopedido getEstadopedido() {
@@ -185,12 +185,34 @@ public class Pedido implements Serializable {
 		this.estadopedido = estadopedido;
 	}
 	
-	public Cliente getCliente() {
-		return this.cliente;
+	public Tienda getTienda() {
+		return this.tienda;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setTienda(Tienda tienda) {
+		this.tienda = tienda;
 	}
+	
+	
+	public BigDecimal getSubTotalDetalle(){
+		BigDecimal res = BigDecimal.ZERO;
+		if(this.detallepedidos!=null){
+			for(Detallepedido dp : this.detallepedidos){
+				res.add(dp.getPrecioXcantidad());
+			}
+		}
+		return res;
+	}
+	
+	public BigDecimal getSubTotalImpuestoConsumo(){
+		BigDecimal res = BigDecimal.ZERO;
+		if(this.detallepedidos!=null){
+			for(Detallepedido dp : this.detallepedidos){
+				res.add(dp.getValorImpuestoConsumo());
+			}
+		}
+		return res;
+	}	
+
 	
 }

@@ -2,9 +2,7 @@ package persistence.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 
 /**
@@ -12,59 +10,62 @@ import java.util.Collection;
  * 
  */
 @Entity
- @Table(name="ubigeo_prov")
- public class UbigeoProv implements Serializable {
- 	private static final long serialVersionUID = 1L;
+@Table(name="ubigeo_prov")
+public class UbigeoProv implements Serializable {
+	private static final long serialVersionUID = 1L;
 
- 	@EmbeddedId
- 	private UbigeoProvPK id;
+	@EmbeddedId
+	private UbigeoProvPK id;
 
- 	@Column(name="up_nombre", length=200)
- 	private String upnombre;
+	@Column(name="up_nombre")
+	private String upNombre;
 
- 	//bi-directional many-to-one association to UbigeoDist
- 	@OneToMany(mappedBy="ubigeoprov")
- 	private Collection<UbigeoDist> ubigeodists = new ArrayList<UbigeoDist>();
+	//bi-directional many-to-one association to UbigeoDist
+	@OneToMany(mappedBy="ubigeoProv")
+	private List<UbigeoDist> ubigeoDists;
 
- 	//bi-directional many-to-one association to UbigeoDepa
+	//bi-directional many-to-one association to UbigeoDepa
  	@ManyToOne(fetch=FetchType.LAZY)
  	//@DescriptionsList
  	@JoinColumn(name="ud_cod", nullable=false, insertable=false, updatable=false)
- 	private UbigeoDepa ubigeodepa;
+ 	private UbigeoDepa ubigeoDepa;
 
- 	public UbigeoProvPK getId() {
- 		return id;
- 	}
+    public UbigeoProv() {
+    }
 
- 	public void setId(UbigeoProvPK id) {
- 		this.id = id;
- 	}
+	public UbigeoProvPK getId() {
+		return this.id;
+	}
 
- 	public String getUpnombre() {
- 		return upnombre;
- 	}
+	public void setId(UbigeoProvPK id) {
+		this.id = id;
+	}
+	
+	public String getUpNombre() {
+		return this.upNombre;
+	}
 
- 	public void setUpnombre(String upnombre) {
- 		this.upnombre = upnombre;
- 	}
+	public void setUpNombre(String upNombre) {
+		this.upNombre = upNombre;
+	}
 
- 	public Collection<UbigeoDist> getUbigeodists() {
- 		return ubigeodists;
- 	}
+	public List<UbigeoDist> getUbigeoDists() {
+		return this.ubigeoDists;
+	}
 
- 	public void setUbigeodists(Collection<UbigeoDist> ubigeodists) {
- 		this.ubigeodists = ubigeodists;
- 	}
+	public void setUbigeoDists(List<UbigeoDist> ubigeoDists) {
+		this.ubigeoDists = ubigeoDists;
+	}
+	
+	public UbigeoDepa getUbigeoDepa() {
+		return this.ubigeoDepa;
+	}
 
- 	public UbigeoDepa getUbigeodepa() {
- 		return ubigeodepa;
- 	}
-
- 	public void setUbigeodepa(UbigeoDepa ubigeodepa) {
- 		this.ubigeodepa = ubigeodepa;
- 	}
-
- 	// This must return true for another Foo object with same key/id.
+	public void setUbigeoDepa(UbigeoDepa ubigeoDepa) {
+		this.ubigeoDepa = ubigeoDepa;
+	}
+	
+	// This must return true for another Foo object with same key/id.
     public boolean equals(Object other) {
         return other instanceof UbigeoProv && id!=null ? id.equals( ((UbigeoProv) other).getId() ) : (other == this);
     }
@@ -73,5 +74,4 @@ import java.util.Collection;
     public int hashCode() {
         return id!=null ? this.getClass().hashCode() + id.hashCode() : super.hashCode();
     }
-
- }
+}

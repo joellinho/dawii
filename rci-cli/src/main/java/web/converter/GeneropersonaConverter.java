@@ -6,8 +6,8 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import persistence.entity.Generopersona;
-import persistencia.servicefactory.GeneroPersonaService;
-import persistencia.servicefactory.ServiceFactory;
+import persistence.servicefactory.GeneroPersonaService;
+import persistence.servicefactory.ServiceFactory;
 
 @FacesConverter(value="generoPersonaConverter")
 public class GeneropersonaConverter implements Converter {

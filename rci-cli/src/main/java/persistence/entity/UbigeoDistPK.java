@@ -12,78 +12,58 @@ public class UbigeoDistPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="udi_cod", unique=true, nullable=false, length=5)
-	private String udicod;
+	@Column(name="ud_cod")
+	private String udCod;
 
-	@Column(name="up_cod", unique=true, nullable=false, length=5)
-	private String upcod;
+	@Column(name="udi_cod")
+	private String udiCod;
 
-	@Column(name="ud_cod", unique=true, nullable=false, length=5)
-	private String udcod;
+	@Column(name="up_cod")
+	private String upCod;
 
-	public UbigeoDistPK() {
+    public UbigeoDistPK() {
+    }
+	public String getUdCod() {
+		return this.udCod;
+	}
+	public void setUdCod(String udCod) {
+		this.udCod = udCod;
+	}
+	public String getUdiCod() {
+		return this.udiCod;
+	}
+	public void setUdiCod(String udiCod) {
+		this.udiCod = udiCod;
+	}
+	public String getUpCod() {
+		return this.upCod;
+	}
+	public void setUpCod(String upCod) {
+		this.upCod = upCod;
 	}
 
-	public String getUdicod() {
-		return udicod;
-	}
-
-	public void setUdicod(String udicod) {
-		this.udicod = udicod;
-	}
-
-	public String getUpcod() {
-		return upcod;
-	}
-
-	public void setUpcod(String upcod) {
-		this.upcod = upcod;
-	}
-
-	public String getUdcod() {
-		return udcod;
-	}
-
-	public void setUdcod(String udcod) {
-		this.udcod = udcod;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((udicod == null) ? 0 : udicod.hashCode());
-		result = prime * result + ((udicod == null) ? 0 : udicod.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
+	public boolean equals(Object other) {
+		if (this == other) {
 			return true;
 		}
-		if (obj == null) {
+		if (!(other instanceof UbigeoDistPK)) {
 			return false;
 		}
-		if (!(obj instanceof UbigeoDistPK)) {
-			return false;
-		}
-		UbigeoDistPK other = (UbigeoDistPK) obj;
-		if (udicod == null) {
-			if (other.udicod != null) {
-				return false;
-			}
-		} else if (!udicod.equals(other.udicod)) {
-			return false;
-		}
-		if (udicod == null) {
-			if (other.udicod != null) {
-				return false;
-			}
-		} else if (!udicod.equals(other.udicod)) {
-			return false;
-		}
-		return true;
-	}
-	
+		UbigeoDistPK castOther = (UbigeoDistPK)other;
+		return 
+			this.udCod.equals(castOther.udCod)
+			&& this.udiCod.equals(castOther.udiCod)
+			&& this.upCod.equals(castOther.upCod);
+
+    }
+    
+	public int hashCode() {
+		final int prime = 31;
+		int hash = 17;
+		hash = hash * prime + this.udCod.hashCode();
+		hash = hash * prime + this.udiCod.hashCode();
+		hash = hash * prime + this.upCod.hashCode();
+		
+		return hash;
+    }
 }

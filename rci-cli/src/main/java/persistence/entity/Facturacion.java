@@ -1,6 +1,8 @@
 package persistence.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +17,6 @@ public class Facturacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String id;
 
 	private String deleted;
@@ -29,8 +30,16 @@ public class Facturacion implements Serializable {
 
 	private String razonsocial;
 
+	
+
+	private BigDecimal subTotal = BigDecimal.ZERO;
+	private BigDecimal impuestoConsumo= BigDecimal.ZERO;
+	private BigDecimal bruto= BigDecimal.ZERO;
+	private BigDecimal impuestoIgv= BigDecimal.ZERO;
+	private BigDecimal total= BigDecimal.ZERO;
+	
 	//bi-directional many-to-one association to Detallefacturacion
-	@OneToMany(mappedBy="facturacion")
+	@OneToMany(mappedBy="facturacion", cascade=CascadeType.PERSIST)
 	private List<Detallefacturacion> detallefacturacions;
 
 	//bi-directional many-to-one association to Pedido
@@ -116,4 +125,43 @@ public class Facturacion implements Serializable {
 		this.tipocomprobante = tipocomprobante;
 	}
 	
+	public BigDecimal getSubTotal() {
+		return subTotal;
+	}
+
+	public void setSubTotal(BigDecimal subTotal) {
+		this.subTotal = subTotal;
+	}
+
+	public BigDecimal getImpuestoConsumo() {
+		return impuestoConsumo;
+	}
+
+	public void setImpuestoConsumo(BigDecimal impuestoConsumo) {
+		this.impuestoConsumo = impuestoConsumo;
+	}
+
+	public BigDecimal getBruto() {
+		return bruto;
+	}
+
+	public void setBruto(BigDecimal bruto) {
+		this.bruto = bruto;
+	}
+
+	public BigDecimal getImpuestoIgv() {
+		return impuestoIgv;
+	}
+
+	public void setImpuestoIgv(BigDecimal impuestoIgv) {
+		this.impuestoIgv = impuestoIgv;
+	}
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
 }

@@ -16,7 +16,7 @@ public class Productoempresa implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private String id;
+	private int id;
 
 	private String descripcion;
 
@@ -31,15 +31,15 @@ public class Productoempresa implements Serializable {
 
 	private BigDecimal precioventa;
 
-	//bi-directional many-to-one association to Empresacomercial
-    @ManyToOne
-	@JoinColumn(name="empresa_id")
-	private Empresacomercial empresacomercial;
-
 	//bi-directional many-to-one association to Categoriaproducto
     @ManyToOne
 	@JoinColumn(name="categoria_id")
 	private Categoriaproducto categoriaproducto;
+
+	//bi-directional many-to-one association to Empresacomercial
+    @ManyToOne
+	@JoinColumn(name="empresa_id")
+	private Empresacomercial empresacomercial;
 
 	//bi-directional many-to-one association to Productotienda
 	@OneToMany(mappedBy="productoempresa")
@@ -48,11 +48,11 @@ public class Productoempresa implements Serializable {
     public Productoempresa() {
     }
 
-	public String getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -104,20 +104,20 @@ public class Productoempresa implements Serializable {
 		this.precioventa = precioventa;
 	}
 
-	public Empresacomercial getEmpresacomercial() {
-		return this.empresacomercial;
-	}
-
-	public void setEmpresacomercial(Empresacomercial empresacomercial) {
-		this.empresacomercial = empresacomercial;
-	}
-	
 	public Categoriaproducto getCategoriaproducto() {
 		return this.categoriaproducto;
 	}
 
 	public void setCategoriaproducto(Categoriaproducto categoriaproducto) {
 		this.categoriaproducto = categoriaproducto;
+	}
+	
+	public Empresacomercial getEmpresacomercial() {
+		return this.empresacomercial;
+	}
+
+	public void setEmpresacomercial(Empresacomercial empresacomercial) {
+		this.empresacomercial = empresacomercial;
 	}
 	
 	public List<Productotienda> getProductotiendas() {

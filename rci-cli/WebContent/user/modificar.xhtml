@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    > 
+    
+<h:head>
+</h:head>
+
+<h:body> 
+   	<ui:composition template="/template/layout.xhtml">
+ 		<ui:define name="content">
+ 		
+
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+ 		
+ 		<h:form id="frmModificar">
+  			<p:panelGrid style="margin-top:20px">   
+ 				<f:facet name="header">
+ 					<p:row>  
+            			<p:column colspan="2">Cuenta de Usuario</p:column>  
+       				</p:row>       				
+ 				</f:facet>
+ 				
+ 				<p:row>  
+        			<p:column colspan="2" >	  
+            			Modifica tus datos.
+        			</p:column>  
+    			</p:row>
+ 				
+ 				
+ 				<!-- Datos de Personales -->
+ 				
+ 				<p:row>  
+        			<p:column colspan="2" styleClass="ui-widget-header">	  
+            			Datos Personales
+        			</p:column>  
+    			</p:row>  
+ 				
+ 				<p:row>
+	 				<p:column>  
+	 					Apellido
+	 				</p:column>
+	 				<p:column> 
+	 					<h:outputLabel for="txtApellido" value="#{modificarClienteManaged.clienteLogeadoCopy.apellido}" />
+	 				</p:column>   
+ 				</p:row>
+ 			
+ 				<p:row>
+	 				<p:column>  
+	 					Nombre
+	 				</p:column>
+	 				<p:column> 
+	 					<h:outputLabel for="txtNombre" value="#{modificarClienteManaged.clienteLogeadoCopy.nombre}"/> 
+	 				</p:column>   
+ 				</p:row>								
+				 				 				
+				<p:row>
+	 				<p:column>  
+	 					Correo Electronico
+	 				</p:column>
+	 					 				
+	 				<p:column>
+	 					<h:outputLabel for="txtEmail" value="#{modificarClienteManaged.clienteLogeadoCopy.email}"/> 
+	 				</p:column>   
+ 				</p:row>		
+ 			
+ 					
+ 			
+ 				
+ 			    <p:row>
+	 				<p:column>  
+	 					Tipo de Documento de Identidad
+	 				</p:column>
+	 				<p:column> 
+	 					<p:selectOneMenu id="cboTipoDocumento" value="#{modificarClienteManaged.clienteLogeadoCopy.tipodocumento}">
+	                	<f:selectItems value="#{modificarClienteManaged.listaTipoDoc}" 
+	                				   var="tipoDoc"
+	                				   itemLabel="#{tipoDoc.descripcion}"              				   
+	                	/>  
+                	<f:converter converterId="tipoDocumentoConverter" />
+            	</p:selectOneMenu>
+	 				</p:column>   
+ 				</p:row>		
+ 			    	
+ 			    <p:row>
+	 				<p:column>  
+	 					Número Documento de Identidad
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtNumeroDocumentoIdentidad" value="#{modificarClienteManaged.clienteLogeadoCopy.numeroDocumentoIdentidad}"
+	 					required="true">
+	 					<p:ajax update="msgNumeroDocumentoIdentidad" event="keyup" />
+	 					</p:inputText>
+	 					<p:message for="txtNumeroDocumentoIdentidad" id="msgNumeroDocumentoIdentidad" display="icon"/>
+	 				</p:column>  
+
+ 				</p:row>	
+ 								
+ 				 <p:row>
+	 				<p:column>  
+	 					Celular
+	 				</p:column>
+	 				<p:column> 
+	 					<p:keyboard id="txtTelefonoCelular" value="#{modificarClienteManaged.clienteLogeadoCopy.telefonoCelular}" keypadOnly="true"
+	 					required="true">
+	 					<p:ajax update="msgTelefonoCelular" event="keyup" />
+	 					</p:keyboard>
+	 					<p:message for="txtTelefonoCelular" id="msgTelefonoCelular" display="icon"/>
+	 				</p:column>  
+	 				  
+ 				</p:row>	
+ 				
+ 				<p:row>
+	 				<p:column>  
+	 					Telefono
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="txtTelefonoPrincipal" value="#{modificarClienteManaged.clienteLogeadoCopy.telefonoPrincipal}" required="true">
+	 					<p:ajax update="msgTelefonoPrincipal" event="keyup" />
+	 					</p:inputText>
+	 					<p:message for="txtTelefonoPrincipal" id="msgTelefonoPrincipal" display="icon"/>
+	 				</p:column>   
+ 
+ 				</p:row> 				
+ 				
+ 				<!-- Direccion Usual-->
+ 				
+			 	<p:row>  
+        			<p:column colspan="2" styleClass="ui-widget-header">	  
+            			Dirección Frecuente
+        			</p:column>  
+    			</p:row>  
+ 				
+ 				<!-- Ubigeo -->		
+    			<p:row>
+					<p:column>
+						Departamento	  
+					</p:column>  
+        			<p:column>	  
+            			<p:selectOneMenu id="cboUbiDepa" value="#{modificarClienteManaged.ubigeoManaged.ubiDepaSelect}" required="true">
+            			<f:selectItem itemLabel="Seleccionar" itemValue="" />  
+	                		<f:selectItems value="#{modificarClienteManaged.ubigeoManaged.listaUbiDepa}" 
+	                				   var="ubiDepa"
+	                				   itemLabel="#{ubiDepa.udNombre}"                				   
+	                		/>  
+	                		
+	                		<p:ajax update="cboUbiProv"  
+                        		listener="#{modificarClienteManaged.ubigeoManaged.handleDepaChange}" />  
+	                		<f:converter converterId="ubigeoDepaConverter" />
+            			</p:selectOneMenu>
+        			</p:column>
+    			</p:row>
+    			
+    			<p:row>
+					<p:column>
+						Provincia	  
+					</p:column>  
+        			<p:column>	  
+            			<p:selectOneMenu id="cboUbiProv" value="#{modificarClienteManaged.ubigeoManaged.ubiProvSelect}" required="true">
+            				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
+	                		<f:selectItems value="#{modificarClienteManaged.ubigeoManaged.listaUbiProv}" 
+	                				   var="ubiProv"
+	                				   itemLabel="#{ubiProv.upNombre}"                				   
+	                		/>  
+	                		<p:ajax update="cboUbiDist"  
+                        		listener="#{modificarClienteManaged.ubigeoManaged.handleProvChange}" />  
+	                		<f:converter converterId="ubigeoProvConverter" />
+            			</p:selectOneMenu>
+        			</p:column>
+    			</p:row>
+    			
+    			<p:row>
+					<p:column>
+						Distrito	  
+					</p:column>  
+        			<p:column>	  
+            			<p:selectOneMenu id="cboUbiDist" value="#{modificarClienteManaged.ubigeoManaged.ubiDistSelect}" required="true">
+            				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
+	                		<f:selectItems value="#{modificarClienteManaged.ubigeoManaged.listaUbiDist}" 
+	                				   var="ubiDist"
+	                				   itemLabel="#{ubiDist.udiNombre}"                				   
+	                		/>
+	                		<p:ajax 	                			
+                        		listener="#{modificarClienteManaged.ubigeoManaged.handleDistChange}" />  
+	                		<f:converter converterId="ubigeoDistConverter" />
+            			</p:selectOneMenu>
+        			</p:column>
+    			</p:row>
+    			
+    			<!-- Dirección -->
+    			
+    			<p:row>  
+        			<p:column>	
+        				Dirección Destino:		  
+        			</p:column>
+        			<p:column>	
+        				  <p:inputText id="txtDireccion" value="#{modificarClienteManaged.clienteLogeadoCopy.direccion}" required="true">
+        				  <p:ajax update="msgDireccion" event="keyup" />
+        				  </p:inputText>
+        				  <p:message for="txtDireccion" id="msgDireccion" display="icon"/>
+        			</p:column>
+       			</p:row>	
+       			
+ 				
+				<!-- Datos de la Empresa --> 				
+			 	<p:row>  
+        			<p:column colspan="2" styleClass="ui-widget-header">	  
+            			Datos de Empresa
+        			</p:column>  
+    			</p:row>  
+ 				
+ 				<p:row>
+	 				<p:column>  
+	 					RUC
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="Ruc" value="#{modificarClienteManaged.rucEmpresa}"/>
+	 				</p:column>   
+ 				</p:row> 	
+ 				
+ 				<p:row>
+	 				<p:column>  
+	 					Razón Social
+	 				</p:column>
+	 				<p:column> 
+	 					<p:inputText id="RazonSocial" value="#{modificarClienteManaged.razonSocial}"/>
+	 				</p:column>   
+ 				</p:row>
+ 				
+ 				<p:row>
+	 				<p:column colspan="2">  
+	 					<p:commandButton id="btnModificar" value="Modificar" ajax="false" action="#{modificarClienteManaged.modificar}"/>
+	 				</p:column>
+
+ 				</p:row>	 	
+ 						 	    
+ 			</p:panelGrid>
+ 		</h:form>
+  	
+
+	
+</ui:define>
+    	</ui:composition> 
+    </h:body>
+ 
+</html>

@@ -1,5 +1,6 @@
 package persistence.entity;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 
@@ -9,14 +10,14 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="ubigeo_dist")
-public class UbigeoDist {
-
+public class UbigeoDist implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private UbigeoDistPK id;
 
-	@Column(name="udi_nombre", length=200)
-	private String udinombre;
+	@Column(name="udi_nombre")
+	private String udiNombre;
 
 	//bi-directional many-to-one association to UbigeoProv
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -24,37 +25,33 @@ public class UbigeoDist {
 		@JoinColumn(name="up_cod", referencedColumnName="up_cod", nullable=false, insertable=false, updatable=false),
 		@JoinColumn(name="ud_cod", referencedColumnName="ud_cod", nullable=false, insertable=false, updatable=false)
 		})
-	private UbigeoProv ubigeoprov;
+	private UbigeoProv ubigeoProv;
 
-	public UbigeoDist() {
-	}
+    public UbigeoDist() {
+    }
 
 	public UbigeoDistPK getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(UbigeoDistPK id) {
 		this.id = id;
 	}
-
-	public String getUdinombre() {
-		return udinombre;
+	
+	public String getUdiNombre() {
+		return this.udiNombre;
 	}
 
-	public void setUdinombre(String udinombre) {
-		this.udinombre = udinombre;
+	public void setUdiNombre(String udiNombre) {
+		this.udiNombre = udiNombre;
 	}
 
-	public UbigeoProv getUbigeoprov() {
-		return ubigeoprov;
+	public UbigeoProv getUbigeoProv() {
+		return this.ubigeoProv;
 	}
 
-	public void setUbigeoprov(UbigeoProv ubigeoprov) {
-		this.ubigeoprov = ubigeoprov;
-	}
-
-	public String toString(){
-		return this.id.getUdcod()+ this.id.getUdicod() + this.id.getUpcod();
+	public void setUbigeoProv(UbigeoProv ubigeoProv) {
+		this.ubigeoProv = ubigeoProv;
 	}
 	
 	// This must return true for another Foo object with same key/id.
@@ -66,5 +63,5 @@ public class UbigeoDist {
     public int hashCode() {
         return id!=null ? this.getClass().hashCode() + id.hashCode() : super.hashCode();
     }
-
+	
 }

@@ -5,11 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import persistence.entity.UbigeoDepa;
-import persistence.entity.UbigeoDist;
 import persistence.entity.UbigeoProv;
 import persistence.entity.UbigeoProvPK;
-import persistencia.servicefactory.UbigeoProvService;
+import persistence.servicefactory.UbigeoProvService;
 
 public class JPAUbigeoProvService implements UbigeoProvService {
 
@@ -59,12 +57,20 @@ public class JPAUbigeoProvService implements UbigeoProvService {
 			em.close();
 		}
 	}
+	
+	@Override
+	public UbigeoProv obtenerPorId(String upcod, String udcod) {
+		UbigeoProvPK id = new UbigeoProvPK();
+		id.setUdCod(udcod);
+		id.setUpCod(upcod);
+		return this.obtenerPorId(id);
+	}
 
 	@Override
 	public List<UbigeoProv> listarUbigeoProvPorDepa(String codDepa) {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
-			String query = "SELECT up FROM UbigeoProv up WHERE up.id.udcod=:codDepa";
+			String query = "SELECT up FROM UbigeoProv up WHERE up.id.udCod=:codDepa";
 			TypedQuery<UbigeoProv> emquery = em.createQuery(query,UbigeoProv.class);
 			emquery.setParameter("codDepa", codDepa);
 			return emquery.getResultList();
@@ -73,5 +79,7 @@ public class JPAUbigeoProvService implements UbigeoProvService {
 			em.close();
 		}
 	}
+
+	
 
 }

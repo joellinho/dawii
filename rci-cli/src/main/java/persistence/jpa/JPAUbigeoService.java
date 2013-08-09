@@ -6,8 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import persistence.entity.Ubigeo;
-import persistence.entity.UbigeoProv;
-import persistencia.servicefactory.UbigeoService;
+import persistence.servicefactory.UbigeoService;
 
 public class JPAUbigeoService implements UbigeoService {
 
@@ -25,13 +24,13 @@ public class JPAUbigeoService implements UbigeoService {
 	}
 
 	@Override
-	public Ubigeo obtenerUbigeo(String codProvincia) {
+	public Ubigeo obtenerUbigeo(String codDistrito) {
 		EntityManager em = JPAUtil.getEntityManager();
 		try{
-			String query = "SELECT u FROM Ubigeo u WHERE u.codPro=:codProvincia";
+			String query = "SELECT u FROM Ubigeo u WHERE u.codDis=:codDistrito";
 			TypedQuery<Ubigeo> emquery = em.createQuery(query,Ubigeo.class);			
 			emquery.setMaxResults(1);
-			emquery.setParameter("codProvincia", codProvincia);
+			emquery.setParameter("codDistrito", codDistrito);
 			List<Ubigeo> resultList = emquery.getResultList(); 
 			if(resultList.size()>0){
 				return resultList.get(0);

@@ -9,8 +9,8 @@ import javax.faces.convert.FacesConverter;
 
 import persistence.entity.UbigeoProv;
 import persistence.entity.UbigeoProvPK;
-import persistencia.servicefactory.ServiceFactory;
-import persistencia.servicefactory.UbigeoProvService;
+import persistence.servicefactory.ServiceFactory;
+import persistence.servicefactory.UbigeoProvService;
 
 @FacesConverter(value="ubigeoProvConverter")
 public class UbigeoProvConverter implements Converter {
@@ -27,8 +27,8 @@ public class UbigeoProvConverter implements Converter {
 		
 		if(st.countTokens()==2)
 		{			
-			uppk.setUdcod(st.nextToken());
-			uppk.setUpcod(st.nextToken());
+			uppk.setUdCod(st.nextToken());
+			uppk.setUpCod(st.nextToken());
 			UbigeoProvService ups = ServiceFactory.obtenerServiceFactory().obtenerUbigeoProvService();
 			uprov = ups.obtenerPorId(uppk);
 		}
@@ -45,7 +45,7 @@ public class UbigeoProvConverter implements Converter {
         }
 		
 		UbigeoProv upActual = (UbigeoProv) value;
-		return upActual.getId().getUdcod() + ";" + upActual.getId().getUpcod();			
+		return upActual.getId().getUdCod() + ";" + upActual.getId().getUpCod();			
 	}
 
 }

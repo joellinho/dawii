@@ -4,18 +4,18 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import persistence.entity.Cliente;
 import persistence.entity.Empresacliente;
-import persistence.entity.Tipocliente;
 import persistence.entity.Tipodocumento;
-import persistencia.servicefactory.ClienteService;
-import persistencia.servicefactory.EmpresaClienteService;
-import persistencia.servicefactory.ServiceFactory;
-import persistencia.servicefactory.TipoclienteService;
-import persistencia.servicefactory.TipodocumentoService;
+import persistence.servicefactory.ClienteService;
+import persistence.servicefactory.EmpresaClienteService;
+import persistence.servicefactory.ServiceFactory;
+import persistence.servicefactory.TipoclienteService;
+import persistence.servicefactory.TipodocumentoService;
 
 
 @ManagedBean(name="registrarseManaged")
@@ -46,13 +46,17 @@ public class RegistrarseManaged {
 	private String razonSocial;
 	private String rucEmpresa;
 	
+	// Managed Bean Ubigeo
+	@ManagedProperty(value="#{ubigeoManaged}")
+	private UbigeoManaged ubigeoManaged;
+	
 	// Constructor
 	public TipodocumentoService getTipoDocServ() {
 		return tipoDocServ;
 	}
 	
 	// Insertar Usuario
-	public String insertarUsuario(ActionEvent action){
+	public String insertarUsuario(){
 		//TODO: Validaciones del usuario.
 			
 		
@@ -68,6 +72,7 @@ public class RegistrarseManaged {
 		cli.setTelefonoCelular(this.telefonoCelular);
 		cli.setTelefonoPrincipal(this.telefonoPrincipal);
 		cli.setTipodocumento(this.tipoDocSeleccionado);
+		cli.setUbigeo(this.ubigeoManaged.getUbiSelect());
 		
 		// Buscamos la empresa, si no la encontramos creamos una nueva
 		//TODO: Deberiamos comprobar si la razon social es la misma?
@@ -89,7 +94,8 @@ public class RegistrarseManaged {
 		
 		if (loginPassword.equals(loginPassword2)) {
 			cliServ.insertar(cli);
-			return "main";
+			//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro exitoso.",""));
+			return "/auth/successReg";
 		}
 	    else{
 	    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Mensaje", "Las Contraseñas no son Iguales."));
@@ -223,5 +229,13 @@ public class RegistrarseManaged {
 
 	public void setrucEmpresa(String ruc) {
 		this.rucEmpresa = ruc;
+	}
+
+	public UbigeoManaged getUbigeoManaged() {
+		return ubigeoManaged;
+	}
+
+	public void setUbigeoManaged(UbigeoManaged ubigeoManaged) {
+		this.ubigeoManaged = ubigeoManaged;
 	}
 }

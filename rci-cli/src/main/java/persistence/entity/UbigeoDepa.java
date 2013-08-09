@@ -1,8 +1,8 @@
 package persistence.entity;
 
+import java.io.Serializable;
 import javax.persistence.*;
-
-import java.util.Collection;
+import java.util.List;
 
 
 /**
@@ -11,53 +11,57 @@ import java.util.Collection;
  */
 @Entity
 @Table(name="ubigeo_depa")
-public class UbigeoDepa {
+public class UbigeoDepa implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ud_cod", unique=true, nullable=false, length=5)
-	private String udcod;
+	@Column(name="ud_cod")
+	private String udCod;
 
-	@Column(name="ud_nombre", length=200)
-	private String udnombre;
+	@Column(name="ud_nombre")
+	private String udNombre;
 
 	//bi-directional many-to-one association to UbigeoProv
-	@OneToMany(mappedBy="ubigeodepa")
-	private Collection<UbigeoProv> ubigeoprov;
+	@OneToMany(mappedBy="ubigeoDepa")
+	private List<UbigeoProv> ubigeoProvs;
 
-	public String getUdcod() {
-		return udcod;
+    public UbigeoDepa() {
+    }
+
+	public String getUdCod() {
+		return this.udCod;
 	}
 
-	public void setUdcod(String udcod) {
-		this.udcod = udcod;
+	public void setUdCod(String udCod) {
+		this.udCod = udCod;
 	}
 
-	public String getUdnombre() {
-		return udnombre;
+	public String getUdNombre() {
+		return this.udNombre;
 	}
 
-	public void setUdnombre(String udnombre) {
-		this.udnombre = udnombre;
+	public void setUdNombre(String udNombre) {
+		this.udNombre = udNombre;
 	}
 
-	public Collection<UbigeoProv> getUbigeoprov() {
-		return ubigeoprov;
+	public List<UbigeoProv> getUbigeoProvs() {
+		return this.ubigeoProvs;
 	}
 
-	public void setUbigeoprov(Collection<UbigeoProv> ubigeoprov) {
-		this.ubigeoprov = ubigeoprov;
+	public void setUbigeoProvs(List<UbigeoProv> ubigeoProvs) {
+		this.ubigeoProvs = ubigeoProvs;
 	}
-
+	
 	// Helpers ------------------------------------------------------------------------------------
 
     // This must return true for another Foo object with same key/id.
     public boolean equals(Object other) {
-        return other instanceof UbigeoDepa && !(udcod.equals("")) ? udcod.equals( ((UbigeoDepa) other).getUdcod() ) : (other == this);
+        return other instanceof UbigeoDepa && !(udCod.equals("")) ? udCod.equals( ((UbigeoDepa) other).getUdCod() ) : (other == this);
     }
 
     // This must return the same hashcode for every Foo object with the same key.
     public int hashCode() {
-        return !(udcod.equals("")) ? this.getClass().hashCode() + udcod.hashCode() : super.hashCode();
+        return !(udCod.equals("")) ? this.getClass().hashCode() + udCod.hashCode() : super.hashCode();
     }
 
 }

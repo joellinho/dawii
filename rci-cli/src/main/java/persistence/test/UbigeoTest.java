@@ -3,7 +3,7 @@ package persistence.test;
 import java.util.List;
 
 import persistence.entity.*;
-import persistencia.servicefactory.*;
+import persistence.servicefactory.*;
 
 
 public class UbigeoTest {
@@ -34,13 +34,13 @@ public class UbigeoTest {
 		for(Ubigeo ubi : listaUbigeo){
 			
 			// Comprobamos si ya tenemos el depa del loop anterior, en caso de tenerla ya no tenemos que buscarla
-			if(udepa==null || !udepa.getUdcod().equals(ubi.getCodDep())){
+			if(udepa==null || !udepa.getUdCod().equals(ubi.getCodDep())){
 				udepa = uDepaServ.obtenerPorId(ubi.getCodDep());// La buscamos
 				
 				if(udepa==null){// Si no encontramos nada debemos crearla e insertarla
 					udepa = new UbigeoDepa();
-					udepa.setUdcod(ubi.getCodDep());
-					udepa.setUdnombre(ubi.getNomDep());
+					udepa.setUdCod(ubi.getCodDep());
+					udepa.setUdNombre(ubi.getNomDep());
 					uDepaServ.insertar(udepa);
 				}
 				
@@ -51,8 +51,8 @@ public class UbigeoTest {
 			
 			// Creamos la key por la que buscaremos
 			UbigeoProvPK uppk = new UbigeoProvPK();
-			uppk.setUdcod(udepa.getUdcod());
-			uppk.setUpcod(ubi.getCodPro());		
+			uppk.setUdCod(udepa.getUdCod());
+			uppk.setUpCod(ubi.getCodPro());		
 			
 			if(uprov==null || !uprov.getId().equals(uppk)){						
 				
@@ -62,8 +62,8 @@ public class UbigeoTest {
 					uprov = new UbigeoProv();
 						
 					uprov.setId(uppk);
-					uprov.setUbigeodepa(udepa);
-					uprov.setUpnombre(ubi.getNomProv());
+					uprov.setUbigeoDepa(udepa);
+					uprov.setUpNombre(ubi.getNomProv());
 					uProvServ.insertar(uprov);
 				}
 			}
@@ -72,9 +72,9 @@ public class UbigeoTest {
 			
 			// Creamos la key
 			UbigeoDistPK udpk = new UbigeoDistPK();
-			udpk.setUdcod(udepa.getUdcod());
-			udpk.setUpcod(uprov.getId().getUpcod());
-			udpk.setUdicod(ubi.getCodDis());
+			udpk.setUdCod(udepa.getUdCod());
+			udpk.setUpCod(uprov.getId().getUpCod());
+			udpk.setUdiCod(ubi.getCodDis());
 			
 			if(udist==null || !udist.getId().equals(udpk)){
 				udist = uDistServ.obtenerPorId(udpk);
@@ -83,8 +83,8 @@ public class UbigeoTest {
 					udist = new UbigeoDist();
 					
 					udist.setId(udpk);
-					udist.setUbigeoprov(uprov);
-					udist.setUdinombre(ubi.getNomDist());
+					udist.setUbigeoProv(uprov);
+					udist.setUdiNombre(ubi.getNomDist());
 					
 					uDistServ.insertar(udist);
 				}

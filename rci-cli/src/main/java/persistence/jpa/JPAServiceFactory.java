@@ -1,16 +1,21 @@
 package persistence.jpa;
 
-import persistencia.servicefactory.ClienteService;
-import persistencia.servicefactory.EmpresaClienteService;
-import persistencia.servicefactory.GeneroPersonaService;
-import persistencia.servicefactory.PedidosService;
-import persistencia.servicefactory.ServiceFactory;
-import persistencia.servicefactory.TipoclienteService;
-import persistencia.servicefactory.TipodocumentoService;
-import persistencia.servicefactory.UbigeoDepaService;
-import persistencia.servicefactory.UbigeoDistService;
-import persistencia.servicefactory.UbigeoProvService;
-import persistencia.servicefactory.UbigeoService;
+import persistence.servicefactory.ClienteService;
+import persistence.servicefactory.EmpresaClienteService;
+import persistence.servicefactory.EmpresacomercialService;
+import persistence.servicefactory.GeneroPersonaService;
+import persistence.servicefactory.PedidoService;
+import persistence.servicefactory.ProductoTiendaService;
+import persistence.servicefactory.SerieComprobanteService;
+import persistence.servicefactory.ServiceFactory;
+import persistence.servicefactory.TiendaService;
+import persistence.servicefactory.TipoclienteService;
+import persistence.servicefactory.TipocomprobanteService;
+import persistence.servicefactory.TipodocumentoService;
+import persistence.servicefactory.UbigeoDepaService;
+import persistence.servicefactory.UbigeoDistService;
+import persistence.servicefactory.UbigeoProvService;
+import persistence.servicefactory.UbigeoService;
 
 
 public class JPAServiceFactory extends ServiceFactory{
@@ -63,10 +68,33 @@ public class JPAServiceFactory extends ServiceFactory{
 	}
 
 	@Override
-	public PedidosService obtenerPedidosService() {
-		// TODO Auto-generated method stub
-		return new JPAPedidosService();
+	public TiendaService obtenerTiendaService() {
+		return new JPATiendaService();
+	}
 
+	@Override
+	public ProductoTiendaService obtenerProductoTiendaService() {
+		return new JPAProductoTiendaService();
+	}
+
+	@Override
+	public PedidoService obtenerPedidoService() {
+		return new JPAPedidoService();
+	}
+
+	@Override
+	public TipocomprobanteService obtenerTipocomprobanteService() {
+		return new JPATipocomprobanteService();
+	}
+
+	@Override
+	public EmpresacomercialService obtenerEmpresacomercialService() {
+		return new JPAEmpresaComercialService();
+	}
+
+	@Override
+	public SerieComprobanteService obtenerSerieComprobanteService() {
+		return new JPASerieComprobanteService();
 	}
 
 	

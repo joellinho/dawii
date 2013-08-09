@@ -2,6 +2,7 @@ package persistence.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -29,11 +30,15 @@ public class Productotienda implements Serializable {
 
 	//bi-directional many-to-one association to Productoempresa
     @ManyToOne
+	@JoinColumn(name="productoempresa_id")
 	private Productoempresa productoempresa;
 
 	//bi-directional many-to-one association to Tienda
     @ManyToOne
 	private Tienda tienda;
+    
+    @Transient
+    private boolean selected;
 
     public Productotienda() {
     }
@@ -84,6 +89,14 @@ public class Productotienda implements Serializable {
 
 	public void setTienda(Tienda tienda) {
 		this.tienda = tienda;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 	
 }
