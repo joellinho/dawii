@@ -7,13 +7,18 @@
 
     <h:body> 
     	<ui:composition template="/template/layout.xhtml">
+
+		<ui:define name="header" >
+		  <!-- header vacio -->
+		</ui:define>
+
  		<ui:define name="content">
-
-
+				
 		<td width="30%" align="center" valign="top">
 				<h:form id="frmLogin">  
    
-				<p:panelGrid style="margin-top:20px">
+   				<!-- agregar a style border-collapse:inherit y border-style:hidden a los columns de los msg para no mostrar las lineas-->
+				<p:panelGrid style="margin-top:25%;margin-left:35%;border-collapse:inherit" > <!-- centrado pero no dinamico -->
 					<f:facet name="header">
 	 					<p:row>  
 	            			<p:column colspan="2">Ingresar</p:column>  
@@ -25,11 +30,14 @@
 		 					Usuario:
 		 				</p:column>
 		 				<p:column> 
-		 					<p:inputText id="login" value="#{loginManaged.user}" required="true" maxlength="20">
+		 					<p:inputText id="login" value="#{loginManaged.user}" required="true" maxlength="35" 
+		 					requiredMessage="Debe ingresar su correo">
 		 					<p:ajax update="msgLogin" event="keyup" />
 		 					</p:inputText>
-		 					<p:message for="login" id="msgLogin" display="icon"/>
-		 				</p:column>   
+		 				</p:column>  
+		 				<p:column>
+		 				<p:message for="login" id="msgLogin" display="icon"/>
+		 				</p:column> 
 	 				</p:row> 	
 		 				
 	 				<p:row>
@@ -37,11 +45,14 @@
 		 					Password:
 		 				</p:column>
 		 				<p:column> 
-		 					<p:password id="password" value="#{loginManaged.pass}" required="true" maxlength="5">
+		 					<p:password id="password" value="#{loginManaged.pass}" required="true" maxlength="5"
+		 					requiredMessage="Debe ingresar su contraseña">
 		 					<p:ajax update="msgPassword" event="keyup" />
-		 					</p:password>
-		 					<p:message for="password" id="msgPassword" display="icon"/> 
+		 					</p:password> 
 		 				</p:column>   
+		 				<p:column>
+		 				<p:message for="password" id="msgPassword" display="icon"/>
+		 				</p:column>
 	 				</p:row> 	
 	 				
 	                <p:row>
@@ -56,13 +67,18 @@
 					
 	            
            		</p:panelGrid>
-           			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+           			<p:messages id="messages" autoUpdate="true" closable="true"/>
 	          	</h:form>
              
 			</td>
 		  	
  	
  		</ui:define>
+ 		
+ 		<ui:define name="footer" >
+		  <!-- footer vacio -->
+		</ui:define>
+ 		
     	</ui:composition> 
     </h:body>
  

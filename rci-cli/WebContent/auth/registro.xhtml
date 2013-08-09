@@ -4,20 +4,23 @@
     xmlns:f="http://java.sun.com/jsf/core" 
     xmlns:p="http://primefaces.org/ui"
     xmlns:ui="http://java.sun.com/jsf/facelets">
-            
+       
+    <h:head>
+    </h:head>
+    
     <h:body> 
    	<ui:composition template="/template/layout.xhtml">
  		<ui:define name="content">
 
-
 		<p:messages id="messages" autoUpdate="true" closable="true" />
-			<table style="width:100%">
+			<table>
 			
  			<tr>
  		
  			<td width="70%" >
 			<h:form id="formRegistrar">
-  			<p:panelGrid style="margin-top:20px">   
+			<!-- agregar a style border-collapse:inherit y border-style:hidden a los columns de los msg para no mostrar las lineas-->
+  			<p:panelGrid style="margin-top:20px;margin-left:40%">   <!-- centrado pero no dinamico -->
  				<f:facet name="header">
  					<p:row>  
             			<p:column colspan="2">Registrarse</p:column>  
@@ -44,13 +47,15 @@
 	 					Apellido *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="Apellido" value="#{registrarseManaged.apellido}" required="true" maxlength="20" 
-	 					validatorMessage="Ingrese solo caracteres [a-Z]">
+	 					<p:inputText id="Apellido" value="#{registrarseManaged.apellido}" required="true" maxlength="25" 
+	 					validatorMessage="Ingrese solo caracteres [a-Z]" requiredMessage="Apellido es requerido">
 	 					  <!-- <f:validateLength minimum="3" /> -->
 	 					  <f:validateRegex pattern="[a-zA-Z ]*"/>
 	 					  <p:ajax update="msgApellido" event="keyup" />
 	 					</p:inputText>
-	 					<p:message for="Apellido" id="msgApellido" display="icon"/>
+	 				</p:column>
+	 				<p:column>
+	 				<p:message for="Apellido" id="msgApellido" display="icon"/>
 	 				</p:column>
  				</p:row>
  			
@@ -59,13 +64,15 @@
 	 					Nombre *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="Nombre" value="#{registrarseManaged.nombre}" required="true" maxlength="10"
-	 					validatorMessage="Ingrese solo caracteres [a-Z]">
-	 					<f:validateLength minimum="3" />
+	 					<p:inputText id="Nombre" value="#{registrarseManaged.nombre}" required="true" maxlength="25"
+	 					validatorMessage="Ingrese solo caracteres [a-Z]" requiredMessage="Nombre es requerido">
+	 					<!-- <f:validateLength minimum="3" /> -->
 	 					<f:validateRegex pattern="[a-zA-Z ]*"/>
 	 					<p:ajax update="msgNombre" event="keyup" />
-	 					</p:inputText>
-	 					<p:message for="Nombre" id="msgNombre" display="icon"/> 
+	 					</p:inputText> 
+	 				</p:column>
+	 				<p:column>
+	 				<p:message for="Nombre" id="msgNombre" display="icon"/>
 	 				</p:column>
  				</p:row>								
 				 				 				
@@ -74,12 +81,14 @@
 	 					Correo Electronico *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:inputText id="Email" value="#{registrarseManaged.email}" required="true" maxlength="20">
- 							<f:validateLength minimum="5" maximum="25"/> 
+	 					<p:inputText id="Email" value="#{registrarseManaged.email}" required="true" maxlength="35" requiredMessage="Email es requerido">
+ 							<f:validateLength minimum="5"/> 
  							<p:ajax update="msgEmail" event="keyup" />
  						</p:inputText>
- 						<p:message for="Email" id="msgEmail" display="icon"/>
-	 				</p:column> 
+	 				</p:column>
+	 				<p:column>
+	 				<p:message for="Email" id="msgEmail" display="icon"/>
+	 				</p:column>
  				</p:row>		
  			
  				<p:row>
@@ -87,12 +96,15 @@
 	 					Crea una Contraseña * (max. 5)
 	 				</p:column>
 	 				<p:column> 
-	 					<p:password id="Password" value="#{registrarseManaged.loginPassword}" required="true" maxlength="5">
-	 						 <f:validateLength minimum="3" maximum="5"/>
+	 					<p:password id="Password" value="#{registrarseManaged.loginPassword}" required="true" maxlength="5"
+	 					 requiredMessage="Contraseña es requerida">
+	 						 <f:validateLength minimum="3" maximum="5" />
 	 						 <p:ajax update="msgPassword" event="keyup" />
 	 					</p:password>
-	 					<p:message for="Password" id="msgPassword" display="icon"/>
 	 				</p:column>   
+	 				<p:column>
+	 				<p:message for="Password" id="msgPassword" display="icon"/>
+	 				</p:column>
  				</p:row>		
  			
  				<p:row>
@@ -100,12 +112,15 @@
 	 					Vuelve a Escribir la Contraseña *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:password id="Password2" value="#{registrarseManaged.loginPassword2}" required="true" maxlength="5">
-	 						<f:validateLength minimum="3" maximum="5"/>
+	 					<p:password id="Password2" value="#{registrarseManaged.loginPassword2}" required="true" maxlength="5"
+	 					requiredMessage="Contraseña es requerida">
+	 						<f:validateLength minimum="3" maximum="5" />
 	 						<p:ajax update="msgPassword2" event="keyup" />
 	 					</p:password>
-	 					<p:message for="Password2" id="msgPassword2" display="icon"/>
 	 				</p:column>   
+	 				<p:column>
+	 				<p:message for="Password2" id="msgPassword2" display="icon"/>
+	 				</p:column>
  				</p:row>		
  			    	
  			    <p:row>
@@ -129,13 +144,15 @@
 	 				</p:column>
 	 				<p:column> 
 	 					<p:inputText id="NumeroDocumentoIdentidad" value="#{registrarseManaged.numeroDocumentoIdentidad}" required="true"
-	 					maxlength="8" validatorMessage="Ingrese solo digitos">
+	 					maxlength="8" validatorMessage="Ingrese solo digitos" requiredMessage="Numero de DNI es requerido">
 	 						<f:validateLength maximum="8" />
 	 						<f:validateRegex pattern="(^[1-9]{8}$)"/>
 	 						<p:ajax update="msgNumeroDocumentoIdentidad" event="keyup" />
 	 					</p:inputText>
-	 					<p:message for="NumeroDocumentoIdentidad" id="msgNumeroDocumentoIdentidad" display="icon"/>
 	 				</p:column>   
+	 				<p:column>
+	 					<p:message for="NumeroDocumentoIdentidad" id="msgNumeroDocumentoIdentidad" display="icon"/>
+	 				</p:column>
  				</p:row>	
  								
  				 <p:row>
@@ -143,13 +160,16 @@
 	 					Celular *
 	 				</p:column>
 	 				<p:column> 
-	 					<p:keyboard id="TelefonoCelular" value="#{registrarseManaged.telefonoCelular}" keypadOnly="true" required="true"
-	 					maxlength="9">
+	 					<p:inputText id="TelefonoCelular" value="#{registrarseManaged.telefonoCelular}" required="true" maxlength="9"
+	 					validatorMessage="Ingrese solo digitos" requiredMessage="Numero de celular es requerido">
 	 						<f:validateLength maximum="9" />
+	 						<f:validateRegex pattern="(^[1-9]{9}$)"/>
 	 						<p:ajax update="msgTelefonoCelular" event="keyup" />
-	 					</p:keyboard>
-	 					<p:message for="TelefonoCelular" id="msgTelefonoCelular" display="icon"/>
+	 					</p:inputText>
 	 				</p:column>  
+	 				<p:column>
+	 					<p:message for="TelefonoCelular" id="msgTelefonoCelular" display="icon"/>
+	 				</p:column>
  				</p:row>	
  				
  				<p:row>
@@ -158,17 +178,19 @@
 	 				</p:column>
 	 				<p:column> 
 	 					<p:inputText id="TelefonoPrincipal" value="#{registrarseManaged.telefonoPrincipal}" required="true" 
-	 					validatorMessage="Ingrese solo digitos" maxlength="7">
+	 					validatorMessage="Ingrese solo digitos" maxlength="7" requiredMessage="Numero de Telefono fijo es requerido">
 	 					<f:validateRegex pattern="(^[1-9]{7}$)"/>
 	 						<f:validateLength maximum="7" />
 	 						<p:ajax update="msgTelefonoPrincipal" event="keyup" />
 	 					</p:inputText>
-	 					<p:message for="TelefonoPrincipal" id="msgTelefonoPrincipal" display="icon"/>
 	 				</p:column>   
+	 				<p:column>
+	 				<p:message for="TelefonoPrincipal" id="msgTelefonoPrincipal" display="icon"/>
+	 				</p:column>
  				</p:row> 				
  				
  				<!-- Datos de la Empresa -->
- 				
+ 				<!-- Opcional ? -->
 			 	<p:row>  
         			<p:column colspan="2" styleClass="ui-widget-header">	  
             			Datos de Empresa
@@ -206,10 +228,11 @@
  				<!-- Ubigeo -->		
     			<p:row>
 					<p:column>
-						Departamento	  
+						Departamento *	  
 					</p:column>  
         			<p:column>	  
-            			<p:selectOneMenu id="cboUbiDepa" value="#{registrarseManaged.ubigeoManaged.ubiDepaSelect}">
+            			<p:selectOneMenu id="cboUbiDepa" value="#{registrarseManaged.ubigeoManaged.ubiDepaSelect}" required="true"
+            			requiredMessage="Elija un departamento">
             			<f:selectItem itemLabel="Seleccionar" itemValue="" />  
 	                		<f:selectItems value="#{registrarseManaged.ubigeoManaged.listaUbiDepa}" 
 	                				   var="ubiDepa"
@@ -228,7 +251,8 @@
 						Provincia	  
 					</p:column>  
         			<p:column>	  
-            			<p:selectOneMenu id="cboUbiProv" value="#{registrarseManaged.ubigeoManaged.ubiProvSelect}">
+            			<p:selectOneMenu id="cboUbiProv" value="#{registrarseManaged.ubigeoManaged.ubiProvSelect}" required="true"
+            			requiredMessage="Elija una provincia">
             				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
 	                		<f:selectItems value="#{registrarseManaged.ubigeoManaged.listaUbiProv}" 
 	                				   var="ubiProv"
@@ -246,7 +270,8 @@
 						Distrito	  
 					</p:column>  
         			<p:column>	  
-            			<p:selectOneMenu id="cboUbiDist" value="#{registrarseManaged.ubigeoManaged.ubiDistSelect}">
+            			<p:selectOneMenu id="cboUbiDist" value="#{registrarseManaged.ubigeoManaged.ubiDistSelect}" required="true"
+            			requiredMessage="Elija un distrito">
             				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
 	                		<f:selectItems value="#{registrarseManaged.ubigeoManaged.listaUbiDist}" 
 	                				   var="ubiDist"
@@ -266,11 +291,14 @@
         				Dirección Destino *		  
         			</p:column>
         			<p:column>	
-        				  <p:inputText id="Direccion" value="#{registrarseManaged.direccion}" required="true" maxlength="35">
-        				  	<f:validateLength minimum="7" />
+        				  <p:inputText id="Direccion" value="#{registrarseManaged.direccion}" required="true" maxlength="35"
+        				   requiredMessage="Direccion es requerido">
+        				  	<f:validateLength minimum="7"/>
 	 						<p:ajax update="msgDireccion" event="keyup" />
-        				  </p:inputText>
-        				  <p:message for="Direccion" id="msgDireccion" display="icon"/>
+        				  </p:inputText>  
+        			</p:column>
+        			<p:column>
+        				<p:message for="Direccion" id="msgDireccion" display="icon"/>
         			</p:column>
        			</p:row>	
        			

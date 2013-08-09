@@ -77,7 +77,7 @@ public class LoginManaged implements UbigeoSelectedListener {
 			}
 		}
 		else{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Mensaje", "Usuario y/o Contraseña incorrectos."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Usuario y/o Contraseña incorrectos.",""));
 			return null;
 		}
 	}

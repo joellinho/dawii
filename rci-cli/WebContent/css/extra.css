@@ -2,3 +2,7 @@
 .newSelectedRow {
      background: green;
 }
+
+.inherit{
+	border-collapse: inherit;
+}
