@@ -10,14 +10,17 @@
 
   </h:head>
     <h:body>
-    
+     
     
     
     	<ui:composition template="/template/layout.xhtml">
  		<ui:define name="content">
- 	
+ 		<h:outputStylesheet name="css/extra.css" />
  		 		
  		<!-- Datos del Pedido -->
+ 		 <p:panel header="Pedido">  
+ 		
+ 		
 		<h:form id="frmPedido">
 
 		<f:facet name="header">
@@ -27,18 +30,21 @@
       		</p:column>
     		</p:row>   				
 		</f:facet>
- 				
-	
+ 					
  				<p:panelGrid style="margin-top:20px">
 			
- 						
-	   			
-			
+ 								
 				<!-- Ubigeo -->
 				<p:row>
 	   				<p:column colspan="4" styleClass="ui-widget-header">  
 	   					Dirección de Entrega
-	   				</p:column>	   			
+	   				</p:column>	   	
+	   				<p:column styleClass="ui-widget-header">  
+	   					
+	   				</p:column>	   	
+					<p:column colspan="2" styleClass="ui-widget-header">  
+	   					Comprobante de Pago
+	   				</p:column>	   		
 	   			</p:row>
 			
 				<p:row>
@@ -67,11 +73,28 @@
         				  <p:inputText id="txtDireccion" value="#{pedidoManaged.direccionDestino}" required="true">
         				  <p:ajax update="msgDireccion" event="keyup" />
         				  </p:inputText>
+        				  <p:message for="txtDireccion" id="msgDireccion" display="icon"/>
         			</p:column>
-        			<p:column>
-        			<p:message for="txtDireccion" id="msgDireccion" display="icon"/>
+  			        <p:column>
+        				
         			</p:column>
-        			
+       			     
+       			     
+       			     <p:column>
+        				TipoComprobante
+        			</p:column>
+        			<p:column colspan="3">
+        				<p:selectOneMenu id="cboTipoComp" value="#{pedidoManaged.tipocomprobanteSelect}">
+            				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
+	                		<f:selectItems value="#{pedidoManaged.listaTipoComp}" 
+	                				   var="tipoComp"
+	                				   itemLabel="#{tipoComp.descripcion}"                				   
+	                		/>
+	                		<p:ajax update="lblRazonSocial"  
+                        		listener="#{pedidoManaged.updateNombreLabelRS}" />  
+	                		<f:converter converterId="tipocomprobanteConverter" />
+            			</p:selectOneMenu>
+        			</p:column>   			
     			</p:row>
     			
     			<p:row>
@@ -101,6 +124,26 @@
         				  <p:message for="txtReferencia" id="msgReferencia" display="icon"/>
         				  </p:column>
         			</p:column>
+        			
+        			<p:column>
+        				
+        			</p:column>
+        			
+       				<p:column>
+        				<h:outputLabel id="lblRazonSocial" value="#{pedidoManaged.nombreLabelRS}" />  
+        			</p:column>
+        			<p:column colspan="3">
+        				  <p:inputText id="txtRazonSocial" value="#{pedidoManaged.razonSocial}" />
+        			</p:column>
+        			
+        			<p:column>
+        				
+        			</p:column>  
+        			  
+	        		<p:column colspan="2" styleClass="ui-widget-header">  
+	   					Realizar Pedido
+	   				</p:column>	   		
+	       			
     			</p:row>
     			
     			<p:row>
@@ -130,175 +173,105 @@
         					<h:outputText value="Dirección" />  
   					  	 </p:commandLink>  
         			</p:column>
-    			</p:row>
-    			
-    			<!-- Tipo Comprobante -->
-	   			<p:row>
-	   				<p:column colspan="2" styleClass="ui-widget-header">  
-	   					Comprobante de Pago
-	   				</p:column>	   			
-	   			</p:row>
-				<p:row>  
+        			
         			<p:column>
-        				TipoComprobante
+        				
         			</p:column>
-        			<p:column>
-        				<p:selectOneMenu id="cboTipoComp" value="#{pedidoManaged.tipocomprobanteSelect}">
-            				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
-	                		<f:selectItems value="#{pedidoManaged.listaTipoComp}" 
-	                				   var="tipoComp"
-	                				   itemLabel="#{tipoComp.descripcion}"                				   
-	                		/>
-	                		<p:ajax update="lblRazonSocial"  
-                        		listener="#{pedidoManaged.updateNombreLabelRS}" />  
-	                		<f:converter converterId="tipocomprobanteConverter" />
-            			</p:selectOneMenu>
-        			</p:column>
-    			</p:row>
-    		
-    			<p:row>  
-        			<p:column>
-        				<h:outputLabel id="lblRazonSocial" value="#{pedidoManaged.nombreLabelRS}" />  
-        			</p:column>
-        			<p:column>
-        				  <p:inputText id="txtRazonSocial" value="#{pedidoManaged.razonSocial}" />
-        			</p:column>
-    			</p:row>
-       			
-       			<p:row>  
-        			<p:column>
+        			
+       				<p:column>
         				Documento
         			</p:column>
-        			<p:column>
+        			<p:column colspan="3">
         				  <p:inputText id="txtNumeroDoc" value="#{pedidoManaged.numeroDoc}" />
         			</p:column>
+        			
+        			<p:column>
+        				
+        			</p:column>  
+        			  
+	        		<p:column>	
+	        				   <p:commandButton id="btnGenerarPedido" value="Enviar Pedido"  
+		                    					action="#{pedidoManaged.registrarPedido}" ajax="false"/>
+	        		</p:column>
     			</p:row>
+    			
+    		
+	   						
+    		
+       		
        			
-       			
-       			
-       			<p:row>  
-        			<p:column>	
-        				   <p:commandButton id="btnGenerarPedido" value="Enviar Pedido"  
-	                    					action="#{pedidoManaged.registrarPedido}" ajax="false"/>
-        			</p:column>
-       			</p:row>
-    
+  			
+    			
     			
     		</p:panelGrid>
 			</h:form>
-				<h:form id="frmBuscarProducto">      
-			<p:panelGrid>
-				<p:row>  
-					<p:column colspan="2" styleClass="ui-widget-header">  
-	   					Pedido
-   					</p:column>
-   				</p:row>	 
-   				
-   				
-   				<p:row>  
-					<p:column>  
-						 <p:fieldset  id="fdsDetallePedido"  legend="Pedidos">  
-						 <p:outputPanel id="dropArea">  
-	   					<p:dataTable id="tblDetalle" var="detalle" value="#{pedidoManaged.listaDetallePedido}" 
-   					 rowKey="#{detalle.id}" wigdetvar="tableDetalle"  >  
-					  	<f:facet name="header">  
+			
+			
+			<h:form id="frmDetallePedido">
+			
+				<p:dataTable id="tblDetalle" var="detalle" value="#{pedidoManaged.listaDetallePedido}" 
+   					 rowKey="#{detalle.id}" wigdetvar="tableDetalle"  
+   					  rowStyleClass="ui-widget"
+   					 scrollable="true" scrollHeight="120">
+  						
+  					<f:facet name="header">  
 	            			Detalle del pedido  
-	        			</f:facet>  
-	  						
-	  					 <p:column headerText="CC">  
-		            		#{detalle.productotienda.tienda.empresacomercial.nombrecomercial}  
-		        		 </p:column>  	
-	  						
-		  				 <p:column headerText="Producto">  
-		            		#{detalle.productotienda.productoempresa.descripcion}  
-		        		 </p:column>  
-		  				
-		  				 <p:column headerText="Cantidad">		  				 	  
-		            		<p:spinner 
-                    			value="#{detalle.cantidad}" min="1" max="99">
-                    			
-                    		<p:ajax 
-	                			update="tblDetalle"
-                        		listener="#{pedidoManaged.actualizarCostosTotales}" /> 	
-                    			
-                    			
-                   			</p:spinner> 
-		        		 </p:column>
-       			
-       					<p:column headerText="Eliminar" style="width:4%">  
-               				<p:commandButton id="deleteButton" update=":frmBuscarProducto:tblDetalle :frmBuscarProducto:tblProductos" icon="ui-icon-close" title="Delete"
-               						action="#{pedidoManaged.removerDetalle}">		                 
-		                 
-		                 	<f:setPropertyActionListener value="#{detalle}" target="#{pedidoManaged.selectedDetalle}" />
-		                   
-           					</p:commandButton>  
-       					</p:column>    
-	  					
-	  					<p:columnGroup type="footer">  
-				            <p:row>  
-				                <p:column colspan="3" footerText="Bruto:"  
-				                                style="text-align:right"  />  
-				  
-				                <p:column footerText="#{pedidoManaged.bruto}" />
-				            </p:row>
-				            
-				            <p:row>  
-				                <p:column colspan="3" footerText="Impuesto Consumo:"  
-				                                style="text-align:right"  />  
-				  
-				                <p:column footerText="#{pedidoManaged.impuestoConsumo}" />
-				            </p:row>  
-				            
-		                    <p:row>  
-				                <p:column colspan="3" footerText="Sub Total:"  
-				                                style="text-align:right"  />  
-				  
-				                <p:column footerText="#{pedidoManaged.subTotal}" />
-				            </p:row>  
-				            
-				            <p:row>  
-				                <p:column colspan="3" footerText="IGV:"  
-				                                style="text-align:right"  />  
-				  
-				                <p:column footerText="#{pedidoManaged.impuestoIgv}" />
-				            </p:row>
-				            
-				            <p:row>  
-				                <p:column colspan="3" footerText="Total:"  
-				                                style="text-align:right"  />  
-				  
-				                <p:column footerText="#{pedidoManaged.total}" />
-				            </p:row>        
-				        </p:columnGroup>  
-  
+        			</f:facet>  	
+  						
+  					 <p:column headerText="CC" styleClass="ui-widget" >  
+	            		#{detalle.productotienda.tienda.empresacomercial.nombrecomercial}  
+	        		 </p:column>  	
+  						
+	  				 <p:column headerText="Producto"  styleClass="ui-widget" >    
+	            		#{detalle.productotienda.productoempresa.descripcion}  
+	        		 </p:column>  
 	  				
-	  				
-	  				
-	  					</p:dataTable>
-	  					</p:outputPanel>  
-	  					</p:fieldset>
-	  				
-	  					 <p:droppable for="fdsDetallePedido" tolerance="touch" activeStyleClass="ui-state-highlight"
-	  					  datasource=":frmBuscarProducto:tblProductos" >  
-        					<p:ajax listener="#{pedidoManaged.agregarProductoDrop}" update="tblDetalle tblProductos"  
-        				 />  
-    					</p:droppable> 
-    					
-    					 
-   					</p:column>
-   					<p:column>  
-   					 <p:fieldset legend="Listado Producto">  
-	   					<p:dataTable id="tblProductos" var="prodTie" value="#{pedidoManaged.listaProductoTienda}" widgetVar="tablaProductos"   
+	  				 <p:column headerText="Cantidad"  styleClass="ui-widget" >  		  				 	  
+	            		<p:spinner 
+                   			value="#{detalle.cantidad}" min="1" max="99">
+                   			
+                   		<p:ajax 
+                			update=":frmEnviarPedido:datosFinales"
+                       		listener="#{pedidoManaged.actualizarCostosTotales}" /> 	
+                   			
+                   			
+                  			</p:spinner> 
+	        		 </p:column>
+      			
+      					<p:column headerText="Eliminar" style="width:4%"  styleClass="ui-widget" >    
+              				<p:commandButton id="deleteButton" update=":frmDetallePedido:tblDetalle :frmBuscarProducto:tblProductos :frmEnviarPedido:datosFinales" 
+              					icon="ui-icon-close" title="Delete" action="#{pedidoManaged.removerDetalle}">		                 
+	                 
+	                 		<f:setPropertyActionListener value="#{detalle}" target="#{pedidoManaged.selectedDetalle}" />
+	                   
+          					</p:commandButton>  
+      					</p:column>    
+  					
+  					 <f:facet name="footer">  
+
+				            	   
+             				 <p:commandButton id="btnBuscarProducto" value="Agregar Producto"
+             				  onclick="prdDlg.show()" />  
+		        	</f:facet>  
+  					
+					
+  				
+					</p:dataTable> 		
+			
+			</h:form>
+			
+ 			
+ 			<h:form id="frmBuscarProducto">      
+ 			<p:dialog id="prodDialog" header="Productos" widgetVar="prdDlg" modal="true" >  
+    		  
+ 			<p:dataTable id="tblProductos" var="prodTie" value="#{pedidoManaged.listaProductoTienda}" widgetVar="tablaProductos"   
            						 emptyMessage="No se encontró productos." filteredValue="#{pedidoManaged.listaProdTiendaFliltrados}"
-           						 rowStyleClass="#{prodTie.selected? 'ui-widget-header' : null }" 
-           						 >  
-  						
-  						<p:column style="width:20px">  
-                				<h:outputText id="dragIcon"  
-                    				styleClass="ui-icon ui-icon-arrow-4"  />  
-                			<p:draggable for="dragIcon" revert="true" disabled="#{prodTie.selected}" />  
-            			</p:column>  
-  						
+           						 rowStyleClass="#{prodTie.selected? 'newSelectedRow' : 'ui-widget' }"
+	           					 paginator="true" rows="10"  
+	                 			 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+				                 rowsPerPageTemplate="5,10,15"								
+				                 >  
+           						 
 			        	<p:column filterBy="#{prodTie.tienda}"   
 			                headerText="Franquicia" 
 			                filterOptions="#{pedidoManaged.listaFranquicia}"
@@ -316,7 +289,8 @@
   						</p:column>
   						
   						<p:column style="width:4%">  
-			                <p:commandButton id="selectButton" update=":frmBuscarProducto:tblDetalle :frmBuscarProducto:tblProductos" icon="ui-icon-arrowreturn-1-n" title="View"
+			                <p:commandButton id="selectButton" update=":frmDetallePedido:tblDetalle :frmBuscarProducto:tblProductos" 
+			                icon="ui-icon-arrowreturn-1-n" title="View"
 			                 action="#{pedidoManaged.agregarProducto}" disabled="#{prodTie.selected}">		                 
 			                 
 			                 <f:setPropertyActionListener value="#{prodTie}" target="#{pedidoManaged.productoTiendaSelect}" />
@@ -324,20 +298,55 @@
 			                </p:commandButton>    
         				</p:column>   	
         								
-  					
-  						</p:dataTable>	
-					 </p:fieldset>  					
-   					</p:column>
-   				</p:row>	  		
-			</p:panelGrid>
+  				
+			</p:dataTable>	
+ 				
+ 			</p:dialog>
  			
-        		</h:form>	   	
-    	
-		
+ 		
+ 			</h:form>	  
+   			 	
+    		<h:form id="frmEnviarPedido" >    
+    					
+ 				<p:panelGrid style="margin-top:20px" id="datosFinales">
+ 				
+	 				<p:row>
+	 					<p:column>
+	 						<h:outputText value="Sub Total"  />		 
+	 					</p:column>
+	 					<p:column>
+	 						<p:inputText value="#{pedidoManaged.subTotal}"  readonly = "true"/>  
+	 					</p:column>
+ 					</p:row>	
+					
+ 					<p:row>
+	 					<p:column>
+	 						<h:outputText value="I.G.V."  /> 
+	 					</p:column>
+	 					<p:column>
+	 						<p:inputText value="#{pedidoManaged.impuestoIgv}"  readonly = "true"/>  
+	 					</p:column>
+ 					</p:row>
+ 					
+ 					<p:row>
+	 					<p:column>
+	 						<h:outputText value="Total:"  />	
+	 					</p:column>
+	 					<p:column>
+	 						<p:inputText value="#{pedidoManaged.total}"  readonly = "true"/>  
+	 					</p:column>
+ 					</p:row>	 						
+ 					
+	 				<!-- Detalle Pedido-->
+           			
+	       			
+	 			
+ 				</p:panelGrid>	
+        		
 								  
-             	
+          	</h:form>
 			
-		
+		 </p:panel>  
 	
 
  		</ui:define>

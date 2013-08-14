@@ -1,0 +1,16 @@
+.newSelectedRow {
+     background: #CEECF5;
+     font-size: 13px;
+}
+
+.inherit{
+	border-collapse: inherit;
+}
+
+.ui-widget {
+    font-size: 11px !important;
+ }
+ 
+.ui-widget .ui-widget {
+    font-size: 11px !important;
+ }

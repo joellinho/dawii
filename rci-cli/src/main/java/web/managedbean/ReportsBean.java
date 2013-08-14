@@ -3,6 +3,8 @@ package web.managedbean;
 import java.util.HashMap;
 import java.util.Map;
 import report.common.AbstractReportBean;
+import report.common.AbstractReportBean.ExportOption;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -29,6 +31,7 @@ public class ReportsBean extends AbstractReportBean {
  
     public String execute() {
         try {
+        	super.setExportOption(ExportOption.PDF);
             super.prepareReport();
         } catch (Exception e) {
             // make your own exception handling
