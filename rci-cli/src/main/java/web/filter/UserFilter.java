@@ -40,11 +40,12 @@ public class UserFilter implements Filter {
 	    String requestURI = httpRequest.getRequestURI();
 	    
     	LoginManaged lm = (LoginManaged) httpRequest.getSession().getAttribute("loginManaged");
-    	 
+    	lm.setFrom(requestURI); 
+    	
     	if (lm != null && lm.isLoggedIn()) {
     		chain.doFilter(request, response);
 	    } else {            
-	    	
+	    	//httpResponse.sendRedirect(httpRequest.getContextPath() + "/auth/login.xhtml?from=" + URLEncoder.encode(requestURI, "UTF-8"));
 	        httpResponse.sendRedirect(httpRequest.getContextPath() + "/auth/login.xhtml?from=" + URLEncoder.encode(requestURI, "UTF-8"));
 	    } 
 	}

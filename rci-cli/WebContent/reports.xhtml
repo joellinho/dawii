@@ -9,16 +9,18 @@
    	<ui:composition template="/template/layout.xhtml">
  		<ui:define name="content">
 			<h:form id="form" target="_blank">
-                <h:outputLabel>Export Report</h:outputLabel>
-                 <h:selectOneRadio value="#{reportsBean.exportOption}">
-                    <f:selectItem itemValue="PDF" itemLabel="PDF"/>
-                    <!-- 
-                    <f:selectItem itemValue="HTML" itemLabel="HTML"/>
-                    <f:selectItem itemValue="EXCEL" itemLabel="EXCEL"/>
-                    <f:selectItem itemValue="RTF" itemLabel="RTF"/> -->
-                </h:selectOneRadio>
-                <h:commandButton  action="#{reportsBean.execute}" value="Get Report" />
+			
+			 <p:panel header="Generales" >  
+                <h:outputLabel>Top Vendidos</h:outputLabel>
+                <h:commandButton  action="#{reportsBean.execute}" value="Ver Reporte" />
+ 			</p:panel>
+ 			
+ 			<p:panel header="Del Cliente" rendered="#{not empty loginManaged.clienteLogeado}" >
+ 				<h:outputLabel>Pedidos Realizados</h:outputLabel>
+                <h:commandButton  action="#{pedidosReport.execute}" value="Ver Reporte" />
+			</p:panel>
  
+ 				
             </h:form>
 
 		 

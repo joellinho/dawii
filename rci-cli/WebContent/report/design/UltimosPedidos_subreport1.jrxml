@@ -4,6 +4,7 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="idFacturacionSub" class="java.lang.String"/>
+	<parameter name="parameter1" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select * from detallefacturacion df
 inner join detallepedido dp on df.detallepedido_id = dp.id
@@ -105,26 +106,26 @@ where df.facturacion_id  = $P{idFacturacionSub}]]>
 		<band height="37" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="29" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="204fb818-03f9-4500-be86-59fa525d9540" x="393" y="2" width="100" height="20"/>
 				<textElement/>
-				<text><![CDATA[neto]]></text>
+				<text><![CDATA[COSTO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="fea1454a-61af-47e7-a863-6be3298492b0" x="61" y="2" width="147" height="20"/>
 				<textElement/>
-				<text><![CDATA[descripcion]]></text>
+				<text><![CDATA[DESCRIPCION]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="a48099aa-a227-4d92-9dc7-f40ea90f83ab" x="246" y="2" width="100" height="20"/>
 				<textElement/>
-				<text><![CDATA[cantidad]]></text>
+				<text><![CDATA[CANTIDAD]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="29" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
 				<reportElement uuid="182d327f-bde2-47b8-8dfa-d8beb3d54f0d" x="393" y="0" width="100" height="20"/>
 				<textElement/>
@@ -143,7 +144,7 @@ where df.facturacion_id  = $P{idFacturacionSub}]]>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="46" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>

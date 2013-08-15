@@ -7,7 +7,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Users\\Alvaro\\Desktop\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT * FROM facturacion f
@@ -90,32 +90,40 @@ where p.cliente_id = $P{cli_id}]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b466b4dc-d82c-4c8e-aba6-47a8ec55ae01" x="196" y="47" width="162" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PEDIDOS REALIZADOS]]></text>
+			</staticText>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="abe8b35d-f70b-45e5-9ac0-3b574d01c93e" x="432" y="2" width="100" height="20"/>
 				<textElement/>
-				<text><![CDATA[total]]></text>
+				<text><![CDATA[TOTAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="60fe8247-ec34-404b-a01b-e4b47c31c70a" x="32" y="2" width="100" height="20"/>
+				<reportElement uuid="60fe8247-ec34-404b-a01b-e4b47c31c70a" x="32" y="2" width="113" height="20"/>
 				<textElement/>
-				<text><![CDATA[fechahoraregistro]]></text>
+				<text><![CDATA[FECHA DE REGISTRO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="b9868474-94e9-436f-8c07-96b33d3ee0f7" x="163" y="2" width="242" height="20"/>
 				<textElement/>
-				<text><![CDATA[id]]></text>
+				<text><![CDATA[COMPROBANTE DE PAGO]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="99" splitType="Stretch">
 			<textField>
 				<reportElement uuid="484d8f1a-3eb9-4638-961c-00fd331f00a5" x="432" y="0" width="100" height="20"/>
 				<textElement/>
@@ -132,7 +140,7 @@ where p.cliente_id = $P{cli_id}]]>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<subreport>
-				<reportElement uuid="e11b87e2-ae58-4b6c-a6fa-0fb98e6adde5" x="32" y="46" width="500" height="79"/>
+				<reportElement uuid="e11b87e2-ae58-4b6c-a6fa-0fb98e6adde5" x="32" y="20" width="500" height="79"/>
 				<subreportParameter name="idFacturacionSub">
 					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
 				</subreportParameter>

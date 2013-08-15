@@ -26,7 +26,7 @@
 		<f:facet name="header">
 		    <p:row>
 			<p:column colspan="2" >	  
-          			Pedido"WebContent/user/pedidoOld.xhtml"
+          			Pedido
       		</p:column>
     		</p:row>   				
 		</f:facet>
@@ -55,7 +55,7 @@
         			<p:column>	  
             			<p:selectOneMenu id="cboUbiDepa" value="#{pedidoManaged.ubigeoManaged.ubiDepaSelect}">
             			<f:selectItem itemLabel="Seleccionar" itemValue="" />  
-	                		<f:selectItems value="#{pedidoManaged.ubigeoManaged.listaUbiDepa}" 
+	                		<f:selectItems value="#{pedidoManaged.ubigeoManaged.listaUbiDepa}"
 	                				   var="ubiDepa"
 	                				   itemLabel="#{ubiDepa.udNombre}"                				   
 	                		/>  
@@ -90,7 +90,7 @@
 	                				   var="tipoComp"
 	                				   itemLabel="#{tipoComp.descripcion}"                				   
 	                		/>
-	                		<p:ajax update="lblRazonSocial"  
+	                		<p:ajax update="lblRazonSocial btnGenerarPedido"  
                         		listener="#{pedidoManaged.updateNombreLabelRS}" />  
 	                		<f:converter converterId="tipocomprobanteConverter" />
             			</p:selectOneMenu>
@@ -191,10 +191,13 @@
         			  
 	        		<p:column>	
 	        				   <p:commandButton id="btnGenerarPedido" value="Enviar Pedido"  
-		                    					action="#{pedidoManaged.registrarPedido}" ajax="false"/>
+		                    					action="#{pedidoManaged.registrarPedido}" ajax="false"
+		                    					disabled="#{empty pedidoManaged.listaDetallePedido || empty pedidoManaged.tipocomprobanteSelect}"
+		                    					/>
 	        		</p:column>
     			</p:row>
     			
+    		
     		
 	   						
     		
@@ -239,7 +242,7 @@
 	        		 </p:column>
       			
       					<p:column headerText="Eliminar" style="width:4%"  styleClass="ui-widget" >    
-              				<p:commandButton id="deleteButton" update=":frmDetallePedido:tblDetalle :frmBuscarProducto:tblProductos :frmEnviarPedido:datosFinales" 
+              				<p:commandButton id="deleteButton" update=":frmDetallePedido:tblDetalle :frmBuscarProducto:tblProductos :frmEnviarPedido:datosFinales :frmPedido:btnGenerarPedido" 
               					icon="ui-icon-close" title="Delete" action="#{pedidoManaged.removerDetalle}">		                 
 	                 
 	                 		<f:setPropertyActionListener value="#{detalle}" target="#{pedidoManaged.selectedDetalle}" />
@@ -289,7 +292,7 @@
   						</p:column>
   						
   						<p:column style="width:4%">  
-			                <p:commandButton id="selectButton" update=":frmDetallePedido:tblDetalle :frmBuscarProducto:tblProductos" 
+			                <p:commandButton id="selectButton" update=":frmDetallePedido:tblDetalle :frmBuscarProducto:tblProductos :frmEnviarPedido:datosFinales :frmPedido:btnGenerarPedido" 
 			                icon="ui-icon-arrowreturn-1-n" title="View"
 			                 action="#{pedidoManaged.agregarProducto}" disabled="#{prodTie.selected}">		                 
 			                 

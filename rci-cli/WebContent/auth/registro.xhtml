@@ -204,8 +204,12 @@
 	 				<p:column> 
 	 					<p:inputText id="Ruc" value="#{registrarseManaged.rucEmpresa}" maxlength="11">
 	 					<f:validateRegex pattern="(^[1-9]{11}$)"/>
+	 					<p:ajax update="msgRuc" event="keyup" />
 	 					</p:inputText>
 	 				</p:column>   
+	 				<p:column>
+	 				<p:message for="Ruc" id="msgRuc" display="icon"/>
+	 				</p:column>
  				</p:row> 	
  				
  				<p:row>
@@ -244,7 +248,6 @@
 	                		<f:converter converterId="ubigeoDepaConverter" />
             			</p:selectOneMenu>
         			</p:column>
-    			</p:row>
     			
     			<p:row>
 					<p:column>
